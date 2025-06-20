@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String       @id @default(cuid())
+  email       String       @unique
+  name        String?
+  experiments Experiment[]
+  createdAt   DateTime     @default(now())
+}
+
+model MFCDesign {
+  id          String       @id @default(cuid())
+  name        String
+  type        String
+  cost        String
+  powerOutput String
+  materials   Json
+  experiments Experiment[]
+}
+
+model Experiment {
+  id           String        @id @default(cuid())
+  name         String
+  userId       String
+  designId     String
+  status       String        @default("setup")
+  parameters   Json
+  user         User          @relation(fields: [userId], references: [id])
+  design       MFCDesign     @relation(fields: [designId], references: [id])
+  measurements Measurement[]
+  createdAt    DateTime      @default(now())
+}
+
+model Measurement {
+  id           String     @id @default(cuid())
+  experimentId String
+  voltage      Float
+  current      Float
+  power        Float
+  temperature  Float
+  ph           Float
+  timestamp    DateTime   @default(now())
+  experiment   Experiment @relation(fields: [experimentId], references: [id])
+  
+  @@index([experimentId, timestamp])
+}
