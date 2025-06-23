@@ -45,7 +45,7 @@ export const handlers = [
 
   // Mock experiment creation
   http.post('/api/experiments', async ({ request }) => {
-    const body = await request.json()
+    const body = await request.json() as Record<string, any>
     
     return HttpResponse.json({
       id: `exp-${Date.now()}`,

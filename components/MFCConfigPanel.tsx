@@ -81,7 +81,7 @@ function ElectrodeConfig({ config, onConfigChange }: {
   ]
 
   const getMaterialDescription = (materialValue: string) => {
-    const descriptions = {
+    const descriptions: Record<string, string> = {
       'graphene-oxide': 'Oxygen-functionalized graphene with excellent biocompatibility and electron transfer',
       'reduced-graphene-oxide': 'Chemically reduced GO with restored conductivity and enhanced power density',
       'graphene-carbon-cloth': 'Hybrid electrode combining graphene conductivity with carbon cloth flexibility',
@@ -111,7 +111,7 @@ function ElectrodeConfig({ config, onConfigChange }: {
   }
 
   const getPretreatmentDescription = (pretreatment: string) => {
-    const pretreatments = {
+    const pretreatments: Record<string, string> = {
       'acid-etch': 'Acid etching to increase surface area and remove oxidation',
       'anodization': 'Electrochemical oxidation for corrosion resistance',
       'oxidation': 'Controlled thermal oxidation for beneficial surface properties',
@@ -210,7 +210,7 @@ function ElectrodeConfig({ config, onConfigChange }: {
                 {/* Group materials by category */}
                 {['Traditional', 'Graphene', 'CNT', 'MXene', 'Upcycled'].map(category => {
                   const categoryMaterials = materials.filter(m => m.category === category)
-                  const categoryColors = {
+                  const categoryColors: Record<string, string> = {
                     'Traditional': 'border-gray-200 bg-gray-50',
                     'Graphene': 'border-blue-200 bg-blue-50',
                     'CNT': 'border-green-200 bg-green-50',

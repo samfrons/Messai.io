@@ -21,7 +21,7 @@ interface ExperimentData {
 
 interface MFCDashboard3DProps {
   experiments: ExperimentData[]
-  selectedExperiment?: string
+  selectedExperiment?: string | null
   onExperimentSelect?: (id: string) => void
 }
 
