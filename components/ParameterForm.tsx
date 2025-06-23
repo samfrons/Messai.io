@@ -1,6 +1,8 @@
 'use client'
 
 import { useState } from 'react'
+import MFC3DModel from './MFC3DModel'
+import MFCConfigPanel from './MFCConfigPanel'
 
 interface ExperimentParameters {
   name: string
@@ -8,6 +10,24 @@ interface ExperimentParameters {
   ph: number
   substrateConcentration: number
   notes?: string
+}
+
+interface MFCConfig {
+  electrode: {
+    material: string
+    surface: number
+    thickness: number
+  }
+  microbial: {
+    density: number
+    species: string
+    activity: number
+  }
+  chamber: {
+    volume: number
+    shape: string
+    material: string
+  }
 }
 
 interface ParameterFormProps {
@@ -26,6 +46,25 @@ export default function ParameterForm({ designId, designName, onSubmit, onCancel
     notes: ''
   })
 
+  const [mfcConfig, setMfcConfig] = useState<MFCConfig>({
+    electrode: {
+      material: 'carbon-cloth',
+      surface: 100,
+      thickness: 2.0
+    },
+    microbial: {
+      density: 5.0,
+      species: 'geobacter',
+      activity: 75
+    },
+    chamber: {
+      volume: 1.0,
+      shape: 'rectangular',
+      material: 'acrylic'
+    }
+  })
+
+  const [selectedComponent, setSelectedComponent] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,11 +85,61 @@ export default function ParameterForm({ designId, designName, onSubmit, onCancel
     }))
   }
 
+  const handleConfigChange = (component: keyof MFCConfig, field: string, value: any) => {
+    setMfcConfig(prev => ({
+      ...prev,
+      [component]: {
+        ...prev[component],
+        [field]: value
+      }
+    }))
+  }
+
+  const handleComponentSelect = (component: string) => {
+    setSelectedComponent(component === selectedComponent ? null : component)
+  }
+
   return (
-    <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
+    <div className="max-w-7xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6">
+        <div className="border-b border-gray-200 pb-4">
+          <h2 className="text-xl font-semibold text-gray-900">Setup New Experiment</h2>
+          <p className="text-gray-600 mt-1">Configure parameters and design for your {designName}</p>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* 3D Model */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">MFC 3D Model</h3>
+          <MFC3DModel 
+            config={mfcConfig}
+            onComponentSelect={handleComponentSelect}
+            selectedComponent={selectedComponent}
+          />
+          <p className="text-sm text-gray-600 mt-2">
+            Click on components in the 3D model to configure them
+          </p>
+        </div>
+
+        {/* Configuration Panel */}
+        <div className="bg-white rounded-lg border border-gray-200 p-6">
+          <MFCConfigPanel 
+            config={mfcConfig}
+            selectedComponent={selectedComponent}
+            onConfigChange={handleConfigChange}
+          />
+        </div>
+      </div>
+
+      {/* Experiment Parameters */}
+      <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
+
       <div className="border-b border-gray-200 pb-4">
-        <h2 className="text-xl font-semibold text-gray-900">Setup New Experiment</h2>
-        <p className="text-gray-600 mt-1">Configure parameters for your {designName}</p>
+        <h3 className="text-lg font-semibold text-gray-900">Experiment Parameters</h3>
+        <p className="text-gray-600 mt-1">Set environmental conditions for your experiment</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -138,15 +227,28 @@ export default function ParameterForm({ designId, designName, onSubmit, onCancel
           />
         </div>
 
-        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+        <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-4">
           <h4 className="text-sm font-medium text-blue-900 mb-2">AI Prediction Preview</h4>
-          <p className="text-sm text-blue-700">
-            Based on your parameters, the AI predicts a power output of{' '}
-            <span className="font-semibold">
-              {Math.round(50 + (parameters.temperature * 5) + (parameters.ph * 20))} mW
-            </span>
-            {' '}(±15% confidence interval)
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <div className="text-gray-600">Power Output</div>
+              <div className="font-semibold text-blue-800">
+                {Math.round(50 + (parameters.temperature * 5) + (parameters.ph * 20) + (mfcConfig.electrode.surface * 0.5))} mW
+              </div>
+            </div>
+            <div>
+              <div className="text-gray-600">Efficiency</div>
+              <div className="font-semibold text-green-800">
+                {Math.round((mfcConfig.microbial.activity + mfcConfig.electrode.surface) / 3)}%
+              </div>
+            </div>
+            <div>
+              <div className="text-gray-600">Est. Runtime</div>
+              <div className="font-semibold text-purple-800">
+                {Math.round(mfcConfig.chamber.volume * 24)} hours
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="flex space-x-4 pt-4">
@@ -166,6 +268,7 @@ export default function ParameterForm({ designId, designName, onSubmit, onCancel
           </button>
         </div>
       </form>
+      </div>
     </div>
   )
 }
