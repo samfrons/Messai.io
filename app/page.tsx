@@ -80,6 +80,110 @@ export default function HomePage() {
           electrodes: "Buried carbon electrodes",
           plants: "Aquatic vegetation"
         }
+      },
+      {
+        id: '6',
+        name: "Micro MFC Chip",
+        type: "micro-chip",
+        cost: "$5",
+        powerOutput: "10-50 mW/m²",
+        materials: {
+          container: "1cm³ silicon microchamber",
+          electrodes: "Gold microelectrodes",
+          separator: "Nafion membrane",
+          features: "Lab-on-chip design"
+        }
+      },
+      {
+        id: '7',
+        name: "Isolinear Bio-Chip",
+        type: "isolinear-chip", 
+        cost: "$25",
+        powerOutput: "80-200 mW/m²",
+        materials: {
+          container: "Microscope slide form factor",
+          electrodes: "Transparent ITO electrodes",
+          design: "Star Trek inspired geometry",
+          features: "Optical monitoring ports"
+        }
+      },
+      {
+        id: '8',
+        name: "Benchtop Bioreactor MFC",
+        type: "benchtop-bioreactor",
+        cost: "$350",
+        powerOutput: "1-5 W/m²",
+        materials: {
+          container: "Stirred tank reactor (5L)",
+          electrodes: "High-surface graphite felt",
+          monitoring: "pH, DO, temperature sensors",
+          features: "Continuous flow operation"
+        }
+      },
+      {
+        id: '9',
+        name: "Wastewater Treatment MFC",
+        type: "wastewater-treatment",
+        cost: "$2,500",
+        powerOutput: "2-10 W/m²",
+        materials: {
+          container: "Modular tank system (500L)",
+          electrodes: "Stainless steel mesh arrays",
+          separator: "Ceramic membrane",
+          features: "BOD removal + power generation"
+        }
+      },
+      {
+        id: '10',
+        name: "Brewery Processing MFC",
+        type: "brewery-processing",
+        cost: "$1,800",
+        powerOutput: "3-8 W/m²",
+        materials: {
+          container: "Food-grade stainless steel",
+          electrodes: "Carbon brush anodes",
+          substrate: "Brewery wastewater",
+          features: "CIP-compatible design"
+        }
+      },
+      {
+        id: '11',
+        name: "BioFacade Power Cell",
+        type: "architectural-facade",
+        cost: "$5,000",
+        powerOutput: "10-50 W/m²",
+        materials: {
+          container: "Building-integrated panels",
+          electrodes: "Flexible carbon composites",
+          substrate: "Urban wastewater",
+          features: "Weather-resistant, modular"
+        }
+      },
+      {
+        id: '12',
+        name: "Benthic Sediment MFC",
+        type: "benthic-fuel-cell",
+        cost: "$150",
+        powerOutput: "5-25 W/m²",
+        materials: {
+          container: "Marine-grade housing",
+          electrodes: "Corrosion-resistant titanium",
+          substrate: "Ocean/lake sediments",
+          features: "Long-term deployment"
+        }
+      },
+      {
+        id: '13',
+        name: "Kitchen Sink Bio-Cell",
+        type: "kitchen-sink",
+        cost: "$85",
+        powerOutput: "100-500 mW/m²",
+        materials: {
+          container: "Under-sink installation",
+          electrodes: "Food-safe carbon mesh",
+          substrate: "Organic kitchen waste",
+          features: "Garbage disposal integration"
+        }
       }
     ]
     
@@ -94,14 +198,51 @@ export default function HomePage() {
   }
 
   const handleExperimentSubmit = async (parameters: any) => {
-    // In real app, this would create experiment in database
-    console.log('Creating experiment:', { designId: selectedDesign?.id, parameters })
+    if (!selectedDesign) return
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    // Redirect to experiment view
-    window.location.href = `/experiment/mock-experiment-id`
+    try {
+      // Generate unique experiment ID
+      const experimentId = `exp-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      
+      // In real app, this would create experiment in database
+      console.log('Creating experiment:', { 
+        id: experimentId,
+        designId: selectedDesign.id, 
+        designType: selectedDesign.type,
+        parameters 
+      })
+      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      
+      // Store experiment data in localStorage for demo purposes
+      const experimentData = {
+        id: experimentId,
+        name: parameters.name,
+        designName: selectedDesign.name,
+        designType: selectedDesign.type,
+        status: 'setup',
+        createdAt: new Date().toISOString(),
+        parameters: parameters,
+        stats: {
+          totalMeasurements: 0,
+          averagePower: 0,
+          maxPower: 0,
+          efficiency: 0
+        }
+      }
+      
+      // Store in localStorage
+      const existingExperiments = JSON.parse(localStorage.getItem('messai-experiments') || '[]')
+      existingExperiments.push(experimentData)
+      localStorage.setItem('messai-experiments', JSON.stringify(existingExperiments))
+      
+      // Redirect to experiment view
+      window.location.href = `/experiment/${experimentId}`
+    } catch (error) {
+      console.error('Failed to create experiment:', error)
+      alert('Failed to create experiment. Please try again.')
+    }
   }
 
   const handleCancel = () => {
@@ -114,6 +255,7 @@ export default function HomePage() {
         <ParameterForm
           designId={selectedDesign.id}
           designName={selectedDesign.name}
+          designType={selectedDesign.type}
           onSubmit={handleExperimentSubmit}
           onCancel={handleCancel}
         />
@@ -135,7 +277,7 @@ export default function HomePage() {
 
       {loading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
+          {[...Array(12)].map((_, i) => (
             <div key={i} className="bg-white rounded-lg border-2 border-gray-200 p-6 animate-pulse">
               <div className="flex flex-col items-center space-y-4">
                 <div className="w-16 h-16 bg-gray-300 rounded-lg"></div>

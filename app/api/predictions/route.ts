@@ -68,7 +68,15 @@ export async function POST(request: NextRequest) {
       'cardboard': 0.6,
       'mason-jar': 1.0,
       '3d-printed': 1.3,
-      'wetland': 2.2
+      'wetland': 2.2,
+      'micro-chip': 0.3,
+      'isolinear-chip': 0.9,
+      'benchtop-bioreactor': 3.5,
+      'wastewater-treatment': 5.0,
+      'brewery-processing': 4.2,
+      'architectural-facade': 8.0,
+      'benthic-fuel-cell': 2.8,
+      'kitchen-sink': 1.5
     }
 
     const designBonus = designType ? (designMultipliers[designType] || 1.0) - 1.0 : 0
@@ -134,7 +142,15 @@ export async function GET() {
       'cardboard', 
       'mason-jar',
       '3d-printed',
-      'wetland'
+      'wetland',
+      'micro-chip',
+      'isolinear-chip',
+      'benchtop-bioreactor',
+      'wastewater-treatment',
+      'brewery-processing',
+      'architectural-facade',
+      'benthic-fuel-cell',
+      'kitchen-sink'
     ]
   })
 }

@@ -5,6 +5,7 @@ import { OrbitControls, Environment, Text, Box, Cylinder, Sphere } from '@react-
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
+import DesignSpecific3DModel from './DesignSpecific3DModels'
 
 interface MFCConfig {
   electrode: {
@@ -28,6 +29,7 @@ interface MFC3DModelProps {
   config: MFCConfig
   onComponentSelect: (component: string) => void
   selectedComponent: string | null
+  designType?: string
 }
 
 function AnodeElectrode({ selected, onClick, config }: { selected: boolean, onClick: () => void, config: MFCConfig }) {
@@ -318,45 +320,70 @@ function ElectronFlow({ config }: { config: MFCConfig }) {
   )
 }
 
-function MFCScene({ config, onComponentSelect, selectedComponent }: MFC3DModelProps) {
+function MFCScene({ config, onComponentSelect, selectedComponent, designType }: MFC3DModelProps) {
+  const newDesignTypes = [
+    'micro-chip',
+    'isolinear-chip', 
+    'benchtop-bioreactor',
+    'wastewater-treatment',
+    'brewery-processing',
+    'architectural-facade',
+    'benthic-fuel-cell',
+    'kitchen-sink'
+  ]
+
+  const useDesignSpecificModel = designType && newDesignTypes.includes(designType)
+
   return (
     <>
       <ambientLight intensity={0.6} />
       <directionalLight position={[10, 10, 5]} intensity={1} />
       <pointLight position={[-10, -10, -5]} intensity={0.5} />
       
-      <Chamber 
-        selected={selectedComponent === 'chamber'}
-        onClick={() => onComponentSelect('chamber')}
-        config={config}
-      />
-      
-      <AnodeElectrode 
-        selected={selectedComponent === 'anode'}
-        onClick={() => onComponentSelect('anode')}
-        config={config}
-      />
-      
-      <CathodeElectrode 
-        selected={selectedComponent === 'cathode'}
-        onClick={() => onComponentSelect('cathode')}
-        config={config}
-      />
-      
-      <MicrobialCommunity 
-        selected={selectedComponent === 'microbial'}
-        onClick={() => onComponentSelect('microbial')}
-        config={config}
-      />
-      
-      <ElectronFlow config={config} />
+      {useDesignSpecificModel ? (
+        <group onClick={() => onComponentSelect('design-specific')}>
+          <DesignSpecific3DModel 
+            designType={designType} 
+            scale={1.2} 
+            showLabels={selectedComponent === 'design-specific'} 
+          />
+        </group>
+      ) : (
+        <>
+          <Chamber 
+            selected={selectedComponent === 'chamber'}
+            onClick={() => onComponentSelect('chamber')}
+            config={config}
+          />
+          
+          <AnodeElectrode 
+            selected={selectedComponent === 'anode'}
+            onClick={() => onComponentSelect('anode')}
+            config={config}
+          />
+          
+          <CathodeElectrode 
+            selected={selectedComponent === 'cathode'}
+            onClick={() => onComponentSelect('cathode')}
+            config={config}
+          />
+          
+          <MicrobialCommunity 
+            selected={selectedComponent === 'microbial'}
+            onClick={() => onComponentSelect('microbial')}
+            config={config}
+          />
+          
+          <ElectronFlow config={config} />
+        </>
+      )}
       
       <Environment preset="studio" />
     </>
   )
 }
 
-export default function MFC3DModel({ config, onComponentSelect, selectedComponent }: MFC3DModelProps) {
+export default function MFC3DModel({ config, onComponentSelect, selectedComponent, designType }: MFC3DModelProps) {
   return (
     <div className="w-full h-96 bg-gray-900 rounded-lg overflow-hidden">
       <Canvas
@@ -367,6 +394,7 @@ export default function MFC3DModel({ config, onComponentSelect, selectedComponen
           config={config} 
           onComponentSelect={onComponentSelect}
           selectedComponent={selectedComponent}
+          designType={designType}
         />
         <OrbitControls 
           enablePan={true}

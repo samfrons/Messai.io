@@ -1,5 +1,7 @@
 'use client'
 
+import { Design3DPreview } from './DesignSpecific3DModels'
+
 interface MFCDesign {
   id: string
   name: string
@@ -14,7 +16,7 @@ interface MFCDesignCardProps {
   onSelect: (design: MFCDesign) => void
 }
 
-const MFCIcons = {
+const LegacyMFCIcons = {
   'earthen-pot': (
     <svg viewBox="0 0 100 100" className="w-16 h-16">
       <ellipse cx="50" cy="85" rx="35" ry="8" fill="#8B4513" opacity="0.3"/>
@@ -69,15 +71,43 @@ const MFCIcons = {
   )
 }
 
+// New design types that have 3D models
+const new3DDesigns = [
+  'micro-chip',
+  'isolinear-chip', 
+  'benchtop-bioreactor',
+  'wastewater-treatment',
+  'brewery-processing',
+  'architectural-facade',
+  'benthic-fuel-cell',
+  'kitchen-sink'
+]
+
 export default function MFCDesignCard({ design, onSelect }: MFCDesignCardProps) {
+  const hasNew3DModel = new3DDesigns.includes(design.type)
+  
   return (
     <div 
       className="bg-white rounded-lg border-2 border-gray-200 p-6 cursor-pointer hover:border-primary hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
       onClick={() => onSelect(design)}
     >
       <div className="flex flex-col items-center space-y-4">
-        <div className="p-4 bg-gray-50 rounded-lg">
-          {MFCIcons[design.type as keyof typeof MFCIcons] || MFCIcons['earthen-pot']}
+        <div className="relative">
+          {hasNew3DModel ? (
+            <div className="w-full h-20 bg-gray-900 rounded-lg overflow-hidden">
+              <Design3DPreview designType={design.type} />
+            </div>
+          ) : (
+            <div className="p-4 bg-gray-50 rounded-lg">
+              {LegacyMFCIcons[design.type as keyof typeof LegacyMFCIcons] || LegacyMFCIcons['earthen-pot']}
+            </div>
+          )}
+          
+          {hasNew3DModel && (
+            <div className="absolute top-1 right-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+              3D
+            </div>
+          )}
         </div>
         
         <div className="text-center">
@@ -92,10 +122,17 @@ export default function MFCDesignCard({ design, onSelect }: MFCDesignCardProps) 
               <span className="font-medium text-primary">{design.powerOutput}</span>
             </div>
           </div>
+          
+          {/* Show key features for new designs */}
+          {hasNew3DModel && design.materials.features && (
+            <div className="mt-2 text-xs text-gray-500 italic">
+              {design.materials.features}
+            </div>
+          )}
         </div>
         
         <button className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-          Select Design
+          {hasNew3DModel ? 'Explore 3D Model' : 'Select Design'}
         </button>
       </div>
     </div>

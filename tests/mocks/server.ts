@@ -22,7 +22,15 @@ export const handlers = [
       'cardboard': -25,
       'mason-jar': 0,
       '3d-printed': 15,
-      'wetland': 50
+      'wetland': 50,
+      'micro-chip': -30,
+      'isolinear-chip': -5,
+      'benchtop-bioreactor': 80,
+      'wastewater-treatment': 120,
+      'brewery-processing': 90,
+      'architectural-facade': 200,
+      'benthic-fuel-cell': 60,
+      'kitchen-sink': 25
     }[body.designType] || 0
 
     const predictedPower = basePower + tempFactor + phFactor + substrateFactor + designBonus

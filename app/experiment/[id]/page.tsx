@@ -28,35 +28,55 @@ export default function ExperimentPage() {
   const params = useParams()
   const [experiment, setExperiment] = useState<ExperimentDetails | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [csvData, setCsvData] = useState<string>('')
   const [uploadStatus, setUploadStatus] = useState<string>('')
 
   useEffect(() => {
-    // Mock experiment data
-    const mockExperiment: ExperimentDetails = {
-      id: params.id as string,
-      name: 'Earthen Pot Test #1',
-      designName: 'Earthen Pot MFC',
-      status: 'running',
-      createdAt: '2024-01-15T10:30:00Z',
-      parameters: {
-        temperature: 28.5,
-        ph: 7.1,
-        substrateConcentration: 1.2,
-        notes: 'Testing optimal conditions for earthen pot design with local clay material.'
-      },
-      stats: {
-        totalMeasurements: 1247,
-        averagePower: 245.6,
-        maxPower: 312.8,
-        efficiency: 78.5
+    const loadExperiment = () => {
+      try {
+        // Try to load from localStorage first
+        const storedExperiments = JSON.parse(localStorage.getItem('messai-experiments') || '[]')
+        const foundExperiment = storedExperiments.find((exp: any) => exp.id === params.id)
+        
+        if (foundExperiment) {
+          // Use stored experiment data
+          setExperiment(foundExperiment)
+          setLoading(false)
+          return
+        }
+        
+        // Fallback to mock data for demo purposes
+        const mockExperiment: ExperimentDetails = {
+          id: params.id as string,
+          name: 'Demo Experiment',
+          designName: 'Demo MFC Design',
+          status: 'running',
+          createdAt: new Date().toISOString(),
+          parameters: {
+            temperature: 28.5,
+            ph: 7.1,
+            substrateConcentration: 1.2,
+            notes: 'Demo experiment for testing purposes.'
+          },
+          stats: {
+            totalMeasurements: 1247,
+            averagePower: 245.6,
+            maxPower: 312.8,
+            efficiency: 78.5
+          }
+        }
+        
+        setExperiment(mockExperiment)
+        setLoading(false)
+      } catch (error) {
+        console.error('Failed to load experiment:', error)
+        setError('Failed to load experiment data')
+        setLoading(false)
       }
     }
 
-    setTimeout(() => {
-      setExperiment(mockExperiment)
-      setLoading(false)
-    }, 500)
+    setTimeout(loadExperiment, 500)
   }, [params.id])
 
   const handleCsvUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,6 +127,22 @@ export default function ExperimentPage() {
           <div className="bg-white rounded-lg p-6">
             <div className="h-96 bg-gray-300 rounded"></div>
           </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="text-center">
+          <div className="text-red-600 text-lg mb-4">{error}</div>
+          <a
+            href="/"
+            className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+          >
+            Return to Design Catalog
+          </a>
         </div>
       </div>
     )

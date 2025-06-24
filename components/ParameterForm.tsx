@@ -33,11 +33,12 @@ interface MFCConfig {
 interface ParameterFormProps {
   designId: string
   designName: string
+  designType: string
   onSubmit: (params: ExperimentParameters) => void
   onCancel: () => void
 }
 
-export default function ParameterForm({ designId, designName, onSubmit, onCancel }: ParameterFormProps) {
+export default function ParameterForm({ designId, designName, designType, onSubmit, onCancel }: ParameterFormProps) {
   const [parameters, setParameters] = useState<ExperimentParameters>({
     name: `${designName} Experiment ${new Date().toLocaleDateString()}`,
     temperature: 28,
@@ -141,6 +142,7 @@ export default function ParameterForm({ designId, designName, onSubmit, onCancel
               config={mfcConfig}
               onComponentSelect={handleComponentSelect}
               selectedComponent={selectedComponent}
+              designType={designType}
             />
           </div>
           

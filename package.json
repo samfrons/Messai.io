@@ -10,7 +10,12 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "test:watch": "vitest --watch"
+    "test:watch": "vitest --watch",
+    "test:all": "node scripts/test-all.js",
+    "test:integration": "vitest tests/integration/",
+    "test:regression": "vitest tests/regression/",
+    "test:critical": "vitest tests/integration/ tests/regression/ tests/components/ParameterForm.integration.test.tsx tests/api/",
+    "test:ci": "vitest run --coverage --reporter=json --outputFile=test-results.json"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
