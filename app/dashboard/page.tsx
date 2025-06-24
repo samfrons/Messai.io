@@ -108,244 +108,176 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-8 gap-4"
-      >
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Experiment Dashboard</h1>
-          <p className="text-gray-600 mt-1">Monitor and manage your MFC experiments</p>
+    <div className="h-screen flex flex-col bg-gray-50">
+      {/* Compact header */}
+      <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-gray-900">Experiment Dashboard</h1>
+            <p className="text-sm text-gray-600">Monitor and manage your MFC experiments</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => setView3D(!view3D)}
+              className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all ${
+                view3D 
+                  ? 'bg-blue-500 text-white shadow-lg' 
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              <Eye className="h-4 w-4" />
+              3D View
+            </motion.button>
+            <a
+              href="/"
+              className="bg-blue-600 text-white px-3 py-2 text-sm rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2"
+            >
+              <Settings className="h-4 w-4" />
+              New Experiment
+            </a>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setView3D(!view3D)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${
-              view3D 
-                ? 'bg-blue-500 text-white shadow-lg' 
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
-          >
-            <Eye className="h-4 w-4" />
-            3D View
-          </motion.button>
-          <a
-            href="/"
-            className="bg-primary text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2"
-          >
-            <Settings className="h-4 w-4" />
-            New Experiment
-          </a>
-        </div>
-      </motion.div>
+      </div>
 
-      {experiments.length === 0 ? (
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center py-12"
-        >
-          <div className="text-gray-500 text-lg mb-4">No experiments yet</div>
-          <a
-            href="/"
-            className="bg-primary text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
-          >
-            Create Your First Experiment
-          </a>
-        </motion.div>
-      ) : (
-        <div className="space-y-8">
-          {/* 3D Visualization */}
-          {view3D && (
-            <motion.div
+      {/* Main content area */}
+      <div className="flex-1 overflow-hidden">
+
+        {experiments.length === 0 ? (
+          <div className="flex items-center justify-center h-full">
+            <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-lg border border-gray-200 p-6"
+              className="text-center"
             >
-              <div className="flex items-center justify-between mb-4">
-                <div>
-                  <h2 className="text-xl font-semibold text-gray-900">3D Experiment Overview</h2>
-                  <p className="text-gray-600 text-sm">Interactive visualization of all experiments</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-green-500" />
-                  <span className="text-sm text-gray-600">
-                    {experiments.filter(e => e.status === 'running').length} active
-                  </span>
-                </div>
-              </div>
-              <MFCDashboard3D 
-                experiments={experiments}
-                selectedExperiment={selectedExperiment}
-                onExperimentSelect={setSelectedExperiment}
-              />
-              {selectedExperiment && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200"
-                >
-                  {(() => {
-                    const selected = experiments.find(e => e.id === selectedExperiment)
-                    return selected ? (
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <h3 className="font-semibold text-blue-900">{selected.name}</h3>
-                          <p className="text-blue-700 text-sm">{selected.designName}</p>
-                        </div>
-                        <button
-                          onClick={() => window.location.href = `/experiment/${selected.id}`}
-                          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm"
-                        >
-                          View Details
-                        </button>
-                      </div>
-                    ) : null
-                  })()} 
-                </motion.div>
-              )}
-            </motion.div>
-          )}
-          {/* Experiment List */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-gray-900">Experiment List</h2>
-              <span className="text-sm text-gray-600">{experiments.length} total experiments</span>
-            </div>
-            {experiments.map((experiment, index) => (
-              <motion.div
-                key={experiment.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`bg-white rounded-lg border p-6 hover:shadow-md transition-all cursor-pointer ${
-                  selectedExperiment === experiment.id 
-                    ? 'border-blue-300 shadow-md bg-blue-50' 
-                    : 'border-gray-200'
-                }`}
-                onClick={() => {
-                  setSelectedExperiment(experiment.id)
-                  window.location.href = `/experiment/${experiment.id}`
-                }}
-                onMouseEnter={() => setSelectedExperiment(experiment.id)}
+              <div className="text-gray-500 text-lg mb-4">No experiments yet</div>
+              <a
+                href="/"
+                className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
               >
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-1">
-                    {experiment.name}
-                  </h3>
-                  <p className="text-gray-600">{experiment.designName}</p>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(experiment.status)}`}>
-                    {experiment.status.charAt(0).toUpperCase() + experiment.status.slice(1)}
-                  </span>
-                  <div className="text-right">
-                    <div className="text-2xl font-bold text-primary">
-                      {experiment.lastPower.toFixed(1)} mW
+                Create Your First Experiment
+              </a>
+            </motion.div>
+          </div>
+        ) : (
+          <div className="h-full flex flex-col lg:flex-row">
+            {/* Left: 3D Visualization */}
+            {view3D && (
+              <div className="w-full lg:w-3/5 bg-white border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col min-h-[400px] lg:min-h-0">
+                <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h2 className="text-base lg:text-lg font-semibold text-gray-900">3D Experiment Overview</h2>
+                      <p className="text-xs lg:text-sm text-gray-600">Interactive visualization</p>
                     </div>
-                    <div className="text-sm text-gray-500">Current Power</div>
+                    <div className="flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4 text-green-500" />
+                      <span className="text-xs lg:text-sm text-gray-600">
+                        {experiments.filter(e => e.status === 'running').length} active
+                      </span>
+                    </div>
                   </div>
                 </div>
+                <div className="flex-1 min-h-0">
+                  <MFCDashboard3D 
+                    experiments={experiments}
+                    selectedExperiment={selectedExperiment}
+                    onExperimentSelect={setSelectedExperiment}
+                  />
+                </div>
+                {selectedExperiment && (
+                  <div className="p-3 lg:p-4 border-t border-gray-200 bg-blue-50 flex-shrink-0">
+                    {(() => {
+                      const selected = experiments.find(e => e.id === selectedExperiment)
+                      return selected ? (
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                          <div>
+                            <h3 className="font-semibold text-blue-900 text-sm">{selected.name}</h3>
+                            <p className="text-blue-700 text-xs">{selected.designName}</p>
+                          </div>
+                          <button
+                            onClick={() => window.location.href = `/experiment/${selected.id}`}
+                            className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm"
+                          >
+                            View Details
+                          </button>
+                        </div>
+                      ) : null
+                    })()}
+                  </div>
+                )}
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-                <div>
-                  <span className="text-gray-600">Started:</span>
-                  <div className="font-medium">{formatDate(experiment.createdAt)}</div>
-                </div>
-                <div>
-                  <span className="text-gray-600">Temperature:</span>
-                  <div className="font-medium">{experiment.parameters.temperature}°C</div>
-                </div>
-                <div>
-                  <span className="text-gray-600">pH Level:</span>
-                  <div className="font-medium">{experiment.parameters.ph}</div>
-                </div>
-                <div>
-                  <span className="text-gray-600">Substrate:</span>
-                  <div className="font-medium">{experiment.parameters.substrateConcentration} g/L</div>
-                </div>
-              </div>
-
-              <div className="mt-4 pt-4 border-t border-gray-100">
+            )}
+            
+            {/* Right: Experiment List */}
+            <div className={`${view3D ? 'w-full lg:w-2/5' : 'w-full'} bg-white flex flex-col min-h-0`}>
+              <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
                 <div className="flex items-center justify-between">
-                  <div className="text-sm text-gray-600">
-                    Click to view detailed charts and analysis
-                  </div>
-                  <div className="text-primary">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </div>
+                  <h2 className="text-base lg:text-lg font-semibold text-gray-900">Experiments</h2>
+                  <span className="text-xs lg:text-sm text-gray-600">{experiments.length} total</span>
                 </div>
               </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      )}
+              <div className="flex-1 overflow-y-auto p-2 lg:p-4 space-y-2 lg:space-y-3">
+                {experiments.map((experiment, index) => (
+                  <motion.div
+                    key={experiment.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`border rounded-lg p-3 lg:p-4 hover:shadow-md transition-all cursor-pointer ${
+                      selectedExperiment === experiment.id 
+                        ? 'border-blue-300 shadow-md bg-blue-50' 
+                        : 'border-gray-200 bg-white'
+                    }`}
+                    onClick={() => {
+                      setSelectedExperiment(experiment.id)
+                      window.location.href = `/experiment/${experiment.id}`
+                    }}
+                    onMouseEnter={() => setSelectedExperiment(experiment.id)}
+                  >
+                    <div className="flex items-start justify-between mb-2 lg:mb-3">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-gray-900 text-xs lg:text-sm mb-1 truncate">
+                          {experiment.name}
+                        </h3>
+                        <p className="text-xs text-gray-600 truncate">{experiment.designName}</p>
+                      </div>
+                      <div className="text-right ml-2 lg:ml-3 flex-shrink-0">
+                        <div className="text-sm lg:text-lg font-bold text-blue-600">
+                          {experiment.lastPower.toFixed(1)} mW
+                        </div>
+                        <span className={`px-1 lg:px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(experiment.status)}`}>
+                          {experiment.status.charAt(0).toUpperCase() + experiment.status.slice(1)}
+                        </span>
+                      </div>
+                    </div>
 
-      {/* Statistics */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6"
-      >
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center gap-2 mb-2">
-            <TrendingUp className="h-5 w-5 text-green-500" />
-            <h3 className="text-lg font-semibold text-gray-900">Active</h3>
+                    <div className="grid grid-cols-2 gap-2 lg:gap-3 text-xs">
+                      <div>
+                        <span className="text-gray-600">Started:</span>
+                        <div className="font-medium truncate">{formatDate(experiment.createdAt)}</div>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Temperature:</span>
+                        <div className="font-medium">{experiment.parameters.temperature}°C</div>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">pH Level:</span>
+                        <div className="font-medium">{experiment.parameters.ph}</div>
+                      </div>
+                      <div>
+                        <span className="text-gray-600">Substrate:</span>
+                        <div className="font-medium">{experiment.parameters.substrateConcentration} g/L</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="text-3xl font-bold text-green-600">
-            {experiments.filter(e => e.status === 'running').length}
-          </div>
-          <p className="text-sm text-gray-600 mt-1">Running experiments</p>
-        </div>
-        
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center gap-2 mb-2">
-            <Settings className="h-5 w-5 text-blue-500" />
-            <h3 className="text-lg font-semibold text-gray-900">Average Power</h3>
-          </div>
-          <div className="text-3xl font-bold text-blue-600">
-            {experiments.length > 0 
-              ? Math.round(experiments.reduce((sum, e) => sum + e.lastPower, 0) / experiments.length)
-              : 0
-            } mW
-          </div>
-          <p className="text-sm text-gray-600 mt-1">Across all experiments</p>
-        </div>
-        
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center gap-2 mb-2">
-            <Eye className="h-5 w-5 text-purple-500" />
-            <h3 className="text-lg font-semibold text-gray-900">Peak Power</h3>
-          </div>
-          <div className="text-3xl font-bold text-purple-600">
-            {experiments.length > 0 
-              ? Math.max(...experiments.map(e => e.lastPower)).toFixed(1)
-              : 0
-            } mW
-          </div>
-          <p className="text-sm text-gray-600 mt-1">Highest recorded</p>
-        </div>
-        
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <div className="flex items-center gap-2 mb-2">
-            <Settings className="h-5 w-5 text-gray-500" />
-            <h3 className="text-lg font-semibold text-gray-900">Total</h3>
-          </div>
-          <div className="text-3xl font-bold text-gray-900">
-            {experiments.length}
-          </div>
-          <p className="text-sm text-gray-600 mt-1">All experiments</p>
-        </div>
-      </motion.div>
+        )}
+      </div>
     </div>
   )
 }

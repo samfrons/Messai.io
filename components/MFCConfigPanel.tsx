@@ -181,15 +181,15 @@ function ElectrodeConfig({ config, onConfigChange }: {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-lg border border-red-200 p-4 shadow-sm"
+      className="bg-white rounded-lg border border-red-200 p-3 shadow-sm"
     >
       <button
         onClick={() => setExpanded(!expanded)}
         className="flex items-center justify-between w-full text-left"
       >
         <div className="flex items-center gap-2">
-          <Zap className="h-5 w-5 text-red-500" />
-          <h3 className="font-semibold text-gray-900">Electrode Configuration</h3>
+          <Zap className="h-4 w-4 text-red-500" />
+          <h3 className="text-sm font-semibold text-gray-900">Electrode Configuration</h3>
         </div>
         {expanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
       </button>
@@ -200,13 +200,13 @@ function ElectrodeConfig({ config, onConfigChange }: {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="mt-4 space-y-4"
+            className="mt-3 space-y-3"
           >
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-xs font-medium text-gray-700 mb-2">
                 Electrode Material
               </label>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Group materials by category */}
                 {['Traditional', 'Graphene', 'CNT', 'MXene', 'Upcycled'].map(category => {
                   const categoryMaterials = materials.filter(m => m.category === category)
@@ -219,11 +219,11 @@ function ElectrodeConfig({ config, onConfigChange }: {
                   }
                   
                   return (
-                    <div key={category} className={`p-3 rounded-lg border ${categoryColors[category]}`}>
-                      <h4 className="font-medium text-sm text-gray-700 mb-2">
+                    <div key={category} className={`p-2 rounded border ${categoryColors[category]}`}>
+                      <h4 className="font-medium text-xs text-gray-700 mb-2">
                         {category === 'CNT' ? 'Carbon Nanotubes' : category} Materials
                       </h4>
-                      <div className="space-y-2">
+                      <div className="space-y-1">
                         {categoryMaterials.map((material) => (
                           <label key={material.value} className="flex items-center space-x-3 cursor-pointer">
                             <input
@@ -706,45 +706,49 @@ function calculateMaterialCost(config: MFCConfig): number {
 
 export default function MFCConfigPanel({ config, selectedComponent, onConfigChange }: MFCConfigPanelProps) {
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-4">
-        <Info className="h-5 w-5 text-blue-500" />
-        <h2 className="text-lg font-semibold text-gray-900">MFC Configuration</h2>
-        {selectedComponent && (
-          <span className="text-sm bg-blue-100 text-blue-800 px-2 py-1 rounded">
-            Editing: {selectedComponent}
-          </span>
-        )}
+    <div className="h-full flex flex-col">
+      {/* Compact header with inline status */}
+      <div className="p-4 border-b border-gray-200 bg-gray-50 flex-shrink-0">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Info className="h-4 w-4 text-blue-500" />
+            <h2 className="text-sm font-semibold text-gray-900">Configuration</h2>
+          </div>
+          {selectedComponent && (
+            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+              {selectedComponent}
+            </span>
+          )}
+        </div>
       </div>
+      
+      <div className="flex-1 overflow-y-auto space-y-3 p-4">
 
-      <ElectrodeConfig 
-        config={config}
-        onConfigChange={(field, value) => onConfigChange('electrode', field, value)}
-      />
+        <ElectrodeConfig 
+          config={config}
+          onConfigChange={(field, value) => onConfigChange('electrode', field, value)}
+        />
 
-      <MicrobialConfig 
-        config={config}
-        onConfigChange={(field, value) => onConfigChange('microbial', field, value)}
-      />
+        <MicrobialConfig 
+          config={config}
+          onConfigChange={(field, value) => onConfigChange('microbial', field, value)}
+        />
 
-      <ChamberConfig 
-        config={config}
-        onConfigChange={(field, value) => onConfigChange('chamber', field, value)}
-      />
-
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border border-green-200"
-      >
+        <ChamberConfig 
+          config={config}
+          onConfigChange={(field, value) => onConfigChange('chamber', field, value)}
+        />
+      </div>
+      
+      {/* Performance metrics at bottom */}
+      <div className="p-4 border-t border-gray-200 bg-gradient-to-r from-green-50 to-blue-50 flex-shrink-0">
         <div className="flex items-center gap-2 mb-2">
           <Zap className="h-4 w-4 text-green-600" />
-          <span className="font-medium text-green-900">Predicted Performance</span>
+          <span className="text-sm font-medium text-green-900">Performance</span>
         </div>
-        <div className="grid grid-cols-3 gap-4 text-sm">
+        <div className="grid grid-cols-3 gap-4 text-xs">
           <div>
-            <div className="text-gray-600">Power Output</div>
+            <div className="text-gray-600">Power</div>
             <div className="font-semibold text-green-800">
               {calculateAdvancedPowerOutput(config)} mW
             </div>
@@ -756,13 +760,13 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
             </div>
           </div>
           <div>
-            <div className="text-gray-600">Est. Cost</div>
+            <div className="text-gray-600">Cost</div>
             <div className="font-semibold text-purple-800">
               ${calculateMaterialCost(config)}
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

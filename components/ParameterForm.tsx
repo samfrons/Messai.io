@@ -100,174 +100,184 @@ export default function ParameterForm({ designId, designName, onSubmit, onCancel
   }
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6">
-      {/* Header */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6">
-        <div className="border-b border-gray-200 pb-4">
-          <h2 className="text-xl font-semibold text-gray-900">Setup New Experiment</h2>
-          <p className="text-gray-600 mt-1">Configure parameters and design for your {designName}</p>
+    <div className="h-screen flex flex-col bg-gray-50">
+      {/* Compact Header */}
+      <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
+        <div className="flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-900">Setup New Experiment</h2>
+            <p className="text-sm text-gray-600">Configure parameters and design for your {designName}</p>
+          </div>
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={onCancel}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              disabled={loading}
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700 disabled:opacity-50"
+            >
+              {loading ? 'Creating Experiment...' : 'Start Experiment'}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* 3D Model */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4">MFC 3D Model</h3>
-          <MFC3DModel 
-            config={mfcConfig}
-            onComponentSelect={handleComponentSelect}
-            selectedComponent={selectedComponent}
-          />
-          <p className="text-sm text-gray-600 mt-2">
-            Click on components in the 3D model to configure them
-          </p>
-        </div>
-
-        {/* Configuration Panel */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <MFCConfigPanel 
-            config={mfcConfig}
-            selectedComponent={selectedComponent}
-            onConfigChange={handleConfigChange}
-          />
-        </div>
-      </div>
-
-      {/* Experiment Parameters */}
-      <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-6">
-
-      <div className="border-b border-gray-200 pb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Experiment Parameters</h3>
-        <p className="text-gray-600 mt-1">Set environmental conditions for your experiment</p>
-      </div>
-
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            Experiment Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={parameters.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            required
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div>
-            <label htmlFor="temperature" className="block text-sm font-medium text-gray-700 mb-2">
-              Temperature (°C)
-            </label>
-            <input
-              type="number"
-              id="temperature"
-              min="20"
-              max="40"
-              step="0.1"
-              value={parameters.temperature}
-              onChange={(e) => handleInputChange('temperature', parseFloat(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              required
-            />
-            <p className="text-xs text-gray-500 mt-1">Range: 20-40°C</p>
+      {/* Main Horizontal Layout */}
+      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        
+        {/* Left Panel: 3D Model */}
+        <div className="w-full lg:w-2/5 bg-white border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col min-h-0">
+          <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
+            <h3 className="text-base lg:text-lg font-semibold text-gray-900">3D MFC Model</h3>
+            <p className="text-xs lg:text-sm text-gray-600">Click components to configure</p>
           </div>
-
-          <div>
-            <label htmlFor="ph" className="block text-sm font-medium text-gray-700 mb-2">
-              pH Level
-            </label>
-            <input
-              type="number"
-              id="ph"
-              min="6"
-              max="8"
-              step="0.1"
-              value={parameters.ph}
-              onChange={(e) => handleInputChange('ph', parseFloat(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              required
+          <div className="flex-1 p-2 lg:p-4 min-h-[200px] lg:min-h-0">
+            <MFC3DModel 
+              config={mfcConfig}
+              onComponentSelect={handleComponentSelect}
+              selectedComponent={selectedComponent}
             />
-            <p className="text-xs text-gray-500 mt-1">Range: 6-8</p>
           </div>
-
-          <div>
-            <label htmlFor="substrate" className="block text-sm font-medium text-gray-700 mb-2">
-              Substrate Concentration (g/L)
-            </label>
-            <input
-              type="number"
-              id="substrate"
-              min="0.5"
-              max="2"
-              step="0.1"
-              value={parameters.substrateConcentration}
-              onChange={(e) => handleInputChange('substrateConcentration', parseFloat(e.target.value))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-              required
-            />
-            <p className="text-xs text-gray-500 mt-1">Range: 0.5-2 g/L</p>
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
-            Notes (Optional)
-          </label>
-          <textarea
-            id="notes"
-            rows={3}
-            value={parameters.notes}
-            onChange={(e) => handleInputChange('notes', e.target.value)}
-            placeholder="Add any additional notes about your experiment setup..."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-          />
-        </div>
-
-        <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-4">
-          <h4 className="text-sm font-medium text-blue-900 mb-2">AI Prediction Preview</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            <div>
-              <div className="text-gray-600">Power Output</div>
-              <div className="font-semibold text-blue-800">
-                {Math.round(50 + (parameters.temperature * 5) + (parameters.ph * 20) + (mfcConfig.electrode.surface * 0.5))} mW
+          
+          {/* AI Prediction Preview - Compact */}
+          <div className="p-3 lg:p-4 border-t border-gray-200 bg-gradient-to-r from-green-50 to-blue-50 flex-shrink-0">
+            <h4 className="text-xs lg:text-sm font-semibold text-gray-900 mb-2">AI Prediction Preview</h4>
+            <div className="grid grid-cols-3 gap-2 lg:gap-4 text-xs">
+              <div>
+                <div className="text-gray-600">Power</div>
+                <div className="font-semibold text-green-800">
+                  {Math.round(parameters.temperature * parameters.ph * parameters.substrateConcentration * 45)} mW
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="text-gray-600">Efficiency</div>
-              <div className="font-semibold text-green-800">
-                {Math.round((mfcConfig.microbial.activity + mfcConfig.electrode.surface) / 3)}%
+              <div>
+                <div className="text-gray-600">Efficiency</div>
+                <div className="font-semibold text-blue-800">
+                  {Math.round(65 + (parameters.temperature - 20) + (parameters.ph - 6) * 5)}%
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="text-gray-600">Est. Runtime</div>
-              <div className="font-semibold text-purple-800">
-                {Math.round(mfcConfig.chamber.volume * 24)} hours
+              <div>
+                <div className="text-gray-600">Duration</div>
+                <div className="font-semibold text-purple-800">
+                  {Math.round(5 + parameters.substrateConcentration * 3)} days
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex space-x-4 pt-4">
-          <button
-            type="submit"
-            disabled={loading}
-            className="flex-1 bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {loading ? 'Creating Experiment...' : 'Start Experiment'}
-          </button>
-          <button
-            type="button"
-            onClick={onCancel}
-            className="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors"
-          >
-            Cancel
-          </button>
+        {/* Center Panel: Configuration */}
+        <div className="w-full lg:w-2/5 bg-white flex flex-col min-h-0">
+          <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
+            <h3 className="text-base lg:text-lg font-semibold text-gray-900">Component Configuration</h3>
+            <p className="text-xs lg:text-sm text-gray-600">
+              {selectedComponent ? `Editing: ${selectedComponent}` : 'Select a component to configure'}
+            </p>
+          </div>
+          <div className="flex-1 overflow-y-auto min-h-[300px] lg:min-h-0">
+            <MFCConfigPanel 
+              config={mfcConfig}
+              selectedComponent={selectedComponent}
+              onConfigChange={handleConfigChange}
+            />
+          </div>
         </div>
-      </form>
+
+        {/* Right Panel: Experiment Parameters */}
+        <div className="w-full lg:w-1/5 bg-white border-t lg:border-t-0 lg:border-l border-gray-200 flex flex-col min-h-0">
+          <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
+            <h3 className="text-base lg:text-lg font-semibold text-gray-900">Parameters</h3>
+            <p className="text-xs lg:text-sm text-gray-600">Environmental conditions</p>
+          </div>
+          
+          <div className="flex-1 p-3 lg:p-4 space-y-3 lg:space-y-4 overflow-y-auto">
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={parameters.name}
+                onChange={(e) => setParameters(prev => ({ ...prev, name: e.target.value }))}
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="temperature" className="block text-sm font-medium text-gray-700 mb-2">
+                Temperature (°C)
+              </label>
+              <input
+                type="number"
+                id="temperature"
+                min="20"
+                max="40"
+                step="0.5"
+                value={parameters.temperature}
+                onChange={(e) => setParameters(prev => ({ ...prev, temperature: Number(e.target.value) }))}
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <p className="text-xs text-gray-500 mt-1">20-40°C</p>
+            </div>
+
+            <div>
+              <label htmlFor="ph" className="block text-sm font-medium text-gray-700 mb-2">
+                pH Level
+              </label>
+              <input
+                type="number"
+                id="ph"
+                min="6"
+                max="8"
+                step="0.1"
+                value={parameters.ph}
+                onChange={(e) => setParameters(prev => ({ ...prev, ph: Number(e.target.value) }))}
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <p className="text-xs text-gray-500 mt-1">6-8</p>
+            </div>
+
+            <div>
+              <label htmlFor="substrate" className="block text-sm font-medium text-gray-700 mb-2">
+                Substrate (g/L)
+              </label>
+              <input
+                type="number"
+                id="substrate"
+                min="0.5"
+                max="2"
+                step="0.1"
+                value={parameters.substrateConcentration}
+                onChange={(e) => setParameters(prev => ({ ...prev, substrateConcentration: Number(e.target.value) }))}
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                required
+              />
+              <p className="text-xs text-gray-500 mt-1">0.5-2 g/L</p>
+            </div>
+
+            <div>
+              <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-2">
+                Notes
+              </label>
+              <textarea
+                id="notes"
+                rows={3}
+                value={parameters.notes}
+                onChange={(e) => setParameters(prev => ({ ...prev, notes: e.target.value }))}
+                className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="Additional notes..."
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
