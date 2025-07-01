@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --font-antonio: 'Antonio', 'Arial Narrow', sans-serif;
+  }
+
+  body {
+    @apply font-lcars;
+  }
+}
+
+/* LCARS-specific styles */
+@layer components {
+  /* LCARS glow effect */
+  .lcars-glow {
+    box-shadow: 0 0 20px rgba(255, 153, 0, 0.5);
+  }
+
+  /* LCARS text shadow */
+  .lcars-text-glow {
+    text-shadow: 0 0 10px currentColor;
+  }
+
+  /* Hide scrollbars in LCARS theme */
+  .lcars-scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .lcars-scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Smooth animations */
+* {
+  @apply transition-colors duration-200;
+}

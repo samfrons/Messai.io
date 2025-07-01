@@ -86,55 +86,157 @@ const new3DDesigns = [
 export default function MFCDesignCard({ design, onSelect }: MFCDesignCardProps) {
   const hasNew3DModel = new3DDesigns.includes(design.type)
   
+  // Map design types to LCARS color classes
+  const getDesignColorClasses = (type: string) => {
+    const colorMap: { [key: string]: { bg: string, border: string, text: string, shadow: string } } = {
+      'earthen-pot': { 
+        bg: 'bg-lcars-orange', 
+        border: 'border-lcars-orange', 
+        text: 'text-lcars-orange',
+        shadow: 'hover:shadow-lcars-orange/50'
+      },
+      'cardboard': { 
+        bg: 'bg-lcars-tan', 
+        border: 'border-lcars-tan', 
+        text: 'text-lcars-tan',
+        shadow: 'hover:shadow-lcars-tan/50'
+      },
+      'mason-jar': { 
+        bg: 'bg-lcars-cyan', 
+        border: 'border-lcars-cyan', 
+        text: 'text-lcars-cyan',
+        shadow: 'hover:shadow-lcars-cyan/50'
+      },
+      '3d-printed': { 
+        bg: 'bg-lcars-blue', 
+        border: 'border-lcars-blue', 
+        text: 'text-lcars-blue',
+        shadow: 'hover:shadow-lcars-blue/50'
+      },
+      'wetland': { 
+        bg: 'bg-lcars-success', 
+        border: 'border-lcars-success', 
+        text: 'text-lcars-success',
+        shadow: 'hover:shadow-lcars-success/50'
+      },
+      'micro-chip': { 
+        bg: 'bg-lcars-purple', 
+        border: 'border-lcars-purple', 
+        text: 'text-lcars-purple',
+        shadow: 'hover:shadow-lcars-purple/50'
+      },
+      'isolinear-chip': { 
+        bg: 'bg-lcars-pink', 
+        border: 'border-lcars-pink', 
+        text: 'text-lcars-pink',
+        shadow: 'hover:shadow-lcars-pink/50'
+      },
+      'benchtop-bioreactor': { 
+        bg: 'bg-lcars-gold', 
+        border: 'border-lcars-gold', 
+        text: 'text-lcars-gold',
+        shadow: 'hover:shadow-lcars-gold/50'
+      },
+      'wastewater-treatment': { 
+        bg: 'bg-lcars-cyan', 
+        border: 'border-lcars-cyan', 
+        text: 'text-lcars-cyan',
+        shadow: 'hover:shadow-lcars-cyan/50'
+      },
+      'brewery-processing': { 
+        bg: 'bg-lcars-orange', 
+        border: 'border-lcars-orange', 
+        text: 'text-lcars-orange',
+        shadow: 'hover:shadow-lcars-orange/50'
+      },
+      'architectural-facade': { 
+        bg: 'bg-lcars-purple', 
+        border: 'border-lcars-purple', 
+        text: 'text-lcars-purple',
+        shadow: 'hover:shadow-lcars-purple/50'
+      },
+      'benthic-fuel-cell': { 
+        bg: 'bg-lcars-blue', 
+        border: 'border-lcars-blue', 
+        text: 'text-lcars-blue',
+        shadow: 'hover:shadow-lcars-blue/50'
+      },
+      'kitchen-sink': { 
+        bg: 'bg-lcars-tan', 
+        border: 'border-lcars-tan', 
+        text: 'text-lcars-tan',
+        shadow: 'hover:shadow-lcars-tan/50'
+      }
+    }
+    return colorMap[type] || { 
+      bg: 'bg-lcars-orange', 
+      border: 'border-lcars-orange', 
+      text: 'text-lcars-orange',
+      shadow: 'hover:shadow-lcars-orange/50'
+    }
+  }
+  
+  const colorClasses = getDesignColorClasses(design.type)
+  
   return (
     <div 
-      className="bg-white rounded-lg border-2 border-gray-200 p-6 cursor-pointer hover:border-primary hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1"
+      className={`group relative bg-lcars-black border-2 ${colorClasses.border} rounded-lcars p-4 cursor-pointer hover:shadow-lg ${colorClasses.shadow} transition-all duration-200 transform hover:scale-105`}
       onClick={() => onSelect(design)}
     >
-      <div className="flex flex-col items-center space-y-4">
+      {/* Top accent bar */}
+      <div className={`absolute top-0 left-0 right-0 h-2 ${colorClasses.bg} rounded-t-lcars`} />
+      
+      <div className="flex flex-col items-center space-y-4 pt-4">
         <div className="relative">
           {hasNew3DModel ? (
-            <div className="w-full h-20 bg-gray-900 rounded-lg overflow-hidden">
+            <div className="w-full h-24 bg-lcars-black border border-lcars-gray rounded-lcars overflow-hidden">
               <Design3DPreview designType={design.type} />
             </div>
           ) : (
-            <div className="p-4 bg-gray-50 rounded-lg">
+            <div className={`p-4 bg-lcars-black border ${colorClasses.border} rounded-lcars`}>
               {LegacyMFCIcons[design.type as keyof typeof LegacyMFCIcons] || LegacyMFCIcons['earthen-pot']}
             </div>
           )}
           
           {hasNew3DModel && (
-            <div className="absolute top-1 right-1 bg-blue-500 text-white text-xs px-2 py-1 rounded-full">
+            <div className="absolute top-1 right-1 bg-lcars-purple text-lcars-black text-xs px-2 py-1 rounded-full font-bold">
               3D
             </div>
           )}
         </div>
         
-        <div className="text-center">
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{design.name}</h3>
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Cost:</span>
-              <span className="font-medium text-green-600">{design.cost}</span>
+        <div className="text-center w-full">
+          <h3 className={`text-lg font-bold ${colorClasses.text} mb-2 uppercase tracking-wider`}>
+            {design.name}
+          </h3>
+          
+          {/* LCARS-style data display */}
+          <div className="space-y-1 text-sm mb-3">
+            <div className="flex items-center justify-between bg-lcars-black bg-opacity-50 px-3 py-1 rounded">
+              <span className="text-lcars-gray uppercase text-xs">Cost Index:</span>
+              <span className={`font-bold ${colorClasses.text}`}>{design.cost}</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Power:</span>
-              <span className="font-medium text-primary">{design.powerOutput}</span>
+            <div className="flex items-center justify-between bg-lcars-black bg-opacity-50 px-3 py-1 rounded">
+              <span className="text-lcars-gray uppercase text-xs">Power Output:</span>
+              <span className={`font-bold ${colorClasses.text}`}>{design.powerOutput}</span>
             </div>
           </div>
           
           {/* Show key features for new designs */}
           {hasNew3DModel && design.materials.features && (
-            <div className="mt-2 text-xs text-gray-500 italic">
+            <div className="mt-2 text-xs text-lcars-tan italic px-2">
               {design.materials.features}
             </div>
           )}
         </div>
         
-        <button className="w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-          {hasNew3DModel ? 'Explore 3D Model' : 'Select Design'}
+        <button className={`w-full ${colorClasses.bg} text-lcars-black py-3 px-4 rounded-lcars hover:opacity-80 transition-opacity font-bold uppercase tracking-wider`}>
+          {hasNew3DModel ? 'Access 3D Schema' : 'Select Configuration'}
         </button>
       </div>
+      
+      {/* Bottom accent */}
+      <div className={`absolute bottom-0 left-0 right-0 h-1 ${colorClasses.bg} rounded-b-lcars opacity-50`} />
     </div>
   )
 }
