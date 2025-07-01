@@ -483,18 +483,18 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
     const baseDepth = 5
     const height = Math.max(0.5, Math.min(5, volume / (baseWidth * baseDepth)))
 
-    // Create water medium with greenish tint for algae culture
+    // Create water medium with subtle greenish tint for algae culture
     const mediumGeometry = new THREE.BoxGeometry(baseWidth * 0.95, height * 0.95, baseDepth * 0.95)
     const mediumMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0x2a5d3e,
+      color: 0x1a3d2e,
       transparent: true,
-      opacity: 0.25,
-      transmission: 0.85,
-      thickness: 1,
-      roughness: 0.1,
+      opacity: 0.1,  // Much more transparent
+      transmission: 0.95,  // Higher transmission
+      thickness: 0.5,
+      roughness: 0.05,
       ior: 1.33,
-      emissive: 0x0a1d0e,
-      emissiveIntensity: 0.1
+      emissive: 0x051d0e,
+      emissiveIntensity: 0.05  // Subtle glow
     })
     const medium = new THREE.Mesh(mediumGeometry, mediumMaterial)
     scene.add(medium)
@@ -508,19 +508,20 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       
       // Create colonies and individual cells
       if (type === 'spirulina') {
-        // Spirulina - long spiral filaments (scaled up 1000x for visibility)
+        // Spirulina - tight spring-like spiral filaments (cyanobacteria)
         const filamentCount = Math.min(baseCount / 5, 40)
         
         for (let i = 0; i < filamentCount; i++) {
           const spiralGroup = new THREE.Group()
           
-          // Create a helix curve for spirulina
-          const turns = 3 + Math.random() * 5
-          const radius = 0.15 + Math.random() * 0.1  // Much larger for visibility
-          const height = 1.5 + Math.random() * 1.0   // Scaled up filament length
+          // Create a tight helix curve - real spirulina has very close coils
+          const turns = 8 + Math.random() * 4  // More turns
+          const radius = 0.08 + Math.random() * 0.02  // Tighter radius
+          const height = 0.8 + Math.random() * 0.4   // Shorter, more compact
           const points = []
           
-          for (let t = 0; t <= turns * Math.PI * 2; t += 0.2) {
+          // Create tighter spiral with more points
+          for (let t = 0; t <= turns * Math.PI * 2; t += 0.1) {
             points.push(new THREE.Vector3(
               Math.cos(t) * radius,
               (t / (turns * Math.PI * 2)) * height,
@@ -529,17 +530,17 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
           }
           
           const curve = new THREE.CatmullRomCurve3(points)
-          const geometry = new THREE.TubeGeometry(curve, 50, 0.05, 8, false) // Thicker tubes for visibility
+          const geometry = new THREE.TubeGeometry(curve, 100, 0.03, 6, false) // Uniform width
           const material = new THREE.MeshPhysicalMaterial({
-            color: algaeData.color,
-            emissive: algaeData.color,
-            emissiveIntensity: 0.7,  // Bright glow
-            metalness: 0.3,
-            roughness: 0.6,
+            color: 0x0a5f3e,  // Dark blue-green for cyanobacteria
+            emissive: 0x0a5f3e,
+            emissiveIntensity: 0.5,
+            metalness: 0.1,
+            roughness: 0.8,
             transparent: true,
-            opacity: 1.0,  // Fully opaque for visibility
-            clearcoat: 0.5,
-            clearcoatRoughness: 0.3
+            opacity: 0.95,
+            clearcoat: 0.3,
+            clearcoatRoughness: 0.7
           })
           
           const spirulina = new THREE.Mesh(geometry, material)
@@ -559,73 +560,92 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
         }
         
       } else if (type === 'chlorella') {
-        // Chlorella - spherical cells, often in small clusters (scaled up for visibility)
-        const clusterCount = Math.min(baseCount / 10, 30)
+        // Chlorella - perfect spherical cells, mostly single with some pairs
+        const cellCount = Math.min(baseCount / 2, 80)
         
-        for (let c = 0; c < clusterCount; c++) {
-          const clusterGroup = new THREE.Group()
-          const cellsInCluster = Math.floor(Math.random() * 8) + 1
-          const clusterCenter = new THREE.Vector3(
+        for (let c = 0; c < cellCount; c++) {
+          const cellGroup = new THREE.Group()
+          const isPaired = Math.random() < 0.3  // 30% chance of being paired
+          const cellsInGroup = isPaired ? 2 : 1
+          const groupCenter = new THREE.Vector3(
             (Math.random() - 0.5) * (baseWidth - 1),
             (Math.random() - 0.5) * (height - 0.4),
             (Math.random() - 0.5) * (baseDepth - 1)
           )
           
-          for (let i = 0; i < cellsInCluster; i++) {
-            const geometry = new THREE.SphereGeometry(0.1 + Math.random() * 0.05, 16, 16) // Much larger spheres
+          for (let i = 0; i < cellsInGroup; i++) {
+            const geometry = new THREE.SphereGeometry(0.08, 24, 24) // Perfect spheres, uniform size
             const material = new THREE.MeshPhysicalMaterial({
-              color: algaeData.color,
-              emissive: algaeData.color,
-              emissiveIntensity: 0.6,  // Brighter glow
-              metalness: 0.1,
-              roughness: 0.7,
+              color: 0x00ff00,  // Bright green for chlorophyll
+              emissive: 0x00aa00,
+              emissiveIntensity: 0.4,
+              metalness: 0.0,
+              roughness: 0.9,  // Cell wall gives matte appearance
               transparent: true,
-              opacity: 1.0,  // Fully opaque
-              clearcoat: 0.4,
-              clearcoatRoughness: 0.7,
-              sheen: 0.5,
-              sheenRoughness: 0.8,
-              sheenColor: algaeData.color
+              opacity: 0.9,
+              clearcoat: 0.6,  // Cell wall sheen
+              clearcoatRoughness: 0.4,
+              sheen: 0.3,
+              sheenRoughness: 0.6,
+              sheenColor: 0x88ff88
             })
             
             const cell = new THREE.Mesh(geometry, material)
-            cell.position.set(
-              clusterCenter.x + (Math.random() - 0.5) * 0.3,
-              clusterCenter.y + (Math.random() - 0.5) * 0.3,
-              clusterCenter.z + (Math.random() - 0.5) * 0.3
-            )
+            if (isPaired && i === 1) {
+              // Position second cell touching the first
+              cell.position.set(
+                groupCenter.x + 0.16,
+                groupCenter.y,
+                groupCenter.z
+              )
+            } else {
+              cell.position.copy(groupCenter)
+            }
             
-            clusterGroup.add(cell)
+            cellGroup.add(cell)
           }
           
-          group.add(clusterGroup)
+          group.add(cellGroup)
         }
         
       } else if (type === 'scenedesmus') {
-        // Scenedesmus - colonial, typically 4-8 cells in a row (scaled up)
+        // Scenedesmus - colonial green algae, 2-8 oval cells in a row
         const colonyCount = Math.min(baseCount / 8, 25)
         
         for (let c = 0; c < colonyCount; c++) {
           const colonyGroup = new THREE.Group()
-          const cellsInColony = Math.floor(Math.random() * 5) + 4
+          const cellsInColony = Math.random() < 0.5 ? 4 : Math.floor(Math.random() * 3) * 2 + 2 // Even numbers common
           
           for (let i = 0; i < cellsInColony; i++) {
-            const geometry = new THREE.CapsuleGeometry(0.08, 0.16, 8, 16) // Much larger capsules
+            // Create oval/elliptical cells
+            const geometry = new THREE.SphereGeometry(0.06, 16, 16)
+            geometry.scale(1.8, 1, 1) // Elongated oval shape
             const material = new THREE.MeshPhysicalMaterial({
-              color: algaeData.color,
-              emissive: algaeData.color,
-              emissiveIntensity: 0.6,  // Brighter
-              metalness: 0.15,
-              roughness: 0.65,
+              color: 0x00dd00,  // Slightly darker green than chlorella
+              emissive: 0x009900,
+              emissiveIntensity: 0.35,
+              metalness: 0.0,
+              roughness: 0.85,
               transparent: true,
-              opacity: 1.0,  // Fully opaque
-              clearcoat: 0.3,
-              clearcoatRoughness: 0.6
+              opacity: 0.95,
+              clearcoat: 0.4,
+              clearcoatRoughness: 0.5
             })
             
             const cell = new THREE.Mesh(geometry, material)
-            cell.position.x = (i - cellsInColony / 2) * 0.18 // Adjusted spacing for larger cells
+            cell.position.x = (i - (cellsInColony - 1) / 2) * 0.11 // Tightly packed
             cell.rotation.z = Math.PI / 2
+            
+            // Add small spines on outer cells (characteristic feature)
+            if ((i === 0 || i === cellsInColony - 1) && Math.random() < 0.5) {
+              const spineGeometry = new THREE.ConeGeometry(0.01, 0.05, 4)
+              const spineMaterial = new THREE.MeshStandardMaterial({ color: 0x00aa00 })
+              const spine = new THREE.Mesh(spineGeometry, spineMaterial)
+              spine.position.x = i === 0 ? -0.08 : 0.08
+              spine.rotation.z = i === 0 ? -Math.PI / 2 : Math.PI / 2
+              cell.add(spine)
+            }
+            
             colonyGroup.add(cell)
           }
           
@@ -643,78 +663,229 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
           group.add(colonyGroup)
         }
         
-      } else {
-        // Generic microalgae (scaled up for visibility)
-        const cellCount = Math.min(baseCount / 5, 40)
+      } else if (type === 'chlamydomonas') {
+        // Chlamydomonas - pear-shaped cells with two flagella
+        const cellCount = Math.min(baseCount / 3, 50)
         
         for (let i = 0; i < cellCount; i++) {
-          const isFilamentous = Math.random() > 0.5
+          const cellGroup = new THREE.Group()
           
-          if (isFilamentous) {
-            // Create short filaments
-            const points = []
-            const segments = 3 + Math.floor(Math.random() * 5)
-            for (let s = 0; s < segments; s++) {
-              points.push(new THREE.Vector3(
-                s * 0.1,  // Larger segments
-                Math.sin(s * 0.5) * 0.05,
-                Math.cos(s * 0.5) * 0.05
+          // Create pear-shaped body
+          const geometry = new THREE.SphereGeometry(0.07, 16, 16)
+          geometry.scale(1, 1.3, 1) // Elongate to pear shape
+          
+          // Taper the bottom
+          const positions = geometry.attributes.position
+          for (let j = 0; j < positions.count; j++) {
+            const y = positions.getY(j)
+            if (y < 0) {
+              const scale = 1 + y * 0.3 // Taper bottom
+              positions.setX(j, positions.getX(j) * scale)
+              positions.setZ(j, positions.getZ(j) * scale)
+            }
+          }
+          geometry.attributes.position.needsUpdate = true
+          
+          const material = new THREE.MeshPhysicalMaterial({
+            color: 0x00ff88,  // Bright green
+            emissive: 0x00aa44,
+            emissiveIntensity: 0.4,
+            metalness: 0.0,
+            roughness: 0.8,
+            transparent: true,
+            opacity: 0.9,
+            clearcoat: 0.3
+          })
+          
+          const body = new THREE.Mesh(geometry, material)
+          cellGroup.add(body)
+          
+          // Add two flagella
+          for (let f = 0; f < 2; f++) {
+            const flagellaPoints = []
+            const flagellaLength = 0.15
+            const segments = 8
+            
+            for (let s = 0; s <= segments; s++) {
+              const t = s / segments
+              flagellaPoints.push(new THREE.Vector3(
+                (f === 0 ? -0.02 : 0.02) + Math.sin(t * Math.PI * 2) * 0.01 * t,
+                0.09 + t * flagellaLength,
+                Math.cos(t * Math.PI * 2) * 0.01 * t
               ))
             }
             
-            const curve = new THREE.CatmullRomCurve3(points)
-            const geometry = new THREE.TubeGeometry(curve, 20, 0.04, 8, false) // Thicker filaments
-            const material = new THREE.MeshPhysicalMaterial({
-              color: algaeData.color,
-              emissive: algaeData.color,
-              emissiveIntensity: 0.6,  // Brighter
-              metalness: 0.2,
-              roughness: 0.6,
+            const flagellaCurve = new THREE.CatmullRomCurve3(flagellaPoints)
+            const flagellaGeometry = new THREE.TubeGeometry(flagellaCurve, 16, 0.005, 4, false)
+            const flagellaMaterial = new THREE.MeshBasicMaterial({
+              color: 0x88ff88,
               transparent: true,
-              opacity: 1.0  // Fully opaque
+              opacity: 0.6
             })
             
-            const filament = new THREE.Mesh(geometry, material)
-            filament.position.set(
-              (Math.random() - 0.5) * (baseWidth - 0.5),
-              (Math.random() - 0.5) * (height - 0.2),
-              (Math.random() - 0.5) * (baseDepth - 0.5)
-            )
-            filament.rotation.set(
-              Math.random() * Math.PI * 2,
-              Math.random() * Math.PI * 2,
-              Math.random() * Math.PI * 2
-            )
+            const flagella = new THREE.Mesh(flagellaGeometry, flagellaMaterial)
+            cellGroup.add(flagella)
+          }
+          
+          cellGroup.position.set(
+            (Math.random() - 0.5) * (baseWidth - 0.5),
+            (Math.random() - 0.5) * (height - 0.2),
+            (Math.random() - 0.5) * (baseDepth - 0.5)
+          )
+          cellGroup.rotation.set(
+            Math.random() * Math.PI * 2,
+            Math.random() * Math.PI * 2,
+            Math.random() * Math.PI * 2
+          )
+          
+          group.add(cellGroup)
+        }
+        
+      } else if (type === 'dunaliella') {
+        // Dunaliella - elongated cells, no rigid cell wall, can change shape
+        const cellCount = Math.min(baseCount / 3, 40)
+        
+        for (let i = 0; i < cellCount; i++) {
+          const cellGroup = new THREE.Group()
+          
+          // Create elongated, flexible-looking cell
+          const geometry = new THREE.SphereGeometry(0.06, 16, 16)
+          geometry.scale(2.5, 1, 1) // Very elongated
+          
+          // Add slight irregularity to show flexible nature
+          const positions = geometry.attributes.position
+          for (let j = 0; j < positions.count; j++) {
+            const x = positions.getX(j)
+            const wobble = Math.sin(j * 0.5) * 0.005
+            positions.setX(j, x + wobble)
+          }
+          geometry.attributes.position.needsUpdate = true
+          
+          const material = new THREE.MeshPhysicalMaterial({
+            color: 0xff8800,  // Orange-red due to carotenoids
+            emissive: 0xaa4400,
+            emissiveIntensity: 0.5,
+            metalness: 0.1,
+            roughness: 0.6,
+            transparent: true,
+            opacity: 0.85,
+            clearcoat: 0.2  // Less shiny due to no rigid wall
+          })
+          
+          const body = new THREE.Mesh(geometry, material)
+          cellGroup.add(body)
+          
+          // Add two flagella (similar to chlamydomonas)
+          for (let f = 0; f < 2; f++) {
+            const flagellaPoints = []
+            for (let s = 0; s <= 6; s++) {
+              const t = s / 6
+              flagellaPoints.push(new THREE.Vector3(
+                (f === 0 ? -0.08 : 0.08) + Math.sin(t * Math.PI) * 0.02,
+                Math.sin(t * Math.PI * 3) * 0.02,
+                -0.05 + t * 0.12
+              ))
+            }
             
-            group.add(filament)
-          } else {
-            // Create ovoid cells
-            const geometry = new THREE.SphereGeometry(0.12, 16, 12) // Much larger cells
-            geometry.scale(1, 1.5, 1)
-            const material = new THREE.MeshPhysicalMaterial({
-              color: algaeData.color,
-              emissive: algaeData.color,
-              emissiveIntensity: 0.5,  // Brighter
-              metalness: 0.15,
-              roughness: 0.7,
+            const flagellaCurve = new THREE.CatmullRomCurve3(flagellaPoints)
+            const flagellaGeometry = new THREE.TubeGeometry(flagellaCurve, 12, 0.006, 4, false)
+            const flagellaMaterial = new THREE.MeshBasicMaterial({
+              color: 0xffaa44,
               transparent: true,
-              opacity: 1.0  // Fully opaque
+              opacity: 0.5
+            })
+            
+            const flagella = new THREE.Mesh(flagellaGeometry, flagellaMaterial)
+            cellGroup.add(flagella)
+          }
+          
+          cellGroup.position.set(
+            (Math.random() - 0.5) * (baseWidth - 0.5),
+            (Math.random() - 0.5) * (height - 0.2),
+            (Math.random() - 0.5) * (baseDepth - 0.5)
+          )
+          cellGroup.rotation.set(
+            Math.random() * Math.PI * 2,
+            Math.random() * Math.PI * 2,
+            Math.random() * Math.PI * 2
+          )
+          
+          group.add(cellGroup)
+        }
+        
+      } else if (type === 'synechocystis') {
+        // Synechocystis - small spherical cyanobacteria, often in pairs or small groups
+        const cellCount = Math.min(baseCount / 2, 100)
+        
+        for (let i = 0; i < cellCount; i++) {
+          const groupType = Math.random()
+          const cellGroup = new THREE.Group()
+          
+          let cellsInGroup = 1
+          if (groupType < 0.4) cellsInGroup = 2  // 40% pairs
+          else if (groupType < 0.6) cellsInGroup = 4  // 20% tetrads
+          
+          for (let c = 0; c < cellsInGroup; c++) {
+            const geometry = new THREE.SphereGeometry(0.05, 20, 20) // Smaller than chlorella
+            const material = new THREE.MeshPhysicalMaterial({
+              color: 0x0088aa,  // Blue-green cyanobacteria
+              emissive: 0x004455,
+              emissiveIntensity: 0.45,
+              metalness: 0.05,
+              roughness: 0.85,
+              transparent: true,
+              opacity: 0.9,
+              clearcoat: 0.5,
+              clearcoatRoughness: 0.6
             })
             
             const cell = new THREE.Mesh(geometry, material)
-            cell.position.set(
-              (Math.random() - 0.5) * (baseWidth - 0.5),
-              (Math.random() - 0.5) * (height - 0.2),
-              (Math.random() - 0.5) * (baseDepth - 0.5)
-            )
-            cell.rotation.set(
-              Math.random() * Math.PI * 2,
-              Math.random() * Math.PI * 2,
-              Math.random() * Math.PI * 2
-            )
             
-            group.add(cell)
+            // Position cells in pairs or tetrads
+            if (cellsInGroup === 2) {
+              cell.position.x = (c - 0.5) * 0.1
+            } else if (cellsInGroup === 4) {
+              const angle = (c / 4) * Math.PI * 2
+              cell.position.x = Math.cos(angle) * 0.05
+              cell.position.z = Math.sin(angle) * 0.05
+            }
+            
+            cellGroup.add(cell)
           }
+          
+          cellGroup.position.set(
+            (Math.random() - 0.5) * (baseWidth - 0.5),
+            (Math.random() - 0.5) * (height - 0.2),
+            (Math.random() - 0.5) * (baseDepth - 0.5)
+          )
+          
+          group.add(cellGroup)
+        }
+        
+      } else {
+        // Default simple spherical cells for any other type
+        const cellCount = Math.min(baseCount / 5, 40)
+        
+        for (let i = 0; i < cellCount; i++) {
+          const geometry = new THREE.SphereGeometry(0.08, 16, 16)
+          const material = new THREE.MeshPhysicalMaterial({
+            color: algaeData.color,
+            emissive: algaeData.color,
+            emissiveIntensity: 0.4,
+            metalness: 0.1,
+            roughness: 0.8,
+            transparent: true,
+            opacity: 0.9
+          })
+          
+          const cell = new THREE.Mesh(geometry, material)
+          cell.position.set(
+            (Math.random() - 0.5) * (baseWidth - 0.5),
+            (Math.random() - 0.5) * (height - 0.2),
+            (Math.random() - 0.5) * (baseDepth - 0.5)
+          )
+          
+          group.add(cell)
         }
       }
       
