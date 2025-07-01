@@ -271,6 +271,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
     const chamber = new THREE.Mesh(chamberGeometry, chamberMaterial)
     chamber.castShadow = true
     chamber.receiveShadow = true
+    chamber.userData.type = 'chamber' // Tag for identification
     scene.add(chamber)
     objectsRef.current.hydrogelChamber = chamber
 
@@ -295,6 +296,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       glassMaterial
     )
     frontWall.position.z = baseDepth / 2 + wallThickness / 2
+    frontWall.userData.type = 'chamberWall'
     scene.add(frontWall)
 
     const backWall = new THREE.Mesh(
@@ -302,6 +304,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       glassMaterial
     )
     backWall.position.z = -baseDepth / 2 - wallThickness / 2
+    backWall.userData.type = 'chamberWall'
     scene.add(backWall)
 
     // Side walls
@@ -310,6 +313,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       glassMaterial
     )
     leftWall.position.x = -baseWidth / 2 - wallThickness / 2
+    leftWall.userData.type = 'chamberWall'
     scene.add(leftWall)
 
     const rightWall = new THREE.Mesh(
@@ -317,6 +321,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       glassMaterial
     )
     rightWall.position.x = baseWidth / 2 + wallThickness / 2
+    rightWall.userData.type = 'chamberWall'
     scene.add(rightWall)
 
     // Top and bottom caps
@@ -331,6 +336,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       capMaterial
     )
     topCap.position.y = height / 2 + wallThickness / 2
+    topCap.userData.type = 'chamberWall'
     scene.add(topCap)
 
     const bottomCap = new THREE.Mesh(
@@ -338,6 +344,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       capMaterial
     )
     bottomCap.position.y = -height / 2 - wallThickness / 2
+    bottomCap.userData.type = 'chamberWall'
     scene.add(bottomCap)
 
     // Add inlet/outlet ports
@@ -497,6 +504,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       emissiveIntensity: 0.05  // Subtle glow
     })
     const medium = new THREE.Mesh(mediumGeometry, mediumMaterial)
+    medium.userData.type = 'waterMedium' // Tag for identification
     scene.add(medium)
 
     algaeTypes.forEach(type => {
@@ -1180,12 +1188,50 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
           const chamber = objectsRef.current.hydrogelChamber
           if (chamber) {
             sceneRef.current.remove(chamber)
-            // Remove all chamber-related objects
-            sceneRef.current.children
-              .filter(child => child.type === 'Mesh' && 
-                (child.material as any).color?.getHex() === 0x00ff88 ||
-                (child.material as any).transmission > 0.9)
-              .forEach(child => sceneRef.current?.remove(child))
+            // Remove all chamber-related objects safely
+            const childrenToRemove: THREE.Object3D[] = []
+            
+            sceneRef.current.traverse((child) => {
+              if (child instanceof THREE.Mesh) {
+                // Check userData first for tagged objects
+                if (child.userData.type === 'waterMedium' || 
+                    child.userData.type === 'chamber' ||
+                    child.userData.type === 'chamberWall') {
+                  childrenToRemove.push(child)
+                  return
+                }
+                
+                // Check material properties as fallback
+                try {
+                  const material = child.material as any
+                  if (material && material.color) {
+                    const colorHex = material.color.getHex()
+                    // Chamber-related colors
+                    if (colorHex === 0x00ff88 || // Chamber
+                        colorHex === 0xffffff || // Glass walls
+                        colorHex === 0x1a3d2e || // Water medium
+                        colorHex === 0x333333) { // Caps
+                      childrenToRemove.push(child)
+                    }
+                  }
+                } catch (e) {
+                  // Ignore any errors accessing material properties
+                }
+              }
+            })
+            
+            // Remove and dispose identified objects
+            childrenToRemove.forEach(child => {
+              sceneRef.current?.remove(child)
+              if (child instanceof THREE.Mesh) {
+                child.geometry.dispose()
+                if (child.material instanceof THREE.Material) {
+                  child.material.dispose()
+                } else if (Array.isArray(child.material)) {
+                  child.material.forEach(mat => mat.dispose())
+                }
+              }
+            })
           }
           createHydrogelChamber(sceneRef.current)
           // Recreate algae to fit new volume
