@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -14,12 +14,12 @@ model Account {
   type              String
   provider          String
   providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
+  refresh_token     String?
+  access_token      String?
   expires_at        Int?
   token_type        String?
   scope             String?
-  id_token          String? @db.Text
+  id_token          String?
   session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -39,10 +39,10 @@ model User {
   id                 String              @id @default(cuid())
   email              String              @unique
   emailVerified      DateTime?
-  password           String?             // For credentials provider
+  password           String?
   name               String?
   image              String?
-  role               Role                @default(USER)
+  role               String              @default("USER")
   isActive           Boolean             @default(true)
   accounts           Account[]
   sessions           Session[]
@@ -50,6 +50,8 @@ model User {
   verificationTokens VerificationToken[]
   passwordResets     PasswordReset[]
   loginAttempts      LoginAttempt[]
+  profile            UserProfile?
+  settings           UserSettings?
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   lastLoginAt        DateTime?
@@ -57,7 +59,7 @@ model User {
   // Profile fields
   institution        String?
   researchArea       String?
-  bio                String?             @db.Text
+  bio                String?
   
   // Security fields
   twoFactorEnabled   Boolean             @default(false)
@@ -103,13 +105,6 @@ model LoginAttempt {
   @@index([ipAddress, createdAt])
 }
 
-enum Role {
-  USER
-  RESEARCHER
-  ADMIN
-  SUPER_ADMIN
-}
-
 // Application Models
 model MFCDesign {
   id          String       @id @default(cuid())
@@ -117,7 +112,7 @@ model MFCDesign {
   type        String
   cost        String
   powerOutput String
-  materials   Json
+  materials   String       // JSON stored as string in SQLite
   experiments Experiment[]
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
@@ -128,8 +123,8 @@ model Experiment {
   name         String
   userId       String
   designId     String
-  status       ExperimentStatus @default(SETUP)
-  parameters   Json
+  status       String        @default("SETUP")
+  parameters   String        // JSON stored as string in SQLite
   isPublic     Boolean       @default(false)
   user         User          @relation(fields: [userId], references: [id])
   design       MFCDesign     @relation(fields: [designId], references: [id])
@@ -150,19 +145,11 @@ model Measurement {
   temperature  Float
   ph           Float
   substrate    Float?
-  notes        String?    @db.Text
+  notes        String?
   timestamp    DateTime   @default(now())
   experiment   Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
   
   @@index([experimentId, timestamp])
-}
-
-enum ExperimentStatus {
-  SETUP
-  RUNNING
-  PAUSED
-  COMPLETED
-  FAILED
 }
 
 // API Rate Limiting
@@ -174,4 +161,43 @@ model RateLimit {
   createdAt DateTime @default(now())
   
   @@index([key, expire])
+}
+
+// User Profile for onboarding and public information
+model UserProfile {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  avatar              String?
+  expertise           String?
+  interests           String   @default("[]") // JSON array stored as string
+  publicProfile       Boolean  @default(false)
+  completedOnboarding Boolean  @default(false)
+  onboardingStep      Int      @default(0)
+  linkedIn            String?
+  orcid               String?
+  googleScholar       String?
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  @@index([userId])
+}
+
+// User Settings for preferences and notifications
+model UserSettings {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  emailNotifications    Boolean  @default(true)
+  experimentAlerts      Boolean  @default(true)
+  collaborationRequests Boolean  @default(true)
+  newsletter            Boolean  @default(false)
+  theme                 String   @default("dark")
+  units                 String   @default("metric")
+  language              String   @default("en")
+  dashboardLayout       String?  // JSON stored as string
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  @@index([userId])
 }

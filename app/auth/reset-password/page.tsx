@@ -167,6 +167,8 @@ function ResetPasswordContent() {
                   {...register('password')}
                   type="password"
                   id="password"
+                  name="password"
+                  autoComplete="new-password"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}
@@ -206,6 +208,8 @@ function ResetPasswordContent() {
                   {...register('confirmPassword')}
                   type="password"
                   id="confirmPassword"
+                  name="confirmPassword"
+                  autoComplete="new-password"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}

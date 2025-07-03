@@ -50,6 +50,8 @@ model User {
   verificationTokens VerificationToken[]
   passwordResets     PasswordReset[]
   loginAttempts      LoginAttempt[]
+  profile            UserProfile?
+  settings           UserSettings?
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   lastLoginAt        DateTime?
@@ -159,4 +161,43 @@ model RateLimit {
   createdAt DateTime @default(now())
   
   @@index([key, expire])
+}
+
+// User Profile for onboarding and public information
+model UserProfile {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  avatar              String?
+  expertise           String?
+  interests           String   @default("[]") // JSON array stored as string
+  publicProfile       Boolean  @default(false)
+  completedOnboarding Boolean  @default(false)
+  onboardingStep      Int      @default(0)
+  linkedIn            String?
+  orcid               String?
+  googleScholar       String?
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  
+  @@index([userId])
+}
+
+// User Settings for preferences and notifications
+model UserSettings {
+  id                    String   @id @default(cuid())
+  userId                String   @unique
+  emailNotifications    Boolean  @default(true)
+  experimentAlerts      Boolean  @default(true)
+  collaborationRequests Boolean  @default(true)
+  newsletter            Boolean  @default(false)
+  theme                 String   @default("dark")
+  units                 String   @default("metric")
+  language              String   @default("en")
+  dashboardLayout       String?  // JSON stored as string
+  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+  
+  @@index([userId])
 }

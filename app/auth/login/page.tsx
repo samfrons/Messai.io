@@ -81,6 +81,8 @@ function LoginForm() {
                   {...register('email')}
                   type="email"
                   id="email"
+                  name="email"
+                  autoComplete="email"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   placeholder="researcher@example.com"
                   disabled={isLoading}
@@ -101,6 +103,8 @@ function LoginForm() {
                   {...register('password')}
                   type="password"
                   id="password"
+                  name="password"
+                  autoComplete="current-password"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}

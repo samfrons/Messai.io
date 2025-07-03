@@ -11,10 +11,10 @@ export default function WelcomePage() {
   const { data: session } = useSession();
 
   useEffect(() => {
-    // Redirect to dashboard after 10 seconds
+    // Redirect to onboarding after 5 seconds for new users
     const timer = setTimeout(() => {
-      router.push('/dashboard');
-    }, 10000);
+      router.push('/onboarding');
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [router]);
@@ -127,13 +127,13 @@ export default function WelcomePage() {
         {/* Auto-redirect notice */}
         <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
           <p className="text-gray-400 mb-4">
-            You&apos;ll be automatically redirected to your dashboard in a few seconds...
+            Let&apos;s set up your profile to get the most out of MESSAi...
           </p>
           <Link
-            href="/dashboard"
-            className="inline-flex items-center gap-2 py-3 px-6 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg transition-colors duration-200"
+            href="/onboarding"
+            className="inline-flex items-center gap-2 py-3 px-6 bg-lcars-gold hover:bg-lcars-tan text-black font-bold rounded-lg transition-colors duration-200"
           >
-            Continue to Dashboard
+            Start Setup
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

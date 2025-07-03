@@ -102,6 +102,8 @@ export default function SignupPage() {
                   {...register('email')}
                   type="email"
                   id="email"
+                  name="email"
+                  autoComplete="email"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   placeholder="researcher@example.com"
                   disabled={isLoading}
@@ -122,6 +124,8 @@ export default function SignupPage() {
                   {...register('name')}
                   type="text"
                   id="name"
+                  name="name"
+                  autoComplete="name"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   placeholder="Dr. Jane Smith"
                   disabled={isLoading}
@@ -142,6 +146,8 @@ export default function SignupPage() {
                   {...register('password')}
                   type="password"
                   id="password"
+                  name="password"
+                  autoComplete="new-password"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}
@@ -181,6 +187,8 @@ export default function SignupPage() {
                   {...register('confirmPassword')}
                   type="password"
                   id="confirmPassword"
+                  name="confirmPassword"
+                  autoComplete="new-password"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}
@@ -201,6 +209,8 @@ export default function SignupPage() {
                   {...register('institution')}
                   type="text"
                   id="institution"
+                  name="institution"
+                  autoComplete="organization"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   placeholder="University of Example"
                   disabled={isLoading}

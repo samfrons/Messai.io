@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { Eye, Settings, TrendingUp, AlertCircle, Mail, Loader2 } from 'lucide-react'
+import { Eye, Settings, TrendingUp, AlertCircle, Mail, Loader2, Sparkles, CheckCircle } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -29,12 +29,22 @@ function DashboardContent() {
   const [selectedExperiment, setSelectedExperiment] = useState<string | null>(null)
   const [view3D, setView3D] = useState(true)
   const [loading, setLoading] = useState(true)
+  const [onboardingStatus, setOnboardingStatus] = useState<{ completedOnboarding: boolean; onboardingStep: number } | null>(null)
   
   const justVerified = searchParams.get('verified') === 'true'
   const needsVerification = searchParams.get('verify') === 'required'
   const isUnverified = !session?.user?.emailVerified && process.env.NEXT_PUBLIC_REQUIRE_EMAIL_VERIFICATION === 'true'
+  const justCompletedOnboarding = searchParams.get('onboarding') === 'complete'
 
   useEffect(() => {
+    // Check onboarding status
+    if (session?.user?.id) {
+      fetch('/api/user/onboarding')
+        .then(res => res.json())
+        .then(data => setOnboardingStatus(data))
+        .catch(() => {})
+    }
+    
     // Mock experiments data
     const mockExperiments: Experiment[] = [
       {
@@ -70,7 +80,7 @@ function DashboardContent() {
       setExperiments(mockExperiments)
       setLoading(false)
     }, 500)
-  }, [])
+  }, [session])
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -118,6 +128,37 @@ function DashboardContent() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
+      {/* Onboarding completion message */}
+      {justCompletedOnboarding && (
+        <div className="bg-green-50 border-b border-green-200 px-6 py-3">
+          <div className="flex items-center gap-3">
+            <CheckCircle className="h-5 w-5 text-green-600" />
+            <p className="text-sm text-green-800">
+              <strong>Profile setup complete!</strong> Welcome to MESSAi. You&apos;re all set to start your research.
+            </p>
+          </div>
+        </div>
+      )}
+      
+      {/* Onboarding incomplete banner */}
+      {onboardingStatus && !onboardingStatus.completedOnboarding && !justCompletedOnboarding && (
+        <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Sparkles className="h-5 w-5 text-amber-600" />
+            <p className="text-sm text-amber-800">
+              <strong>Complete your profile setup</strong> to unlock personalized recommendations and features.
+            </p>
+          </div>
+          <Link
+            href="/onboarding"
+            className="text-sm text-amber-600 hover:text-amber-700 font-medium flex items-center gap-1"
+          >
+            Continue Setup
+            <Sparkles className="h-4 w-4" />
+          </Link>
+        </div>
+      )}
+      
       {/* Email verification banner */}
       {(isUnverified || needsVerification) && (
         <div className="bg-yellow-50 border-b border-yellow-200 px-6 py-3 flex items-center justify-between">
