@@ -4,9 +4,16 @@ This file provides context and instructions for AI assistants (like Claude) work
 
 ## Project Overview
 
-MESSAi (Microbial Electrochemical Systems AI Platform) is a sophisticated web platform for microbial fuel cell (MFC) research. It combines:
+MESSAi (Microbial Electrochemical Systems AI Platform) is a sophisticated web platform for microbial electrochemical systems research. It supports various bioelectrochemical technologies including:
+- Microbial Fuel Cells (MFCs) - electricity generation
+- Microbial Electrolysis Cells (MECs) - hydrogen production
+- Microbial Desalination Cells (MDCs) - water treatment
+- Microbial Electrosynthesis (MES) - chemical production
+- Other bioelectrochemical systems
+
+The platform combines:
 - Interactive 3D visualization using Three.js
-- AI-powered predictions for power output optimization
+- AI-powered predictions for system optimization
 - Comprehensive experiment tracking
 - Scientific material database with 27 electrode options
 - LCARS (Star Trek-inspired) UI theme
@@ -53,7 +60,7 @@ npm run db:studio   # Open Prisma Studio
 
 ## Scientific Context
 
-### MFC Designs (13 types)
+### Bioelectrochemical System Designs (13 types)
 - **Laboratory**: Mason jar, earthen pot, micro-chip ($1-$50)
 - **Pilot Scale**: 3D printed, benchtop bioreactor ($30-$1,800)
 - **Industrial**: Wastewater treatment, architectural facade ($150-$5,000)
@@ -82,7 +89,7 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 
 ## Common Tasks
 
-### Adding a New MFC Design
+### Adding a New System Design
 1. Update `app/page.tsx` with design details
 2. Add 3D model in `components/DesignSpecific3DModels.tsx`
 3. Update prediction multipliers in `lib/ai-predictions.ts`
@@ -138,9 +145,11 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 ## Research References
 
 The platform is based on peer-reviewed research:
-- Logan, B.E. (2008). Microbial Fuel Cells
+- Logan, B.E. (2008). Microbial Fuel Cells (comprehensive MFC reference)
+- Rozendal, R.A. et al. (2008). Hydrogen Production with MECs
 - Wang, H. & Ren, Z.J. (2013). Bioelectrochemical Metal Recovery
 - Anasori, B. et al. (2017). 2D Metal Carbides (MXenes)
+- Rabaey, K. & Rozendal, R.A. (2010). Microbial Electrosynthesis
 
 ## Contact
 
