@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { signupSchema, type SignupInput } from '@/lib/auth/validation';
-import { Mail, Lock, User, Building, Flask, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
+import { Mail, Lock, User, Building, Beaker, AlertCircle, Loader2, CheckCircle } from 'lucide-react';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -213,7 +213,7 @@ export default function SignupPage() {
                 Research Area
               </label>
               <div className="relative">
-                <Flask className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+                <Beaker className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
                 <input
                   {...register('researchArea')}
                   type="text"
