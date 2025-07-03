@@ -54,3 +54,4 @@ temp/
 .vercel
 .env.local.backup
 .env.production
+.env.google-oauth
