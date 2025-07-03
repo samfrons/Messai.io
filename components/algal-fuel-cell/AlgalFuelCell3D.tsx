@@ -178,8 +178,9 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current)
       }
-      if (mountRef.current && renderer.domElement) {
-        mountRef.current.removeChild(renderer.domElement)
+      const currentMount = mountRef.current
+      if (currentMount && renderer.domElement && currentMount.contains(renderer.domElement)) {
+        currentMount.removeChild(renderer.domElement)
       }
       renderer.dispose()
     }
@@ -996,9 +997,7 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
       // Create electron
       const electronGeometry = new THREE.SphereGeometry(0.05, 8, 8)
       const electronMaterial = new THREE.MeshBasicMaterial({
-        color: 0xffff00,
-        emissive: 0xffff00,
-        emissiveIntensity: 2
+        color: 0xffff00
       })
       
       const electron = new THREE.Mesh(electronGeometry, electronMaterial)
