@@ -1,6 +1,19 @@
 'use client'
 
-import { Design3DPreview } from './DesignSpecific3DModels'
+import dynamic from 'next/dynamic'
+
+// Dynamic import to avoid SSR issues with Three.js
+const Design3DPreview = dynamic(
+  () => import('./DesignSpecific3DModels').then(mod => ({ default: mod.Design3DPreview })),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-lcars-cyan border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+  }
+)
 
 interface MFCDesign {
   id: string

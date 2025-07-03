@@ -13,7 +13,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://accounts.google.com",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data:",
-              "connect-src 'self' https://accounts.google.com https://www.googleapis.com https://securetoken.googleapis.com",
+              "connect-src 'self' https://accounts.google.com https://www.googleapis.com https://securetoken.googleapis.com https://raw.githack.com https://*.githack.com",
               "frame-src 'self' https://accounts.google.com",
               "object-src 'none'",
               "base-uri 'self'",

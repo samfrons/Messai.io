@@ -6,7 +6,23 @@ import { Eye, Settings, TrendingUp, AlertCircle, Mail, Loader2, Sparkles, CheckC
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import MFCDashboard3D from '@/components/MFCDashboard3D'
+import dynamic from 'next/dynamic'
+
+// Dynamic import to avoid SSR issues with Three.js
+const MFCDashboard3D = dynamic(
+  () => import('@/components/MFCDashboard3D'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-lcars-cyan" />
+          <p className="text-lcars-gray">Loading 3D Visualization...</p>
+        </div>
+      </div>
+    )
+  }
+)
 
 interface Experiment {
   id: string

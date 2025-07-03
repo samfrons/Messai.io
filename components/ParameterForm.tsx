@@ -1,8 +1,24 @@
 'use client'
 
 import { useState } from 'react'
-import MFC3DModel from './MFC3DModel'
+import dynamic from 'next/dynamic'
 import MFCConfigPanel from './MFCConfigPanel'
+
+// Dynamic import to avoid SSR issues with Three.js
+const MFC3DModel = dynamic(
+  () => import('./MFC3DModel'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center h-full bg-lcars-black rounded-lg">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-lcars-cyan border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+          <p className="text-lcars-gray">Loading 3D Model...</p>
+        </div>
+      </div>
+    )
+  }
+)
 
 interface ExperimentParameters {
   name: string
