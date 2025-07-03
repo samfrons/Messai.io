@@ -1,0 +1,37 @@
+# CODEOWNERS for MESSAi
+
+# Default owners for everything in the repository
+* @your-org/messai-core
+
+# Documentation
+/docs/ @your-org/messai-docs
+README.md @your-org/messai-docs
+
+# Frontend Components
+/components/ @your-org/messai-frontend
+/app/ @your-org/messai-frontend
+
+# 3D Visualization
+/components/MFC3DModel.tsx @your-org/messai-3d
+/components/DesignSpecific3DModels.tsx @your-org/messai-3d
+/components/algal-fuel-cell/ @your-org/messai-3d
+
+# API and Backend
+/app/api/ @your-org/messai-backend
+/lib/ @your-org/messai-backend
+/prisma/ @your-org/messai-backend
+
+# Testing
+/tests/ @your-org/messai-qa
+*.test.ts @your-org/messai-qa
+*.test.tsx @your-org/messai-qa
+
+# Build and Config
+/.github/ @your-org/messai-devops
+/package.json @your-org/messai-core
+/tsconfig.json @your-org/messai-core
+*.config.* @your-org/messai-devops
+
+# Scientific Accuracy
+/lib/ai-predictions.ts @your-org/messai-science
+/components/algal-fuel-cell/AlgalFuelCellDatabase.ts @your-org/messai-science

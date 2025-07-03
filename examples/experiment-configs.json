@@ -1,0 +1,152 @@
+{
+  "experiments": [
+    {
+      "id": "exp-001",
+      "name": "Optimal Mason Jar MFC",
+      "description": "Standard laboratory setup for educational purposes",
+      "design": "mason-jar",
+      "parameters": {
+        "temperature": 30,
+        "ph": 7.0,
+        "substrateConcentration": 1.5,
+        "anodeMaterial": "carbon-cloth",
+        "cathodeMaterial": "carbon-cloth",
+        "separator": "proton-exchange-membrane"
+      },
+      "expectedPower": {
+        "min": 20,
+        "max": 50,
+        "unit": "mW/m²"
+      },
+      "duration": "7 days",
+      "notes": "Ideal for beginners and educational demonstrations"
+    },
+    {
+      "id": "exp-002",
+      "name": "High-Performance Benchtop Bioreactor",
+      "description": "Advanced setup with premium materials",
+      "design": "benchtop-bioreactor",
+      "parameters": {
+        "temperature": 35,
+        "ph": 7.2,
+        "substrateConcentration": 2.0,
+        "anodeMaterial": "mxene-ti3c2tx",
+        "cathodeMaterial": "cnt-graphene-hybrid",
+        "separator": "ceramic",
+        "agitation": 150
+      },
+      "expectedPower": {
+        "min": 300,
+        "max": 500,
+        "unit": "mW/m²"
+      },
+      "duration": "30 days",
+      "notes": "Requires precise temperature control and continuous monitoring"
+    },
+    {
+      "id": "exp-003",
+      "name": "Low-Cost Earthen Pot MFC",
+      "description": "Sustainable design for developing regions",
+      "design": "earthen-pot",
+      "parameters": {
+        "temperature": 25,
+        "ph": 6.8,
+        "substrateConcentration": 1.0,
+        "anodeMaterial": "reclaimed-copper",
+        "cathodeMaterial": "reclaimed-copper",
+        "separator": "clay",
+        "pretreatment": "acid-etching"
+      },
+      "expectedPower": {
+        "min": 10,
+        "max": 30,
+        "unit": "mW/m²"
+      },
+      "duration": "14 days",
+      "notes": "Uses locally available materials, suitable for rural applications"
+    },
+    {
+      "id": "exp-004",
+      "name": "Wastewater Treatment Pilot",
+      "description": "Industrial-scale wastewater processing",
+      "design": "wastewater-treatment",
+      "parameters": {
+        "temperature": 20,
+        "ph": 7.5,
+        "substrateConcentration": 3.0,
+        "anodeMaterial": "stainless-steel-mesh",
+        "cathodeMaterial": "graphite-plate",
+        "separator": "ion-exchange-membrane",
+        "flowRate": 100,
+        "bod": 250
+      },
+      "expectedPower": {
+        "min": 15,
+        "max": 35,
+        "unit": "W/m²"
+      },
+      "duration": "90 days",
+      "notes": "Continuous flow system with automated monitoring"
+    },
+    {
+      "id": "exp-005",
+      "name": "Algal Fuel Cell Research",
+      "description": "Photosynthetic microbial fuel cell with algae",
+      "design": "algal-fuel-cell",
+      "parameters": {
+        "temperature": 28,
+        "ph": 7.3,
+        "lightIntensity": 5000,
+        "co2Concentration": 5,
+        "algaeStrain": "Chlorella vulgaris",
+        "anodeMaterial": "graphene-aerogel",
+        "cathodeMaterial": "platinum-carbon"
+      },
+      "expectedPower": {
+        "min": 100,
+        "max": 200,
+        "unit": "mW/m²"
+      },
+      "duration": "21 days",
+      "notes": "Requires controlled light cycles and CO2 supplementation"
+    }
+  ],
+  "materials": {
+    "electrodes": {
+      "budget": ["reclaimed-copper", "carbon-cloth", "graphite-rod"],
+      "standard": ["carbon-felt", "graphite-plate", "stainless-steel-mesh"],
+      "premium": ["graphene-oxide", "mxene-ti3c2tx", "cnt-graphene-hybrid"]
+    },
+    "separators": {
+      "low-cost": ["clay", "j-cloth", "filter-paper"],
+      "standard": ["proton-exchange-membrane", "ion-exchange-membrane"],
+      "advanced": ["ceramic", "glass-fiber", "nafion"]
+    }
+  },
+  "substrates": {
+    "synthetic": {
+      "glucose": {
+        "concentration": "1-2 g/L",
+        "cod": "1000-2000 mg/L"
+      },
+      "acetate": {
+        "concentration": "0.5-1.5 g/L",
+        "cod": "500-1500 mg/L"
+      }
+    },
+    "real-world": {
+      "domestic-wastewater": {
+        "cod": "200-500 mg/L",
+        "bod": "100-300 mg/L"
+      },
+      "brewery-wastewater": {
+        "cod": "2000-5000 mg/L",
+        "bod": "1200-3500 mg/L"
+      },
+      "dairy-wastewater": {
+        "cod": "1500-4000 mg/L",
+        "bod": "800-2500 mg/L"
+      }
+    }
+  }
+}
