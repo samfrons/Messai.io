@@ -205,12 +205,12 @@ export default function HomePage() {
       const experimentId = `exp-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
       
       // In real app, this would create experiment in database
-      console.log('Creating experiment:', { 
-        id: experimentId,
-        designId: selectedDesign.id, 
-        designType: selectedDesign.type,
-        parameters 
-      })
+      // Creating experiment: { 
+      //   id: experimentId,
+      //   designId: selectedDesign.id, 
+      //   designType: selectedDesign.type,
+      //   parameters 
+      // }
       
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000))

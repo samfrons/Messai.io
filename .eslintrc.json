@@ -11,6 +11,7 @@
     ],
     "prefer-const": "error",
     "no-unused-expressions": "error",
-    "no-duplicate-imports": "error"
+    "no-duplicate-imports": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

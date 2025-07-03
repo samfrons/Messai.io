@@ -175,11 +175,11 @@ export const authOptions: NextAuthOptions = {
   events: {
     async signIn({ user }) {
       // Additional security logging
-      console.log(`User ${user.email} signed in at ${new Date().toISOString()}`);
+      // User ${user.email} signed in at ${new Date().toISOString()}
     },
     async signOut({ session }) {
       if (session?.user?.email) {
-        console.log(`User ${session.user.email} signed out at ${new Date().toISOString()}`);
+        // User ${session.user.email} signed out at ${new Date().toISOString()}
       }
     },
   },

@@ -195,9 +195,9 @@ export default function ParameterControls({
               >
                 <option value="bg11">BG-11</option>
                 <option value="tap">TAP</option>
-                <option value="bold">Bold's Basal Medium</option>
+                <option value="bold">Bold&apos;s Basal Medium</option>
                 <option value="f2">f/2 Medium</option>
-                <option value="zarrouk">Zarrouk's Medium</option>
+                <option value="zarrouk">Zarrouk&apos;s Medium</option>
               </select>
             </div>
 

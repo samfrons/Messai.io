@@ -203,8 +203,8 @@ const emailTemplates = {
 // Send email function
 async function sendEmail(to: string, subject: string, html: string, text: string) {
   if (!transporter) {
-    console.log('Email service not configured. Email would have been sent to:', to);
-    console.log('Subject:', subject);
+    // Email service not configured. Email would have been sent to: ${to}
+    // Subject: ${subject}
     return;
   }
 
@@ -217,7 +217,7 @@ async function sendEmail(to: string, subject: string, html: string, text: string
       html,
     });
 
-    console.log('Email sent:', info.messageId);
+    // Email sent: ${info.messageId}
     return info;
   } catch (error) {
     console.error('Email error:', error);
