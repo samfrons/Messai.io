@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { Eye, Settings, TrendingUp, AlertCircle, Mail } from 'lucide-react'
+import { Eye, Settings, TrendingUp, AlertCircle, Mail, Loader2 } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -22,7 +22,7 @@ interface Experiment {
   }
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const { data: session } = useSession()
   const searchParams = useSearchParams()
   const [experiments, setExperiments] = useState<Experiment[]>([])
@@ -321,5 +321,20 @@ export default function DashboardPage() {
         )}
       </div>
     </div>
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-500 mx-auto" />
+          <p className="mt-2 text-gray-600">Loading dashboard...</p>
+        </div>
+      </div>
+    }>
+      <DashboardContent />
+    </Suspense>
   )
 }
