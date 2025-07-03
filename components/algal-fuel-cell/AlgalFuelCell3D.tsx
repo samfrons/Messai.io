@@ -90,7 +90,10 @@ export default function AlgalFuelCell3D({ className = '' }: AlgalFuelCell3DProps
     renderer.shadowMap.type = THREE.PCFSoftShadowMap
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = 1.5 // Increased exposure for better visibility
-    mountRef.current.appendChild(renderer.domElement)
+    const currentMount = mountRef.current
+    if (currentMount) {
+      currentMount.appendChild(renderer.domElement)
+    }
     rendererRef.current = renderer
 
     // Post-processing

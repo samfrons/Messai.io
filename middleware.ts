@@ -1,11 +1,12 @@
 import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import type { NextAuthRequest } from 'next-auth/middleware';
 
 // Middleware function with authentication
 export default withAuth(
-  function middleware(req: NextRequest) {
-    const token = req.nextauth?.token;
+  function middleware(req) {
+    const token = (req as any).nextauth?.token;
     const isAuth = !!token;
     const isAuthPage = req.nextUrl.pathname.startsWith('/auth');
     const isPublicPage = ['/', '/about', '/docs', '/api/predictions'].includes(req.nextUrl.pathname);
