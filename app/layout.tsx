@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Antonio } from 'next/font/google'
 import './globals.css'
+import { SessionProvider } from '@/components/SessionProvider'
 
 const antonio = Antonio({ 
   subsets: ['latin'],
@@ -21,7 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={antonio.variable}>
       <body className="bg-lcars-black font-lcars">
-        <div className="min-h-screen flex flex-col">
+        <SessionProvider>
+          <div className="min-h-screen flex flex-col">
           {/* LCARS Header Bar */}
           <header className="h-24 flex items-stretch gap-2 p-2">
             {/* Left section */}
@@ -106,6 +108,7 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
+        </SessionProvider>
       </body>
     </html>
   )
