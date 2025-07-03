@@ -92,19 +92,17 @@ export async function POST(request: NextRequest) {
           passwordReset.user.name
         );
       } catch (emailError) {
-        // Log error but don't fail the request
-        console.error('Failed to send password change notification:', emailError);
+        // Email notification failed but password was changed successfully
+        // Don't fail the request
       }
     }
 
-    // Log successful password reset
-    console.log(`Password reset successful for user: ${passwordReset.user?.email}`);
-
+    // Password reset successful
     return NextResponse.json({
       message: 'Password has been reset successfully',
     });
   } catch (error) {
-    console.error('Password reset error:', error);
+    // Handle unexpected errors
     return NextResponse.json(
       { error: 'An error occurred resetting your password. Please try again.' },
       { status: 500 }

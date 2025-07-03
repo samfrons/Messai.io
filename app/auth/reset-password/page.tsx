@@ -1,13 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { resetPasswordSchema, type ResetPasswordInput } from '@/lib/auth/validation';
 import { Lock, AlertCircle, Loader2, CheckCircle, XCircle } from 'lucide-react';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 function ResetPasswordContent() {
   const router = useRouter();

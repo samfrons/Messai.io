@@ -62,7 +62,7 @@ export default function ForgotPasswordPage() {
             <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
             <h2 className="text-xl font-bold text-white mb-2">Password Reset Email Sent</h2>
             <p className="text-gray-400 mb-6">
-              If an account exists with that email address, we've sent password reset instructions.
+              If an account exists with that email address, we&apos;ve sent password reset instructions.
             </p>
             <p className="text-sm text-gray-500 mb-8">
               The reset link will expire in 24 hours for security reasons.
@@ -94,7 +94,7 @@ export default function ForgotPasswordPage() {
         {/* Form */}
         <div className="bg-gray-900 p-8 rounded-lg border border-gray-800">
           <p className="text-gray-400 mb-6">
-            Enter your email address and we'll send you instructions to reset your password.
+            Enter your email address and we&apos;ll send you instructions to reset your password.
           </p>
 
           {error && (

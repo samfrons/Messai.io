@@ -52,15 +52,13 @@ export async function GET(request: NextRequest) {
       where: { id: verificationToken.id },
     });
 
-    // Log successful verification
-    console.log(`Email verified for user: ${verificationToken.user?.email}`);
-
+    // Email verification successful
     return NextResponse.json({
       message: 'Email verified successfully',
       email: verificationToken.user?.email,
     });
   } catch (error) {
-    console.error('Email verification error:', error);
+    // Handle unexpected errors
     return NextResponse.json(
       { error: 'An error occurred during email verification' },
       { status: 500 }

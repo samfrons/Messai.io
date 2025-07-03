@@ -31,7 +31,7 @@ function VerifyRequestContent() {
               {provider === 'credentials' ? 'Verify your email' : 'Check your email'}
             </h2>
             <p className="text-gray-400">
-              We've sent you an email with a verification link. Please check your inbox and click the link to verify your account.
+              We&apos;ve sent you an email with a verification link. Please check your inbox and click the link to verify your account.
             </p>
           </div>
 
@@ -40,7 +40,7 @@ function VerifyRequestContent() {
               The verification link will expire in <span className="text-white font-medium">24 hours</span>.
             </p>
             <p>
-              Didn't receive the email? Check your spam folder or request a new verification email.
+              Didn&apos;t receive the email? Check your spam folder or request a new verification email.
             </p>
           </div>
 

@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
 
     // Always return success to prevent email enumeration
     if (!user) {
-      console.log(`Password reset requested for non-existent email: ${email}`);
+      // Security: Don't reveal whether email exists
       return NextResponse.json({
         message: 'If an account exists with that email, we have sent password reset instructions.',
       });
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
       try {
         await sendPasswordResetEmail(user.email, resetToken, user.name);
       } catch (emailError) {
-        console.error('Failed to send password reset email:', emailError);
+        // Handle email sending failure
         // Delete the token if email fails
         await prisma.passwordReset.delete({
           where: { token: resetToken },
@@ -80,14 +80,15 @@ export async function POST(request: NextRequest) {
         );
       }
     } else {
-      console.log(`Password reset token for ${user.email}: ${resetToken}`);
+      // Email service not configured - token created but not sent
+      // In production, this should be handled properly
     }
 
     return NextResponse.json({
       message: 'If an account exists with that email, we have sent password reset instructions.',
     });
   } catch (error) {
-    console.error('Password reset request error:', error);
+    // Handle unexpected errors
     return NextResponse.json(
       { error: 'An error occurred processing your request. Please try again.' },
       { status: 500 }

@@ -127,7 +127,7 @@ export default function WelcomePage() {
         {/* Auto-redirect notice */}
         <div className="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
           <p className="text-gray-400 mb-4">
-            You'll be automatically redirected to your dashboard in a few seconds...
+            You&apos;ll be automatically redirected to your dashboard in a few seconds...
           </p>
           <Link
             href="/dashboard"
