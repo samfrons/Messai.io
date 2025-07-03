@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Eye, Settings, TrendingUp } from 'lucide-react'
+import { Eye, Settings, TrendingUp, AlertCircle, Mail } from 'lucide-react'
+import { useSession } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import MFCDashboard3D from '@/components/MFCDashboard3D'
 
 interface Experiment {
@@ -20,10 +23,16 @@ interface Experiment {
 }
 
 export default function DashboardPage() {
+  const { data: session } = useSession()
+  const searchParams = useSearchParams()
   const [experiments, setExperiments] = useState<Experiment[]>([])
   const [selectedExperiment, setSelectedExperiment] = useState<string | null>(null)
   const [view3D, setView3D] = useState(true)
   const [loading, setLoading] = useState(true)
+  
+  const justVerified = searchParams.get('verified') === 'true'
+  const needsVerification = searchParams.get('verify') === 'required'
+  const isUnverified = !session?.user?.emailVerified && process.env.NEXT_PUBLIC_REQUIRE_EMAIL_VERIFICATION === 'true'
 
   useEffect(() => {
     // Mock experiments data
@@ -109,6 +118,39 @@ export default function DashboardPage() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
+      {/* Email verification banner */}
+      {(isUnverified || needsVerification) && (
+        <div className="bg-yellow-50 border-b border-yellow-200 px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <AlertCircle className="h-5 w-5 text-yellow-600" />
+            <p className="text-sm text-yellow-800">
+              <strong>Email verification required.</strong> Please verify your email to access all features.
+            </p>
+          </div>
+          <Link
+            href="/auth/verify-request"
+            className="text-sm text-yellow-600 hover:text-yellow-700 font-medium flex items-center gap-1"
+          >
+            <Mail className="h-4 w-4" />
+            Resend verification
+          </Link>
+        </div>
+      )}
+      
+      {/* Success message for just verified users */}
+      {justVerified && (
+        <div className="bg-green-50 border-b border-green-200 px-6 py-3">
+          <div className="flex items-center gap-3">
+            <svg className="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="text-sm text-green-800">
+              <strong>Email verified successfully!</strong> You now have full access to all MESSAi features.
+            </p>
+          </div>
+        </div>
+      )}
+      
       {/* Compact header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
         <div className="flex items-center justify-between">

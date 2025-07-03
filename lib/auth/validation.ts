@@ -56,6 +56,16 @@ export const emailSchema = z.object({
   email: z.string().email('Invalid email address'),
 });
 
+// Forgot password schema
+export const forgotPasswordSchema = z.object({
+  email: z.string().email('Invalid email address'),
+});
+
+// Verify email token schema
+export const verifyEmailSchema = z.object({
+  token: z.string().min(1, 'Verification token is required'),
+});
+
 // Profile update schema
 export const profileUpdateSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters').optional(),
@@ -71,3 +81,5 @@ export type UpdatePasswordInput = z.infer<typeof updatePasswordSchema>;
 export type ResetPasswordInput = z.infer<typeof resetPasswordSchema>;
 export type EmailInput = z.infer<typeof emailSchema>;
 export type ProfileUpdateInput = z.infer<typeof profileUpdateSchema>;
+export type ForgotPasswordInput = z.infer<typeof forgotPasswordSchema>;
+export type VerifyEmailInput = z.infer<typeof verifyEmailSchema>;

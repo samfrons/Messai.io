@@ -5,7 +5,8 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/db';
 import bcrypt from 'bcryptjs';
 import { loginSchema } from './validation';
-import type { Role } from '@prisma/client';
+// For SQLite compatibility, we'll use string literals instead of enum
+type Role = 'USER' | 'RESEARCHER' | 'ADMIN' | 'SUPER_ADMIN';
 
 declare module 'next-auth' {
   interface Session {

@@ -1,10 +1,59 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getToken } from 'next-auth/jwt';
 
-export function middleware(request: NextRequest) {
-  // Add security headers to all responses
+// Define protected routes
+const protectedRoutes = ['/dashboard', '/experiment', '/designs'];
+const authRoutes = ['/auth/login', '/auth/signup'];
+
+export async function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  
+  // Check if the path is protected
+  const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));
+  const isAuthRoute = authRoutes.some(route => pathname.startsWith(route));
+  
+  // Get the token (user session)
+  const token = await getToken({ 
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+  
+  // Redirect authenticated users away from auth pages
+  if (isAuthRoute && token) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/dashboard';
+    return NextResponse.redirect(url);
+  }
+  
+  // Protect routes that require authentication
+  if (isProtectedRoute && !token) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/auth/login';
+    // Preserve the original URL as callback
+    url.searchParams.set('callbackUrl', request.nextUrl.pathname);
+    return NextResponse.redirect(url);
+  }
+  
+  // Check email verification for certain routes
+  if (isProtectedRoute && token && process.env.REQUIRE_EMAIL_VERIFICATION === 'true') {
+    // Allow limited access to dashboard for unverified users
+    if (pathname === '/dashboard' && !token.emailVerified) {
+      // User can access dashboard but with limited functionality
+      // The dashboard component should check verification status
+    } else if (pathname !== '/dashboard' && !token.emailVerified) {
+      // Redirect to dashboard for other protected routes
+      const url = request.nextUrl.clone();
+      url.pathname = '/dashboard';
+      url.searchParams.set('verify', 'required');
+      return NextResponse.redirect(url);
+    }
+  }
+  
+  // Create response with security headers
   const response = NextResponse.next();
   
+  // Add security headers to all responses
   response.headers.set('X-Frame-Options', 'DENY');
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('X-XSS-Protection', '1; mode=block');

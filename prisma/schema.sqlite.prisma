@@ -1,0 +1,162 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// NextAuth.js Models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                 String              @id @default(cuid())
+  email              String              @unique
+  emailVerified      DateTime?
+  password           String?
+  name               String?
+  image              String?
+  role               String              @default("USER")
+  isActive           Boolean             @default(true)
+  accounts           Account[]
+  sessions           Session[]
+  experiments        Experiment[]
+  verificationTokens VerificationToken[]
+  passwordResets     PasswordReset[]
+  loginAttempts      LoginAttempt[]
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  lastLoginAt        DateTime?
+  
+  // Profile fields
+  institution        String?
+  researchArea       String?
+  bio                String?
+  
+  // Security fields
+  twoFactorEnabled   Boolean             @default(false)
+  twoFactorSecret    String?
+  
+  @@index([email])
+}
+
+model VerificationToken {
+  id         String   @id @default(cuid())
+  identifier String   // Email address
+  token      String   @unique
+  expires    DateTime
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([identifier, token])
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expires   DateTime
+  used      Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  
+  @@index([token])
+}
+
+model LoginAttempt {
+  id         String   @id @default(cuid())
+  email      String
+  ipAddress  String
+  userAgent  String?
+  success    Boolean
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  
+  @@index([email, createdAt])
+  @@index([ipAddress, createdAt])
+}
+
+// Application Models
+model MFCDesign {
+  id          String       @id @default(cuid())
+  name        String
+  type        String
+  cost        String
+  powerOutput String
+  materials   String       // JSON stored as string in SQLite
+  experiments Experiment[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Experiment {
+  id           String        @id @default(cuid())
+  name         String
+  userId       String
+  designId     String
+  status       String        @default("SETUP")
+  parameters   String        // JSON stored as string in SQLite
+  isPublic     Boolean       @default(false)
+  user         User          @relation(fields: [userId], references: [id])
+  design       MFCDesign     @relation(fields: [designId], references: [id])
+  measurements Measurement[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  
+  @@index([userId])
+  @@index([status])
+}
+
+model Measurement {
+  id           String     @id @default(cuid())
+  experimentId String
+  voltage      Float
+  current      Float
+  power        Float
+  temperature  Float
+  ph           Float
+  substrate    Float?
+  notes        String?
+  timestamp    DateTime   @default(now())
+  experiment   Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+  
+  @@index([experimentId, timestamp])
+}
+
+// API Rate Limiting
+model RateLimit {
+  id        String   @id @default(cuid())
+  key       String   @unique // IP address or user ID
+  points    Int      @default(0)
+  expire    DateTime
+  createdAt DateTime @default(now())
+  
+  @@index([key, expire])
+}

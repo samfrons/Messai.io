@@ -48,3 +48,6 @@ prisma/migrations/
 # Temporary files
 .tmp/
 temp/
+
+# Requirements builder (uncomment if you want to exclude requirements)
+# requirements/

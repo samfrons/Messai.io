@@ -232,7 +232,7 @@ export async function sendVerificationEmail(email: string, token: string) {
   return sendEmail(email, subject, html, text);
 }
 
-export async function sendPasswordResetEmail(email: string, token: string) {
+export async function sendPasswordResetEmail(email: string, token: string, name?: string | null) {
   const resetUrl = `${process.env.NEXTAUTH_URL}/auth/reset-password?token=${token}`;
   const { subject, html, text } = emailTemplates.passwordReset(resetUrl);
   return sendEmail(email, subject, html, text);
@@ -240,5 +240,58 @@ export async function sendPasswordResetEmail(email: string, token: string) {
 
 export async function sendWelcomeEmail(email: string, name: string) {
   const { subject, html, text } = emailTemplates.welcome(name);
+  return sendEmail(email, subject, html, text);
+}
+
+export async function sendPasswordChangeNotificationEmail(email: string, name?: string | null) {
+  const subject = 'Your MESSAi password has been changed';
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background: linear-gradient(135deg, #FF6B00 0%, #00D4FF 100%); color: white; padding: 30px; text-align: center; }
+          .content { background: #f4f4f4; padding: 30px; }
+          .alert { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; margin: 20px 0; border-radius: 5px; }
+          .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Password Changed</h1>
+          </div>
+          <div class="content">
+            <h2>Hello ${name || 'there'},</h2>
+            <p>This email confirms that your MESSAi account password has been successfully changed.</p>
+            <div class="alert">
+              <strong>🔒 Security Notice:</strong>
+              <p>If you did not make this change, please contact us immediately and secure your account.</p>
+            </div>
+            <p>For security reasons, you may need to sign in again on all your devices.</p>
+            <p>Thank you for using MESSAi!</p>
+          </div>
+          <div class="footer">
+            <p>© 2024 MESSAi - Advancing Bioelectrochemical Research</p>
+            <p>This is an automated security notification.</p>
+          </div>
+        </div>
+      </body>
+    </html>
+  `;
+  const text = `
+    Password Changed
+    
+    Hello ${name || 'there'},
+    
+    This email confirms that your MESSAi account password has been successfully changed.
+    
+    If you did not make this change, please contact us immediately.
+    
+    For security reasons, you may need to sign in again on all your devices.
+  `;
+  
   return sendEmail(email, subject, html, text);
 }

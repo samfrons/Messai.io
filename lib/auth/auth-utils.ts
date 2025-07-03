@@ -4,7 +4,8 @@ import { prisma } from '@/lib/db';
 import { getServerSession } from 'next-auth';
 import { authOptions } from './auth-options';
 import { redirect } from 'next/navigation';
-import type { Role } from '@prisma/client';
+// For SQLite compatibility, we'll use string literals instead of enum
+type Role = 'USER' | 'RESEARCHER' | 'ADMIN' | 'SUPER_ADMIN';
 
 // Password hashing
 export async function hashPassword(password: string): Promise<string> {

@@ -33,8 +33,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3003",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
+    "postinstall": "prisma generate",
     "lint": "next lint",
     "test": "vitest",
     "test:ui": "vitest --ui",
