@@ -80,7 +80,10 @@ async function main() {
   // Create MFC designs
   for (const design of mfcDesigns) {
     await prisma.mFCDesign.create({
-      data: design
+      data: {
+        ...design,
+        materials: JSON.stringify(design.materials)
+      }
     })
   }
 

@@ -192,7 +192,10 @@ export async function hasPermission(userId: string, resource: string, action: st
     },
   };
 
-  const userPermissions = permissions[user.role]?.[resource] || [];
+  const rolePermissions = permissions[user.role as Role];
+  if (!rolePermissions) return false;
+  
+  const userPermissions = rolePermissions[resource] || [];
   return userPermissions.includes(action) || userPermissions.includes(`${action}:own`);
 }
 

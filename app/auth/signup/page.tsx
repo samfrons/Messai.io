@@ -228,6 +228,8 @@ export default function SignupPage() {
                   {...register('researchArea')}
                   type="text"
                   id="researchArea"
+                  name="researchArea"
+                  autoComplete="off"
                   className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                   placeholder="Bioelectrochemistry"
                   disabled={isLoading}
@@ -240,6 +242,7 @@ export default function SignupPage() {
                 {...register('acceptTerms')}
                 type="checkbox"
                 id="acceptTerms"
+                name="acceptTerms"
                 className="mt-1 w-4 h-4 bg-gray-800 border-gray-700 rounded focus:ring-2 focus:ring-cyan-500"
                 disabled={isLoading}
               />
