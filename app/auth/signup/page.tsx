@@ -38,8 +38,21 @@ export default function SignupPage() {
 
       const result = await response.json();
 
+      console.log('Signup response:', response.status, result);
+      
       if (!response.ok) {
-        setError(result.error || 'An error occurred during signup');
+        // Handle specific error codes
+        if (response.status === 409) {
+          setError('An account with this email already exists. Please login instead.');
+        } else if (response.status === 400 && result.details) {
+          // Handle validation errors
+          const firstError = (Object.values(result.details.fieldErrors || {})[0] as any)?.[0] || 
+                            (Object.values(result.details.formErrors || {})[0] as any) || 
+                            'Invalid input. Please check your information.';
+          setError(firstError);
+        } else {
+          setError(result.error || 'An error occurred during signup. Please try again.');
+        }
       } else {
         setIsSuccess(true);
         setTimeout(() => {

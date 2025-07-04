@@ -2,7 +2,7 @@
 
 import { useEffect, useState, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { Eye, Settings, TrendingUp, AlertCircle, Mail, Loader2, Sparkles, CheckCircle } from 'lucide-react'
+import { Eye, Settings, TrendingUp, AlertCircle, Mail, Loader2, Sparkles, CheckCircle, Lightbulb, ArrowRight } from 'lucide-react'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
@@ -39,7 +39,7 @@ interface Experiment {
 }
 
 function DashboardContent() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const searchParams = useSearchParams()
   const [experiments, setExperiments] = useState<Experiment[]>([])
   const [selectedExperiment, setSelectedExperiment] = useState<string | null>(null)
@@ -51,9 +51,10 @@ function DashboardContent() {
   const needsVerification = searchParams.get('verify') === 'required'
   const isUnverified = !session?.user?.emailVerified && process.env.NEXT_PUBLIC_REQUIRE_EMAIL_VERIFICATION === 'true'
   const justCompletedOnboarding = searchParams.get('onboarding') === 'complete'
+  const isAuthenticated = status === 'authenticated'
 
   useEffect(() => {
-    // Check onboarding status
+    // Check onboarding status only for authenticated users
     if (session?.user?.id) {
       fetch('/api/user/onboarding')
         .then(res => res.json())
@@ -144,6 +145,27 @@ function DashboardContent() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
+      {/* Unauthenticated user notice */}
+      {!isAuthenticated && status !== 'loading' && (
+        <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Lightbulb className="h-5 w-5 text-blue-600" />
+              <p className="text-sm text-blue-800">
+                <strong>Welcome to MESSAi Dashboard!</strong> You&apos;re viewing our public demo. Sign in to create and manage your own experiments.
+              </p>
+            </div>
+            <Link
+              href="/auth/login"
+              className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+            >
+              Sign In
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      )}
+      
       {/* Onboarding completion message */}
       {justCompletedOnboarding && (
         <div className="bg-green-50 border-b border-green-200 px-6 py-3">
@@ -156,8 +178,8 @@ function DashboardContent() {
         </div>
       )}
       
-      {/* Onboarding incomplete banner */}
-      {onboardingStatus && !onboardingStatus.completedOnboarding && !justCompletedOnboarding && (
+      {/* Onboarding incomplete banner - only show for authenticated users */}
+      {isAuthenticated && onboardingStatus && !onboardingStatus.completedOnboarding && !justCompletedOnboarding && (
         <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Sparkles className="h-5 w-5 text-amber-600" />
@@ -175,8 +197,8 @@ function DashboardContent() {
         </div>
       )}
       
-      {/* Email verification banner */}
-      {(isUnverified || needsVerification) && (
+      {/* Email verification banner - only show for authenticated users */}
+      {isAuthenticated && (isUnverified || needsVerification) && (
         <div className="bg-yellow-50 border-b border-yellow-200 px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <AlertCircle className="h-5 w-5 text-yellow-600" />
@@ -194,8 +216,8 @@ function DashboardContent() {
         </div>
       )}
       
-      {/* Success message for just verified users */}
-      {justVerified && (
+      {/* Success message for just verified users - only show for authenticated users */}
+      {isAuthenticated && justVerified && (
         <div className="bg-green-50 border-b border-green-200 px-6 py-3">
           <div className="flex items-center gap-3">
             <svg className="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -229,13 +251,22 @@ function DashboardContent() {
               <Eye className="h-4 w-4" />
               3D View
             </motion.button>
-            <a
-              href="/"
-              className="bg-blue-600 text-white px-3 py-2 text-sm rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2"
-            >
-              <Settings className="h-4 w-4" />
-              New Experiment
-            </a>
+            {isAuthenticated ? (
+              <a
+                href="/"
+                className="bg-blue-600 text-white px-3 py-2 text-sm rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2"
+              >
+                <Settings className="h-4 w-4" />
+                New Experiment
+              </a>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="bg-blue-600 text-white px-3 py-2 text-sm rounded-md hover:bg-blue-700 transition-colors"
+              >
+                Sign in to Create
+              </Link>
+            )}
           </div>
         </div>
       </div>
@@ -251,12 +282,21 @@ function DashboardContent() {
               className="text-center"
             >
               <div className="text-gray-500 text-lg mb-4">No experiments yet</div>
-              <a
-                href="/"
-                className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
-              >
-                Create Your First Experiment
-              </a>
+              {isAuthenticated ? (
+                <a
+                  href="/"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
+                >
+                  Create Your First Experiment
+                </a>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
+                >
+                  Sign in to Get Started
+                </Link>
+              )}
             </motion.div>
           </div>
         ) : (
@@ -295,12 +335,21 @@ function DashboardContent() {
                             <h3 className="font-semibold text-blue-900 text-sm">{selected.name}</h3>
                             <p className="text-blue-700 text-xs">{selected.designName}</p>
                           </div>
-                          <button
-                            onClick={() => window.location.href = `/experiment/${selected.id}`}
-                            className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm"
-                          >
-                            View Details
-                          </button>
+                          {isAuthenticated ? (
+                            <button
+                              onClick={() => window.location.href = `/experiment/${selected.id}`}
+                              className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm"
+                            >
+                              View Details
+                            </button>
+                          ) : (
+                            <Link
+                              href="/auth/login"
+                              className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm inline-block"
+                            >
+                              Sign in to View
+                            </Link>
+                          )}
                         </div>
                       ) : null
                     })()}
@@ -331,7 +380,9 @@ function DashboardContent() {
                     }`}
                     onClick={() => {
                       setSelectedExperiment(experiment.id)
-                      window.location.href = `/experiment/${experiment.id}`
+                      if (isAuthenticated) {
+                        window.location.href = `/experiment/${experiment.id}`
+                      }
                     }}
                     onMouseEnter={() => setSelectedExperiment(experiment.id)}
                   >

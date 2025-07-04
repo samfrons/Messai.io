@@ -3,7 +3,8 @@ import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 // Define protected routes
-const protectedRoutes = ['/dashboard', '/experiment', '/designs', '/profile', '/settings', '/onboarding'];
+// Removed '/dashboard' and '/designs' from protected routes to allow public access
+const protectedRoutes = ['/experiment', '/profile', '/settings', '/onboarding'];
 const authRoutes = ['/auth/login', '/auth/signup'];
 
 export async function middleware(request: NextRequest) {
@@ -22,7 +23,15 @@ export async function middleware(request: NextRequest) {
   // Redirect authenticated users away from auth pages
   if (isAuthRoute && token) {
     const url = request.nextUrl.clone();
-    url.pathname = '/dashboard';
+    
+    // Check if user has completed onboarding
+    // For new users, redirect to welcome page
+    if (pathname === '/auth/signup') {
+      url.pathname = '/auth/welcome';
+    } else {
+      url.pathname = '/dashboard';
+    }
+    
     return NextResponse.redirect(url);
   }
   

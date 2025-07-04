@@ -5,6 +5,7 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/lib/db';
 import bcrypt from 'bcryptjs';
 import { loginSchema } from './validation';
+import { ensureUserRecords } from './user-creation';
 // For SQLite compatibility, we'll use string literals instead of enum
 type Role = 'USER' | 'RESEARCHER' | 'ADMIN' | 'SUPER_ADMIN';
 
@@ -176,10 +177,21 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user }) {
       // Additional security logging
       // User ${user.email} signed in at ${new Date().toISOString()}
+      
+      // Ensure UserProfile and UserSettings exist for all users
+      if (user?.id) {
+        await ensureUserRecords(user.id);
+      }
     },
     async signOut({ session }) {
       if (session?.user?.email) {
         // User ${session.user.email} signed out at ${new Date().toISOString()}
+      }
+    },
+    async createUser({ user }) {
+      // This event is triggered when a new user is created via OAuth
+      if (user?.id) {
+        await ensureUserRecords(user.id);
       }
     },
   },

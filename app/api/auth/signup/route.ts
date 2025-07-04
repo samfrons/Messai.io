@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db';
 import { signupSchema } from '@/lib/auth/validation';
 import { hashPassword, generateVerificationToken } from '@/lib/auth/auth-utils';
 import { sendVerificationEmail } from '@/lib/email';
+import { createUserProfileAndSettings } from '@/lib/auth/user-creation';
 
 export async function POST(request: NextRequest) {
   try {
@@ -50,6 +51,9 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    // Create UserProfile and UserSettings
+    await createUserProfileAndSettings(user.id);
+
     // Generate verification token
     const verificationToken = await generateVerificationToken(email, user.id);
 
@@ -69,8 +73,25 @@ export async function POST(request: NextRequest) {
       },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Signup error:', error);
+    
+    // Handle Prisma errors
+    if (error.code === 'P2002') {
+      return NextResponse.json(
+        { error: 'An account with this email already exists' },
+        { status: 409 }
+      );
+    }
+    
+    // Handle database connection errors
+    if (error.code === 'P2024') {
+      return NextResponse.json(
+        { error: 'Database connection timeout. Please try again.' },
+        { status: 503 }
+      );
+    }
+    
     return NextResponse.json(
       { error: 'An error occurred during signup. Please try again.' },
       { status: 500 }

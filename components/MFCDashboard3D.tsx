@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment, Text, Box, Cylinder, Sphere } from '@react-three/drei'
+import { OrbitControls, Text, Box, Cylinder, Sphere } from '@react-three/drei'
 import { useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import * as THREE from 'three'
@@ -191,7 +191,9 @@ function Dashboard3DScene({ experiments, selectedExperiment, onExperimentSelect 
       {/* Grid floor */}
       <gridHelper args={[20, 20, '#333333', '#666666']} position={[0, -1, 0]} />
       
-      <Environment preset="studio" />
+      {/* Simple lighting setup without HDR */}
+      <hemisphereLight intensity={0.5} groundColor="#444444" />
+      <fog attach="fog" args={['#202020', 10, 40]} />
     </>
   )
 }

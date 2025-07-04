@@ -61,9 +61,6 @@ const nextConfig = {
   
   // Suppress hydration warnings in development
   reactStrictMode: true,
-  
-  // Enable SWC minification
-  swcMinify: true,
 }
 
 module.exports = nextConfig

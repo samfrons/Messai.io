@@ -36,8 +36,17 @@ function LoginForm() {
         callbackUrl,
       });
 
+      console.log('Login result:', result);
+      
       if (result?.error) {
-        setError(result.error);
+        // Handle specific error messages
+        if (result.error === 'CredentialsSignin') {
+          setError('Invalid email or password. Please try again.');
+        } else if (result.error.includes('Too many failed login attempts')) {
+          setError('Too many failed login attempts. Please try again in 15 minutes.');
+        } else {
+          setError(result.error);
+        }
       } else if (result?.ok) {
         router.push(callbackUrl);
         router.refresh();
