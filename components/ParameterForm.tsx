@@ -53,9 +53,16 @@ interface ParameterFormProps {
   designType: string
   onSubmit: (params: ExperimentParameters) => void
   onCancel: () => void
+  initialConfig?: MFCConfig
+  predictions?: {
+    power: number
+    efficiency: number
+    cost: number
+    confidence: number
+  }
 }
 
-export default function ParameterForm({ designId, designName, designType, onSubmit, onCancel }: ParameterFormProps) {
+export default function ParameterForm({ designId, designName, designType, onSubmit, onCancel, initialConfig, predictions }: ParameterFormProps) {
   const [parameters, setParameters] = useState<ExperimentParameters>({
     name: `${designName} Experiment ${new Date().toLocaleDateString()}`,
     temperature: 28,
@@ -64,7 +71,7 @@ export default function ParameterForm({ designId, designName, designType, onSubm
     notes: ''
   })
 
-  const [mfcConfig, setMfcConfig] = useState<MFCConfig>({
+  const [mfcConfig, setMfcConfig] = useState<MFCConfig>(initialConfig || {
     electrode: {
       material: 'carbon-cloth',
       surface: 100,
