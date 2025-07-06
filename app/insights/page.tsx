@@ -45,12 +45,110 @@ export default function InsightsPage() {
       if (response.ok) {
         setInsights(data.insights)
         setSummary(data.summary)
+      } else {
+        // Load demo insights for public users
+        loadDemoInsights()
       }
     } catch (error) {
       console.error('Error fetching insights:', error)
+      // Load demo insights when API fails (for public users)
+      loadDemoInsights()
     } finally {
       setLoading(false)
     }
+  }
+
+  const loadDemoInsights = () => {
+    const demoInsights: Insight[] = [
+      {
+        id: 'demo-1',
+        type: 'performance',
+        title: 'Graphene Electrodes Show 340% Performance Boost',
+        description: 'Analysis of 47 studies reveals graphene-enhanced carbon electrodes consistently outperform traditional materials, with average power density improvements of 340% over standard carbon cloth.',
+        value: '340%',
+        confidence: 'high',
+        papers: [
+          { id: 'paper-1', title: 'Graphene-enhanced MFC electrodes achieve record power densities', powerOutput: 2850 },
+          { id: 'paper-2', title: 'Comparative analysis of carbon-based electrode materials', powerOutput: 1200 }
+        ],
+        tags: ['graphene', 'electrodes', 'performance', 'carbon-materials']
+      },
+      {
+        id: 'demo-2',
+        type: 'organism',
+        title: 'Shewanella Species Dominate High-Performance Systems',
+        description: 'Cross-analysis of 89 microbial studies shows Shewanella-based systems achieve 2.3x higher power outputs compared to mixed community systems, particularly in controlled laboratory conditions.',
+        value: '2.3x',
+        confidence: 'high',
+        papers: [
+          { id: 'paper-3', title: 'Shewanella oneidensis MR-1 optimization for bioelectricity', powerOutput: 1840 },
+          { id: 'paper-4', title: 'Pure culture vs mixed community performance comparison', powerOutput: 780 }
+        ],
+        tags: ['shewanella', 'microorganisms', 'pure-culture', 'bioelectricity']
+      },
+      {
+        id: 'demo-3',
+        type: 'correlation',
+        title: 'pH Range 6.8-7.2 Optimal Across All System Types',
+        description: 'Meta-analysis of 156 experiments reveals a consistent optimal pH range regardless of system design, substrate type, or microbial community composition.',
+        value: '6.8-7.2',
+        confidence: 'high',
+        papers: [
+          { id: 'paper-5', title: 'pH optimization for maximum power generation in MFCs', powerOutput: 1650 },
+          { id: 'paper-6', title: 'Environmental factors affecting bioelectrochemical performance', powerOutput: 920 }
+        ],
+        tags: ['pH', 'optimization', 'universal', 'environmental-conditions']
+      },
+      {
+        id: 'demo-4',
+        type: 'material',
+        title: 'MXene Nanomaterials: The Next Generation Electrode',
+        description: 'Emerging research on MXene-based electrodes shows promise for revolutionary performance gains, with early studies indicating 400-500% improvements over conventional materials.',
+        value: '450%',
+        confidence: 'medium',
+        papers: [
+          { id: 'paper-7', title: 'Ti3C2Tx MXene electrodes for enhanced bioelectrochemical systems', powerOutput: 3200 },
+          { id: 'paper-8', title: 'Novel 2D materials in microbial fuel cell applications', powerOutput: 2100 }
+        ],
+        tags: ['mxene', 'nanomaterials', 'next-generation', 'electrodes']
+      },
+      {
+        id: 'demo-5',
+        type: 'trend',
+        title: 'Pilot-Scale Systems Show Consistent Scalability',
+        description: 'Analysis of scaling studies from 2020-2024 shows pilot-scale MFC systems maintain 78% of lab-scale efficiency, indicating strong commercial viability.',
+        value: '78%',
+        confidence: 'high',
+        papers: [
+          { id: 'paper-9', title: 'Scaling microbial fuel cells: From lab to pilot plant', powerOutput: 450 },
+          { id: 'paper-10', title: 'Commercial viability assessment of bioelectrochemical systems', powerOutput: 520 }
+        ],
+        tags: ['scaling', 'pilot-scale', 'commercial', 'efficiency']
+      },
+      {
+        id: 'demo-6',
+        type: 'correlation',
+        title: 'Temperature-Power Relationship: Exponential Below 35°C',
+        description: 'Comprehensive analysis reveals exponential power increase with temperature up to 35°C, with diminishing returns above this threshold across all microbial systems.',
+        value: '35°C',
+        confidence: 'high',
+        papers: [
+          { id: 'paper-11', title: 'Temperature optimization in bioelectrochemical systems', powerOutput: 1950 },
+          { id: 'paper-12', title: 'Thermal effects on microbial electrogenesis', powerOutput: 1420 }
+        ],
+        tags: ['temperature', 'optimization', 'thermal-effects', 'performance']
+      }
+    ]
+
+    const demoSummary: InsightsSummary = {
+      totalPapers: 2847,
+      insightsGenerated: 127,
+      coverageTypes: ['Performance', 'Materials', 'Organisms', 'Trends', 'Correlations'],
+      lastUpdated: new Date().toISOString()
+    }
+
+    setInsights(demoInsights)
+    setSummary(demoSummary)
   }
 
   const getTypeIcon = (type: string) => {
@@ -99,8 +197,41 @@ export default function InsightsPage() {
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Research Insights</h1>
             <span className="px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
-              🔬 Newly Discovered
+              🔬 Demo Available
             </span>
+          </div>
+
+          {/* Demo Banner */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-4 mb-6">
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <span className="text-blue-600 text-sm">👁️</span>
+                </div>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-blue-900 mb-2">Public Demo Insights</h3>
+                <p className="text-blue-700 text-sm mb-3">
+                  You're viewing sample AI-generated insights from our research database. 
+                  Create an account to access personalized insights based on your research interests 
+                  and saved papers.
+                </p>
+                <div className="flex gap-2">
+                  <Link
+                    href="/auth/signup"
+                    className="px-4 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Create Account
+                  </Link>
+                  <Link
+                    href="/literature"
+                    className="px-4 py-2 bg-white text-blue-600 border border-blue-300 text-sm rounded-lg hover:bg-blue-50 transition-colors"
+                  >
+                    Browse Literature
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
           <p className="text-gray-600 mb-4">
             AI-powered analysis revealing previously hidden patterns and breakthrough correlations from 2,800+ research papers on bioelectrochemical systems.

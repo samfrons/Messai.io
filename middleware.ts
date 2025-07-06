@@ -2,9 +2,8 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-// Define protected routes
-// Removed '/dashboard' and '/designs' from protected routes to allow public access
-const protectedRoutes = ['/experiment', '/profile', '/settings', '/onboarding'];
+// Define protected routes - Literature, insights, and demo experiments are now public
+const protectedRoutes = ['/experiment', '/profile', '/settings', '/onboarding', '/dashboard'];
 const authRoutes = ['/auth/login', '/auth/signup'];
 
 export async function middleware(request: NextRequest) {

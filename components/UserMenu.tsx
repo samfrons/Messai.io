@@ -3,7 +3,8 @@
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { User, LogOut, Settings, ChevronDown, Bell, Sparkles } from 'lucide-react';
+import { User, LogOut, Settings, ChevronDown, Bell, Sparkles, ExternalLink } from 'lucide-react';
+import { getDemoConfig } from '@/lib/demo-mode';
 
 interface UserProfile {
   avatar: string | null;
@@ -16,6 +17,7 @@ export function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [hasNewNotifications, setHasNewNotifications] = useState(false);
+  const demoConfig = getDemoConfig();
 
   useEffect(() => {
     if (session?.user?.id) {
@@ -48,6 +50,36 @@ export function UserMenu() {
   }
 
   if (!session) {
+    if (demoConfig.isDemo) {
+      return (
+        <div className="flex flex-col gap-2">
+          {/* Demo Mode - External Links */}
+          <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-3 mb-2">
+            <div className="text-xs text-blue-700 font-medium mb-1">🎭 Demo Mode</div>
+            <div className="text-xs text-blue-600">Visit messai.io for accounts</div>
+          </div>
+          <a
+            href={`${demoConfig.productionUrl}/auth/login`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-blue-600 hover:bg-blue-700 transition-colors rounded-lg px-4 py-2 text-white font-medium text-center flex items-center justify-center gap-2"
+          >
+            Sign In at messai.io
+            <ExternalLink className="w-4 h-4" />
+          </a>
+          <a
+            href={`${demoConfig.productionUrl}/auth/signup`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-600 hover:bg-green-700 transition-colors rounded-lg px-4 py-2 text-white font-medium text-center flex items-center justify-center gap-2"
+          >
+            Create Account
+            <ExternalLink className="w-4 h-4" />
+          </a>
+        </div>
+      );
+    }
+
     return (
       <div className="flex flex-col gap-2">
         <Link

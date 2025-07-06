@@ -3,10 +3,13 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import UnifiedDashboard from '@/components/unified/UnifiedDashboard'
+import { getDemoConfig } from '@/lib/demo-mode'
+import { ExternalLink } from 'lucide-react'
 
 export default function Home() {
   const [showDashboard, setShowDashboard] = useState(false)
   const [message, setMessage] = useState('')
+  const demoConfig = getDemoConfig()
 
   const electrochemicalSystems = [
     {
@@ -67,6 +70,30 @@ export default function Home() {
       {/* Header */}
       <div className="border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900">
         <div className="px-6 py-4">
+          {/* Demo Mode Banner */}
+          {demoConfig.isDemo && (
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-3 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">🎭</span>
+                <div>
+                  <div className="text-sm font-medium text-purple-900">MESSAi Demo Platform</div>
+                  <div className="text-xs text-purple-700">
+                    You're viewing the demo version. Visit{' '}
+                    <a 
+                      href={demoConfig.productionUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="font-medium underline hover:text-purple-800"
+                    >
+                      messai.io
+                    </a>
+                    {' '}for the full platform with personal accounts.
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          
           <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
             Welcome to MESSAi
           </h1>
@@ -97,10 +124,10 @@ export default function Home() {
                 Launch Platform
               </button>
               <Link 
-                href="/designs"
+                href="/systems"
                 className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
               >
-                Browse Examples
+                Browse Systems
               </Link>
             </div>
           </div>
@@ -210,12 +237,24 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </button>
-              <Link 
-                href="/auth/signup"
-                className="inline-flex items-center px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
-              >
-                Create Account
-              </Link>
+              {demoConfig.isDemo ? (
+                <a
+                  href={`${demoConfig.productionUrl}/auth/signup`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
+                >
+                  Create Account at messai.io
+                  <ExternalLink className="w-4 h-4 ml-2" />
+                </a>
+              ) : (
+                <Link 
+                  href="/auth/signup"
+                  className="inline-flex items-center px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
+                >
+                  Create Account
+                </Link>
+              )}
             </div>
           </div>
         </div>
