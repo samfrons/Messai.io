@@ -44,7 +44,9 @@
     "test:all": "node scripts/test-all.js",
     "test:integration": "vitest tests/integration/",
     "test:regression": "vitest tests/regression/",
-    "test:critical": "vitest tests/integration/ tests/regression/ tests/components/ParameterForm.integration.test.tsx tests/api/",
+    "test:literature": "vitest tests/literature/ tests/api/papers.test.ts",
+    "test:literature:watch": "vitest tests/literature/ tests/api/papers.test.ts --watch",
+    "test:critical": "vitest tests/integration/ tests/regression/ tests/components/ParameterForm.integration.test.tsx tests/api/ tests/literature/",
     "test:ci": "vitest run --coverage --reporter=json --outputFile=test-results.json",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
@@ -54,8 +56,24 @@
     "db:migrate": "prisma migrate dev",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
+    "db:backup": "node scripts/backup/create-backup.js",
+    "db:restore": "node scripts/backup/restore-backup.js",
+    "db:backup-test": "node scripts/backup/test-restoration.js",
+    "db:migrate-safe": "node scripts/backup/safe-migrate.js",
+    "db:integrity": "npx tsx scripts/literature/database-integrity-check.ts",
+    "db:validate-links": "npx tsx scripts/literature/validate-external-links.ts",
+    "db:cleanup-fake": "npx tsx scripts/literature/cleanup-fake-papers.ts",
+    "db:extract-data": "npx tsx scripts/literature/advanced-data-extraction.ts",
+    "db:quality-score": "npx tsx scripts/literature/paper-quality-scoring.ts",
+    "db:enhance-content": "npx tsx scripts/literature/content-enhancement.ts",
+    "literature:enhance-all": "npx tsx scripts/literature/full-enhancement-pipeline.ts",
     "clean": "rm -rf .next node_modules",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "zen:start": "npx zen-mcp-server-199bio",
+    "zen:discover": "npx tsx scripts/zen/discover-papers.ts",
+    "zen:validate": "npx tsx scripts/zen/validate-links.ts",
+    "zen:quality": "npx tsx scripts/zen/quality-check.ts",
+    "ai:process": "tsx scripts/literature/ai-paper-processor.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",
@@ -65,6 +83,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/nodemailer": "^6.4.17",
     "@types/three": "^0.169.0",
+    "@vercel/blob": "^1.1.1",
     "autoprefixer": "^10.4.21",
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.5.0",
@@ -76,6 +95,7 @@
     "next-auth": "^4.24.11",
     "node-fetch": "^2.7.0",
     "nodemailer": "^6.10.1",
+    "openai": "^5.8.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.59.0",
@@ -106,6 +126,7 @@
     "prisma": "^5.22.0",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
-    "vitest": "^3.2.4"
+    "vitest": "^3.2.4",
+    "zen-mcp-server-199bio": "^2.2.0"
   }
 }
