@@ -41,7 +41,7 @@ export function UserMenu() {
 
   if (status === 'loading') {
     return (
-      <div className="bg-lcars-gray bg-opacity-30 rounded-lcars px-6 py-2 animate-pulse">
+      <div className="bg-gray-200 dark:bg-gray-700 bg-opacity-30 rounded-lg px-6 py-2 animate-pulse">
         <div className="h-5 w-20"></div>
       </div>
     );
@@ -49,16 +49,16 @@ export function UserMenu() {
 
   if (!session) {
     return (
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2">
         <Link
           href="/auth/login"
-          className="bg-lcars-cyan hover:bg-lcars-blue transition-colors rounded-lcars px-6 py-2 text-lcars-black font-bold uppercase"
+          className="bg-blue-600 hover:bg-blue-700 transition-colors rounded-lg px-4 py-2 text-white font-medium text-center"
         >
           Login
         </Link>
         <Link
           href="/auth/signup"
-          className="bg-lcars-gold hover:bg-lcars-tan transition-colors rounded-lcars px-6 py-2 text-lcars-black font-bold uppercase"
+          className="bg-green-600 hover:bg-green-700 transition-colors rounded-lg px-4 py-2 text-white font-medium text-center"
         >
           Sign Up
         </Link>
@@ -70,7 +70,7 @@ export function UserMenu() {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-lcars-purple hover:bg-lcars-pink transition-colors rounded-lcars px-4 py-2 text-lcars-black font-bold uppercase flex items-center gap-2 relative"
+        className="bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors rounded-lg px-3 py-2 text-gray-900 dark:text-gray-100 font-medium flex items-center gap-2 relative w-full text-left"
       >
         {/* Profile Picture or Icon */}
         {profile?.avatar ? (
@@ -92,7 +92,7 @@ export function UserMenu() {
         
         {/* Onboarding Badge */}
         {profile && !profile.completedOnboarding && (
-          <Sparkles className="w-4 h-4 text-lcars-gold" />
+          <Sparkles className="w-4 h-4 text-yellow-500" />
         )}
         
         <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -104,8 +104,8 @@ export function UserMenu() {
             className="fixed inset-0 z-40"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 mt-2 w-72 bg-gray-900 border border-lcars-purple rounded-lcars overflow-hidden z-50">
-            <div className="p-4 border-b border-gray-800">
+          <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
+            <div className="p-4 border-b border-gray-200 dark:border-gray-800">
               <div className="flex items-start gap-3">
                 {/* Profile Picture in Menu */}
                 {profile?.avatar ? (
@@ -121,9 +121,9 @@ export function UserMenu() {
                 )}
                 
                 <div className="flex-1">
-                  <p className="text-white font-medium truncate">{session.user.name || 'Researcher'}</p>
-                  <p className="text-sm text-gray-400 truncate">{session.user.email}</p>
-                  <p className="text-xs text-lcars-purple mt-1 uppercase">{session.user.role}</p>
+                  <p className="text-gray-900 dark:text-white font-medium truncate">{session.user.name || 'Researcher'}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 truncate">{session.user.email}</p>
+                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-1 uppercase">{session.user.role}</p>
                 </div>
               </div>
               
@@ -131,7 +131,7 @@ export function UserMenu() {
               {profile && !profile.completedOnboarding && (
                 <Link
                   href="/onboarding"
-                  className="mt-3 flex items-center gap-2 p-2 bg-gold-900/20 border border-lcars-gold rounded text-lcars-gold text-sm hover:bg-gold-900/30 transition-colors"
+                  className="mt-3 flex items-center gap-2 p-2 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-600 rounded-lg text-yellow-700 dark:text-yellow-400 text-sm hover:bg-yellow-100 dark:hover:bg-yellow-900/30 transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   <Sparkles className="w-4 h-4" />
@@ -143,7 +143,7 @@ export function UserMenu() {
             <div className="p-2">
               <Link
                 href="/profile"
-                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:bg-gray-800 rounded transition-colors"
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 <User className="w-4 h-4" />
@@ -152,7 +152,7 @@ export function UserMenu() {
               
               <Link
                 href="/dashboard"
-                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:bg-gray-800 rounded transition-colors relative"
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors relative"
                 onClick={() => setIsOpen(false)}
               >
                 <Bell className="w-4 h-4" />
@@ -164,7 +164,7 @@ export function UserMenu() {
               
               <Link
                 href="/settings"
-                className="flex items-center gap-2 px-3 py-2 text-gray-300 hover:bg-gray-800 rounded transition-colors"
+                className="flex items-center gap-2 px-3 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 <Settings className="w-4 h-4" />
@@ -173,9 +173,9 @@ export function UserMenu() {
               
               {/* Profile Stats */}
               {profile && (
-                <div className="px-3 py-2 border-t border-gray-800 mt-2">
-                  <p className="text-xs text-gray-500 mb-1">Research Interests</p>
-                  <p className="text-sm text-gray-300">
+                <div className="px-3 py-2 border-t border-gray-200 dark:border-gray-800 mt-2">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Research Interests</p>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
                     {profile.interests.length > 0
                       ? `${profile.interests.length} topics selected`
                       : 'No interests selected'}
@@ -183,13 +183,13 @@ export function UserMenu() {
                 </div>
               )}
               
-              <hr className="my-2 border-gray-800" />
+              <hr className="my-2 border-gray-200 dark:border-gray-800" />
               <button
                 onClick={() => {
                   setIsOpen(false);
                   signOut({ callbackUrl: '/' });
                 }}
-                className="flex items-center gap-2 px-3 py-2 text-red-400 hover:bg-gray-800 rounded transition-colors w-full text-left"
+                className="flex items-center gap-2 px-3 py-2 text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors w-full text-left"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Sign Out</span>

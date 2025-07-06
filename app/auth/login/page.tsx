@@ -59,21 +59,18 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
-        {/* LCARS-style header */}
-        <div className="mb-8">
-          <div className="bg-gradient-to-r from-orange-500 to-orange-600 h-2 w-full rounded-t-lg"></div>
-          <div className="bg-gray-900 p-8 border-l-4 border-orange-500">
-            <h1 className="text-3xl font-bold text-orange-500 mb-2">MESSAi LOGIN</h1>
-            <p className="text-gray-400">Access your bioelectrochemical research platform</p>
-          </div>
+        {/* Modern header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Sign in to MESSAi</h1>
+          <p className="text-gray-600">Access your bioelectrochemical research platform</p>
         </div>
 
         {/* Login form */}
-        <div className="bg-gray-900 p-8 rounded-lg border border-gray-800">
+        <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
           {error && (
-            <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-lg flex items-center gap-2 text-red-400">
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700">
               <AlertCircle className="w-5 h-5 flex-shrink-0" />
               <p className="text-sm">{error}</p>
             </div>
@@ -81,53 +78,53 @@ function LoginForm() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                 Email Address
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   {...register('email')}
                   type="email"
                   id="email"
                   name="email"
                   autoComplete="email"
-                  className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full pl-10 pr-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="researcher@example.com"
                   disabled={isLoading}
                 />
               </div>
               {errors.email && (
-                <p className="mt-1 text-sm text-red-400">{errors.email.message}</p>
+                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
               )}
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   {...register('password')}
                   type="password"
                   id="password"
                   name="password"
                   autoComplete="current-password"
-                  className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                  className="w-full pl-10 pr-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}
                 />
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-400">{errors.password.message}</p>
+                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
               )}
             </div>
 
             <div className="flex items-center justify-between">
               <Link
                 href="/auth/forgot-password"
-                className="text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                className="text-sm text-blue-600 hover:text-blue-500 transition-colors"
               >
                 Forgot password?
               </Link>
@@ -136,7 +133,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 bg-orange-500 hover:bg-orange-600 disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
@@ -152,10 +149,10 @@ function LoginForm() {
           <div className="mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700"></div>
+                <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-900 text-gray-400">Or continue with</span>
+                <span className="px-2 bg-white text-gray-500">Or continue with</span>
               </div>
             </div>
 
@@ -163,7 +160,7 @@ function LoginForm() {
               <button
                 onClick={() => signIn('google', { callbackUrl })}
                 disabled={isLoading}
-                className="w-full py-3 px-4 bg-gray-800 hover:bg-gray-700 disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 border border-gray-700"
+                className="w-full py-3 px-4 bg-white hover:bg-gray-50 disabled:bg-gray-100 text-gray-900 font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 border border-gray-300"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
@@ -188,11 +185,11 @@ function LoginForm() {
             </div>
           </div>
 
-          <p className="mt-8 text-center text-sm text-gray-400">
+          <p className="mt-8 text-center text-sm text-gray-600">
             Don&apos;t have an account?{' '}
             <Link
               href="/auth/signup"
-              className="text-orange-400 hover:text-orange-300 font-medium transition-colors"
+              className="text-blue-600 hover:text-blue-500 font-medium transition-colors"
             >
               Sign up
             </Link>
@@ -206,10 +203,10 @@ function LoginForm() {
 export default function LoginPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-orange-500 mx-auto" />
-          <p className="mt-2 text-gray-400">Loading...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-blue-600 mx-auto" />
+          <p className="mt-2 text-gray-600">Loading...</p>
         </div>
       </div>
     }>

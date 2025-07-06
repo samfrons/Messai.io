@@ -44,51 +44,42 @@ function ErrorContent() {
   const isWarning = error === 'SessionRequired' || error === 'AccessDenied';
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
-        {/* LCARS-style header */}
-        <div className="mb-8">
-          <div className={`bg-gradient-to-r ${
-            isWarning ? 'from-yellow-500 to-yellow-600' : 'from-red-500 to-red-600'
-          } h-2 w-full rounded-t-lg`}></div>
-          <div className={`bg-gray-900 p-8 border-l-4 ${
-            isWarning ? 'border-yellow-500' : 'border-red-500'
-          }`}>
-            <h1 className={`text-3xl font-bold mb-2 ${
-              isWarning ? 'text-yellow-500' : 'text-red-500'
-            }`}>
-              {isWarning ? 'ACCESS DENIED' : 'AUTHENTICATION ERROR'}
-            </h1>
-            <p className="text-gray-400">
-              {error ? `Error code: ${error}` : 'Unknown error'}
-            </p>
-          </div>
+        {/* Modern header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            {isWarning ? 'Access Denied' : 'Authentication Error'}
+          </h1>
+          <p className="text-gray-600">
+            {error ? `Error code: ${error}` : 'Unknown error'}
+          </p>
         </div>
 
         {/* Content */}
-        <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 text-center">
+        <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
           <div className="mb-6">
             {isWarning ? (
               <AlertTriangle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
             ) : (
               <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
             )}
-            <h2 className="text-xl font-bold text-white mb-2">
+            <h2 className="text-xl font-bold text-gray-900 mb-2">
               {isWarning ? 'Authentication Required' : 'Something went wrong'}
             </h2>
-            <p className="text-gray-400">{errorMessage}</p>
+            <p className="text-gray-600">{errorMessage}</p>
           </div>
 
           <div className="space-y-3">
             <Link
               href="/auth/login"
-              className="w-full py-3 px-4 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
             >
               Try Again
             </Link>
             <Link
               href="/"
-              className="w-full py-3 px-4 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 border border-gray-700"
+              className="w-full py-3 px-4 bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2 border border-gray-300"
             >
               <Home className="w-5 h-5" />
               Go to Home

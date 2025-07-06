@@ -82,30 +82,19 @@ function ResetPasswordContent() {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black p-4">
-        <div className="w-full max-w-md">
-          {/* LCARS-style header */}
-          <div className="mb-8">
-            <div className="bg-gradient-to-r from-green-500 to-green-600 h-2 w-full rounded-t-lg"></div>
-            <div className="bg-gray-900 p-8 border-l-4 border-green-500">
-              <h1 className="text-3xl font-bold text-green-500 mb-2">PASSWORD RESET</h1>
-              <p className="text-gray-400">Success!</p>
-            </div>
-          </div>
-
-          <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 text-center">
-            <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-white mb-2">Password Reset Successful</h2>
-            <p className="text-gray-400 mb-6">
-              Your password has been successfully reset. You can now log in with your new password.
-            </p>
-            <Link
-              href="/auth/login"
-              className="inline-block py-3 px-6 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors duration-200"
-            >
-              Go to Login
-            </Link>
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+          <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Password Reset Successful</h1>
+          <p className="text-gray-600 mb-6">
+            Your password has been successfully reset. You can now log in with your new password.
+          </p>
+          <Link
+            href="/auth/login"
+            className="inline-block py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+          >
+            Go to Login
+          </Link>
         </div>
       </div>
     );
@@ -113,42 +102,37 @@ function ResetPasswordContent() {
 
   if (!token) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black p-4">
-        <div className="w-full max-w-md">
-          <div className="bg-gray-900 p-8 rounded-lg border border-gray-800 text-center">
-            <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h2 className="text-xl font-bold text-white mb-2">Invalid Reset Link</h2>
-            <p className="text-gray-400 mb-6">
-              This password reset link is invalid or has expired.
-            </p>
-            <Link
-              href="/auth/forgot-password"
-              className="inline-block py-3 px-6 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-colors duration-200"
-            >
-              Request New Reset Link
-            </Link>
-          </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+        <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg border border-gray-200 text-center">
+          <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+          <h2 className="text-xl font-bold text-gray-900 mb-2">Invalid Reset Link</h2>
+          <p className="text-gray-600 mb-6">
+            This password reset link is invalid or has expired.
+          </p>
+          <Link
+            href="/auth/forgot-password"
+            className="inline-block py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+          >
+            Request New Reset Link
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-md">
-        {/* LCARS-style header */}
-        <div className="mb-8">
-          <div className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 w-full rounded-t-lg"></div>
-          <div className="bg-gray-900 p-8 border-l-4 border-purple-500">
-            <h1 className="text-3xl font-bold text-purple-500 mb-2">RESET PASSWORD</h1>
-            <p className="text-gray-400">Create a new password</p>
-          </div>
+        {/* Modern header */}
+        <div className="mb-8 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Reset Password</h1>
+          <p className="text-gray-600">Create a new password</p>
         </div>
 
         {/* Form */}
-        <div className="bg-gray-900 p-8 rounded-lg border border-gray-800">
+        <div className="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
           {error && (
-            <div className="mb-6 p-4 bg-red-900/20 border border-red-500 rounded-lg flex items-center gap-2 text-red-400">
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-center gap-2 text-red-700">
               <AlertCircle className="w-5 h-5 flex-shrink-0" />
               <p className="text-sm">{error}</p>
             </div>
@@ -158,40 +142,40 @@ function ResetPasswordContent() {
             <input type="hidden" {...register('token')} />
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 New Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   {...register('password')}
                   type="password"
                   id="password"
                   name="password"
                   autoComplete="new-password"
-                  className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full pl-10 pr-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}
                 />
               </div>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-400">{errors.password.message}</p>
+                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
               )}
               {password && (
                 <div className="mt-2 space-y-1 text-xs">
-                  <div className={passwordStrength.length ? 'text-green-400' : 'text-gray-500'}>
+                  <div className={passwordStrength.length ? 'text-green-600' : 'text-gray-400'}>
                     ✓ At least 8 characters
                   </div>
-                  <div className={passwordStrength.uppercase ? 'text-green-400' : 'text-gray-500'}>
+                  <div className={passwordStrength.uppercase ? 'text-green-600' : 'text-gray-400'}>
                     ✓ One uppercase letter
                   </div>
-                  <div className={passwordStrength.lowercase ? 'text-green-400' : 'text-gray-500'}>
+                  <div className={passwordStrength.lowercase ? 'text-green-600' : 'text-gray-400'}>
                     ✓ One lowercase letter
                   </div>
-                  <div className={passwordStrength.number ? 'text-green-400' : 'text-gray-500'}>
+                  <div className={passwordStrength.number ? 'text-green-600' : 'text-gray-400'}>
                     ✓ One number
                   </div>
-                  <div className={passwordStrength.special ? 'text-green-400' : 'text-gray-500'}>
+                  <div className={passwordStrength.special ? 'text-green-600' : 'text-gray-400'}>
                     ✓ One special character
                   </div>
                 </div>
@@ -199,31 +183,31 @@ function ResetPasswordContent() {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
                 Confirm New Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   {...register('confirmPassword')}
                   type="password"
                   id="confirmPassword"
                   name="confirmPassword"
                   autoComplete="new-password"
-                  className="w-full pl-10 pr-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full pl-10 pr-3 py-2 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="••••••••"
                   disabled={isLoading}
                 />
               </div>
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-400">{errors.confirmPassword.message}</p>
+                <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
               )}
             </div>
 
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 px-4 bg-purple-500 hover:bg-purple-600 disabled:bg-gray-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
+              className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-medium rounded-lg transition-colors duration-200 flex items-center justify-center gap-2"
             >
               {isLoading ? (
                 <>
@@ -236,11 +220,11 @@ function ResetPasswordContent() {
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-400">
+          <p className="mt-6 text-center text-sm text-gray-600">
             Remember your password?{' '}
             <Link
               href="/auth/login"
-              className="text-purple-400 hover:text-purple-300 font-medium transition-colors"
+              className="text-blue-600 hover:text-blue-500 font-medium transition-colors"
             >
               Back to Login
             </Link>
@@ -254,10 +238,10 @@ function ResetPasswordContent() {
 export default function ResetPasswordPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen flex items-center justify-center bg-black">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
-          <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p className="mt-2 text-gray-400">Loading...</p>
+          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="mt-2 text-gray-600">Loading...</p>
         </div>
       </div>
     }>

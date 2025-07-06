@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
     const resetToken = await generatePasswordResetToken(user.id);
 
     // Send reset email (if email service is configured)
-    if (process.env.SMTP_HOST) {
+    if (process.env.RESEND_API_KEY) {
       try {
         await sendPasswordResetEmail(user.email, resetToken, user.name);
       } catch (emailError) {

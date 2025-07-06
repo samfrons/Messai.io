@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     const verificationToken = await generateVerificationToken(email, user.id);
 
     // Send verification email (if email service is configured)
-    if (process.env.SMTP_HOST) {
+    if (process.env.RESEND_API_KEY) {
       await sendVerificationEmail(email, verificationToken);
     }
 

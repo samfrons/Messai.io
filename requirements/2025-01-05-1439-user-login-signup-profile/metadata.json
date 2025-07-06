@@ -1,0 +1,27 @@
+{
+  "id": "user-login-signup-profile",
+  "started": "2025-01-05T14:39:00Z",
+  "lastUpdated": "2025-01-05T14:39:00Z",
+  "status": "active",
+  "phase": "complete",
+  "progress": {
+    "discovery": { "answered": 5, "total": 5 },
+    "detail": { "answered": 5, "total": 5 }
+  },
+  "contextFiles": [
+    "/app/layout.tsx",
+    "/components/UserMenu.tsx", 
+    "/app/auth/login/page.tsx",
+    "/app/auth/signup/page.tsx",
+    "/app/profile/page.tsx",
+    "/lib/auth/auth-options.ts",
+    "/prisma/schema.prisma"
+  ],
+  "relatedFeatures": [
+    "Authentication system (NextAuth.js)",
+    "User profile management", 
+    "Settings management",
+    "Onboarding wizard",
+    "Research literature database"
+  ]
+}

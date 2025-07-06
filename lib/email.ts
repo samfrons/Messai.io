@@ -1,17 +1,7 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
-// Create transporter
-const transporter = process.env.SMTP_HOST
-  ? nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_PORT === '465',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASSWORD,
-      },
-    })
-  : null;
+// Create Resend client
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Email templates
 const emailTemplates = {
@@ -202,23 +192,22 @@ const emailTemplates = {
 
 // Send email function
 async function sendEmail(to: string, subject: string, html: string, text: string) {
-  if (!transporter) {
-    // Email service not configured. Email would have been sent to: ${to}
-    // Subject: ${subject}
+  if (!resend) {
+    console.log(`Email service not configured. Email would have been sent to: ${to}`);
+    console.log(`Subject: ${subject}`);
     return;
   }
 
   try {
-    const info = await transporter.sendMail({
-      from: `"MESSAi" <${process.env.EMAIL_FROM || 'noreply@messai.com'}>`,
+    const data = await resend.emails.send({
+      from: process.env.EMAIL_FROM || 'MESSAi <noreply@messai.com>',
       to,
       subject,
-      text,
       html,
     });
 
-    // Email sent: ${info.messageId}
-    return info;
+    console.log(`Email sent: ${data.id}`);
+    return data;
   } catch (error) {
     console.error('Email error:', error);
     throw error;

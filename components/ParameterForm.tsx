@@ -2,18 +2,19 @@
 
 import { useState } from 'react'
 import dynamic from 'next/dynamic'
+import { DesignType } from '@messai/ui'
 import MFCConfigPanel from './MFCConfigPanel'
 
-// Dynamic import to avoid SSR issues with Three.js
-const MFC3DModel = dynamic(
-  () => import('./MFC3DModel'),
+// Dynamic import to avoid SSR issues with Three.js - using new MESSModel3D
+const MESSModel3D = dynamic(
+  () => import('@messai/ui').then(mod => mod.MESSModel3D),
   { 
     ssr: false,
     loading: () => (
-      <div className="flex items-center justify-center h-full bg-lcars-black rounded-lg">
+      <div className="flex items-center justify-center h-full bg-gray-900 rounded-lg">
         <div className="text-center">
-          <div className="w-8 h-8 border-4 border-lcars-cyan border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-          <p className="text-lcars-gray">Loading 3D Model...</p>
+          <div className="w-8 h-8 border-4 border-primary-500 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+          <p className="text-gray-400">Loading 3D Model...</p>
         </div>
       </div>
     )
@@ -154,11 +155,13 @@ export default function ParameterForm({ designId, designName, designType, onSubm
             <p className="text-xs lg:text-sm text-gray-600">Click components to configure</p>
           </div>
           <div className="flex-1 p-2 lg:p-4 min-h-[200px] lg:min-h-0">
-            <MFC3DModel 
-              config={mfcConfig}
-              onComponentSelect={handleComponentSelect}
-              selectedComponent={selectedComponent}
-              designType={designType}
+            <MESSModel3D 
+              design={designType as DesignType}
+              interactive={true}
+              showGrid={true}
+              autoRotate={true}
+              rotationSpeed={0.01}
+              onClick={(component) => handleComponentSelect(component || 'overall')}
             />
           </div>
           

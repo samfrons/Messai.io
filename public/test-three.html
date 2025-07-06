@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Three.js Test</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #000; color: #fff; font-family: monospace; }
+    #canvas { width: 800px; height: 600px; background: #222; border: 1px solid #444; }
+    #status { padding: 10px; background: #111; margin-bottom: 10px; }
+    .success { color: #0f0; }
+    .error { color: #f00; }
+  </style>
+</head>
+<body>
+  <h1>Three.js Direct Test</h1>
+  <div id="status">Loading...</div>
+  <div id="canvas"></div>
+  
+  <script type="module">
+    const status = document.getElementById('status');
+    const canvas = document.getElementById('canvas');
+    
+    try {
+      // Test if eval works (CSP check)
+      eval('1 + 1');
+      status.innerHTML += '<div class="success">✓ eval() works - CSP allows it</div>';
+      
+      // Import Three.js
+      const THREE = await import('https://unpkg.com/three@0.160.0/build/three.module.js');
+      status.innerHTML += '<div class="success">✓ Three.js loaded successfully</div>';
+      
+      // Create a simple scene
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, 800/600, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer();
+      renderer.setSize(800, 600);
+      canvas.appendChild(renderer.domElement);
+      
+      // Add a cube
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+      const cube = new THREE.Mesh(geometry, material);
+      scene.add(cube);
+      
+      camera.position.z = 5;
+      
+      // Animation loop
+      function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+      
+      status.innerHTML += '<div class="success">✓ Three.js scene created and running!</div>';
+      
+    } catch (error) {
+      status.innerHTML += `<div class="error">✗ Error: ${error.message}</div>`;
+      console.error(error);
+    }
+  </script>
+</body>
+</html>

@@ -1,10 +1,9 @@
 import React, { ReactElement } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
-import { Canvas } from '@react-three/fiber'
 
 // Mock Canvas component for testing 3D components
 const MockCanvas: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div data-testid="mock-canvas">{children}</div>
+  return <div data-testid="dashboard-canvas">{children}</div>
 }
 
 // Custom render function that includes providers

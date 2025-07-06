@@ -15,6 +15,11 @@ build/
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production
+
+# Production secrets (never commit)
+.env.vercel
+.env.prod
 
 # IDE
 .vscode/
@@ -55,3 +60,7 @@ temp/
 .env.local.backup
 .env.production
 .env.google-oauth
+
+# Sessions
+sessions/
+claude-sessions/

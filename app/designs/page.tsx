@@ -264,49 +264,37 @@ export default function HomePage() {
   }
 
   return (
-    <div className="p-8">
-      {/* LCARS Header Section */}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      {/* Modern Header */}
       <div className="mb-8">
-        <div className="flex items-stretch gap-2 mb-4">
-          <div className="w-32 h-16 bg-lcars-orange rounded-l-lcars-lg" />
-          <div className="flex-1 h-16 bg-lcars-orange flex items-center px-6">
-            <h1 className="text-2xl font-bold text-lcars-black uppercase tracking-wider">
-              MFC Design Database
-            </h1>
-          </div>
-          <div className="w-4 h-16 bg-lcars-orange" />
-          <div className="w-24 h-16 bg-lcars-cyan rounded-r-lcars" />
-        </div>
-        <div className="bg-lcars-black bg-opacity-50 border border-lcars-cyan rounded-lcars p-4">
-          <p className="text-lcars-cyan font-medium uppercase">
-            Access Starfleet Microbial Fuel Cell Research Database
-          </p>
-          <p className="text-lcars-tan text-sm mt-2">
-            Select design configuration for detailed analysis and deployment parameters
-          </p>
-        </div>
+        <h1 className="text-3xl font-semibold text-gray-900 mb-2">
+          MFC Design Library
+        </h1>
+        <p className="text-gray-600">
+          Choose from our collection of microbial fuel cell designs, each optimized for different applications and budgets.
+        </p>
       </div>
 
       {loading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {[...Array(12)].map((_, i) => (
-            <div key={i} className="bg-lcars-black border-2 border-lcars-gray rounded-lcars p-6 animate-pulse">
+            <div key={i} className="bg-white border border-gray-200 rounded-lg p-6 animate-pulse">
               <div className="flex flex-col items-center space-y-4">
-                <div className="w-16 h-16 bg-lcars-gray bg-opacity-30 rounded-lcars"></div>
+                <div className="w-full h-32 bg-gray-200 rounded-lg"></div>
                 <div className="text-center w-full">
-                  <div className="h-6 bg-lcars-gray bg-opacity-30 rounded mb-2 w-3/4 mx-auto"></div>
+                  <div className="h-6 bg-gray-200 rounded mb-2 w-3/4 mx-auto"></div>
                   <div className="space-y-2">
-                    <div className="h-4 bg-lcars-gray bg-opacity-30 rounded w-1/2 mx-auto"></div>
-                    <div className="h-4 bg-lcars-gray bg-opacity-30 rounded w-2/3 mx-auto"></div>
+                    <div className="h-4 bg-gray-200 rounded w-1/2 mx-auto"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3 mx-auto"></div>
                   </div>
                 </div>
-                <div className="w-full h-10 bg-lcars-gray bg-opacity-30 rounded-lcars"></div>
+                <div className="w-full h-10 bg-gray-200 rounded-lg"></div>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {designs.map((design) => (
             <MFCDesignCard
               key={design.id}
@@ -317,40 +305,44 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* LCARS Info Panel */}
-      <div className="mt-8">
-        <div className="flex items-stretch gap-2 mb-4">
-          <div className="w-24 h-12 bg-lcars-purple rounded-l-lcars" />
-          <div className="flex-1 h-12 bg-lcars-purple flex items-center px-6">
-            <h2 className="text-lg font-bold text-lcars-black uppercase">
-              Operational Procedures
-            </h2>
+      {/* Process Guide */}
+      <div className="mt-12 bg-gray-50 rounded-lg p-8">
+        <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+          Getting Started
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
+                1
+              </div>
+              <h3 className="ml-3 text-lg font-medium text-gray-900">Select Design</h3>
+            </div>
+            <p className="text-gray-600">
+              Choose a design that fits your budget and power requirements. Each design has been validated in laboratory conditions.
+            </p>
           </div>
-          <div className="w-32 h-12 bg-lcars-purple rounded-r-lcars-lg" />
-        </div>
-        <div className="bg-lcars-black bg-opacity-50 border border-lcars-purple rounded-lcars p-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-lcars-gold text-lcars-black rounded-lcars flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                01
+          <div>
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
+                2
               </div>
-              <h3 className="text-lg font-bold text-lcars-gold mb-2 uppercase">Select Design</h3>
-              <p className="text-lcars-tan text-sm">Choose from our pre-validated MFC configurations based on your budget and power requirements.</p>
+              <h3 className="ml-3 text-lg font-medium text-gray-900">Configure Parameters</h3>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-lcars-cyan text-lcars-black rounded-lcars flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                02
+            <p className="text-gray-600">
+              Set your experimental conditions including temperature, pH, and substrate concentration for optimal performance.
+            </p>
+          </div>
+          <div>
+            <div className="flex items-center mb-4">
+              <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center font-semibold">
+                3
               </div>
-              <h3 className="text-lg font-bold text-lcars-cyan mb-2 uppercase">Configure Parameters</h3>
-              <p className="text-lcars-tan text-sm">Set your experimental conditions including temperature, pH, and substrate concentration.</p>
+              <h3 className="ml-3 text-lg font-medium text-gray-900">Track & Analyze</h3>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-lcars-orange text-lcars-black rounded-lcars flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                03
-              </div>
-              <h3 className="text-lg font-bold text-lcars-orange mb-2 uppercase">Track & Analyze</h3>
-              <p className="text-lcars-tan text-sm">Monitor real-time data, get AI predictions, and optimize your microbial fuel cell performance.</p>
-            </div>
+            <p className="text-gray-600">
+              Monitor real-time data, get AI predictions, and optimize your microbial fuel cell performance.
+            </p>
           </div>
         </div>
       </div>
