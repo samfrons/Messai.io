@@ -225,6 +225,18 @@ model ResearchPaper {
   source            String            // 'user', 'pubmed', 'crossref', 'ieee'
   uploadedBy        String
   isPublic          Boolean           @default(true)
+  
+  // AI-generated fields
+  aiSummary         String?           // Concise AI-generated summary
+  aiKeyFindings     String?           // Key findings in JSON format
+  aiMethodology     String?           // Summarized methodology
+  aiImplications    String?           // Research implications and applications
+  aiDataExtraction  String?           // Structured extracted data in JSON
+  aiInsights        String?           // AI-generated insights and analysis
+  aiProcessingDate  DateTime?         // When AI processing occurred
+  aiModelVersion    String?           // Which AI model/version was used
+  aiConfidence      Float?            // Confidence score for AI extraction (0-1)
+  
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
   
@@ -235,6 +247,7 @@ model ResearchPaper {
   @@index([title])
   @@index([uploadedBy])
   @@index([publicationDate])
+  @@index([aiProcessingDate])
 }
 
 model ExperimentPaper {
