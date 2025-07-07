@@ -6,14 +6,53 @@ import prisma from '@/lib/db'
 // GET /api/papers/[id] - Get a single paper
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
+    const { id } = await params
     
     const paper = await prisma.researchPaper.findUnique({
-      where: { id: params.id },
-      include: {
+      where: { id },
+      select: {
+        id: true,
+        title: true,
+        authors: true,
+        abstract: true,
+        doi: true,
+        pubmedId: true,
+        arxivId: true,
+        ieeeId: true,
+        publicationDate: true,
+        journal: true,
+        volume: true,
+        issue: true,
+        pages: true,
+        keywords: true,
+        externalUrl: true,
+        organismTypes: true,
+        anodeMaterials: true,
+        cathodeMaterials: true,
+        powerOutput: true,
+        efficiency: true,
+        systemType: true,
+        source: true,
+        uploadedBy: true,
+        isPublic: true,
+        // AI fields
+        aiSummary: true,
+        aiKeyFindings: true,
+        aiMethodology: true,
+        aiImplications: true,
+        aiDataExtraction: true,
+        aiInsights: true,
+        aiProcessingDate: true,
+        aiModelVersion: true,
+        aiConfidence: true,
+        // Timestamps
+        createdAt: true,
+        updatedAt: true,
+        // Relations
         user: {
           select: {
             id: true,
@@ -68,10 +107,11 @@ export async function GET(
 // PUT /api/papers/[id] - Update a paper
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
+    const { id } = await params
     
     if (!session?.user?.id) {
       return NextResponse.json(
@@ -82,7 +122,7 @@ export async function PUT(
     
     // Check if user owns the paper
     const existingPaper = await prisma.researchPaper.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: { uploadedBy: true }
     })
     
@@ -154,7 +194,7 @@ export async function PUT(
     }
     
     const paper = await prisma.researchPaper.update({
-      where: { id: params.id },
+      where: { id },
       data: updateData,
       include: {
         user: {
@@ -189,10 +229,11 @@ export async function PUT(
 // DELETE /api/papers/[id] - Delete a paper
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions)
+    const { id } = await params
     
     if (!session?.user?.id) {
       return NextResponse.json(
@@ -203,7 +244,7 @@ export async function DELETE(
     
     // Check if user owns the paper
     const paper = await prisma.researchPaper.findUnique({
-      where: { id: params.id },
+      where: { id },
       select: { uploadedBy: true }
     })
     
@@ -222,7 +263,7 @@ export async function DELETE(
     }
     
     await prisma.researchPaper.delete({
-      where: { id: params.id }
+      where: { id }
     })
     
     return NextResponse.json({ message: 'Paper deleted successfully' })

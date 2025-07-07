@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
     const limit = parseInt(searchParams.get('limit') || '10')
     const search = searchParams.get('search') || ''
     const userId = searchParams.get('userId') || undefined
+    const realOnly = searchParams.get('realOnly') === 'true'
     
     const skip = (page - 1) * limit
     
@@ -33,6 +34,32 @@ export async function GET(request: NextRequest) {
     
     if (userId) {
       where.uploadedBy = userId
+    }
+    
+    // Filter for real papers only if requested
+    if (realOnly) {
+      const realSources = ['crossref_api', 'arxiv_api', 'pubmed_api', 'local_pdf', 'web_search', 
+                          'comprehensive_search', 'advanced_electrode_biofacade_search', 
+                          'extensive_electrode_biofacade_collection']
+      
+      const realPaperConditions = [
+        { source: { in: realSources } },
+        { doi: { not: null } },
+        { arxivId: { not: null } },
+        { pubmedId: { not: null } }
+      ]
+      
+      if (where.AND) {
+        where.AND.push({ OR: realPaperConditions })
+      } else if (where.OR) {
+        where.AND = [
+          { OR: where.OR },
+          { OR: realPaperConditions }
+        ]
+        delete where.OR
+      } else {
+        where.OR = realPaperConditions
+      }
     }
     
     if (search) {
@@ -62,7 +89,28 @@ export async function GET(request: NextRequest) {
         skip,
         take: limit,
         orderBy: { createdAt: 'desc' },
-        include: {
+        select: {
+          id: true,
+          title: true,
+          authors: true,
+          abstract: true,
+          journal: true,
+          publicationDate: true,
+          systemType: true,
+          powerOutput: true,
+          doi: true,
+          externalUrl: true,
+          source: true,
+          arxivId: true,
+          pubmedId: true,
+          efficiency: true,
+          // Include AI fields
+          aiSummary: true,
+          aiKeyFindings: true,
+          aiInsights: true,
+          aiProcessingDate: true,
+          aiConfidence: true,
+          // Include relations
           user: {
             select: {
               id: true,
