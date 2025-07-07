@@ -21,6 +21,14 @@ build/
 .env.vercel
 .env.prod
 
+# Backup configuration and keys (never commit)
+.env.backup
+.env.backup.local
+.env.backup.prod
+backup-config.json
+backup-keys/
+*.backup-key
+
 # IDE
 .vscode/
 .idea/
@@ -54,6 +62,12 @@ prisma/migrations/
 .tmp/
 temp/
 
+# Backup files and storage (never commit actual backups)
+backups/
+*.sql
+*.backup
+*.dump
+
 # Requirements builder (uncomment if you want to exclude requirements)
 # requirements/
 .vercel
@@ -64,3 +78,17 @@ temp/
 # Sessions
 sessions/
 claude-sessions/
+
+# Authentication sensitive files
+/app/api/auth/
+/lib/auth/
+**/auth-config.ts
+**/oauth-keys.ts
+**/auth-secrets.ts
+
+# Private worktrees (prevent accidental commits)
+/messai-auth/
+/messai-marketing/
+
+# Security alerts (temporary)
+SECURITY_ALERT.md
