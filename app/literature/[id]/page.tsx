@@ -8,7 +8,7 @@ import Link from 'next/link'
 interface PaperDetails {
   id: string
   title: string
-  authors: string
+  authors: string[] | string
   abstract?: string
   doi?: string
   pubmedId?: string
@@ -19,11 +19,11 @@ interface PaperDetails {
   volume?: string
   issue?: string
   pages?: string
-  keywords: string
+  keywords: string[] | string
   externalUrl: string
-  organismTypes?: string
-  anodeMaterials?: string
-  cathodeMaterials?: string
+  organismTypes?: string[] | string
+  anodeMaterials?: string[] | string
+  cathodeMaterials?: string[] | string
   powerOutput?: number
   efficiency?: number
   systemType?: string
@@ -36,11 +36,17 @@ interface PaperDetails {
   aiMethodology?: string
   aiImplications?: string
   aiDataExtraction?: string
+  aiData?: any
   aiInsights?: string
   aiProcessingDate?: string
   aiModelVersion?: string
   aiConfidence?: number
-  user: {
+  // Enhanced computed fields
+  hasPerformanceData?: boolean
+  isAiProcessed?: boolean
+  processingMethod?: string
+  confidenceScore?: number
+  user?: {
     id: string
     name?: string
     email: string
@@ -113,28 +119,120 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
     }
   }
 
-  const formatAuthors = (authorsJson: string) => {
-    try {
-      const authors = JSON.parse(authorsJson)
-      if (Array.isArray(authors)) {
-        return authors.join(', ')
-      }
-      return authorsJson
-    } catch {
-      return authorsJson
+  const formatAuthors = (authors: string[] | string) => {
+    if (Array.isArray(authors)) {
+      const cleanAuthors = authors.filter(author => author && author !== 'not specified')
+      if (cleanAuthors.length === 0) return 'Authors not specified'
+      return cleanAuthors.join(', ')
     }
+    if (typeof authors === 'string') {
+      try {
+        const parsed = JSON.parse(authors)
+        if (Array.isArray(parsed)) {
+          const cleanAuthors = parsed.filter(author => author && author !== 'not specified')
+          if (cleanAuthors.length === 0) return 'Authors not specified'
+          return cleanAuthors.join(', ')
+        }
+        return parsed || 'Authors not specified'
+      } catch {
+        return authors || 'Authors not specified'
+      }
+    }
+    return 'Authors not specified'
   }
 
-  const formatKeywords = (keywordsJson: string) => {
-    try {
-      const keywords = JSON.parse(keywordsJson)
-      if (Array.isArray(keywords)) {
-        return keywords
+  const formatArrayField = (field: string[] | string | undefined, fieldName: string) => {
+    if (!field) return `${fieldName} not specified`
+    
+    let itemList: string[] = []
+    if (Array.isArray(field)) {
+      itemList = field
+    } else if (typeof field === 'string') {
+      try {
+        const parsed = JSON.parse(field)
+        itemList = Array.isArray(parsed) ? parsed : [parsed]
+      } catch {
+        itemList = [field]
       }
-      return []
-    } catch {
-      return []
     }
+    
+    const cleanItems = itemList.filter(item => {
+      if (!item || typeof item !== 'string') return false
+      const lower = item.toLowerCase().trim()
+      
+      // Basic quality filters
+      if (lower.length <= 2) return false
+      if (['not specified', 'undefined', 'null', 'n/a', 'na'].includes(lower)) return false
+      if (lower.includes('null') || lower.includes('undefined')) return false
+      
+      // Pattern matching artifacts
+      const artifacts = ['the', 'and', 'with', 'using', 'while the', 'in the', 'of the', 'for the', 'to the', 'was', 'were', 'is', 'are', 'at', 'on', 'in', 'of', 'by', 'from', 'as']
+      if (artifacts.includes(lower)) return false
+      
+      // Very short or common words
+      if (lower.length < 4 && !['mxene', 'cnt', 'go', 'rgo'].includes(lower)) return false
+      
+      return true
+    })
+    
+    if (cleanItems.length === 0) return `${fieldName} not specified`
+    
+    return cleanItems.join(', ')
+  }
+
+  const formatMaterialsList = (materials: string[] | string | undefined): string[] => {
+    if (!materials) return []
+    
+    let materialList: string[] = []
+    if (Array.isArray(materials)) {
+      materialList = materials
+    } else if (typeof materials === 'string') {
+      try {
+        const parsed = JSON.parse(materials)
+        materialList = Array.isArray(parsed) ? parsed : [parsed]
+      } catch {
+        materialList = [materials]
+      }
+    }
+    
+    const cleanMaterials = materialList.filter(m => {
+      if (!m || typeof m !== 'string') return false
+      const lower = m.toLowerCase().trim()
+      
+      // Basic quality filters
+      if (lower.length <= 2) return false
+      if (['not specified', 'undefined', 'null', 'n/a', 'na'].includes(lower)) return false
+      if (lower.includes('null') || lower.includes('undefined')) return false
+      
+      // Pattern matching artifacts
+      const artifacts = ['the', 'and', 'with', 'using', 'while the', 'in the', 'of the', 'for the', 'to the', 'was', 'were', 'is', 'are', 'at', 'on', 'in', 'of', 'by', 'from', 'as']
+      if (artifacts.includes(lower)) return false
+      
+      // Very short or common words
+      if (lower.length < 4 && !['mxene', 'cnt', 'go', 'rgo'].includes(lower)) return false
+      
+      return true
+    })
+    
+    return cleanMaterials
+  }
+
+  const formatKeywords = (keywords: string[] | string): string[] => {
+    if (Array.isArray(keywords)) {
+      return keywords.filter(k => k && k !== 'not specified')
+    }
+    if (typeof keywords === 'string') {
+      try {
+        const parsed = JSON.parse(keywords)
+        if (Array.isArray(parsed)) {
+          return parsed.filter(k => k && k !== 'not specified')
+        }
+        return [parsed].filter(k => k && k !== 'not specified')
+      } catch {
+        return [keywords].filter(k => k && k !== 'not specified')
+      }
+    }
+    return []
   }
 
   const formatDate = (dateString?: string) => {
@@ -192,7 +290,7 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
 
   if (!paper) return null
 
-  const isOwner = session?.user?.id === paper.user.id
+  const isOwner = session?.user?.id && paper.user?.id && session.user.id === paper.user.id
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -551,18 +649,18 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
             )}
 
             {/* Materials Information */}
-            {(formatMaterials(paper.anodeMaterials).length > 0 || formatMaterials(paper.cathodeMaterials).length > 0 || formatMaterials(paper.organismTypes).length > 0) && (
+            {(formatMaterialsList(paper.anodeMaterials).length > 0 || formatMaterialsList(paper.cathodeMaterials).length > 0 || formatMaterialsList(paper.organismTypes).length > 0) && (
               <div className="mb-6 p-6 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-gray-200">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="text-2xl">🔬</span>
                   <h2 className="text-xl font-semibold text-gray-900">Materials & Organisms</h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {formatMaterials(paper.anodeMaterials).length > 0 && (
+                  {formatMaterialsList(paper.anodeMaterials).length > 0 && (
                     <div>
                       <h4 className="font-semibold text-gray-800 mb-2">Anode Materials</h4>
                       <div className="flex flex-wrap gap-1">
-                        {formatMaterials(paper.anodeMaterials).map((material, index) => (
+                        {formatMaterialsList(paper.anodeMaterials).map((material, index) => (
                           <span key={index} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">
                             {material}
                           </span>
@@ -570,11 +668,11 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
                       </div>
                     </div>
                   )}
-                  {formatMaterials(paper.cathodeMaterials).length > 0 && (
+                  {formatMaterialsList(paper.cathodeMaterials).length > 0 && (
                     <div>
                       <h4 className="font-semibold text-gray-800 mb-2">Cathode Materials</h4>
                       <div className="flex flex-wrap gap-1">
-                        {formatMaterials(paper.cathodeMaterials).map((material, index) => (
+                        {formatMaterialsList(paper.cathodeMaterials).map((material, index) => (
                           <span key={index} className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
                             {material}
                           </span>
@@ -582,11 +680,11 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
                       </div>
                     </div>
                   )}
-                  {formatMaterials(paper.organismTypes).length > 0 && (
+                  {formatMaterialsList(paper.organismTypes).length > 0 && (
                     <div>
                       <h4 className="font-semibold text-gray-800 mb-2">Microorganisms</h4>
                       <div className="flex flex-wrap gap-1">
-                        {formatMaterials(paper.organismTypes).map((organism, index) => (
+                        {formatMaterialsList(paper.organismTypes).map((organism, index) => (
                           <span key={index} className="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded-full">
                             {organism}
                           </span>
@@ -642,8 +740,12 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
 
             {/* Metadata */}
             <div className="text-sm text-gray-500 pt-6 border-t">
-              <p>Uploaded by {paper.user.name || paper.user.email}</p>
-              {paper.user.institution && <p>Institution: {paper.user.institution}</p>}
+              {paper.user && (
+                <>
+                  <p>Uploaded by {paper.user.name || paper.user.email}</p>
+                  {paper.user.institution && <p>Institution: {paper.user.institution}</p>}
+                </>
+              )}
               <p>Added on {formatDate(paper.createdAt)}</p>
             </div>
           </div>

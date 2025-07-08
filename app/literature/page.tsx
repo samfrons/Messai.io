@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 interface Paper {
   id: string
   title: string
-  authors: string
+  authors: string[] | string  // Can be array or string
   abstract?: string
   journal?: string
   publicationDate?: string
@@ -20,20 +20,26 @@ interface Paper {
   arxivId?: string
   pubmedId?: string
   efficiency?: number
+  // Enhanced extraction fields
+  anodeMaterials?: string[] | string
+  cathodeMaterials?: string[] | string
+  organismTypes?: string[] | string
+  keywords?: string[] | string
   // AI fields
   aiSummary?: string
   aiKeyFindings?: string
   aiInsights?: string
   aiProcessingDate?: string
   aiConfidence?: number
-  _count: {
-    experiments: number
-  }
-  user: {
-    id: string
-    name?: string
-    email: string
-  }
+  aiData?: any
+  // Enhanced computed fields
+  hasPerformanceData?: boolean
+  isAiProcessed?: boolean
+  processingMethod?: string
+  confidenceScore?: number
+  uploadedBy?: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 interface PaginationInfo {
@@ -65,7 +71,7 @@ export default function LiteraturePage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [stats, setStats] = useState<LiteratureStats | null>(null)
   const [statsLoading, setStatsLoading] = useState(true)
-  const [showRealPapersOnly, setShowRealPapersOnly] = useState(true)
+  const [showRealPapersOnly, setShowRealPapersOnly] = useState(false)
   const [pagination, setPagination] = useState<PaginationInfo>({
     page: 1,
     limit: 10,
@@ -124,16 +130,105 @@ export default function LiteraturePage() {
     setPagination(prev => ({ ...prev, page: 1 }))
   }
 
-  const formatAuthors = (authorsJson: string) => {
-    try {
-      const authors = JSON.parse(authorsJson)
-      if (Array.isArray(authors)) {
-        return authors.slice(0, 3).join(', ') + (authors.length > 3 ? ' et al.' : '')
-      }
-      return authorsJson
-    } catch {
-      return authorsJson
+  const formatAuthors = (authors: string[] | string) => {
+    if (Array.isArray(authors)) {
+      const cleanAuthors = authors.filter(author => author && author !== 'not specified')
+      if (cleanAuthors.length === 0) return 'Authors not specified'
+      return cleanAuthors.slice(0, 3).join(', ') + (cleanAuthors.length > 3 ? ' et al.' : '')
     }
+    if (typeof authors === 'string') {
+      try {
+        const parsed = JSON.parse(authors)
+        if (Array.isArray(parsed)) {
+          const cleanAuthors = parsed.filter(author => author && author !== 'not specified')
+          if (cleanAuthors.length === 0) return 'Authors not specified'
+          return cleanAuthors.slice(0, 3).join(', ') + (cleanAuthors.length > 3 ? ' et al.' : '')
+        }
+        return parsed || 'Authors not specified'
+      } catch {
+        return authors || 'Authors not specified'
+      }
+    }
+    return 'Authors not specified'
+  }
+
+  const formatMaterials = (materials: string[] | string | undefined, type: 'anode' | 'cathode') => {
+    if (!materials) return null
+    
+    let materialList: string[] = []
+    if (Array.isArray(materials)) {
+      materialList = materials
+    } else if (typeof materials === 'string') {
+      try {
+        const parsed = JSON.parse(materials)
+        materialList = Array.isArray(parsed) ? parsed : [parsed]
+      } catch {
+        materialList = [materials]
+      }
+    }
+    
+    // Filter out placeholder values and common pattern matching artifacts
+    const cleanMaterials = materialList.filter(m => {
+      if (!m || typeof m !== 'string') return false
+      const lower = m.toLowerCase().trim()
+      
+      // Basic quality filters
+      if (lower.length <= 2) return false
+      if (['not specified', 'undefined', 'null', 'n/a', 'na'].includes(lower)) return false
+      if (lower.includes('null') || lower.includes('undefined')) return false
+      
+      // Pattern matching artifacts
+      const artifacts = ['the', 'and', 'with', 'using', 'while the', 'in the', 'of the', 'for the', 'to the', 'was', 'were', 'is', 'are', 'at', 'on', 'in', 'of', 'by', 'from', 'as']
+      if (artifacts.includes(lower)) return false
+      
+      // Very short or common words
+      if (lower.length < 4 && !['mxene', 'cnt', 'go', 'rgo'].includes(lower)) return false
+      
+      return true
+    })
+    
+    if (cleanMaterials.length === 0) return null
+    
+    return cleanMaterials.slice(0, 3).join(', ') + (cleanMaterials.length > 3 ? '...' : '')
+  }
+
+  const formatOrganisms = (organisms: string[] | string | undefined) => {
+    if (!organisms) return null
+    
+    let organismList: string[] = []
+    if (Array.isArray(organisms)) {
+      organismList = organisms
+    } else if (typeof organisms === 'string') {
+      try {
+        const parsed = JSON.parse(organisms)
+        organismList = Array.isArray(parsed) ? parsed : [parsed]
+      } catch {
+        organismList = [organisms]
+      }
+    }
+    
+    const cleanOrganisms = organismList.filter(o => {
+      if (!o || typeof o !== 'string') return false
+      const lower = o.toLowerCase().trim()
+      
+      // Basic quality filters
+      if (lower.length <= 2) return false
+      if (['not specified', 'undefined', 'null', 'n/a', 'na'].includes(lower)) return false
+      if (lower.includes('null') || lower.includes('undefined')) return false
+      
+      // Pattern matching artifacts for organisms
+      const artifacts = ['the', 'and', 'with', 'using', 'while the', 'in the', 'of the', 'for the', 'to the', 'was', 'were', 'is', 'are', 'at', 'on', 'in', 'of', 'by', 'from', 'as', 'solution', 'medium', 'buffer']
+      if (artifacts.includes(lower)) return false
+      
+      // Very short words (but allow some scientific abbreviations)
+      if (lower.length < 4 && !['e. coli', 'dh5α'].some(abbrev => lower.includes(abbrev.split(' ')[0]))) return false
+      
+      return true
+    })
+    
+    if (cleanOrganisms.length === 0) return null
+    
+    return cleanOrganisms.slice(0, 2).join(', ') + (cleanOrganisms.length > 2 ? '...' : '')
   }
 
   const formatDate = (dateString?: string) => {
@@ -277,24 +372,83 @@ export default function LiteraturePage() {
                       </p>
                     </div>
                   )}
-                  <div className="flex items-center gap-4 text-sm">
+
+                  {/* Enhanced Data Section */}
+                  {(paper.hasPerformanceData || formatMaterials(paper.anodeMaterials, 'anode') || formatOrganisms(paper.organismTypes)) && (
+                    <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                        {/* Performance Data */}
+                        {paper.powerOutput && (
+                          <div className="flex items-center gap-2">
+                            <span className="text-gray-600">⚡ Power:</span>
+                            <span className="font-medium text-gray-900">{paper.powerOutput} mW/m²</span>
+                          </div>
+                        )}
+                        {paper.efficiency && (
+                          <div className="flex items-center gap-2">
+                            <span className="text-gray-600">📊 Efficiency:</span>
+                            <span className="font-medium text-gray-900">{paper.efficiency}%</span>
+                          </div>
+                        )}
+                        {paper.systemType && (
+                          <div className="flex items-center gap-2">
+                            <span className="text-gray-600">🔧 System:</span>
+                            <span className="font-medium text-gray-900">{paper.systemType}</span>
+                          </div>
+                        )}
+                        
+                        {/* Materials */}
+                        {formatMaterials(paper.anodeMaterials, 'anode') && (
+                          <div className="flex items-start gap-2">
+                            <span className="text-gray-600">🔋 Anode:</span>
+                            <span className="font-medium text-gray-900 text-xs leading-relaxed">
+                              {formatMaterials(paper.anodeMaterials, 'anode')}
+                            </span>
+                          </div>
+                        )}
+                        {formatMaterials(paper.cathodeMaterials, 'cathode') && (
+                          <div className="flex items-start gap-2">
+                            <span className="text-gray-600">⚡ Cathode:</span>
+                            <span className="font-medium text-gray-900 text-xs leading-relaxed">
+                              {formatMaterials(paper.cathodeMaterials, 'cathode')}
+                            </span>
+                          </div>
+                        )}
+                        
+                        {/* Organisms */}
+                        {formatOrganisms(paper.organismTypes) && (
+                          <div className="flex items-start gap-2 md:col-span-2">
+                            <span className="text-gray-600">🦠 Organisms:</span>
+                            <span className="font-medium text-gray-900 text-xs leading-relaxed">
+                              {formatOrganisms(paper.organismTypes)}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-4 text-sm flex-wrap">
                     {isRealPaper(paper) && (
                       <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
                         {getPaperSourceLabel(paper)}
                       </span>
                     )}
-                    {paper.aiProcessingDate && (
+                    {paper.isAiProcessed && (
                       <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full flex items-center gap-1">
-                        <span>🤖</span> AI Enhanced
+                        <span>🤖</span> {paper.processingMethod || 'AI Enhanced'}
+                        {paper.confidenceScore && (
+                          <span className="ml-1">({Math.round(paper.confidenceScore * 100)}%)</span>
+                        )}
                       </span>
                     )}
-                    {paper.powerOutput && (
-                      <span className="text-gray-600">
-                        Power: {paper.powerOutput} mW/m²
+                    {paper.hasPerformanceData && (
+                      <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+                        📊 Performance Data
                       </span>
                     )}
                     <span className="text-gray-600">
-                      {paper._count.experiments} experiments
+                      Source: {paper.source || 'Unknown'}
                     </span>
                   </div>
                 </div>
