@@ -158,11 +158,12 @@ export async function validatePaperQuality(paper: any): Promise<QualityScore> {
     const currentYear = new Date().getFullYear()
     const age = currentYear - year
     
-    if (age <= 1) score.breakdown.recency = 10
-    else if (age <= 3) score.breakdown.recency = 8
-    else if (age <= 5) score.breakdown.recency = 6
-    else if (age <= 8) score.breakdown.recency = 4
-    else score.breakdown.recency = 2
+    if (age <= 2) score.breakdown.recency = 10
+    else if (age <= 5) score.breakdown.recency = 8
+    else if (age <= 10) score.breakdown.recency = 6
+    else if (age <= 15) score.breakdown.recency = 4
+    else if (age <= 25) score.breakdown.recency = 2
+    else score.breakdown.recency = 1
   }
   
   // 6. Impact Score (0-10 points)

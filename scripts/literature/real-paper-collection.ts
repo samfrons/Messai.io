@@ -24,7 +24,7 @@ interface QualityCriteria {
   hasAbstract: boolean
   hasVerifiableId: boolean // DOI, PubMed ID, or arXiv ID
   hasAuthors: boolean
-  isRecentEnough: boolean // Published after 2015
+  isRecentEnough: boolean // Published after 2000
   isRelevantField: boolean
   hasPerformanceData?: boolean
 }
@@ -35,19 +35,19 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: 'MXene AND (microbial fuel cell OR bioelectrochemical)',
     category: 'MXENE_MFC',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 50
   },
   {
     query: 'Ti3C2 AND bioelectrochemical AND electrode',
     category: 'TI3C2_ELECTRODE',
-    minYear: 2021,
+    minYear: 2000,
     expectedResults: 30
   },
   {
     query: 'MXene AND "electron transfer" AND bacteria',
     category: 'MXENE_ELECTRON_TRANSFER',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 25
   },
   
@@ -55,19 +55,19 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: 'graphene oxide AND "microbial fuel cell" AND performance',
     category: 'GRAPHENE_OXIDE_MFC',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 80
   },
   {
     query: 'reduced graphene oxide AND bioelectrochemical AND "power density"',
     category: 'RGO_POWER_DENSITY',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 60
   },
   {
     query: 'carbon nanotube AND "microbial electrolysis" AND hydrogen',
     category: 'CNT_MEC_HYDROGEN',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 40
   },
   
@@ -75,13 +75,13 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: '"power density" AND "mW/m2" AND "microbial fuel cell"',
     category: 'HIGH_POWER_DENSITY',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 100
   },
   {
     query: 'optimization AND "microbial fuel cell" AND "current density"',
     category: 'MFC_OPTIMIZATION',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 70
   },
   
@@ -89,13 +89,13 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: '"wastewater treatment" AND "microbial fuel cell" AND removal',
     category: 'WASTEWATER_MFC',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 90
   },
   {
     query: '"heavy metal" AND bioelectrochemical AND remediation',
     category: 'HEAVY_METAL_BES',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 50
   },
   
@@ -103,13 +103,13 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: 'Geobacter AND "electron transfer" AND electrode',
     category: 'GEOBACTER_ELECTRODE',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 60
   },
   {
     query: 'Shewanella AND biofilm AND "microbial fuel cell"',
     category: 'SHEWANELLA_BIOFILM',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 50
   },
   
@@ -117,19 +117,19 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: '"electrode modification" AND bioelectrochemical AND conductivity',
     category: 'ELECTRODE_MODIFICATION',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 60
   },
   {
     query: 'PEDOT AND "microbial fuel cell" AND anode',
     category: 'PEDOT_ANODE',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 30
   },
   {
     query: '"metal oxide" AND cathode AND bioelectrochemical',
     category: 'METAL_OXIDE_CATHODE',
-    minYear: 2020,
+    minYear: 2000,
     expectedResults: 45
   },
   
@@ -137,13 +137,13 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: '"machine learning" AND "microbial fuel cell" AND prediction',
     category: 'ML_MFC_PREDICTION',
-    minYear: 2021,
+    minYear: 2000,
     expectedResults: 25
   },
   {
     query: '"artificial intelligence" AND bioelectrochemical AND optimization',
     category: 'AI_BES_OPTIMIZATION',
-    minYear: 2021,
+    minYear: 2000,
     expectedResults: 20
   },
   
@@ -151,14 +151,76 @@ const HIGH_QUALITY_SEARCHES = [
   {
     query: '"pilot scale" AND "microbial fuel cell" AND performance',
     category: 'PILOT_SCALE_MFC',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 40
   },
   {
     query: 'scale-up AND bioelectrochemical AND "wastewater treatment"',
     category: 'SCALEUP_BES_WASTEWATER',
-    minYear: 2019,
+    minYear: 2000,
     expectedResults: 35
+  },
+  
+  // Seminal Papers and Early Research (2000-2014)
+  {
+    query: 'Logan AND "microbial fuel cell" AND review',
+    category: 'LOGAN_MFC_REVIEW',
+    minYear: 2000,
+    expectedResults: 30
+  },
+  {
+    query: 'Rabaey AND bioelectrochemical AND systems',
+    category: 'RABAEY_BES_FUNDAMENTAL',
+    minYear: 2000,
+    expectedResults: 40
+  },
+  {
+    query: '"electrochemically active bacteria" AND characterization',
+    category: 'EARLY_EAB_RESEARCH',
+    minYear: 2000,
+    expectedResults: 50
+  },
+  {
+    query: '"sediment fuel cell" AND marine AND "early development"',
+    category: 'EARLY_SMFC',
+    minYear: 2000,
+    expectedResults: 25
+  },
+  {
+    query: 'Lovley AND Geobacter AND "electron transfer"',
+    category: 'LOVLEY_GEOBACTER',
+    minYear: 2000,
+    expectedResults: 35
+  },
+  {
+    query: '"bioelectrochemical hydrogen" AND production AND fundamentals',
+    category: 'EARLY_MEC_H2',
+    minYear: 2000,
+    expectedResults: 30
+  },
+  {
+    query: '"mediator-less" AND "microbial fuel cell" AND development',
+    category: 'MEDIATORLESS_MFC',
+    minYear: 2000,
+    expectedResults: 25
+  },
+  {
+    query: '"electricity generation" AND wastewater AND microbes AND 2000:2010[pdat]',
+    category: 'EARLY_WASTEWATER_MFC',
+    minYear: 2000,
+    expectedResults: 45
+  },
+  {
+    query: 'Kim AND "mediator-free microbial fuel cell"',
+    category: 'KIM_MEDIATOR_FREE',
+    minYear: 2000,
+    expectedResults: 20
+  },
+  {
+    query: '"microbial fuel cell" AND "fundamental studies" AND 2000:2008[pdat]',
+    category: 'FUNDAMENTAL_EARLY_MFC',
+    minYear: 2000,
+    expectedResults: 40
   }
 ]
 
@@ -252,7 +314,7 @@ function validatePaperQuality(paper: any): QualityCriteria {
     hasAbstract: !!(paper.abstract && paper.abstract.length > 100),
     hasVerifiableId: !!(paper.doi || paper.pubmedId || paper.arxivId),
     hasAuthors: !!(paper.authors && paper.authors.length > 0),
-    isRecentEnough: publicationYear >= 2015,
+    isRecentEnough: publicationYear >= 2000,
     isRelevantField: checkRelevance(paper),
     hasPerformanceData: checkForPerformanceData(paper)
   }
@@ -286,13 +348,23 @@ function checkForPerformanceData(paper: any): boolean {
 
 // Parse CrossRef response to our format
 function parseCrossRefItem(item: any) {
+  // Try to get publication date from either 'published' or 'published-print' fields
+  let publicationDate = null
+  if (item.published?.['date-parts']?.[0]) {
+    publicationDate = item.published['date-parts'][0].join('-')
+  } else if (item['published-print']?.['date-parts']?.[0]) {
+    publicationDate = item['published-print']['date-parts'][0].join('-')
+  } else if (item['published-online']?.['date-parts']?.[0]) {
+    publicationDate = item['published-online']['date-parts'][0].join('-')
+  }
+  
   return {
     title: item.title?.[0] || '',
     authors: (item.author || []).map((a: any) => `${a.given} ${a.family}`),
     abstract: item.abstract || null,
     doi: item.DOI,
     journal: item['container-title']?.[0] || null,
-    publicationDate: item.published?.['date-parts']?.[0]?.join('-') || null,
+    publicationDate: publicationDate,
     externalUrl: item.URL || `https://doi.org/${item.DOI}`,
     source: 'crossref_api' as const,
     keywords: item.subject || []
@@ -365,7 +437,7 @@ async function collectHighQualityPapers() {
         }
         
         if (!quality.isRecentEnough) {
-          console.log(`   ⚠️ Skipping: Too old (before 2015)`)
+          console.log(`   ⚠️ Skipping: Too old (before 2000)`)
           stats.totalSkipped++
           continue
         }
@@ -441,7 +513,7 @@ async function collectHighQualityPapers() {
   
   console.log('\n✅ All papers are:')
   console.log('  • Real (verified by DOI/PubMed/arXiv)')
-  console.log('  • Recent (2015 or newer)')
+  console.log('  • Recent (2000 or newer)')
   console.log('  • Relevant (bioelectrochemical systems)')
   console.log('  • High-quality (with abstracts and authors)')
   

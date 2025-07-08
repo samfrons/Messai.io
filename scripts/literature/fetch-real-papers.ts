@@ -52,7 +52,7 @@ class RealPaperFetcher {
     console.log(`🔍 Searching CrossRef for: "${query}"`)
     
     try {
-      const url = `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=${limit}&sort=score&order=desc&filter=type:journal-article,from-pub-date:2015`
+      const url = `https://api.crossref.org/works?query=${encodeURIComponent(query)}&rows=${limit}&sort=score&order=desc&filter=type:journal-article,from-pub-date:2000`
       
       const response = await fetch(url, {
         headers: {
