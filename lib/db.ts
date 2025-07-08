@@ -10,7 +10,7 @@ function createPrismaClient() {
   
   // Use SQLite for local development if no PostgreSQL URL is set
   const databaseUrl = isLocalDev 
-    ? 'file:./prisma/dev.db' 
+    ? 'file:/Users/samfrons/Desktop/Messai/prisma/dev.db' 
     : (process.env.DATABASE_URL || 'file:./prisma/dev.db')
   
   // For production with Prisma Accelerate, use PRISMA_DATABASE_URL if available
