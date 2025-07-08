@@ -6,3 +6,6 @@ import { authOptions } from '@/lib/auth/auth-options'
 export const getServerSession = async () => {
   return null
 }
+
+// Export authOptions for backward compatibility
+export { authOptions }

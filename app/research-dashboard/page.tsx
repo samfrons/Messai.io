@@ -274,7 +274,7 @@ export default function ResearchDashboardPage() {
             >
               <div className="text-2xl mb-2">⚡</div>
               <div className="font-medium text-gray-900">High Performance</div>
-              <div className="text-xs text-gray-600">Power > 50k mW/m²</div>
+              <div className="text-xs text-gray-600">Power {'>'}  50k mW/m²</div>
             </Link>
             
             <Link

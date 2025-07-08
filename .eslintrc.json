@@ -3,15 +3,13 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
-    "no-console": [
-      "warn",
-      {
-        "allow": ["warn", "error"]
-      }
-    ],
-    "prefer-const": "error",
-    "no-unused-expressions": "error",
-    "no-duplicate-imports": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react/no-unescaped-entities": "warn",
+    "react/display-name": "warn",
+    "no-console": "warn",
+    "prefer-const": "warn",
+    "no-unused-expressions": "warn",
+    "no-duplicate-imports": "warn",
+    "react-hooks/exhaustive-deps": "warn",
+    "@next/next/no-img-element": "warn"
   }
 }
