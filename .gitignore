@@ -90,5 +90,17 @@ claude-sessions/
 /messai-auth/
 /messai-marketing/
 
-# Security alerts (temporary)
+# Security alerts and audit files
 SECURITY_ALERT.md
+SECURITY_*.md
+*_SECURITY_*.md
+IMMEDIATE_SECURITY_*.md
+FINAL_SECURITY_*.md
+UPDATE_OAUTH_*.md
+CLEANUP_*.sh
+clean-auth-*.sh
+COMMIT_MESSAGES.md
+
+# Security documentation that might contain sensitive info
+docs/SECURITY_*.md
+docs/*_SECURITY_*.md
