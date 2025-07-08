@@ -80,8 +80,9 @@ sessions/
 claude-sessions/
 
 # Authentication sensitive files
-/app/api/auth/
-/lib/auth/
+# Temporarily allow auth stubs for deployment
+# /app/api/auth/
+# /lib/auth/
 **/auth-config.ts
 **/oauth-keys.ts
 **/auth-secrets.ts
