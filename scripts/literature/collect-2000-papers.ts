@@ -20,7 +20,7 @@ const CROSSREF_DELAY = 1000 // 1 second between requests
 const PUBMED_DELAY = 500 // 0.5 seconds for PubMed
 const ARXIV_DELAY = 2000 // 2 seconds for arXiv
 const BATCH_SIZE = 100 // Papers per search
-const TARGET_PAPERS = 2000 // Total target
+const TARGET_PAPERS = 5000 // Total target
 
 // Comprehensive search queries for different time periods and topics
 const SEARCH_QUERIES = [
@@ -59,6 +59,48 @@ const SEARCH_QUERIES = [
   { query: '"dairy wastewater" AND bioelectrochemical', yearStart: 2010, yearEnd: 2025, expectedCount: 50 },
   { query: '"heavy metal removal" AND MFC', yearStart: 2015, yearEnd: 2025, expectedCount: 70 },
   { query: '"biosensor" AND "microbial fuel cell"', yearStart: 2015, yearEnd: 2025, expectedCount: 90 },
+  
+  // NEW: Electroanalytical methodologies (2015-2025)
+  { query: '"cyclic voltammetry" AND MFC', yearStart: 2015, yearEnd: 2025, expectedCount: 120 },
+  { query: '"impedance spectroscopy" AND bioelectrochemical', yearStart: 2015, yearEnd: 2025, expectedCount: 100 },
+  { query: 'chronoamperometry AND "microbial fuel cell"', yearStart: 2015, yearEnd: 2025, expectedCount: 80 },
+  { query: '"electrochemical characterization" AND MFC', yearStart: 2015, yearEnd: 2025, expectedCount: 90 },
+  { query: '"tafel analysis" AND bioelectrochemical', yearStart: 2015, yearEnd: 2025, expectedCount: 70 },
+  { query: '"polarization curve" AND "microbial fuel cell"', yearStart: 2015, yearEnd: 2025, expectedCount: 110 },
+  
+  // NEW: Brewery MFCs expansion (2010-2025)
+  { query: '"brewery wastewater" AND "microbial fuel cell"', yearStart: 2010, yearEnd: 2025, expectedCount: 150 },
+  { query: '"beer brewery" AND bioelectrochemical', yearStart: 2010, yearEnd: 2025, expectedCount: 80 },
+  { query: '"distillery wastewater" AND MFC', yearStart: 2010, yearEnd: 2025, expectedCount: 100 },
+  { query: '"brewing effluent" AND "electricity generation"', yearStart: 2010, yearEnd: 2025, expectedCount: 60 },
+  { query: '"industrial brewery" AND "fuel cell"', yearStart: 2012, yearEnd: 2025, expectedCount: 70 },
+  { query: '"malt" AND "microbial fuel cell"', yearStart: 2012, yearEnd: 2025, expectedCount: 40 },
+  
+  // NEW: Algal fuel cells (2012-2025)
+  { query: '"algal microbial fuel cell"', yearStart: 2012, yearEnd: 2025, expectedCount: 200 },
+  { query: '"photosynthetic MFC"', yearStart: 2012, yearEnd: 2025, expectedCount: 150 },
+  { query: 'microalgae AND bioelectrochemical', yearStart: 2012, yearEnd: 2025, expectedCount: 120 },
+  { query: '"algae cathode" AND MFC', yearStart: 2012, yearEnd: 2025, expectedCount: 80 },
+  { query: 'cyanobacteria AND "fuel cell"', yearStart: 2012, yearEnd: 2025, expectedCount: 90 },
+  { query: '"phototrophic" AND bioelectrochemical', yearStart: 2014, yearEnd: 2025, expectedCount: 60 },
+  
+  // NEW: Advanced materials (2015-2025)
+  { query: '"3D printed" AND MFC', yearStart: 2018, yearEnd: 2025, expectedCount: 60 },
+  { query: 'biochar AND "microbial fuel cell"', yearStart: 2015, yearEnd: 2025, expectedCount: 80 },
+  { query: '"metal organic framework" AND bioelectrochemical', yearStart: 2016, yearEnd: 2025, expectedCount: 50 },
+  { query: '"nanostructured electrode" AND MFC', yearStart: 2015, yearEnd: 2025, expectedCount: 90 },
+  
+  // NEW: System optimization and scale-up (2018-2025)
+  { query: '"pilot scale" AND bioelectrochemical', yearStart: 2018, yearEnd: 2025, expectedCount: 100 },
+  { query: '"industrial scale" AND MFC', yearStart: 2018, yearEnd: 2025, expectedCount: 80 },
+  { query: '"reactor optimization" AND "microbial fuel cell"', yearStart: 2018, yearEnd: 2025, expectedCount: 70 },
+  { query: '"continuous flow" AND bioelectrochemical', yearStart: 2016, yearEnd: 2025, expectedCount: 90 },
+  
+  // NEW: Smart systems and monitoring (2020-2025)
+  { query: '"machine learning" AND bioelectrochemical', yearStart: 2020, yearEnd: 2025, expectedCount: 60 },
+  { query: '"IoT" AND "microbial fuel cell"', yearStart: 2020, yearEnd: 2025, expectedCount: 40 },
+  { query: '"real-time monitoring" AND MFC', yearStart: 2020, yearEnd: 2025, expectedCount: 50 },
+  { query: '"artificial intelligence" AND "fuel cell"', yearStart: 2020, yearEnd: 2025, expectedCount: 70 },
 ]
 
 // Paper validation schema

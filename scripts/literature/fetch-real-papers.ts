@@ -520,8 +520,9 @@ async function main() {
 
   const fetcher = new RealPaperFetcher()
 
-  // Define search terms for microbial electrochemical systems
+  // Define comprehensive search terms for microbial electrochemical systems
   const searchTerms = [
+    // Original core terms
     'microbial fuel cell performance',
     'bioelectrochemical systems optimization',
     'microbial electrolysis cell hydrogen',
@@ -535,7 +536,64 @@ async function main() {
     'microbial electrosynthesis',
     'bioelectrochemical sensor',
     'hybrid bioelectrochemical system',
-    'scaled bioelectrochemical reactor'
+    'scaled bioelectrochemical reactor',
+    
+    // Core expansion terms
+    'microbial electrochemical cell',
+    'bioelectrochemical reactor design',
+    'microbial electrochemical technology',
+    'bio-electrochemical system performance',
+    'electroactive biofilm formation',
+    'exoelectrogen bacteria cultivation',
+    
+    // Electroanalytical methodologies
+    'cyclic voltammetry microbial fuel cell',
+    'impedance spectroscopy bioelectrochemical',
+    'chronoamperometry microbial electrochemical',
+    'linear sweep voltammetry MFC',
+    'differential pulse voltammetry biosensor',
+    'tafel plot microbial fuel cell',
+    'polarization curve MFC analysis',
+    'electrochemical characterization bioelectrochemical',
+    
+    // Brewery & industrial applications
+    'brewery wastewater microbial fuel cell',
+    'beer brewery bioelectrochemical treatment',
+    'brewing industry MFC application',
+    'brewery effluent electricity generation',
+    'malt whisky distillery fuel cell',
+    'distillery wastewater bioelectrochemical',
+    'food processing MFC treatment',
+    'winery wastewater fuel cell',
+    'industrial scale microbial electrochemical',
+    
+    // Algal & photosynthetic systems
+    'algal microbial fuel cell',
+    'photosynthetic microbial fuel cell',
+    'microalgae bioelectrochemical system',
+    'algae cathode MFC',
+    'phototrophic cathodic chamber',
+    'cyanobacteria fuel cell',
+    'photo-bioelectrochemical cell',
+    'algae biocathode performance',
+    
+    // Advanced materials & configurations
+    '3D printed electrode MFC',
+    'nanostructured anode bioelectrochemical',
+    'biochar electrode microbial fuel cell',
+    'metal organic framework MFC',
+    'membrane-less fuel cell design',
+    'air cathode optimization MFC',
+    'graphene oxide bioelectrochemical',
+    'carbon nanotube MFC electrode',
+    'MXene microbial fuel cell',
+    
+    // Recent innovations & smart systems
+    'machine learning MFC optimization',
+    'artificial intelligence bioelectrochemical',
+    'internet of things fuel cell monitoring',
+    'smart MFC monitoring system',
+    'real-time MFC performance monitoring'
   ]
 
   let allPapers: any[] = []
@@ -546,9 +604,9 @@ async function main() {
       console.log(`\n🔍 Searching for: "${term}"`)
 
       const [crossRefPapers, arxivPapers, pubmedPapers] = await Promise.all([
-        fetcher.fetchFromCrossRef(term, 15),
-        fetcher.fetchFromArxiv(term, 8),
-        fetcher.fetchFromPubMed(term, 12)
+        fetcher.fetchFromCrossRef(term, 40),
+        fetcher.fetchFromArxiv(term, 20),
+        fetcher.fetchFromPubMed(term, 30)
       ])
 
       const standardPapers = await fetcher.convertToStandardFormat(crossRefPapers, arxivPapers, pubmedPapers)

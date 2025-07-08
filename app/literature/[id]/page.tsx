@@ -46,6 +46,16 @@ interface PaperDetails {
   isAiProcessed?: boolean
   processingMethod?: string
   confidenceScore?: number
+  // Comprehensive parameter fields
+  experimentalConditions?: string
+  reactorConfiguration?: string
+  electrodeSpecifications?: string
+  biologicalParameters?: string
+  performanceMetrics?: string
+  operationalParameters?: string
+  electrochemicalData?: string
+  timeSeriesData?: string
+  economicMetrics?: string
   user?: {
     id: string
     name?: string
@@ -75,6 +85,7 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
   const [loading, setLoading] = useState(true)
   const [isEditing, setIsEditing] = useState(false)
   const [resolvedParams, setResolvedParams] = useState<{ id: string } | null>(null)
+  const [activeTab, setActiveTab] = useState<string>('experimental')
 
   useEffect(() => {
     params.then(p => setResolvedParams(p))
@@ -85,6 +96,20 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
       fetchPaper()
     }
   }, [resolvedParams])
+
+  // Set default tab when paper loads
+  useEffect(() => {
+    if (paper) {
+      // Set first available tab as default
+      if (paper.experimentalConditions) setActiveTab('experimental')
+      else if (paper.reactorConfiguration) setActiveTab('reactor')
+      else if (paper.electrodeSpecifications) setActiveTab('electrode')
+      else if (paper.biologicalParameters) setActiveTab('biological')
+      else if (paper.performanceMetrics) setActiveTab('performance')
+      else if (paper.operationalParameters) setActiveTab('operational')
+      else if (paper.electrochemicalData) setActiveTab('electrochemical')
+    }
+  }, [paper])
 
   const fetchPaper = async () => {
     if (!resolvedParams) return
@@ -690,6 +715,333 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
                             {organism}
                           </span>
                         ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Comprehensive Parameters Section */}
+            {(paper.experimentalConditions || paper.reactorConfiguration || paper.electrodeSpecifications || 
+              paper.biologicalParameters || paper.performanceMetrics || paper.operationalParameters || 
+              paper.electrochemicalData || paper.timeSeriesData || paper.economicMetrics) && (
+              <div className="mb-6 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-200">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">📊</span>
+                  <h2 className="text-2xl font-bold text-gray-900">Comprehensive Parameters</h2>
+                  <span className="ml-auto px-3 py-1 bg-indigo-100 text-indigo-700 text-sm font-medium rounded-full">
+                    Extracted Data
+                  </span>
+                </div>
+                
+                {/* Tab Navigation */}
+                <div className="flex flex-wrap gap-2 mb-4 border-b border-indigo-200">
+                  {paper.experimentalConditions && (
+                    <button
+                      onClick={() => setActiveTab('experimental')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'experimental' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      🧪 Experimental
+                    </button>
+                  )}
+                  {paper.reactorConfiguration && (
+                    <button
+                      onClick={() => setActiveTab('reactor')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'reactor' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      ⚙️ Reactor
+                    </button>
+                  )}
+                  {paper.electrodeSpecifications && (
+                    <button
+                      onClick={() => setActiveTab('electrode')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'electrode' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      🔌 Electrodes
+                    </button>
+                  )}
+                  {paper.biologicalParameters && (
+                    <button
+                      onClick={() => setActiveTab('biological')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'biological' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      🦠 Biological
+                    </button>
+                  )}
+                  {paper.performanceMetrics && (
+                    <button
+                      onClick={() => setActiveTab('performance')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'performance' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      ⚡ Performance
+                    </button>
+                  )}
+                  {paper.operationalParameters && (
+                    <button
+                      onClick={() => setActiveTab('operational')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'operational' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      🎛️ Operational
+                    </button>
+                  )}
+                  {paper.electrochemicalData && (
+                    <button
+                      onClick={() => setActiveTab('electrochemical')}
+                      className={`px-4 py-2 font-medium rounded-t-lg transition-colors ${
+                        activeTab === 'electrochemical' 
+                          ? 'bg-white text-indigo-700 border-l border-t border-r border-indigo-200 -mb-px' 
+                          : 'text-gray-600 hover:text-indigo-700'
+                      }`}
+                    >
+                      📈 Electrochemical
+                    </button>
+                  )}
+                </div>
+                
+                {/* Tab Content */}
+                <div className="bg-white p-6 rounded-b-lg">
+                  {activeTab === 'experimental' && paper.experimentalConditions && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>🧪</span> Experimental Conditions
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.experimentalConditions);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                                <span className="font-medium text-gray-700 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span className="ml-2 text-gray-900">
+                                  {typeof value === 'object' 
+                                    ? `${value.value} ${value.unit || ''}`.trim()
+                                    : String(value)
+                                  }
+                                </span>
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.experimentalConditions}</p>;
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {activeTab === 'reactor' && paper.reactorConfiguration && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>⚙️</span> Reactor Configuration
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.reactorConfiguration);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                                <span className="font-medium text-gray-700 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span className="ml-2 text-gray-900">
+                                  {typeof value === 'object' 
+                                    ? `${value.value} ${value.unit || ''}`.trim()
+                                    : String(value)
+                                  }
+                                </span>
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.reactorConfiguration}</p>;
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {activeTab === 'electrode' && paper.electrodeSpecifications && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>🔌</span> Electrode Specifications
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.electrodeSpecifications);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                                <span className="font-medium text-gray-700 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span className="ml-2 text-gray-900">
+                                  {Array.isArray(value) 
+                                    ? value.join(', ')
+                                    : typeof value === 'object' 
+                                      ? `${value.value} ${value.unit || ''}`.trim()
+                                      : String(value)
+                                  }
+                                </span>
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.electrodeSpecifications}</p>;
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {activeTab === 'biological' && paper.biologicalParameters && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>🦠</span> Biological Parameters
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.biologicalParameters);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                                <span className="font-medium text-gray-700 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span className="ml-2 text-gray-900">
+                                  {Array.isArray(value) 
+                                    ? value.join(', ')
+                                    : String(value)
+                                  }
+                                </span>
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.biologicalParameters}</p>;
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {activeTab === 'performance' && paper.performanceMetrics && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>⚡</span> Performance Metrics
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.performanceMetrics);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border border-blue-200">
+                                <div className="font-medium text-gray-700 capitalize mb-1">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                                </div>
+                                <div className="text-xl font-bold text-blue-700">
+                                  {typeof value === 'object' 
+                                    ? `${value.value} ${value.unit || ''}`.trim()
+                                    : typeof value === 'number'
+                                      ? value.toLocaleString()
+                                      : String(value)
+                                  }
+                                </div>
+                                {typeof value === 'object' && value.conditions && (
+                                  <div className="text-xs text-gray-600 mt-1">
+                                    {value.conditions}
+                                  </div>
+                                )}
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.performanceMetrics}</p>;
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {activeTab === 'operational' && paper.operationalParameters && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>🎛️</span> Operational Parameters
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.operationalParameters);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                                <span className="font-medium text-gray-700 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span className="ml-2 text-gray-900">
+                                  {typeof value === 'object' 
+                                    ? `${value.value} ${value.unit || ''}`.trim()
+                                    : String(value)
+                                  }
+                                </span>
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.operationalParameters}</p>;
+                          }
+                        })()}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {activeTab === 'electrochemical' && paper.electrochemicalData && (
+                    <div>
+                      <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                        <span>📈</span> Electrochemical Characterization
+                      </h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {(() => {
+                          try {
+                            const data = JSON.parse(paper.electrochemicalData);
+                            return Object.entries(data).map(([key, value]: [string, any]) => (
+                              <div key={key} className="bg-gray-50 p-3 rounded-lg">
+                                <span className="font-medium text-gray-700 capitalize">
+                                  {key.replace(/([A-Z])/g, ' $1').trim()}:
+                                </span>
+                                <span className="ml-2 text-gray-900">
+                                  {Array.isArray(value) 
+                                    ? value.join(', ')
+                                    : typeof value === 'object' 
+                                      ? `${value.value} ${value.unit || ''}`.trim()
+                                      : String(value)
+                                  }
+                                </span>
+                              </div>
+                            ));
+                          } catch {
+                            return <p className="text-gray-700">{paper.electrochemicalData}</p>;
+                          }
+                        })()}
                       </div>
                     </div>
                   )}
