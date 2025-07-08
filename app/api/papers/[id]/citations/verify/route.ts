@@ -6,7 +6,7 @@ import { getDemoConfig } from '@/lib/demo-mode'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     // Check authentication
@@ -30,7 +30,7 @@ export async function POST(
       )
     }
 
-    const paperId = params.id
+    const { id: paperId } = await params
 
     // Verify citations
     console.log(`[API] Verifying citations for paper: ${paperId}`)
