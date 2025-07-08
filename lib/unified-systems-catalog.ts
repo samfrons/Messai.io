@@ -1195,5 +1195,4 @@ export function getDesignTypeFor3D(system: UnifiedMESSSystem): string {
   return mappings[system.id] || 'mason-jar'; // Default fallback
 }
 
-// Export type
-export type { UnifiedMESSSystem };
+// Type is already exported as interface above

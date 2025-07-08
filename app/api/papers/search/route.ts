@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth/next'
-import { authOptions } from '@/lib/auth/auth-options'
+// Authentication removed for research-only version
 import prisma from '@/lib/db'
 
 // GET /api/papers/search - Advanced search with filters
 export async function GET(request: NextRequest) {
   try {
-    const session = await getServerSession(authOptions)
+    // No authentication in research-only version
+    const session = null
     const searchParams = request.nextUrl.searchParams
     
     // Extract search parameters
@@ -26,15 +26,8 @@ export async function GET(request: NextRequest) {
     // Build complex where clause
     const where: any = {}
     
-    // Base visibility filter
-    if (session?.user?.id) {
-      where.OR = [
-        { isPublic: true },
-        { uploadedBy: session.user.id }
-      ]
-    } else {
-      where.isPublic = true
-    }
+    // Research version shows all public papers
+    where.isPublic = true
     
     // Full-text search across multiple fields
     if (query) {

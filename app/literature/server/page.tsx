@@ -45,7 +45,7 @@ export default async function ServerLiteraturePage() {
               {paper.doi && <p className="text-xs text-blue-600">DOI: {paper.doi}</p>}
               <p className="text-xs text-gray-500">
                 Experiments: {paper._count.experiments} | 
-                Uploaded by: {paper.user.email}
+                Uploaded by: {paper.user?.email || 'Anonymous'}
               </p>
             </div>
           ))}

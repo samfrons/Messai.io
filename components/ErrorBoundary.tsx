@@ -34,8 +34,8 @@ export default class ErrorBoundary extends Component<Props, State> {
     // Report to monitoring service in production
     if (process.env.NODE_ENV === 'production') {
       // Example: Track context-specific errors
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'exception', {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'exception', {
           description: `${this.props.context || 'Component'} Error: ${error.toString()}`,
           fatal: false,
         })
@@ -117,8 +117,8 @@ export function LiteratureErrorBoundary({ children }: { children: ReactNode }) {
       onError={(error, errorInfo) => {
         console.error('Literature component error:', error)
         // Track literature-specific errors
-        if (typeof window !== 'undefined' && window.gtag) {
-          window.gtag('event', 'exception', {
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'exception', {
             description: `Literature Error: ${error.toString()}`,
             fatal: false,
           })

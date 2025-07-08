@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/auth'
+// Authentication removed for research-only version
 import { zenBrowser } from '@/lib/zen-browser'
 import { getDemoConfig } from '@/lib/demo-mode'
 import { z } from 'zod'
@@ -15,14 +14,7 @@ const extractPaperSchema = z.object({
 
 export async function POST(request: NextRequest) {
   try {
-    // Check authentication
-    const session = await getServerSession(authOptions)
-    if (!session) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
-        { status: 401 }
-      )
-    }
+    // No authentication in research-only version
 
     // Check demo mode
     const demoConfig = getDemoConfig()
@@ -64,58 +56,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Save to database if requested
-    let savedPaper = null
-    if (save && session.user?.id) {
-      // Check if paper already exists
-      const existing = await prisma.paper.findFirst({
-        where: {
-          OR: [
-            { title: paperData.title },
-            ...(paperData.doi ? [{ doi: paperData.doi }] : []),
-            { externalUrl: url }
-          ]
-        }
-      })
-
-      if (existing) {
-        return NextResponse.json(
-          { 
-            error: 'Paper already exists in database',
-            existingId: existing.id 
-          },
-          { status: 409 }
-        )
-      }
-
-      // Save new paper
-      savedPaper = await prisma.paper.create({
-        data: {
-          title: paperData.title,
-          authors: JSON.stringify(paperData.authors),
-          abstract: paperData.abstract || null,
-          journal: paperData.journal || null,
-          publicationDate: paperData.publicationDate ? new Date(paperData.publicationDate) : null,
-          doi: paperData.doi || null,
-          externalUrl: url,
-          powerOutput: paperData.powerOutput || null,
-          efficiency: paperData.efficiency || null,
-          systemType: paperData.systemType || 'MFC',
-          source: 'zen_extraction',
-          dataQuality: 'HIGH',
-          isRealPaper: true,
-          userId: session.user.id
-        }
-      })
-
-      console.log(`[API] Saved paper with ID: ${savedPaper.id}`)
-    }
+    // Saving disabled in research-only version
+    const savedPaper = null
 
     return NextResponse.json({
       success: true,
       data: paperData,
-      saved: save,
-      paperId: savedPaper?.id || null
+      saved: false,
+      paperId: null
     })
 
   } catch (error) {

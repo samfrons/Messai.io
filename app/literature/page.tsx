@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+// Authentication removed for research-only version
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -64,7 +64,8 @@ interface LiteratureStats {
 }
 
 export default function LiteraturePage() {
-  const { data: session } = useSession()
+  // No authentication in research-only version
+  const session = null
   const router = useRouter()
   const [papers, setPapers] = useState<Paper[]>([])
   const [loading, setLoading] = useState(true)

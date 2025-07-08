@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/auth'
+// Authentication removed for research-only version
 import { zenBrowser } from '@/lib/zen-browser'
 import { getDemoConfig } from '@/lib/demo-mode'
 import { z } from 'zod'
@@ -12,7 +11,8 @@ const validateLinkSchema = z.object({
 export async function POST(request: NextRequest) {
   try {
     // Check authentication
-    const session = await getServerSession(authOptions)
+    // No authentication in research-only version
+    const session = null
     if (!session) {
       return NextResponse.json(
         { error: 'Authentication required' },

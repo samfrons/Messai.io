@@ -66,8 +66,8 @@ export async function GET() {
         papers: topPerformers.map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['high-performance', 'breakthrough', 'power-density']
       })
@@ -113,8 +113,8 @@ export async function GET() {
         papers: topMaterials[0].papers.slice(0, 5).map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['materials', 'electrodes', 'performance-correlation']
       })
@@ -161,9 +161,9 @@ export async function GET() {
         papers: topOrganisms[0].papers.slice(0, 5).map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          efficiency: p.efficiency,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          efficiency: p.efficiency || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['microorganisms', 'biocatalysts', 'performance']
       })
@@ -185,8 +185,8 @@ export async function GET() {
         papers: recentPapers.slice(0, 5).map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['recent', 'breakthrough', '2023-2024', 'advancement']
       })
@@ -227,8 +227,8 @@ export async function GET() {
         papers: topSystem.papers.slice(0, 5).map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['system-comparison', 'performance-ranking']
       })
@@ -250,8 +250,8 @@ export async function GET() {
         papers: hiddenGems.slice(0, 5).map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['hidden-gems', 'underreported', 'high-performance']
       })
@@ -275,8 +275,8 @@ export async function GET() {
         papers: conferenceSource.slice(0, 5).map(p => ({
           id: p.id,
           title: p.title,
-          powerOutput: p.powerOutput,
-          systemType: p.systemType
+          powerOutput: p.powerOutput || undefined,
+          systemType: p.systemType || undefined
         })),
         tags: ['ismet', 'conference', 'quality-analysis']
       })

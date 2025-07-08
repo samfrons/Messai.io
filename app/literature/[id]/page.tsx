@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
+// Authentication removed for research-only version
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
@@ -68,7 +68,8 @@ interface PaperDetails {
 }
 
 export default function PaperDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { data: session } = useSession()
+  // No authentication in research-only version
+  const session = null
   const router = useRouter()
   const [paper, setPaper] = useState<PaperDetails | null>(null)
   const [loading, setLoading] = useState(true)
@@ -290,7 +291,7 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
 
   if (!paper) return null
 
-  const isOwner = session?.user?.id && paper.user?.id && session.user.id === paper.user.id
+  const isOwner = false // No ownership in research-only version
 
   return (
     <div className="min-h-screen bg-gray-50">
