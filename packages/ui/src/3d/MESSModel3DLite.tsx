@@ -120,7 +120,10 @@ export function MESSModel3DLite({
   };
 
   return (
-    <div className={`flex items-center justify-center h-full perspective-1000 ${className}`}>
+    <div className={`flex items-center justify-center h-full ${className}`} style={{ perspective: '1000px' }}>
+      <div className="text-xs text-red-500 absolute top-1 right-1 z-10">
+        3D: {design}
+      </div>
       {getDesignElement()}
     </div>
   );

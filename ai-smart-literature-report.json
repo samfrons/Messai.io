@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-07-05T10:22:01.653Z",
+  "generatedAt": "2025-07-06T01:23:13.287Z",
   "totalGenerated": 51,
   "categoriesGenerated": [
     "quantum_bioelectrochemistry",
@@ -52,10 +52,10 @@
       "doi": "10.1038/s41566-2024-1000",
       "journal": "Nature Photonics",
       "publicationDate": "2024-01-15",
-      "abstract": "Quantum coherence effects in quantum dots enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 27852 mW/m² with 74.4% quantum efficiency.",
+      "abstract": "Quantum coherence effects in quantum dots enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 40154 mW/m² with 56.5% quantum efficiency.",
       "externalUrl": "https://www.nature.com/articles/s41566-2024-1000",
-      "powerOutput": 27851.643838317766,
-      "efficiency": 74.41726562498724,
+      "powerOutput": 40154.48306827777,
+      "efficiency": 56.50523924319536,
       "systemType": "QFC",
       "organisms": [
         "quantum-coherent bacteria",
@@ -80,13 +80,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.95,
       "researchVector": [
-        9.257909817806699,
-        6.055233009069465,
-        7.690306288120173,
-        0.5873922297363299,
-        0.26628351318778387,
-        7.410738116297091,
-        8.80431034945377
+        9.175443410243613,
+        0.3179681761226649,
+        5.511107361400334,
+        7.597886657886333,
+        9.170835787987235,
+        7.129772448711753,
+        8.596836748057276
       ],
       "relatedPapers": [
         "10.1038/s41566-2024-1001",
@@ -117,10 +117,10 @@
       "doi": "10.1038/s41566-2024-1001",
       "journal": "Nature Photonics",
       "publicationDate": "2024-02-15",
-      "abstract": "Quantum coherence effects in quantum wells enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 18756 mW/m² with 61.4% quantum efficiency.",
+      "abstract": "Quantum coherence effects in quantum wells enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 21595 mW/m² with 71.3% quantum efficiency.",
       "externalUrl": "https://www.nature.com/articles/s41566-2024-1001",
-      "powerOutput": 18755.982323070544,
-      "efficiency": 61.37434837274865,
+      "powerOutput": 21595.319222204434,
+      "efficiency": 71.28104936229448,
       "systemType": "QFC",
       "organisms": [
         "quantum-coherent bacteria",
@@ -145,13 +145,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.95,
       "researchVector": [
-        9.513125742998835,
-        0.7726976804988062,
-        6.940915368276428,
-        2.6541398540293604,
-        3.557813955882525,
-        3.0927364145978475,
-        9.95898544812867
+        9.31630663126834,
+        6.794732258162397,
+        3.0329463337848606,
+        9.595092637306703,
+        5.671910239432507,
+        5.11251795310044,
+        8.573673101198732
       ],
       "relatedPapers": [
         "10.1038/s41566-2024-1000",
@@ -182,10 +182,10 @@
       "doi": "10.1038/s41566-2024-1002",
       "journal": "Nature Photonics",
       "publicationDate": "2024-03-15",
-      "abstract": "Quantum coherence effects in topological insulators enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 7947 mW/m² with 58.1% quantum efficiency.",
+      "abstract": "Quantum coherence effects in topological insulators enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 10106 mW/m² with 79.6% quantum efficiency.",
       "externalUrl": "https://www.nature.com/articles/s41566-2024-1002",
-      "powerOutput": 7947.084677428591,
-      "efficiency": 58.12076171865396,
+      "powerOutput": 10105.889482917011,
+      "efficiency": 79.61862193875062,
       "systemType": "QFC",
       "organisms": [
         "quantum-coherent bacteria",
@@ -210,13 +210,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.85,
       "researchVector": [
-        9.773496649471923,
-        0.1675922521291029,
-        3.894295145145681,
-        9.188533484743344,
-        7.210420594168174,
-        0.923931915475722,
-        9.248202432805884
+        9.45497268659788,
+        9.231165590751377,
+        7.55776937861625,
+        9.558692991705165,
+        1.5236557404606987,
+        0.47124728390400383,
+        9.429919556526588
       ],
       "relatedPapers": [
         "10.1038/s41566-2024-1000",
@@ -247,10 +247,10 @@
       "doi": "10.1038/s41566-2024-1003",
       "journal": "Nature Photonics",
       "publicationDate": "2024-04-15",
-      "abstract": "Quantum coherence effects in perovskite quantum structures enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 16545 mW/m² with 55.8% quantum efficiency.",
+      "abstract": "Quantum coherence effects in perovskite quantum structures enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 39076 mW/m² with 71.5% quantum efficiency.",
       "externalUrl": "https://www.nature.com/articles/s41566-2024-1003",
-      "powerOutput": 16545.467462646833,
-      "efficiency": 55.81228231925395,
+      "powerOutput": 39075.617725446944,
+      "efficiency": 71.54013854885149,
       "systemType": "QFC",
       "organisms": [
         "quantum-coherent bacteria",
@@ -275,13 +275,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.95,
       "researchVector": [
-        9.5303267931374,
-        0.1579148001482622,
-        6.3579621407157365,
-        3.018772506891585,
-        2.888526499556372,
-        5.912389252016648,
-        8.749852805614477
+        9.951037894354247,
+        3.3107622988083985,
+        2.037834039410331,
+        3.766851427573046,
+        4.775810456044118,
+        7.129137128017506,
+        8.50473546275575
       ],
       "relatedPapers": [
         "10.1038/s41566-2024-1000",
@@ -312,10 +312,10 @@
       "doi": "10.1038/s41566-2024-1004",
       "journal": "Nature Photonics",
       "publicationDate": "2024-05-15",
-      "abstract": "Quantum coherence effects in carbon quantum dots enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 65916 mW/m² with 69.9% quantum efficiency.",
+      "abstract": "Quantum coherence effects in carbon quantum dots enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 93611 mW/m² with 63.2% quantum efficiency.",
       "externalUrl": "https://www.nature.com/articles/s41566-2024-1004",
-      "powerOutput": 65916.2115265318,
-      "efficiency": 69.90967810814931,
+      "powerOutput": 93611.16265236553,
+      "efficiency": 63.23445744158633,
       "systemType": "QFC",
       "organisms": [
         "quantum-coherent bacteria",
@@ -340,13 +340,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.95,
       "researchVector": [
-        9.59499195829566,
-        3.9076922145867687,
-        5.33970635564081,
-        8.73080039035621,
-        9.896645147435674,
-        0.09055784924043797,
-        8.673048852222694
+        9.323445850615336,
+        0.3882546718873958,
+        4.869868864714069,
+        1.7712966725820722,
+        0.5971018910793768,
+        6.625429632877471,
+        9.448173668806641
       ],
       "relatedPapers": [
         "10.1038/s41566-2024-1000",
@@ -377,10 +377,10 @@
       "doi": "10.1038/s41566-2024-1005",
       "journal": "Nature Photonics",
       "publicationDate": "2024-06-15",
-      "abstract": "Quantum coherence effects in silicon quantum dots enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 45857 mW/m² with 76.6% quantum efficiency.",
+      "abstract": "Quantum coherence effects in silicon quantum dots enable unprecedented electron transfer rates through quantum tunneling mechanisms, achieving 23482 mW/m² with 71.4% quantum efficiency.",
       "externalUrl": "https://www.nature.com/articles/s41566-2024-1005",
-      "powerOutput": 45857.045635465656,
-      "efficiency": 76.59997647670201,
+      "powerOutput": 23482.113729420453,
+      "efficiency": 71.3717641412754,
       "systemType": "QFC",
       "organisms": [
         "quantum-coherent bacteria",
@@ -405,13 +405,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.95,
       "researchVector": [
-        9.235203537354353,
-        9.084289546369906,
-        0.9161480630913887,
-        2.310521327246551,
-        2.7124004496317933,
-        6.682170430899372,
-        8.708007241145578
+        9.663732420121141,
+        6.465757472969978,
+        2.1031816353258037,
+        1.969546835048479,
+        6.3287695018661765,
+        1.2512036431881368,
+        9.83410766726998
       ],
       "relatedPapers": [
         "10.1038/s41566-2024-1000",
@@ -442,10 +442,10 @@
       "doi": "10.1038/s42256-2024-2000",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-01-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3074 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2423 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2000",
-      "powerOutput": 3073.9617858948177,
-      "efficiency": 90.76397006636415,
+      "powerOutput": 2423.2795022877144,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -471,13 +471,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        4.2888985478252195,
-        9.425145201268707,
-        9.62470593910515,
-        2.102441518241178,
-        1.7896940615030599,
-        4.75954101352408,
-        7.280839599758293
+        6.702927059223178,
+        9.914841359287227,
+        9.258283326649519,
+        9.081564758414517,
+        1.7924394771270236,
+        1.6332959212293585,
+        1.3687981998297882
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2001",
@@ -508,9 +508,9 @@
       "doi": "10.1038/s42256-2024-2001",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-02-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 4308 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3279 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2001",
-      "powerOutput": 4308.270845299147,
+      "powerOutput": 3279.136880977069,
       "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
@@ -537,13 +537,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        7.282278519919063,
-        9.49921462853893,
-        9.955716402464438,
-        9.218766017678547,
-        8.263604974353886,
-        0.36578561560302925,
-        6.188249908051873
+        3.175622397364084,
+        9.68387499910624,
+        9.274442050269835,
+        1.488107913317922,
+        7.4538585857141975,
+        1.6357358595692806,
+        6.849764847806559
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -574,10 +574,10 @@
       "doi": "10.1038/s42256-2024-2002",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-03-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 1985 mW/m² through real-time metabolic adaptation and responsive hydrogels interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 1708 mW/m² through real-time metabolic adaptation and responsive hydrogels interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2002",
-      "powerOutput": 1984.6299362625928,
-      "efficiency": 99,
+      "powerOutput": 1708.439703765538,
+      "efficiency": 97.86384620736894,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -603,13 +603,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        0.5786200411167375,
-        9.312085451849725,
-        9.009782705628295,
-        5.981678215541393,
-        6.250989958283393,
-        1.3521446088734668,
-        1.4274902924152055
+        1.0694863576298363,
+        9.534152617627898,
+        9.05427032198517,
+        1.0346440380787647,
+        4.663521484070079,
+        4.436843528147043,
+        2.408013620056235
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -640,10 +640,10 @@
       "doi": "10.1038/s42256-2024-2003",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-04-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2738 mW/m² through real-time metabolic adaptation and programmable matter interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3803 mW/m² through real-time metabolic adaptation and programmable matter interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2003",
-      "powerOutput": 2738.174938243186,
-      "efficiency": 99,
+      "powerOutput": 3802.508961144719,
+      "efficiency": 90.4458994328278,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -669,13 +669,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        0.93456536754561,
-        9.939040799450447,
-        9.666349385727356,
-        0.5850860160803317,
-        8.717214815095078,
-        8.936096676929587,
-        4.87213644811481
+        8.571894304788623,
+        9.763699838570282,
+        8.967862422297697,
+        2.7246130377155864,
+        0.6632307565448037,
+        4.774195174732827,
+        9.627844825074058
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -706,9 +706,9 @@
       "doi": "10.1038/s42256-2024-2004",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-05-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 5181 mW/m² through real-time metabolic adaptation and metamaterials interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2375 mW/m² through real-time metabolic adaptation and metamaterials interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2004",
-      "powerOutput": 5180.881717015826,
+      "powerOutput": 2374.589212557289,
       "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
@@ -735,13 +735,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        9.20070564072002,
-        9.212054995955146,
-        9.477764917710703,
-        3.256545487812832,
-        8.6956899406797,
-        4.656094289100654,
-        7.488583429281288
+        0.7501102291925421,
+        9.416885977604872,
+        9.3134255184007,
+        7.760986666229477,
+        9.323637721880244,
+        6.29398886640727,
+        6.669437760499002
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -772,10 +772,10 @@
       "doi": "10.1038/s42256-2024-2005",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-06-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3699 mW/m² through real-time metabolic adaptation and photonic crystals interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3266 mW/m² through real-time metabolic adaptation and photonic crystals interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2005",
-      "powerOutput": 3699.399728839472,
-      "efficiency": 92.2965886113034,
+      "powerOutput": 3265.733313988696,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -801,13 +801,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        7.899331145240545,
-        9.660756693389914,
-        9.584834644914588,
-        0.021904409763939814,
-        4.589496633846304,
-        4.251353857828444,
-        8.958662734355913
+        9.256555377651654,
+        9.821584729008922,
+        8.888826459519365,
+        7.876332587353296,
+        7.465636659727471,
+        6.809965190067004,
+        1.2891235216270558
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -838,10 +838,10 @@
       "doi": "10.1038/s42256-2024-2006",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-07-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3593 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2475 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2006",
-      "powerOutput": 3592.8629160377104,
-      "efficiency": 99,
+      "powerOutput": 2474.9021541539864,
+      "efficiency": 86.53082732985412,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -867,13 +867,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        6.991018612528023,
-        9.95054891351942,
-        9.521905317488775,
-        3.621200262394413,
-        3.572518077813489,
-        7.021741513282489,
-        5.212252651581755
+        2.5334555253740287,
+        9.35371953816337,
+        9.830449012894787,
+        4.221162392315225,
+        7.01048766341774,
+        2.7079875495723638,
+        3.568338963631559
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -904,10 +904,10 @@
       "doi": "10.1038/s42256-2024-2007",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-08-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 4219 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2274 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2007",
-      "powerOutput": 4218.882687471204,
-      "efficiency": 95.80056575754958,
+      "powerOutput": 2274.0951260666434,
+      "efficiency": 89.1616211708266,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -933,13 +933,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        7.21273262680274,
-        9.614767214331001,
-        9.116747302817515,
-        7.36814369469209,
-        4.513680526586555,
-        0.8386538662911835,
-        9.018754363452544
+        2.4104131747056057,
+        9.394450161055227,
+        9.556508514166575,
+        3.4337577657013596,
+        0.8730538310865565,
+        8.366664161753272,
+        3.1475324225479007
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -970,10 +970,10 @@
       "doi": "10.1038/s42256-2024-2008",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-09-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 1424 mW/m² through real-time metabolic adaptation and responsive hydrogels interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2105 mW/m² through real-time metabolic adaptation and responsive hydrogels interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2008",
-      "powerOutput": 1424.27375764449,
-      "efficiency": 98.2939391483432,
+      "powerOutput": 2104.910559961473,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -999,13 +999,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        0.7087433100102869,
-        9.877374028440627,
-        9.885494161471776,
-        6.119073425114188,
-        0.01804579646889959,
-        7.0949723266383735,
-        0.7596226346099422
+        1.559665995758468,
+        9.230982638973156,
+        9.772289585387263,
+        3.5661841340213085,
+        7.019336558522175,
+        6.221197208978713,
+        0.7269623802675262
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1036,10 +1036,10 @@
       "doi": "10.1038/s42256-2024-2009",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-10-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3307 mW/m² through real-time metabolic adaptation and programmable matter interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2590 mW/m² through real-time metabolic adaptation and programmable matter interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2009",
-      "powerOutput": 3306.734214274182,
-      "efficiency": 98.2883333810274,
+      "powerOutput": 2589.517115313731,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1065,13 +1065,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        6.318800187676348,
-        9.429654255097654,
-        8.961846650746256,
-        4.8121337739675285,
-        9.262467927127249,
-        3.2493469352072335,
-        4.871623229821402
+        3.199442783537947,
+        9.631593109855602,
+        9.857732336929129,
+        6.380092964241289,
+        2.780959082468153,
+        8.39006089919512,
+        5.950355574829702
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1102,10 +1102,10 @@
       "doi": "10.1038/s42256-2024-2010",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-11-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2560 mW/m² through real-time metabolic adaptation and metamaterials interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3298 mW/m² through real-time metabolic adaptation and metamaterials interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2010",
-      "powerOutput": 2559.8456926580225,
-      "efficiency": 90.22181270405584,
+      "powerOutput": 3298.2337904244127,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1131,13 +1131,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        5.622186331566086,
-        9.685346752973855,
-        9.005085934069385,
-        3.899005873946819,
-        2.1469320995079655,
-        1.7421370453628815,
-        1.4965954248235325
+        8.664702652593592,
+        9.276775457397427,
+        9.899585377025861,
+        0.3036107153081802,
+        9.550725531292713,
+        0.27883285935322855,
+        1.0392819800387842
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1168,10 +1168,10 @@
       "doi": "10.1038/s42256-2024-2011",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-12-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2431 mW/m² through real-time metabolic adaptation and photonic crystals interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2148 mW/m² through real-time metabolic adaptation and photonic crystals interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2011",
-      "powerOutput": 2431.3457899764985,
-      "efficiency": 99,
+      "powerOutput": 2147.8451493215316,
+      "efficiency": 96.16540543816267,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1197,13 +1197,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        0.1294167307137828,
-        9.597654931041804,
-        9.00371326048605,
-        8.522270925400417,
-        3.4427320743041845,
-        9.053961512427986,
-        7.012491284095638
+        2.005554010274795,
+        9.702538928170489,
+        9.955401389304381,
+        0.30419618341542165,
+        3.5764969761762333,
+        4.854085594504964,
+        2.9646568566463816
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1234,10 +1234,10 @@
       "doi": "10.1038/s42256-2024-2012",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-01-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 4370 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 5247 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2012",
-      "powerOutput": 4370.252698468141,
-      "efficiency": 89.21260003069763,
+      "powerOutput": 5246.677573473038,
+      "efficiency": 94.02576418443556,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1263,13 +1263,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        7.649407220448412,
-        9.220988394488797,
-        9.708831435382724,
-        5.270256467146837,
-        3.9500644864020273,
-        6.901210934733289,
-        9.470102972623849
+        7.29940447576867,
+        9.462395935320785,
+        9.873719069162648,
+        6.542622475627004,
+        9.736253676295782,
+        4.0300467303546466,
+        9.740694050124198
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1300,10 +1300,10 @@
       "doi": "10.1038/s42256-2024-2013",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-02-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 4192 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2984 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2013",
-      "powerOutput": 4191.712628088204,
-      "efficiency": 93.38878907209049,
+      "powerOutput": 2983.6263400827843,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1329,13 +1329,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        4.691510165800013,
-        9.916497747446558,
-        9.769077676001684,
-        3.1818477480230456,
-        6.890404050781356,
-        3.1755825148765915,
-        8.734554344359406
+        9.092846192566647,
+        9.442799876133964,
+        9.888762803496878,
+        5.814893760308029,
+        2.6701679152911817,
+        4.3768592204115215,
+        0.276615858380711
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1366,10 +1366,10 @@
       "doi": "10.1038/s42256-2024-2014",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-03-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2978 mW/m² through real-time metabolic adaptation and responsive hydrogels interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2185 mW/m² through real-time metabolic adaptation and responsive hydrogels interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2014",
-      "powerOutput": 2977.6068510341743,
-      "efficiency": 91.43050647215061,
+      "powerOutput": 2185.49261250405,
+      "efficiency": 97.1572062386662,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1395,13 +1395,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        7.174593563003572,
-        9.969540595343638,
-        9.719245283484026,
-        2.07565639075753,
-        8.173811027283966,
-        4.47231839588069,
-        4.767180500935697
+        0.7279994788758648,
+        9.372756788637316,
+        9.16814520914921,
+        9.735765449339857,
+        0.8587817520637375,
+        9.927074997143636,
+        9.382832180365984
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1432,10 +1432,10 @@
       "doi": "10.1038/s42256-2024-2015",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-04-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3277 mW/m² through real-time metabolic adaptation and programmable matter interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2898 mW/m² through real-time metabolic adaptation and programmable matter interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2015",
-      "powerOutput": 3277.233132213242,
-      "efficiency": 95.84029354508071,
+      "powerOutput": 2898.4534666638356,
+      "efficiency": 92.37783153390485,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1461,13 +1461,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        5.984517737013661,
-        9.396832728802233,
-        9.489878089750954,
-        5.293156025630696,
-        2.0064026541037205,
-        1.8952206411864192,
-        8.101562876750727
+        4.577538685072358,
+        9.642908823357264,
+        9.239798291174216,
+        7.307913947600739,
+        4.820067598648166,
+        1.2738016330552893,
+        1.9733127653976523
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1498,10 +1498,10 @@
       "doi": "10.1038/s42256-2024-2016",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-05-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2918 mW/m² through real-time metabolic adaptation and metamaterials interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 4234 mW/m² through real-time metabolic adaptation and metamaterials interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2016",
-      "powerOutput": 2918.3996735497412,
-      "efficiency": 99,
+      "powerOutput": 4233.76453839193,
+      "efficiency": 96.34829498346853,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1527,13 +1527,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        3.313360114750159,
-        9.230308694147913,
-        9.110049632649945,
-        8.385129302261198,
-        9.069798004025959,
-        9.583145137059601,
-        3.0348686165703276
+        7.998612766914666,
+        9.89638039042901,
+        9.609157565698043,
+        0.8091237116973837,
+        2.2538486417862758,
+        3.2583898232819775,
+        1.6100350205544722
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1564,10 +1564,10 @@
       "doi": "10.1038/s42256-2024-2017",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-06-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2937 mW/m² through real-time metabolic adaptation and photonic crystals interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3314 mW/m² through real-time metabolic adaptation and photonic crystals interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2017",
-      "powerOutput": 2937.482605666557,
-      "efficiency": 99,
+      "powerOutput": 3313.9961671026344,
+      "efficiency": 97.51795429855926,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1593,13 +1593,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        2.483612596929803,
-        9.682276136702104,
-        8.838073537906249,
-        1.3444780879267926,
-        5.319005650408457,
-        5.339828892370377,
-        7.51395792123283
+        4.882870930197168,
+        9.590079584026974,
+        9.776266643770832,
+        0.4420089225984625,
+        5.425150373746394,
+        3.0154714570481267,
+        8.428402021899167
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1630,10 +1630,10 @@
       "doi": "10.1038/s42256-2024-2018",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-07-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3646 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 3368 mW/m² through real-time metabolic adaptation and shape memory alloys interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2018",
-      "powerOutput": 3646.219110591919,
-      "efficiency": 99,
+      "powerOutput": 3368.3008946834816,
+      "efficiency": 91.13865476319924,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1659,13 +1659,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        8.844375706342243,
-        9.933112387740987,
-        9.42289746864907,
-        5.519012452282954,
-        1.728341358101877,
-        8.814100328963544,
-        5.243350619575242
+        5.990571683958034,
+        9.807642093796789,
+        9.843168573786354,
+        7.864947973633594,
+        1.0676607111791458,
+        1.6122531670562879,
+        7.592871116716003
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1696,10 +1696,10 @@
       "doi": "10.1038/s42256-2024-2019",
       "journal": "Nature Machine Intelligence",
       "publicationDate": "2024-08-20",
-      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 1877 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
+      "abstract": "Machine learning algorithms design synthetic microbial consortia that self-optimize electron transfer pathways, achieving 2535 mW/m² through real-time metabolic adaptation and self-healing polymers interface evolution.",
       "externalUrl": "https://www.nature.com/articles/s42256-2024-2019",
-      "powerOutput": 1877.4407798658262,
-      "efficiency": 96.30686491845569,
+      "powerOutput": 2535.121474772492,
+      "efficiency": 99,
       "systemType": "AIFC",
       "organisms": [
         "AI-designed synthetic microbe",
@@ -1725,13 +1725,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.7999999999999999,
       "researchVector": [
-        1.00377706490558,
-        9.240030826344476,
-        8.889766784384603,
-        8.369692430994991,
-        3.6806766833208804,
-        9.91774136954744,
-        3.2066213423239343
+        0.7763006348184076,
+        9.94894057541884,
+        9.701456620342135,
+        3.4905439919382153,
+        6.084277650579204,
+        3.8732619664713153,
+        6.729424393918999
       ],
       "relatedPapers": [
         "10.1038/s42256-2024-2000",
@@ -1762,10 +1762,10 @@
       "doi": "10.1038/s41550-2024-3000",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-01-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Mars atmospheric conditions demonstrate autonomous energy generation and atmospheric processing, achieving 7799 mW/m² under extreme conditions with 63.9% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Mars atmospheric conditions demonstrate autonomous energy generation and atmospheric processing, achieving 3511 mW/m² under extreme conditions with 77.0% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3000",
-      "powerOutput": 7799.203698076587,
-      "efficiency": 63.858016616547545,
+      "powerOutput": 3510.9053049473273,
+      "efficiency": 77.0012267558623,
       "systemType": "SEFC",
       "organisms": [
         "mars-adapted bacteria",
@@ -1790,13 +1790,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.64,
       "researchVector": [
-        6.138527643146851,
-        1.7197890375009584,
-        1.2310501124043038,
-        9.771556213760256,
-        9.472703410887293,
-        2.0013526595437603,
-        9.72978900203621
+        0.26942148688027245,
+        6.594869717360354,
+        9.698436662846957,
+        9.672710874194832,
+        9.95061360650725,
+        1.8060587791307658,
+        8.203934315619744
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3001",
@@ -1827,10 +1827,10 @@
       "doi": "10.1038/s41550-2024-3001",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-02-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for deep space radiation environment demonstrate autonomous energy generation and atmospheric processing, achieving 9834 mW/m² under extreme conditions with 76.5% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for deep space radiation environment demonstrate autonomous energy generation and atmospheric processing, achieving 4999 mW/m² under extreme conditions with 72.3% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3001",
-      "powerOutput": 9834.347677973285,
-      "efficiency": 76.52858109721109,
+      "powerOutput": 4998.770139397895,
+      "efficiency": 72.34329951117161,
       "systemType": "SEFC",
       "organisms": [
         "deep-adapted bacteria",
@@ -1855,13 +1855,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.68,
       "researchVector": [
-        6.3250222549009205,
-        8.335458021908398,
-        5.534187523372227,
-        9.877582700585231,
-        8.47778248962613,
-        7.276867342380848,
-        9.90593783252926
+        7.442191574589712,
+        7.652839015942517,
+        6.693295045799057,
+        9.590582606430873,
+        9.243509150411517,
+        0.4804300412284923,
+        8.36321908614384
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -1892,10 +1892,10 @@
       "doi": "10.1038/s41550-2024-3002",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-03-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for lunar regolith substrate demonstrate autonomous energy generation and atmospheric processing, achieving 1620 mW/m² under extreme conditions with 75.6% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for lunar regolith substrate demonstrate autonomous energy generation and atmospheric processing, achieving 1461 mW/m² under extreme conditions with 78.9% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3002",
-      "powerOutput": 1620.104439438444,
-      "efficiency": 75.56144004580929,
+      "powerOutput": 1461.40628664332,
+      "efficiency": 78.86260275475911,
       "systemType": "SEFC",
       "organisms": [
         "lunar-adapted bacteria",
@@ -1920,13 +1920,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.5599999999999999,
       "researchVector": [
-        1.8035983864276184,
-        8.126288068789133,
-        7.10605060591144,
-        9.603122177068666,
-        9.832492677562565,
-        7.445881262630238,
-        5.012464686083231
+        4.699987250824362,
+        8.198763023912136,
+        3.613294312726718,
+        9.991116749474344,
+        9.96168835398305,
+        4.913488521055274,
+        3.0945104448805827
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -1957,10 +1957,10 @@
       "doi": "10.1038/s41550-2024-3003",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-04-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Europa subsurface ocean demonstrate autonomous energy generation and atmospheric processing, achieving 6308 mW/m² under extreme conditions with 72.1% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Europa subsurface ocean demonstrate autonomous energy generation and atmospheric processing, achieving 7209 mW/m² under extreme conditions with 72.9% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3003",
-      "powerOutput": 6307.901593843574,
-      "efficiency": 72.06280521990818,
+      "powerOutput": 7208.509653346752,
+      "efficiency": 72.85173546740404,
       "systemType": "SEFC",
       "organisms": [
         "europa-adapted bacteria",
@@ -1985,13 +1985,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.64,
       "researchVector": [
-        8.434843372704568,
-        4.247984699615406,
-        8.725452889020476,
-        9.520841393940913,
-        9.893752778496891,
-        7.248783256429785,
-        1.3420563564040733
+        8.951560773359535,
+        6.503461493897067,
+        1.9357209785123364,
+        9.826910920952262,
+        9.576101304512115,
+        9.1429997603701,
+        4.350427324229198
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2022,10 +2022,10 @@
       "doi": "10.1038/s41550-2024-3004",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-05-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Titan hydrocarbon lakes demonstrate autonomous energy generation and atmospheric processing, achieving 6090 mW/m² under extreme conditions with 58.6% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Titan hydrocarbon lakes demonstrate autonomous energy generation and atmospheric processing, achieving 11677 mW/m² under extreme conditions with 73.9% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3004",
-      "powerOutput": 6089.567343977451,
-      "efficiency": 58.6425175823625,
+      "powerOutput": 11677.25236663996,
+      "efficiency": 73.88486302446627,
       "systemType": "SEFC",
       "organisms": [
         "titan-adapted bacteria",
@@ -2050,13 +2050,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.68,
       "researchVector": [
-        2.6987214889990607,
-        0.2680119794715874,
-        4.842765592976244,
-        9.931498471724016,
-        9.424883853284875,
-        6.78401832052139,
-        3.7919088691039216
+        7.801939424674109,
+        7.923681073816717,
+        6.6998823308352495,
+        9.777403429821035,
+        8.769403459666467,
+        1.3559323937224677,
+        9.309180844180924
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2087,10 +2087,10 @@
       "doi": "10.1038/s41550-2024-3005",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-06-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Mars atmospheric conditions demonstrate autonomous energy generation and atmospheric processing, achieving 1447 mW/m² under extreme conditions with 75.9% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Mars atmospheric conditions demonstrate autonomous energy generation and atmospheric processing, achieving 1788 mW/m² under extreme conditions with 65.9% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3005",
-      "powerOutput": 1446.9751627151986,
-      "efficiency": 75.91687226104828,
+      "powerOutput": 1787.5040770311994,
+      "efficiency": 65.86159069051536,
       "systemType": "SEFC",
       "organisms": [
         "mars-adapted bacteria",
@@ -2115,13 +2115,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.5599999999999999,
       "researchVector": [
-        0.7221668040679052,
-        8.550806672186042,
-        4.185446071196772,
-        9.753818631267738,
-        8.693498720924852,
-        1.7629991015255775,
-        6.747460522303346
+        3.8577236022144734,
+        4.235304956710328,
+        5.279460593792105,
+        9.705792227526889,
+        8.254437872377835,
+        3.0957445366847525,
+        5.034489072984973
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2152,10 +2152,10 @@
       "doi": "10.1038/s41550-2024-3006",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-07-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for deep space radiation environment demonstrate autonomous energy generation and atmospheric processing, achieving 3112 mW/m² under extreme conditions with 76.4% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for deep space radiation environment demonstrate autonomous energy generation and atmospheric processing, achieving 3639 mW/m² under extreme conditions with 64.7% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3006",
-      "powerOutput": 3112.0814422571,
-      "efficiency": 76.43832951035468,
+      "powerOutput": 3639.1127308109103,
+      "efficiency": 64.6991664817967,
       "systemType": "SEFC",
       "organisms": [
         "deep-adapted bacteria",
@@ -2180,13 +2180,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.64,
       "researchVector": [
-        5.986845824844275,
-        7.43781029981063,
-        8.723103964669166,
-        9.816339861228148,
-        8.228463528951796,
-        3.0102673576402905,
-        7.598033227612692
+        9.876262500582243,
+        2.8111238604886,
+        5.98264590845091,
+        9.710313920492833,
+        8.294892807581004,
+        1.359650733861557,
+        3.556197266000105
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2217,10 +2217,10 @@
       "doi": "10.1038/s41550-2024-3007",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-08-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for lunar regolith substrate demonstrate autonomous energy generation and atmospheric processing, achieving 9515 mW/m² under extreme conditions with 70.1% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for lunar regolith substrate demonstrate autonomous energy generation and atmospheric processing, achieving 10397 mW/m² under extreme conditions with 72.4% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3007",
-      "powerOutput": 9515.16279449124,
-      "efficiency": 70.07385211551328,
+      "powerOutput": 10397.163895547164,
+      "efficiency": 72.43581925841153,
       "systemType": "SEFC",
       "organisms": [
         "lunar-adapted bacteria",
@@ -2245,13 +2245,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.68,
       "researchVector": [
-        5.325772884000188,
-        4.166527161161852,
-        7.897187661516199,
-        9.506075261974447,
-        8.8770467145036,
-        0.07011207541611109,
-        9.752499911437472
+        5.2040822319563285,
+        4.216597914856135,
+        2.2251055680425647,
+        9.907442214526911,
+        9.558224377605764,
+        4.394218217055239,
+        6.661224299109334
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2282,10 +2282,10 @@
       "doi": "10.1038/s41550-2024-3008",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-09-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Europa subsurface ocean demonstrate autonomous energy generation and atmospheric processing, achieving 2792 mW/m² under extreme conditions with 71.0% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Europa subsurface ocean demonstrate autonomous energy generation and atmospheric processing, achieving 1921 mW/m² under extreme conditions with 73.2% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3008",
-      "powerOutput": 2791.8790481462042,
-      "efficiency": 71.03006832884591,
+      "powerOutput": 1921.4886370268443,
+      "efficiency": 73.2076989861527,
       "systemType": "SEFC",
       "organisms": [
         "europa-adapted bacteria",
@@ -2310,13 +2310,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.5599999999999999,
       "researchVector": [
-        9.911332362851615,
-        5.7114218011323,
-        1.5518632913661645,
-        9.512526058176743,
-        8.869688976025106,
-        9.923096727682235,
-        6.028807434160779
+        6.955223751453657,
+        5.490828513245258,
+        0.19729761203831186,
+        9.778258855620225,
+        9.305080436397471,
+        3.262465991989414,
+        1.9246205693239604
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2347,10 +2347,10 @@
       "doi": "10.1038/s41550-2024-3009",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-10-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Titan hydrocarbon lakes demonstrate autonomous energy generation and atmospheric processing, achieving 4697 mW/m² under extreme conditions with 65.6% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Titan hydrocarbon lakes demonstrate autonomous energy generation and atmospheric processing, achieving 4132 mW/m² under extreme conditions with 67.0% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3009",
-      "powerOutput": 4697.080227688918,
-      "efficiency": 65.62610673828434,
+      "powerOutput": 4131.552101210009,
+      "efficiency": 67.02277041597097,
       "systemType": "SEFC",
       "organisms": [
         "titan-adapted bacteria",
@@ -2375,13 +2375,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.64,
       "researchVector": [
-        6.849216151366646,
-        3.6874956062394504,
-        0.9224580539064409,
-        9.683306263511398,
-        9.599033015501586,
-        5.974258392529041,
-        0.14710333536036568
+        4.297623839819633,
+        5.976623514641384,
+        6.509781263929781,
+        9.972936606498495,
+        8.419770998736542,
+        5.063065110526219,
+        9.151575069857405
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2412,10 +2412,10 @@
       "doi": "10.1038/s41550-2024-3010",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-11-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Mars atmospheric conditions demonstrate autonomous energy generation and atmospheric processing, achieving 7091 mW/m² under extreme conditions with 65.2% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Mars atmospheric conditions demonstrate autonomous energy generation and atmospheric processing, achieving 8584 mW/m² under extreme conditions with 61.1% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3010",
-      "powerOutput": 7091.261397157095,
-      "efficiency": 65.16703389319687,
+      "powerOutput": 8584.008934329993,
+      "efficiency": 61.09221861004188,
       "systemType": "SEFC",
       "organisms": [
         "mars-adapted bacteria",
@@ -2440,13 +2440,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.68,
       "researchVector": [
-        1.305747520303282,
-        3.4326928827952163,
-        7.639728435872546,
-        9.989593604071299,
-        9.303885849170895,
-        6.359452317761447,
-        9.909709337471122
+        5.184921027811072,
+        0.3731567850145656,
+        3.1665490388410023,
+        9.997822735476877,
+        9.334903133463545,
+        7.174277724067402,
+        8.49119538218001
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2477,10 +2477,10 @@
       "doi": "10.1038/s41550-2024-3011",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-12-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for deep space radiation environment demonstrate autonomous energy generation and atmospheric processing, achieving 1323 mW/m² under extreme conditions with 61.4% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for deep space radiation environment demonstrate autonomous energy generation and atmospheric processing, achieving 1631 mW/m² under extreme conditions with 68.8% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3011",
-      "powerOutput": 1322.9874349044887,
-      "efficiency": 61.371985237294936,
+      "powerOutput": 1630.9669194484002,
+      "efficiency": 68.77321996047506,
       "systemType": "SEFC",
       "organisms": [
         "deep-adapted bacteria",
@@ -2505,13 +2505,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.5599999999999999,
       "researchVector": [
-        0.01071305041701498,
-        1.57682228779636,
-        3.8340989231957567,
-        9.648366718841428,
-        9.309759201018869,
-        6.058951025429808,
-        6.789596743874928
+        4.475970813642771,
+        7.653688466403641,
+        9.607382139804955,
+        9.714090322397759,
+        8.475326544082815,
+        6.862974139979183,
+        3.4074083920878873
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2542,10 +2542,10 @@
       "doi": "10.1038/s41550-2024-3012",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-01-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for lunar regolith substrate demonstrate autonomous energy generation and atmospheric processing, achieving 6815 mW/m² under extreme conditions with 72.1% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for lunar regolith substrate demonstrate autonomous energy generation and atmospheric processing, achieving 3404 mW/m² under extreme conditions with 67.2% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3012",
-      "powerOutput": 6815.326348526898,
-      "efficiency": 72.13355102724542,
+      "powerOutput": 3404.4220026328794,
+      "efficiency": 67.23247614441532,
       "systemType": "SEFC",
       "organisms": [
         "lunar-adapted bacteria",
@@ -2570,13 +2570,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.64,
       "researchVector": [
-        5.520514053237933,
-        5.791115938440794,
-        9.793348180359553,
-        9.816056190764716,
-        8.785801425179029,
-        5.62737179387393,
-        7.9232589062669945
+        0.3446904576348775,
+        2.2946050651992778,
+        3.663695378443721,
+        9.785857277969,
+        9.284905967032062,
+        8.318024865786867,
+        0.41408762277187483
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2607,10 +2607,10 @@
       "doi": "10.1038/s41550-2024-3013",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-02-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Europa subsurface ocean demonstrate autonomous energy generation and atmospheric processing, achieving 5777 mW/m² under extreme conditions with 80.8% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Europa subsurface ocean demonstrate autonomous energy generation and atmospheric processing, achieving 4950 mW/m² under extreme conditions with 63.1% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3013",
-      "powerOutput": 5777.235446145324,
-      "efficiency": 80.77088793243124,
+      "powerOutput": 4949.804126423522,
+      "efficiency": 63.07771926709993,
       "systemType": "SEFC",
       "organisms": [
         "europa-adapted bacteria",
@@ -2635,13 +2635,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.68,
       "researchVector": [
-        2.178185466090732,
-        8.411129064038631,
-        8.129941451803278,
-        9.951578055731021,
-        8.69321982999369,
-        6.867842001574552,
-        8.596295523570628
+        2.0141113145830203,
+        2.0101915251946245,
+        5.646631198316134,
+        9.717545352117737,
+        8.057753065541215,
+        3.0689644359491197,
+        4.894534987298611
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2672,10 +2672,10 @@
       "doi": "10.1038/s41550-2024-3014",
       "journal": "Nature Astronomy",
       "publicationDate": "2024-03-25",
-      "abstract": "Self-sustaining bioelectrochemical systems designed for Titan hydrocarbon lakes demonstrate autonomous energy generation and atmospheric processing, achieving 1807 mW/m² under extreme conditions with 77.1% operational reliability.",
+      "abstract": "Self-sustaining bioelectrochemical systems designed for Titan hydrocarbon lakes demonstrate autonomous energy generation and atmospheric processing, achieving 1342 mW/m² under extreme conditions with 70.6% operational reliability.",
       "externalUrl": "https://www.nature.com/articles/s41550-2024-3014",
-      "powerOutput": 1807.120304638038,
-      "efficiency": 77.0538882121143,
+      "powerOutput": 1342.2050971157043,
+      "efficiency": 70.61808139236933,
       "systemType": "SEFC",
       "organisms": [
         "titan-adapted bacteria",
@@ -2700,13 +2700,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.5599999999999999,
       "researchVector": [
-        3.789165025780643,
-        7.134006152025152,
-        8.947798249753422,
-        9.69140834683873,
-        9.375976411107583,
-        7.5275697239482575,
-        5.602779123575472
+        0.9582947107529005,
+        4.47101856573477,
+        5.754454106451394,
+        9.615368114638311,
+        8.941011050780865,
+        8.32973504180169,
+        1.6191596274735942
       ],
       "relatedPapers": [
         "10.1038/s41550-2024-3000",
@@ -2766,13 +2766,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        9.16183997066902,
-        9.14774775721942,
-        2.8554313387417163,
-        4.256137686875254,
-        5.061754754151004,
-        0.8546316274656385,
-        2.0548243864035776
+        8.656984732111196,
+        9.342192648407725,
+        0.47947149276466705,
+        6.674173637950547,
+        8.740597336430758,
+        6.520161423595756,
+        0.5311375329625179
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4001",
@@ -2831,13 +2831,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        9.559894480523194,
-        9.14312106675368,
-        7.085310597741465,
-        2.183935067134355,
-        3.1983266184787773,
-        7.256641238000299,
-        1.0912203220241956
+        9.280867531384555,
+        9.408352190013797,
+        7.416707492484969,
+        1.2493347610236993,
+        5.284810240543216,
+        2.8390286123019215,
+        3.2241685568963296
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -2896,13 +2896,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        8.780427182291524,
-        9.003230228552335,
-        3.793568690003273,
-        4.208718535916358,
-        4.340012547208428,
-        2.8677872466258147,
-        3.4093075302336895
+        9.029029955083296,
+        9.942426728647659,
+        0.8372945253232267,
+        7.910379260918592,
+        2.291170234261357,
+        8.0576196237244,
+        3.5232158695139515
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -2961,13 +2961,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        9.056990297471803,
-        9.462723284979749,
-        9.101243503967423,
-        3.4514975922176583,
-        6.796232598676875,
-        6.156303175848592,
-        6.714797744138663
+        8.740542415281105,
+        9.016869981989146,
+        4.061095833134239,
+        7.374572261801262,
+        6.604273850945949,
+        1.7528047833024707,
+        5.11601809046613
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -3026,13 +3026,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        8.766081408865512,
-        9.185788269170517,
-        4.583802127902688,
-        6.16864596913511,
-        7.104012209131234,
-        7.9854558611148585,
-        0.8560805598237131
+        9.413583029135838,
+        9.685202779220642,
+        6.69127380791341,
+        6.593917149175663,
+        4.910444608887921,
+        5.112035682662237,
+        6.807800909388062
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -3091,13 +3091,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        9.998718055467407,
-        9.73165988812192,
-        2.1242502965655174,
-        4.250234596466511,
-        0.07422251294734394,
-        8.549263141840068,
-        6.10137257280307
+        9.02981444635945,
+        9.761588701962758,
+        5.014556329360085,
+        5.193113881808125,
+        2.7853802027076435,
+        4.187497685427195,
+        7.273452981866118
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -3156,13 +3156,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        8.819964972638285,
-        9.878233083226586,
-        5.014423839304303,
-        7.080980014438776,
-        8.39837061192123,
-        9.611768227586602,
-        0.2930714536453305
+        8.58158313764006,
+        9.21702163221854,
+        5.0484257482221295,
+        2.538014846793619,
+        3.34899494657118,
+        5.7331234567079115,
+        7.6259708603643395
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -3221,13 +3221,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        8.626426868060417,
-        9.913306759947421,
-        2.8877965419899443,
-        6.616585484815298,
-        3.239218827292929,
-        2.3252424599234667,
-        7.141231148176521
+        9.063591885191641,
+        9.306633907814074,
+        4.752846443828456,
+        0.8982679211483036,
+        2.5908400724030156,
+        5.211014532460094,
+        4.293655952773681
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -3286,13 +3286,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        8.685712479565888,
-        9.516680936537544,
-        8.548051971574855,
-        9.183355210977894,
-        5.216869955217314,
-        7.4932847231415245,
-        9.292676261299873
+        9.500342022802496,
+        9.654706703237625,
+        6.813683344092489,
+        9.937025573252114,
+        2.4862401916578247,
+        3.4975702702528677,
+        1.1479192753776668
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",
@@ -3351,13 +3351,13 @@
       "aiGenerated": true,
       "confidenceScore": 0.75,
       "researchVector": [
-        9.899724000895105,
-        9.601094049365162,
-        5.363613208342802,
-        5.005570748374291,
-        5.057030357997836,
-        2.5306013301052976,
-        5.029655999960017
+        8.657286481400664,
+        9.358894765725546,
+        0.31558515089196604,
+        3.22279158222174,
+        4.687743347993636,
+        3.574278880860997,
+        5.03404216547922
       ],
       "relatedPapers": [
         "10.1038/s41593-2024-4000",

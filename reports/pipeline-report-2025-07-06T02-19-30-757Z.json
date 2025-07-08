@@ -1,0 +1,46 @@
+{
+  "timestamp": "2025-07-06T02:17:52.549Z",
+  "steps": {
+    "cleanup": {
+      "completed": true,
+      "removed": 0,
+      "remaining": 4487
+    },
+    "fetchNew": {
+      "completed": true,
+      "added": 36,
+      "errors": 0
+    },
+    "extractData": {
+      "completed": true,
+      "processed": 50,
+      "avgConfidence": 57
+    },
+    "qualityScore": {
+      "completed": true,
+      "avgScore": 58,
+      "highQuality": 0
+    },
+    "enhanceContent": {
+      "completed": true,
+      "enhanced": 25,
+      "avgCompleteness": 75
+    }
+  },
+  "finalStats": {
+    "totalPapers": 4523,
+    "realPapers": 3175,
+    "highQualityPapers": 1905,
+    "averageQualityScore": 72,
+    "papersWithPerformanceData": 4355,
+    "papersWithMaterialsData": 4458
+  },
+  "recommendations": [
+    "🎯 Increase real paper percentage: Currently 70.2%, target >80%",
+    "⭐ Improve average quality score: Currently 72, target >75",
+    "🔄 Schedule regular pipeline runs to maintain data quality",
+    "🔍 Implement automated quality monitoring alerts",
+    "📚 Consider adding more specialized journals and conferences"
+  ],
+  "executionTime": 98188
+}

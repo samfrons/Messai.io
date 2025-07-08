@@ -1,91 +1,463 @@
 {
-  "generatedAt": "2025-07-05T10:24:28.640Z",
+  "generatedAt": "2025-07-06T01:23:24.582Z",
   "engineVersion": "1.0",
   "analysisScope": {
-    "totalPapers": 32,
-    "materialsAnalyzed": 24,
+    "totalPapers": 96,
+    "materialsAnalyzed": 88,
     "gapsIdentified": 5,
     "modelsGenerated": 3,
     "insightsDiscovered": 4
   },
   "trends": [
     {
-      "material": "material-7",
-      "trend": "stable",
+      "material": "adaptive interface",
+      "trend": "increasing",
       "rate": null,
-      "confidence": null
+      "confidence": 0.95
     },
     {
-      "material": "composite electrode",
-      "trend": "stable",
+      "material": "self-organizing structure",
+      "trend": "increasing",
       "rate": null,
-      "confidence": null
+      "confidence": 0.95
     },
     {
-      "material": "material-2",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Advanced alloys",
+      "trend": "increasing",
+      "rate": 9506.920930232558,
+      "confidence": 0.95
     },
     {
-      "material": "material-5",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Carbon nanotubes",
+      "trend": "increasing",
+      "rate": 8309.478947368421,
+      "confidence": 0.95
     },
     {
-      "material": "material-0",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Single-walled carbon nanotubes (SWCNT)",
+      "trend": "increasing",
+      "rate": 6724.898313027179,
+      "confidence": 0.95
     },
     {
-      "material": "material-3",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Engineered polymers",
+      "trend": "increasing",
+      "rate": 5883.625,
+      "confidence": 0.95
     },
     {
-      "material": "material-6",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Metal-organic frameworks",
+      "trend": "increasing",
+      "rate": 5285.9297124600635,
+      "confidence": 0.95
     },
     {
-      "material": "material-1",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Composite materials",
+      "trend": "increasing",
+      "rate": 4642.329949238579,
+      "confidence": 0.95
     },
     {
-      "material": "material-4",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Ti₂CTₓ MXene",
+      "trend": "increasing",
+      "rate": 4336.82196969697,
+      "confidence": 0.95
     },
     {
-      "material": "architectural carbon cloth",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Prussian blue analogues",
+      "trend": "increasing",
+      "rate": 4235.946428571428,
+      "confidence": 0.95
     },
     {
-      "material": "optimized surface",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Nanostructured carbon",
+      "trend": "increasing",
+      "rate": 3665.9246031746034,
+      "confidence": 0.95
     },
     {
-      "material": "MXene nanosheets",
-      "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "material": "Stanene",
+      "trend": "increasing",
+      "rate": 3227.3050089445437,
+      "confidence": 0.95
     },
     {
-      "material": "building-integrated electrodes",
+      "material": "Advanced ceramics",
+      "trend": "increasing",
+      "rate": 2969.0013513513513,
+      "confidence": 0.95
+    },
+    {
+      "material": "V₂CTₓ MXene",
+      "trend": "increasing",
+      "rate": 2893.8103085554,
+      "confidence": 0.95
+    },
+    {
+      "material": "Semiconductor materials",
+      "trend": "increasing",
+      "rate": 2811.8389830508477,
+      "confidence": 0.95
+    },
+    {
+      "material": "Durable composites",
+      "trend": "increasing",
+      "rate": 2785.3917910447763,
+      "confidence": 0.95
+    },
+    {
+      "material": "Tungsten disulfide (WS₂)",
+      "trend": "increasing",
+      "rate": 2505.933070866142,
+      "confidence": 0.95
+    },
+    {
+      "material": "Advanced carbons",
+      "trend": "increasing",
+      "rate": 2285.448563484708,
+      "confidence": 0.95
+    },
+    {
+      "material": "Polypyrrole/CNT composite",
+      "trend": "increasing",
+      "rate": 2137.1749644381225,
+      "confidence": 0.95
+    },
+    {
+      "material": "Borophene",
+      "trend": "increasing",
+      "rate": 1844.8867786705625,
+      "confidence": 0.95
+    },
+    {
+      "material": "Graphene derivatives",
+      "trend": "increasing",
+      "rate": 1712.368275862069,
+      "confidence": 0.95
+    },
+    {
+      "material": "B-doped graphene",
+      "trend": "increasing",
+      "rate": 1679.4919839679358,
+      "confidence": 0.95
+    },
+    {
+      "material": "Titanium mesh",
+      "trend": "increasing",
+      "rate": 1573.0230547550432,
+      "confidence": 0.95
+    },
+    {
+      "material": "Bio-compatible polymers",
+      "trend": "increasing",
+      "rate": 1401.1875405580793,
+      "confidence": 0.95
+    },
+    {
+      "material": "Cost-effective materials",
+      "trend": "increasing",
+      "rate": 1357.3357142857142,
+      "confidence": 0.95
+    },
+    {
+      "material": "Graphene aerogel",
+      "trend": "increasing",
+      "rate": 1265.31861575179,
+      "confidence": 0.95
+    },
+    {
+      "material": "Stainless steel 316L",
+      "trend": "increasing",
+      "rate": 1209.1851851851852,
+      "confidence": 0.95
+    },
+    {
+      "material": "Bacterial cellulose",
+      "trend": "increasing",
+      "rate": 1045.7138769670958,
+      "confidence": 0.95
+    },
+    {
+      "material": "Antimony selenide",
       "trend": "stable",
-      "rate": null,
-      "confidence": null
+      "rate": 808.5227272727273,
+      "confidence": 0.95
+    },
+    {
+      "material": "Extreme-environment materials",
+      "trend": "stable",
+      "rate": 613.9805642633229,
+      "confidence": 0.95
+    },
+    {
+      "material": "Manganese dioxide",
+      "trend": "stable",
+      "rate": 551.9188255613126,
+      "confidence": 0.95
+    },
+    {
+      "material": "Metal-organic frameworks (MOF)",
+      "trend": "stable",
+      "rate": 505.3652726310217,
+      "confidence": 0.95
+    },
+    {
+      "material": "Smart materials",
+      "trend": "stable",
+      "rate": 239.98499061913697,
+      "confidence": 0.95
+    },
+    {
+      "material": "Sustainable polymers",
+      "trend": "stable",
+      "rate": 157.9726443768997,
+      "confidence": 0.95
+    },
+    {
+      "material": "Silicene",
+      "trend": "stable",
+      "rate": 122.32405566600397,
+      "confidence": 0.95
+    },
+    {
+      "material": "Local biomaterials",
+      "trend": "stable",
+      "rate": 67.0277108433735,
+      "confidence": 0.95
+    },
+    {
+      "material": "Nanoparticle composites",
+      "trend": "stable",
+      "rate": 28.933876811594203,
+      "confidence": 0.95
+    },
+    {
+      "material": "Copper mesh",
+      "trend": "stable",
+      "rate": -88.2893447642376,
+      "confidence": 0.95
+    },
+    {
+      "material": "Green composites",
+      "trend": "stable",
+      "rate": -124.57519016968988,
+      "confidence": 0.95
+    },
+    {
+      "material": "Nickel foam",
+      "trend": "stable",
+      "rate": -212.89457831325302,
+      "confidence": 0.95
+    },
+    {
+      "material": "Covalent organic frameworks (COF)",
+      "trend": "stable",
+      "rate": -354.9650293646556,
+      "confidence": 0.95
+    },
+    {
+      "material": "Agricultural waste-based",
+      "trend": "stable",
+      "rate": -380.8665297741273,
+      "confidence": 0.95
+    },
+    {
+      "material": "Ti₃C₂Tₓ MXene",
+      "trend": "stable",
+      "rate": -392.59395973154363,
+      "confidence": 0.95
+    },
+    {
+      "material": "Ta₄C₃Tₓ MXene",
+      "trend": "stable",
+      "rate": -472.16151468315303,
+      "confidence": 0.95
+    },
+    {
+      "material": "Nano-engineered surfaces",
+      "trend": "decreasing",
+      "rate": -553.0503194888179,
+      "confidence": 0.95
+    },
+    {
+      "material": "Quantum dots (ZnS)",
+      "trend": "decreasing",
+      "rate": -629.3202875399361,
+      "confidence": 0.95
+    },
+    {
+      "material": "Biochar",
+      "trend": "decreasing",
+      "rate": -704.0763016157989,
+      "confidence": 0.95
+    },
+    {
+      "material": "PEDOT:PSS",
+      "trend": "decreasing",
+      "rate": -838.6594117647059,
+      "confidence": 0.95
+    },
+    {
+      "material": "Vanadium oxide",
+      "trend": "decreasing",
+      "rate": -964.8181482847658,
+      "confidence": 0.95
+    },
+    {
+      "material": "Activated carbon cloth",
+      "trend": "decreasing",
+      "rate": -1024.2083847102342,
+      "confidence": 0.95
+    },
+    {
+      "material": "Quantum dots (CdS)",
+      "trend": "decreasing",
+      "rate": -1107.6818820224719,
+      "confidence": 0.95
+    },
+    {
+      "material": "MXene composites",
+      "trend": "decreasing",
+      "rate": -1225.6560846560847,
+      "confidence": 0.95
+    },
+    {
+      "material": "Carbon felt",
+      "trend": "decreasing",
+      "rate": -1232.5358280254777,
+      "confidence": 0.95
+    },
+    {
+      "material": "Polyaniline/graphene composite",
+      "trend": "decreasing",
+      "rate": -1252.145739910314,
+      "confidence": 0.95
+    },
+    {
+      "material": "Perovskite nanocrystals",
+      "trend": "decreasing",
+      "rate": -1306.5851063829787,
+      "confidence": 0.95
+    },
+    {
+      "material": "Layered double hydroxides",
+      "trend": "decreasing",
+      "rate": -1518.0008156606852,
+      "confidence": 0.95
+    },
+    {
+      "material": "Chitosan composite",
+      "trend": "decreasing",
+      "rate": -1548.3561643835617,
+      "confidence": 0.95
+    },
+    {
+      "material": "Alginate composite",
+      "trend": "decreasing",
+      "rate": -1677.7697547683924,
+      "confidence": 0.95
+    },
+    {
+      "material": "Black phosphorus",
+      "trend": "decreasing",
+      "rate": -1952.222386587771,
+      "confidence": 0.95
+    },
+    {
+      "material": "Hybrid materials",
+      "trend": "decreasing",
+      "rate": -1957.5357142857142,
+      "confidence": 0.95
+    },
+    {
+      "material": "Iron oxide nanoparticles",
+      "trend": "decreasing",
+      "rate": -2044.7920792079208,
+      "confidence": 0.95
+    },
+    {
+      "material": "Carbon fiber brush",
+      "trend": "decreasing",
+      "rate": -2045.0483183325439,
+      "confidence": 0.95
+    },
+    {
+      "material": "Germanene",
+      "trend": "decreasing",
+      "rate": -2084.410714285714,
+      "confidence": 0.95
+    },
+    {
+      "material": "Cold-resistant materials",
+      "trend": "decreasing",
+      "rate": -2231.188775510204,
+      "confidence": 0.95
+    },
+    {
+      "material": "Graphite rod",
+      "trend": "decreasing",
+      "rate": -3050.8098859315587,
+      "confidence": 0.95
+    },
+    {
+      "material": "Mineral-based materials",
+      "trend": "decreasing",
+      "rate": -3212.8920454545455,
+      "confidence": 0.95
+    },
+    {
+      "material": "Marine-derived materials",
+      "trend": "decreasing",
+      "rate": -3597.3806267806267,
+      "confidence": 0.95
+    },
+    {
+      "material": "Bio-based materials",
+      "trend": "decreasing",
+      "rate": -3732.6429080541698,
+      "confidence": 0.95
+    },
+    {
+      "material": "Mo₂TiC₂Tₓ MXene",
+      "trend": "decreasing",
+      "rate": -3955.9276485788114,
+      "confidence": 0.95
+    },
+    {
+      "material": "Molybdenum disulfide (MoS₂)",
+      "trend": "decreasing",
+      "rate": -3999.5874086565486,
+      "confidence": 0.95
+    },
+    {
+      "material": "Reduced graphene oxide (rGO)",
+      "trend": "decreasing",
+      "rate": -4002.3639825897717,
+      "confidence": 0.95
+    },
+    {
+      "material": "N-doped graphene",
+      "trend": "decreasing",
+      "rate": -4308.206896551724,
+      "confidence": 0.95
+    },
+    {
+      "material": "Multi-walled carbon nanotubes (MWCNT)",
+      "trend": "decreasing",
+      "rate": -5242.837889872931,
+      "confidence": 0.95
+    },
+    {
+      "material": "S-doped graphene",
+      "trend": "decreasing",
+      "rate": -7361.387736699729,
+      "confidence": 0.95
+    },
+    {
+      "material": "Nb₂CTₓ MXene",
+      "trend": "decreasing",
+      "rate": -10722.659407665506,
+      "confidence": 0.95
     },
     {
       "material": "surface modified",
@@ -118,16 +490,28 @@
       "confidence": null
     },
     {
-      "material": "adaptive interface",
-      "trend": "increasing",
+      "material": "optimized surface",
+      "trend": "stable",
       "rate": null,
-      "confidence": 0.95
+      "confidence": null
     },
     {
-      "material": "self-organizing structure",
-      "trend": "increasing",
+      "material": "MXene nanosheets",
+      "trend": "stable",
       "rate": null,
-      "confidence": 0.95
+      "confidence": null
+    },
+    {
+      "material": "architectural carbon cloth",
+      "trend": "stable",
+      "rate": null,
+      "confidence": null
+    },
+    {
+      "material": "building-integrated electrodes",
+      "trend": "stable",
+      "rate": null,
+      "confidence": null
     },
     {
       "material": "quantum interface",
@@ -359,7 +743,7 @@
     {
       "type": "pattern_discovery",
       "title": "MXene Materials Show Exponential Performance Scaling",
-      "description": "Analysis reveals that MXene-based materials demonstrate exponential performance improvements with multi-element compositions. Top performers: Mo₂TiC₂Tₓ, quantum interface, coherent coupling, Nb₂CTₓ, Ti₃CNTₓ.",
+      "description": "Analysis reveals that MXene-based materials demonstrate exponential performance improvements with multi-element compositions. Top performers: Mo₂TiC₂Tₓ MXene, Ti₃C₂Tₓ MXene, Ta₄C₃Tₓ MXene, Ti₂CTₓ MXene, Hybrid materials.",
       "confidence": 0.87,
       "actionItems": [
         "Prioritize multi-element MXene research",
@@ -367,11 +751,11 @@
         "Develop high-throughput MXene synthesis methods"
       ],
       "relatedPapers": [
-        "papers featuring Mo₂TiC₂Tₓ",
-        "papers featuring quantum interface",
-        "papers featuring coherent coupling",
-        "papers featuring Nb₂CTₓ",
-        "papers featuring Ti₃CNTₓ"
+        "papers featuring Mo₂TiC₂Tₓ MXene",
+        "papers featuring Ti₃C₂Tₓ MXene",
+        "papers featuring Ta₄C₃Tₓ MXene",
+        "papers featuring Ti₂CTₓ MXene",
+        "papers featuring Hybrid materials"
       ],
       "potentialImpact": "significant"
     },
@@ -387,10 +771,13 @@
       ],
       "relatedPapers": [
         "studies with engineered strain",
-        "studies with engineered Shewanella",
+        "studies with Photosynthetic cyanobacteria",
+        "studies with Metabolically engineered microbes",
+        "studies with Precision-engineered bacteria",
         "studies with synthetic biology strains",
         "studies with metabolically engineered microbes",
         "studies with photosynthetic bacteria",
+        "studies with engineered Shewanella",
         "studies with AI-designed synthetic microbe"
       ],
       "potentialImpact": "revolutionary"

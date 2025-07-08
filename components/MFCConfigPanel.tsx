@@ -5,7 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronDown, ChevronUp } from 'lucide-react'
 
 interface MFCConfig {
-  electrode: {
+  anode: {
+    material: string
+    surface: number
+    thickness: number
+  }
+  cathode: {
     material: string
     surface: number
     thickness: number
@@ -96,7 +101,8 @@ const materialMultipliers: Record<string, number> = {
 
 export default function MFCConfigPanel({ config, selectedComponent, onConfigChange }: MFCConfigPanelProps) {
   const [expandedSections, setExpandedSections] = useState({
-    electrode: true,
+    anode: true,
+    cathode: true,
     microbial: true,
     chamber: true
   })
@@ -108,18 +114,21 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
     }))
   }
 
-  const calculatePowerOutput = () => {
-    const basePower = config.electrode.surface * config.microbial.activity * 0.05
-    const materialMultiplier = materialMultipliers[config.electrode.material] || 1.0
-    return Math.round(basePower * materialMultiplier)
+  const calculatePower = () => {
+    const anodeMaterial = materialMultipliers[config.anode.material] || 1.0
+    const cathodeMaterial = materialMultipliers[config.cathode.material] || 1.0
+    const basePower = (config.anode.surface + config.cathode.surface) * config.microbial.activity * 0.025
+    return Math.round(basePower * anodeMaterial * cathodeMaterial)
   }
 
   const calculateEfficiency = () => {
-    return Math.round((config.microbial.activity + config.electrode.surface) / 3)
+    return Math.round((config.microbial.activity + (config.anode.surface + config.cathode.surface) / 2) / 3)
   }
 
   const calculateCost = () => {
-    return Math.round(config.chamber.volume * 10 + config.electrode.surface * 0.1)
+    const anodeCost = getMaterialInfo(config.anode.material)?.cost || 0
+    const cathodeCost = getMaterialInfo(config.cathode.material)?.cost || 0
+    return Math.round(config.chamber.volume * 10 + anodeCost + cathodeCost)
   }
 
   const getMaterialInfo = (materialId: string) => {
@@ -133,10 +142,6 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
     return allMaterials.find(m => m.id === materialId)
   }
 
-  const isAdvancedMaterial = (materialId: string) => {
-    return !electrodematerials.traditional.find(m => m.id === materialId)
-  }
-
   const getSpeciesInfo = (speciesId: string) => {
     return microbialSpecies.find(s => s.id === speciesId)
   }
@@ -145,35 +150,34 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
     return chamberMaterials.find(m => m.id === materialId)
   }
 
-  return (
-    <div className="space-y-6 p-4">
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900 mb-2">MFC Configuration</h2>
-        {selectedComponent && (
-          <p className="text-sm text-blue-600">Editing: {selectedComponent}</p>
-        )}
-      </div>
+  const renderElectrodeSection = (type: 'anode' | 'cathode') => {
+    const electrodeConfig = config[type]
+    const isHighlighted = selectedComponent === type
 
-      {/* Electrode Configuration */}
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+    return (
+      <div className={`bg-white rounded-lg border shadow-sm ${isHighlighted ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200'}`}>
         <button
-          onClick={() => toggleSection('electrode')}
+          onClick={() => toggleSection(type)}
           className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
         >
-          <h3 className="text-lg font-semibold text-gray-900">Electrode Configuration</h3>
-          {expandedSections.electrode ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          <h3 className="text-lg font-semibold text-gray-900 capitalize">
+            {type} Configuration
+            {isHighlighted && <span className="ml-2 text-sm text-blue-600">(Selected)</span>}
+          </h3>
+          {expandedSections[type] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </button>
         
         <AnimatePresence>
-          {expandedSections.electrode && (
+          {expandedSections[type] && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               className="border-t border-gray-200 p-4 space-y-4"
             >
+              {/* Material Selection */}
               <div>
-                <h4 className="font-medium text-gray-900 mb-3">Electrode Material</h4>
+                <h4 className="font-medium text-gray-900 mb-3">{type.charAt(0).toUpperCase() + type.slice(1)} Material</h4>
                 
                 {/* Traditional Materials */}
                 <div className="mb-4">
@@ -183,10 +187,10 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
                       <label key={material.id} className="flex items-center space-x-3 p-2 border rounded hover:bg-gray-50">
                         <input
                           type="radio"
-                          name="electrode-material"
+                          name={`${type}-material`}
                           value={material.id}
-                          checked={config.electrode.material === material.id}
-                          onChange={(e) => onConfigChange('electrode', 'material', e.target.value)}
+                          checked={electrodeConfig.material === material.id}
+                          onChange={(e) => onConfigChange(type, 'material', e.target.value)}
                           className="w-4 h-4 text-blue-600"
                         />
                         <div className="flex-1">
@@ -204,164 +208,143 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
                   </div>
                 </div>
 
-                {/* Graphene Materials */}
+                {/* Advanced Materials */}
                 <div className="mb-4">
-                  <h5 className="text-sm font-medium text-gray-700 mb-2">Graphene Materials</h5>
-                  <div className="grid grid-cols-1 gap-2">
-                    {electrodematerials.graphene.map((material) => (
-                      <label key={material.id} className="flex items-center space-x-3 p-2 border rounded hover:bg-gray-50">
-                        <input
-                          type="radio"
-                          name="electrode-material"
-                          value={material.id}
-                          checked={config.electrode.material === material.id}
-                          onChange={(e) => onConfigChange('electrode', 'material', e.target.value)}
-                          className="w-4 h-4 text-blue-600"
-                        />
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">{material.name}</span>
-                            <div className="flex items-center space-x-2 text-xs">
-                              <span className="text-green-600">{material.efficiency}% eff</span>
-                              <span className="text-gray-600">${material.cost}</span>
+                  <h5 className="text-sm font-medium text-gray-700 mb-2">Advanced Materials</h5>
+                  <div className="space-y-3">
+                    {/* Graphene */}
+                    <div>
+                      <h6 className="text-xs font-medium text-purple-700 mb-1">Graphene Materials</h6>
+                      <div className="grid grid-cols-1 gap-2">
+                        {electrodematerials.graphene.map((material) => (
+                          <label key={material.id} className="flex items-center space-x-3 p-2 border border-purple-200 rounded hover:bg-purple-50">
+                            <input
+                              type="radio"
+                              name={`${type}-material`}
+                              value={material.id}
+                              checked={electrodeConfig.material === material.id}
+                              onChange={(e) => onConfigChange(type, 'material', e.target.value)}
+                              className="w-4 h-4 text-purple-600"
+                            />
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium">{material.name}</span>
+                                <div className="flex items-center space-x-2 text-xs">
+                                  <span className="text-green-600">{material.efficiency}% eff</span>
+                                  <span className="text-gray-600">${material.cost}</span>
+                                </div>
+                              </div>
+                              <p className="text-xs text-gray-500">{material.description}</p>
                             </div>
-                          </div>
-                          <p className="text-xs text-gray-500">{material.description}</p>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Carbon Nanotubes Materials */}
-                <div className="mb-4">
-                  <h5 className="text-sm font-medium text-gray-700 mb-2">Carbon Nanotubes Materials</h5>
-                  <div className="grid grid-cols-1 gap-2">
-                    {electrodematerials.nanotube.map((material) => (
-                      <label key={material.id} className="flex items-center space-x-3 p-2 border rounded hover:bg-gray-50">
-                        <input
-                          type="radio"
-                          name="electrode-material"
-                          value={material.id}
-                          checked={config.electrode.material === material.id}
-                          onChange={(e) => onConfigChange('electrode', 'material', e.target.value)}
-                          className="w-4 h-4 text-blue-600"
-                        />
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">{material.name}</span>
-                            <div className="flex items-center space-x-2 text-xs">
-                              <span className="text-green-600">{material.efficiency}% eff</span>
-                              <span className="text-gray-600">${material.cost}</span>
+                    {/* Carbon Nanotubes */}
+                    <div>
+                      <h6 className="text-xs font-medium text-blue-700 mb-1">Carbon Nanotubes</h6>
+                      <div className="grid grid-cols-1 gap-2">
+                        {electrodematerials.nanotube.map((material) => (
+                          <label key={material.id} className="flex items-center space-x-3 p-2 border border-blue-200 rounded hover:bg-blue-50">
+                            <input
+                              type="radio"
+                              name={`${type}-material`}
+                              value={material.id}
+                              checked={electrodeConfig.material === material.id}
+                              onChange={(e) => onConfigChange(type, 'material', e.target.value)}
+                              className="w-4 h-4 text-blue-600"
+                            />
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium">{material.name}</span>
+                                <div className="flex items-center space-x-2 text-xs">
+                                  <span className="text-green-600">{material.efficiency}% eff</span>
+                                  <span className="text-gray-600">${material.cost}</span>
+                                </div>
+                              </div>
+                              <p className="text-xs text-gray-500">{material.description}</p>
                             </div>
-                          </div>
-                          <p className="text-xs text-gray-500">{material.description}</p>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* MXene Materials */}
-                <div className="mb-4">
-                  <h5 className="text-sm font-medium text-gray-700 mb-2">MXene Materials</h5>
-                  <div className="grid grid-cols-1 gap-2">
-                    {electrodematerials.mxene.map((material) => (
-                      <label key={material.id} className="flex items-center space-x-3 p-2 border rounded hover:bg-gray-50">
-                        <input
-                          type="radio"
-                          name="electrode-material"
-                          value={material.id}
-                          checked={config.electrode.material === material.id}
-                          onChange={(e) => onConfigChange('electrode', 'material', e.target.value)}
-                          className="w-4 h-4 text-blue-600"
-                        />
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">{material.name}</span>
-                            <div className="flex items-center space-x-2 text-xs">
-                              <span className="text-green-600">{material.efficiency}% eff</span>
-                              <span className="text-gray-600">${material.cost}</span>
+                    {/* MXenes */}
+                    <div>
+                      <h6 className="text-xs font-medium text-orange-700 mb-1">MXene Materials</h6>
+                      <div className="grid grid-cols-1 gap-2">
+                        {electrodematerials.mxene.map((material) => (
+                          <label key={material.id} className="flex items-center space-x-3 p-2 border border-orange-200 rounded hover:bg-orange-50">
+                            <input
+                              type="radio"
+                              name={`${type}-material`}
+                              value={material.id}
+                              checked={electrodeConfig.material === material.id}
+                              onChange={(e) => onConfigChange(type, 'material', e.target.value)}
+                              className="w-4 h-4 text-orange-600"
+                            />
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium">{material.name}</span>
+                                <div className="flex items-center space-x-2 text-xs">
+                                  <span className="text-green-600">{material.efficiency}% eff</span>
+                                  <span className="text-gray-600">${material.cost}</span>
+                                </div>
+                              </div>
+                              <p className="text-xs text-gray-500">{material.description}</p>
                             </div>
-                          </div>
-                          <p className="text-xs text-gray-500">{material.description}</p>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                </div>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
 
-                {/* Upcycled Materials */}
-                <div className="mb-4">
-                  <h5 className="text-sm font-medium text-gray-700 mb-2">Upcycled Materials</h5>
-                  <div className="grid grid-cols-1 gap-2">
-                    {electrodematerials.upcycled.map((material) => (
-                      <label key={material.id} className="flex items-center space-x-3 p-2 border rounded hover:bg-gray-50">
-                        <input
-                          type="radio"
-                          name="electrode-material"
-                          value={material.id}
-                          checked={config.electrode.material === material.id}
-                          onChange={(e) => onConfigChange('electrode', 'material', e.target.value)}
-                          className="w-4 h-4 text-blue-600"
-                        />
-                        <div className="flex-1">
-                          <div className="flex items-center justify-between">
-                            <span className="text-sm font-medium">{material.name}</span>
-                            <div className="flex items-center space-x-2 text-xs">
-                              <span className="text-green-600">{material.efficiency}% eff</span>
-                              <span className="text-gray-600">${material.cost}</span>
+                    {/* Upcycled */}
+                    <div>
+                      <h6 className="text-xs font-medium text-green-700 mb-1">Upcycled Materials</h6>
+                      <div className="grid grid-cols-1 gap-2">
+                        {electrodematerials.upcycled.map((material) => (
+                          <label key={material.id} className="flex items-center space-x-3 p-2 border border-green-200 rounded hover:bg-green-50">
+                            <input
+                              type="radio"
+                              name={`${type}-material`}
+                              value={material.id}
+                              checked={electrodeConfig.material === material.id}
+                              onChange={(e) => onConfigChange(type, 'material', e.target.value)}
+                              className="w-4 h-4 text-green-600"
+                            />
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <span className="text-sm font-medium">{material.name}</span>
+                                <div className="flex items-center space-x-2 text-xs">
+                                  <span className="text-green-600">{material.efficiency}% eff</span>
+                                  <span className="text-gray-600">${material.cost}</span>
+                                </div>
+                              </div>
+                              <p className="text-xs text-gray-500">{material.description}</p>
                             </div>
-                          </div>
-                          <p className="text-xs text-gray-500">{material.description}</p>
-                        </div>
-                      </label>
-                    ))}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              {/* Advanced Material Properties */}
-              {isAdvancedMaterial(config.electrode.material) && (
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <h4 className="font-medium text-blue-900 mb-2">Advanced Material Properties</h4>
-                  <div className="grid grid-cols-2 gap-4 text-sm">
-                    <div>
-                      <span className="text-blue-700">Electron Transfer Rate:</span>
-                      <span className="ml-2 text-blue-900">Enhanced</span>
-                    </div>
-                    <div>
-                      <span className="text-blue-700">Biocompatibility:</span>
-                      <span className="ml-2 text-blue-900">High</span>
-                    </div>
-                    <div>
-                      <span className="text-blue-700">Stability:</span>
-                      <span className="ml-2 text-blue-900">Excellent</span>
-                    </div>
-                    <div>
-                      <span className="text-blue-700">Research Status:</span>
-                      <span className="ml-2 text-blue-900">Active</span>
-                    </div>
-                  </div>
-                </div>
-              )}
-
               {/* Surface Area */}
               <div>
-                <label htmlFor="surface-area" className="block text-sm font-medium text-gray-700 mb-2">
-                  Surface Area (cm²): {config.electrode.surface}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Surface Area: {electrodeConfig.surface} cm²
                 </label>
                 <input
-                  id="surface-area"
                   type="range"
                   min="5"
                   max="250"
-                  step="5"
-                  value={config.electrode.surface}
-                  onChange={(e) => onConfigChange('electrode', 'surface', Number(e.target.value))}
-                  className="w-full"
+                  value={electrodeConfig.surface}
+                  onChange={(e) => onConfigChange(type, 'surface', parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>5 cm²</span>
                   <span>250 cm²</span>
                 </div>
@@ -369,36 +352,67 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
 
               {/* Thickness */}
               <div>
-                <label htmlFor="thickness" className="block text-sm font-medium text-gray-700 mb-2">
-                  Thickness (mm): {config.electrode.thickness}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Thickness: {electrodeConfig.thickness} mm
                 </label>
                 <input
-                  id="thickness"
                   type="range"
                   min="0.5"
-                  max="5"
-                  step="0.1"
-                  value={config.electrode.thickness}
-                  onChange={(e) => onConfigChange('electrode', 'thickness', Number(e.target.value))}
-                  className="w-full"
+                  max="10"
+                  step="0.5"
+                  value={electrodeConfig.thickness}
+                  onChange={(e) => onConfigChange(type, 'thickness', parseFloat(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>0.5 mm</span>
-                  <span>5 mm</span>
+                  <span>10 mm</span>
                 </div>
               </div>
+
+              {/* Material Info */}
+              {getMaterialInfo(electrodeConfig.material) && (
+                <div className="bg-gray-50 p-3 rounded">
+                  <h5 className="font-medium text-gray-900 mb-1">Material Properties</h5>
+                  <div className="text-sm text-gray-600">
+                    <p>Efficiency: {getMaterialInfo(electrodeConfig.material)?.efficiency}%</p>
+                    <p>Cost: ${getMaterialInfo(electrodeConfig.material)?.cost}</p>
+                    <p>{getMaterialInfo(electrodeConfig.material)?.description}</p>
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6 p-4 max-h-full overflow-y-auto">
+      <div className="text-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-2">MFC Configuration</h2>
+        {selectedComponent && (
+          <p className="text-sm text-blue-600">Editing: {selectedComponent}</p>
+        )}
+      </div>
+
+      {/* Anode Configuration */}
+      {renderElectrodeSection('anode')}
+
+      {/* Cathode Configuration */}
+      {renderElectrodeSection('cathode')}
 
       {/* Microbial Configuration */}
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+      <div className={`bg-white rounded-lg border shadow-sm ${selectedComponent === 'microbial' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200'}`}>
         <button
           onClick={() => toggleSection('microbial')}
           className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
         >
-          <h3 className="text-lg font-semibold text-gray-900">Microbial Community</h3>
+          <h3 className="text-lg font-semibold text-gray-900">
+            Microbial Configuration
+            {selectedComponent === 'microbial' && <span className="ml-2 text-sm text-blue-600">(Selected)</span>}
+          </h3>
           {expandedSections.microbial ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </button>
         
@@ -410,6 +424,7 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
               exit={{ height: 0, opacity: 0 }}
               className="border-t border-gray-200 p-4 space-y-4"
             >
+              {/* Species Selection */}
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Microbial Species</h4>
                 <div className="space-y-2">
@@ -437,59 +452,69 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
                 </div>
               </div>
 
-              {/* Cell Density */}
+              {/* Density */}
               <div>
-                <label htmlFor="cell-density" className="block text-sm font-medium text-gray-700 mb-2">
-                  Cell Density (10⁸ cells/mL): {config.microbial.density}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Cell Density: {config.microbial.density} × 10⁸ cells/mL
                 </label>
                 <input
-                  id="cell-density"
                   type="range"
                   min="1"
-                  max="10"
-                  step="0.1"
+                  max="20"
                   value={config.microbial.density}
-                  onChange={(e) => onConfigChange('microbial', 'density', Number(e.target.value))}
-                  className="w-full"
+                  onChange={(e) => onConfigChange('microbial', 'density', parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
-                  <span>1×10⁸</span>
-                  <span>10×10⁸</span>
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>1 × 10⁸</span>
+                  <span>20 × 10⁸</span>
                 </div>
               </div>
 
-              {/* Activity Level */}
+              {/* Activity */}
               <div>
-                <label htmlFor="activity-level" className="block text-sm font-medium text-gray-700 mb-2">
-                  Activity Level (%): {config.microbial.activity}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Metabolic Activity: {config.microbial.activity}%
                 </label>
                 <input
-                  id="activity-level"
                   type="range"
                   min="10"
                   max="100"
-                  step="5"
                   value={config.microbial.activity}
-                  onChange={(e) => onConfigChange('microbial', 'activity', Number(e.target.value))}
-                  className="w-full"
+                  onChange={(e) => onConfigChange('microbial', 'activity', parseInt(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>10%</span>
                   <span>100%</span>
                 </div>
               </div>
+
+              {/* Species Info */}
+              {getSpeciesInfo(config.microbial.species) && (
+                <div className="bg-gray-50 p-3 rounded">
+                  <h5 className="font-medium text-gray-900 mb-1">Species Properties</h5>
+                  <div className="text-sm text-gray-600">
+                    <p>Power Output: {getSpeciesInfo(config.microbial.species)?.power}</p>
+                    <p>Stability: {getSpeciesInfo(config.microbial.species)?.stability}</p>
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
       {/* Chamber Configuration */}
-      <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+      <div className={`bg-white rounded-lg border shadow-sm ${selectedComponent === 'chamber' ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200'}`}>
         <button
           onClick={() => toggleSection('chamber')}
           className="w-full flex items-center justify-between p-4 hover:bg-gray-50 transition-colors"
         >
-          <h3 className="text-lg font-semibold text-gray-900">Chamber Configuration</h3>
+          <h3 className="text-lg font-semibold text-gray-900">
+            Chamber Configuration
+            {selectedComponent === 'chamber' && <span className="ml-2 text-sm text-blue-600">(Selected)</span>}
+          </h3>
           {expandedSections.chamber ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
         </button>
         
@@ -501,6 +526,7 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
               exit={{ height: 0, opacity: 0 }}
               className="border-t border-gray-200 p-4 space-y-4"
             >
+              {/* Shape Selection */}
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Chamber Shape</h4>
                 <div className="space-y-2">
@@ -523,6 +549,7 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
                 </div>
               </div>
 
+              {/* Material Selection */}
               <div>
                 <h4 className="font-medium text-gray-900 mb-3">Chamber Material</h4>
                 <div className="space-y-2">
@@ -540,7 +567,7 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
                         <div className="flex items-center justify-between">
                           <span className="text-sm font-medium">{material.name}</span>
                           <div className="flex items-center space-x-2 text-xs">
-                            <span className="text-green-600">{material.transparency}</span>
+                            <span className="text-blue-600">{material.transparency}</span>
                             <span className="text-gray-600">${material.cost}</span>
                           </div>
                         </div>
@@ -553,44 +580,55 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
 
               {/* Volume */}
               <div>
-                <label htmlFor="volume" className="block text-sm font-medium text-gray-700 mb-2">
-                  Volume (L): {config.chamber.volume}
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Volume: {config.chamber.volume} L
                 </label>
                 <input
-                  id="volume"
                   type="range"
                   min="0.1"
-                  max="5"
+                  max="10"
                   step="0.1"
                   value={config.chamber.volume}
-                  onChange={(e) => onConfigChange('chamber', 'volume', Number(e.target.value))}
-                  className="w-full"
+                  onChange={(e) => onConfigChange('chamber', 'volume', parseFloat(e.target.value))}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
                 />
-                <div className="flex justify-between text-xs text-gray-500">
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
                   <span>0.1 L</span>
-                  <span>5 L</span>
+                  <span>10 L</span>
                 </div>
               </div>
+
+              {/* Material Info */}
+              {getChamberMaterialInfo(config.chamber.material) && (
+                <div className="bg-gray-50 p-3 rounded">
+                  <h5 className="font-medium text-gray-900 mb-1">Material Properties</h5>
+                  <div className="text-sm text-gray-600">
+                    <p>Transparency: {getChamberMaterialInfo(config.chamber.material)?.transparency}</p>
+                    <p>Cost: ${getChamberMaterialInfo(config.chamber.material)?.cost}</p>
+                    <p>{getChamberMaterialInfo(config.chamber.material)?.description}</p>
+                  </div>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
       </div>
 
-      {/* Predicted Performance */}
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border border-gray-200 p-4">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Predicted Performance</h3>
+      {/* Performance Predictions */}
+      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-lg p-4 border border-green-200">
+        <h3 className="text-lg font-semibold text-gray-900 mb-3">Performance Predictions</h3>
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="text-sm text-gray-600">Power Output</div>
-            <div className="text-2xl font-bold text-green-600">{calculatePowerOutput()} mW</div>
+            <div className="text-2xl font-bold text-green-600">{calculatePower()}</div>
+            <div className="text-xs text-gray-600">mW/m² Power</div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-gray-600">Efficiency</div>
             <div className="text-2xl font-bold text-blue-600">{calculateEfficiency()}%</div>
+            <div className="text-xs text-gray-600">Efficiency</div>
           </div>
           <div className="text-center">
-            <div className="text-sm text-gray-600">Est. Cost</div>
             <div className="text-2xl font-bold text-purple-600">${calculateCost()}</div>
+            <div className="text-xs text-gray-600">Est. Cost</div>
           </div>
         </div>
       </div>

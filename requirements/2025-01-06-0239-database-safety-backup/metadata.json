@@ -1,0 +1,24 @@
+{
+  "id": "database-safety-backup",
+  "started": "2025-01-06T02:39:00Z",
+  "lastUpdated": "2025-01-06T02:39:00Z",
+  "status": "active",
+  "phase": "complete",
+  "progress": {
+    "discovery": { "answered": 5, "total": 5 },
+    "detail": { "answered": 5, "total": 5 }
+  },
+  "contextFiles": [
+    "/lib/db.ts",
+    "/prisma/schema.prisma",
+    "/docs/VERCEL_DEPLOYMENT.md",
+    "/docs/DEPLOYMENT.md",
+    "/package.json"
+  ],
+  "relatedFeatures": [
+    "User authentication system",
+    "Research literature database",
+    "Experiment tracking system",
+    "Vercel deployment infrastructure"
+  ]
+}

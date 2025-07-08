@@ -11,6 +11,14 @@ export default function Home() {
   const [message, setMessage] = useState('')
   const demoConfig = getDemoConfig()
 
+  // In production mode (messai.io), redirect to marketing page
+  if (!demoConfig.isDemo && typeof window !== 'undefined') {
+    // This would be handled by Vercel rewrites, but adding for clarity
+    if (window.location.hostname === 'messai.io') {
+      window.location.href = '/marketing'
+    }
+  }
+
   const electrochemicalSystems = [
     {
       id: 'microbial',

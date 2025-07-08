@@ -1,6 +1,27 @@
-# Deployment Guide
+# MESSAi Deployment Guide
 
-This guide explains how to deploy MESSAi to various platforms.
+## Overview
+
+MESSAi uses a dual-deployment strategy:
+- **messai.io** - Marketing site and landing pages (private content)
+- **app.messai.io** - Research platform application (open source)
+
+## Environment Modes
+
+### Demo Mode (Default for Cloned Repos)
+When users clone the repository, they get a fully functional demo:
+```env
+DEMO_MODE="true"
+NEXT_PUBLIC_DEMO_MODE="true"
+```
+
+### Production Mode (messai.io)
+For production deployment:
+```env
+DEMO_MODE="false"
+NEXT_PUBLIC_DEMO_MODE="false"
+PRODUCTION_URL="https://messai.io"
+```
 
 ## Vercel Deployment (Recommended)
 

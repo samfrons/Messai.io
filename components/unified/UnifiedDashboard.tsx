@@ -4,15 +4,21 @@ import { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SystemSelector from './SystemSelector'
 import FuelCellConfigPanel from '../fuel-cell/FuelCellConfigPanel'
+import FuelCellConfigPanelMobile from '../fuel-cell/FuelCellConfigPanelMobile'
 import FuelCellStack3D from '../fuel-cell/FuelCellStack3D'
 import ControlSystemDesigner from '../fuel-cell/ControlSystemDesigner'
 import ControlSystemVisualization from '../fuel-cell/ControlSystemVisualization'
 import HILTestingInterface from '../fuel-cell/HILTestingInterface'
 import OptimizationInterface from '../fuel-cell/OptimizationInterface'
-import { MESSConfigPanel } from '../MESSConfigPanel'
+import ComparativeAnalysis from '../fuel-cell/ComparativeAnalysis'
+import FuelCellOnboarding from '../onboarding/FuelCellOnboarding'
+import LoadingSpinner from '../ui/LoadingSpinner'
+import ErrorMessage from '../ui/ErrorMessage'
+import MESSConfigPanel from '../MESSConfigPanel'
 import { VanillaDashboard3D } from '../3d/vanilla-dashboard-3d'
 import { type FuelCellPredictionResult } from '@/lib/fuel-cell-predictions'
 import { type PredictionResult } from '@/lib/ai-predictions'
+import { useKeyboardShortcuts, fuelCellShortcuts } from '@/hooks/useKeyboardShortcuts'
 
 // ============================================================================
 // INTERFACES
@@ -49,8 +55,32 @@ export default function UnifiedDashboard({
     isCalculating: false
   })
 
-  const [viewMode, setViewMode] = useState<'config' | '3d' | 'split' | 'control' | 'hil' | 'optimize'>('split')
+  const [viewMode, setViewMode] = useState<'config' | '3d' | 'split' | 'control' | 'hil' | 'optimize' | 'compare'>('split')
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  // Check for mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Keyboard shortcuts
+  useKeyboardShortcuts([
+    { ...fuelCellShortcuts.switchToConfig, handler: () => setViewMode('config') },
+    { ...fuelCellShortcuts.switchTo3D, handler: () => setViewMode('3d') },
+    { ...fuelCellShortcuts.switchToSplit, handler: () => setViewMode('split') },
+    { ...fuelCellShortcuts.switchToControl, handler: () => systemState.type === 'fuel-cell' && setViewMode('control') },
+    { ...fuelCellShortcuts.switchToHIL, handler: () => systemState.type === 'fuel-cell' && setViewMode('hil') },
+    { ...fuelCellShortcuts.switchToOptimize, handler: () => systemState.type === 'fuel-cell' && setViewMode('optimize') },
+    { ...fuelCellShortcuts.switchToCompare, handler: () => systemState.type === 'fuel-cell' && setViewMode('compare') },
+    { ...fuelCellShortcuts.toggleAdvanced, handler: () => setShowAdvancedOptions(!showAdvancedOptions) },
+  ])
 
   // Handle system selection
   const handleSystemSelect = useCallback((systemId: string) => {
@@ -114,9 +144,10 @@ export default function UnifiedDashboard({
     } catch (error) {
       console.error('Prediction error:', error)
       setSystemState(prev => ({ ...prev, isCalculating: false }))
+      setError('Failed to calculate prediction. Please check your configuration and try again.')
       
-      // Show error message to user
-      alert('Failed to calculate prediction. Please check your configuration and try again.')
+      // Clear error after 5 seconds
+      setTimeout(() => setError(null), 5000)
     }
   }, [systemState.type])
 
@@ -227,6 +258,18 @@ export default function UnifiedDashboard({
 
   return (
     <div className={`space-y-6 ${className}`}>
+      {/* Onboarding for fuel cell systems */}
+      {systemState.type === 'fuel-cell' && <FuelCellOnboarding />}
+      
+      {/* Error message display */}
+      {error && (
+        <ErrorMessage
+          message={error}
+          onDismiss={() => setError(null)}
+          className="mx-4 md:mx-0"
+        />
+      )}
+      
       {/* Header with system info and controls */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
@@ -315,6 +358,16 @@ export default function UnifiedDashboard({
                 >
                   Optimize
                 </button>
+                <button
+                  onClick={() => setViewMode('compare')}
+                  className={`px-3 py-1 rounded text-sm transition-colors ${
+                    viewMode === 'compare'
+                      ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-gray-100 shadow'
+                      : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
+                  }`}
+                >
+                  Compare
+                </button>
               </>
             )}
           </div>
@@ -345,13 +398,23 @@ export default function UnifiedDashboard({
               className={viewMode === 'config' ? 'lg:col-span-2' : ''}
             >
               {systemState.type === 'fuel-cell' ? (
-                <FuelCellConfigPanel
-                  initialConfig={systemState.config}
-                  onConfigChange={handleConfigChange}
-                  onPredictionRequest={handlePredictionRequest}
-                  prediction={systemState.prediction as FuelCellPredictionResult}
-                  isCalculating={systemState.isCalculating}
-                />
+                isMobile ? (
+                  <FuelCellConfigPanelMobile
+                    config={systemState.config || {}}
+                    onConfigChange={handleConfigChange}
+                    onPredictionRequest={handlePredictionRequest}
+                    prediction={systemState.prediction as FuelCellPredictionResult}
+                    isCalculating={systemState.isCalculating}
+                  />
+                ) : (
+                  <FuelCellConfigPanel
+                    initialConfig={systemState.config}
+                    onConfigChange={handleConfigChange}
+                    onPredictionRequest={handlePredictionRequest}
+                    prediction={systemState.prediction as FuelCellPredictionResult}
+                    isCalculating={systemState.isCalculating}
+                  />
+                )
               ) : (
                 <MESSConfigPanel
                   onConfigChange={handleConfigChange}
@@ -460,6 +523,19 @@ export default function UnifiedDashboard({
               optimizationResult={systemState.optimizationResult}
               isOptimizing={false} // Would track actual optimization state
             />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Comparative Analysis (Fuel Cell only) */}
+      <AnimatePresence>
+        {viewMode === 'compare' && systemState.type === 'fuel-cell' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <ComparativeAnalysis />
           </motion.div>
         )}
       </AnimatePresence>

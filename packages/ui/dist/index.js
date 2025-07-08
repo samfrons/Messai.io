@@ -2006,7 +2006,13 @@ function MESSModel3DLite({
         ) });
     }
   };
-  return /* @__PURE__ */ jsxRuntime.jsx("div", { className: `flex items-center justify-center h-full perspective-1000 ${className}`, children: getDesignElement() });
+  return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: `flex items-center justify-center h-full ${className}`, style: { perspective: "1000px" }, children: [
+    /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "text-xs text-red-500 absolute top-1 right-1 z-10", children: [
+      "3D: ",
+      design
+    ] }),
+    getDesignElement()
+  ] });
 }
 var perspectiveStyle = `
 .perspective-1000 {

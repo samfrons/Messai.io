@@ -32,6 +32,7 @@ MESSAi is a cutting-edge platform for electrochemical systems research, unifying
 - **Knowledge Graph**: 1,200+ smart knowledge nodes with 2,750+ connections
 - **ML Discovery Engine**: Pattern recognition across research literature
 - **Citation Networks**: Intelligent paper recommendations and research lineages
+- **Browser Automation**: Zen MCP Server integration for automated paper discovery
 
 ### 🎨 **Advanced Visualization & Modeling**
 - **Interactive 3D Systems**: Real-time manipulation with Three.js
@@ -45,7 +46,28 @@ MESSAi is a cutting-edge platform for electrochemical systems research, unifying
 - **Data Export**: CSV, JSON, and research-ready formats
 - **Collaboration Tools**: Public/private sharing and team research
 
-## 🏃 Quick Start
+## 🎭 Demo vs Production
+
+This repository can run in two modes:
+
+### **🎯 Demo Mode (Default for Cloned Repos)**
+- ✅ **Instant access** - No authentication setup required
+- ✅ **Full feature exploration** with sample data
+- ✅ **2,800+ research papers** in the literature database
+- ✅ **AI insights and predictions** with demo content
+- ✅ **3D system visualization** and design tools
+- ✅ **Sample experiments** from real research institutions
+- 🔗 **External links** to messai.io for account creation
+- 🎯 **Perfect for**: Testing, learning, contributing to open source
+
+### **🔐 Production Mode (messai.io)**
+- 🔐 **Personal accounts** with secure authentication
+- 💾 **Save experiments** and track research progress
+- 📊 **Personalized insights** based on your interests
+- 🤝 **Collaboration tools** for research teams
+- 🔒 **Private data** and experiment management
+
+## 🏃 Quick Start (Demo Mode)
 
 ```bash
 # Clone the repository
@@ -55,19 +77,26 @@ cd messai-mvp
 # Install dependencies
 npm install
 
-# Set up environment variables
+# Start in demo mode (default configuration)
+npm run dev
+```
+
+Visit `http://localhost:3003` to explore the full MESSAi platform immediately!
+
+### **Production Setup (Optional)**
+
+```bash
+# Set up environment variables for production
 cp .env.example .env.local
-# Edit .env.local with your configuration
+# Edit .env.local: Set DEMO_MODE="false" and configure auth
 
 # Set up database
 npx prisma migrate dev
 npx prisma generate
 
-# Run development server
+# Run with authentication
 npm run dev
 ```
-
-Visit `http://localhost:3003` to see the application.
 
 ## 🛠️ Tech Stack
 

@@ -20,8 +20,8 @@ Critical security issues identified in the MESSAi repository structure:
 
 Found in `.env.local`:
 ```
-GOOGLE_CLIENT_ID="485735910523-cpl59ou3e24ri0cfj3cqnud67ua14888.apps.googleusercontent.com"
-GOOGLE_CLIENT_SECRET="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"
+GOOGLE_CLIENT_ID="[REDACTED]"
+GOOGLE_CLIENT_SECRET="[REDACTED - ROTATED]"
 ```
 
 **Action Required**: Rotate these credentials immediately in Google Cloud Console

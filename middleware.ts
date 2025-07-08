@@ -8,6 +8,44 @@ const authRoutes = ['/auth/login', '/auth/signup'];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const host = request.headers.get('host');
+  const isDemo = process.env.DEMO_MODE === 'true';
+  
+  // Production domain routing (messai.io vs app.messai.io)
+  if (!isDemo && host) {
+    // Marketing domain (messai.io)
+    if (host === 'messai.io' || host === 'www.messai.io') {
+      // Allow marketing routes
+      if (pathname === '/' || pathname.startsWith('/marketing') || 
+          pathname.startsWith('/about') || pathname.startsWith('/pricing') ||
+          pathname.startsWith('/contact')) {
+        return NextResponse.next();
+      }
+      // Redirect other routes to app subdomain
+      return NextResponse.redirect(new URL(`https://app.messai.io${pathname}`, request.url));
+    }
+    
+    // App domain (app.messai.io)
+    if (host === 'app.messai.io') {
+      // Redirect root to dashboard or login
+      if (pathname === '/') {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+      }
+    }
+  }
+
+  // Demo mode routing
+  if (isDemo) {
+    // Redirect auth pages to demo message
+    if (pathname.startsWith('/auth/') && pathname !== '/auth/demo') {
+      return NextResponse.redirect(new URL('/auth/demo', request.url));
+    }
+    
+    // Redirect account/profile pages to demo
+    if (pathname.startsWith('/profile') || pathname.startsWith('/settings')) {
+      return NextResponse.redirect(new URL('/demo/account', request.url));
+    }
+  }
   
   // Check if the path is protected
   const isProtectedRoute = protectedRoutes.some(route => pathname.startsWith(route));

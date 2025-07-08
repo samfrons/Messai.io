@@ -54,8 +54,14 @@
     "prepare": "prisma generate",
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
+    "db:migrate:dev": "DATABASE_URL=\"file:./prisma/dev.db\" prisma migrate dev",
+    "db:migrate:prod": "prisma migrate deploy",
+    "db:push:prod": "prisma db push",
     "db:studio": "prisma studio",
     "db:seed": "prisma db seed",
+    "migrate:export": "tsx scripts/migrate-to-postgres.ts export",
+    "migrate:import": "tsx scripts/migrate-to-postgres.ts import",
+    "migrate:full": "tsx scripts/migrate-to-postgres.ts full",
     "db:backup": "node scripts/backup/create-backup.js",
     "db:restore": "node scripts/backup/restore-backup.js",
     "db:backup-test": "node scripts/backup/test-restoration.js",
@@ -73,7 +79,11 @@
     "zen:discover": "npx tsx scripts/zen/discover-papers.ts",
     "zen:validate": "npx tsx scripts/zen/validate-links.ts",
     "zen:quality": "npx tsx scripts/zen/quality-check.ts",
-    "ai:process": "tsx scripts/literature/ai-paper-processor.ts"
+    "ai:process": "tsx scripts/literature/ai-paper-processor.ts",
+    "db:test-postgres": "./scripts/test-postgres-setup.sh",
+    "db:postgres:up": "docker-compose -f docker-compose.postgres.yml up -d",
+    "db:postgres:down": "docker-compose -f docker-compose.postgres.yml down",
+    "db:postgres:logs": "docker-compose -f docker-compose.postgres.yml logs -f"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.10.0",

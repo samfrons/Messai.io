@@ -33,5 +33,17 @@
       "destination": "https://github.com/your-org/messai-mvp",
       "permanent": false
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/production-router",
+      "has": [
+        {
+          "type": "host",
+          "value": "messai.io"
+        }
+      ]
+    }
   ]
 }

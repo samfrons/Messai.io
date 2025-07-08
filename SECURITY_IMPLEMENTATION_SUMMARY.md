@@ -30,9 +30,8 @@
 
 ### 1. Rotate OAuth Credentials (DO THIS NOW!)
 ```bash
-# Current exposed credentials:
-CLIENT_ID: 485735910523-cpl59ou3e24ri0cfj3cqnud67ua14888.apps.googleusercontent.com
-CLIENT_SECRET: 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
+# Credentials have been rotated and removed for security
+# Check .env.local for new credentials
 ```
 
 **Steps:**
