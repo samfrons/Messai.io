@@ -1,0 +1,237 @@
+│ ╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮ │
+│ │ 🧠 Ultrathink V2: Enhanced Scientific Domain Architecture                                                                                                  │ │
+│ │                                                                                                                                                            │ │
+│ │ 🔬 Core Insight: Electrochemical Asymmetry                                                                                                                 │ │
+│ │                                                                                                                                                            │ │
+│ │ Current MESSAi Data Shows Clear Separation:                                                                                                                │ │
+│ │ - Literature tracks anodeMaterials vs cathodeMaterials separately                                                                                          │ │
+│ │ - Different filtering logic for each electrode type                                                                                                        │ │
+│ │ - Performance metrics often anode-limited vs cathode-limited                                                                                               │ │
+│ │ - Conclusion: Merge them into single "electrodes" domain was scientifically incorrect                                                                      │ │
+│ │                                                                                                                                                            │ │
+│ │ ⚛️ Refined Domain Architecture                                                                                                                             │ │
+│ │                                                                                                                                                            │ │
+│ │ packages/domains/                                                                                                                                          │ │
+│ │ ├── anodes/            # Oxidation electrodes (bacterial interface)                                                                                        │ │
+│ │ ├── cathodes/          # Reduction electrodes (electron acceptance)                                                                                        │ │
+│ │ ├── microbes/          # Biological systems & biofilms                                                                                                     │ │
+│ │ ├── geometries/        # Physical configurations & flow                                                                                                    │ │
+│ │ ├── environments/      # Operational conditions & control                                                                                                  │ │
+│ │ ├── substrates/        # Feed materials & nutrients                                                                                                        │ │
+│ │ ├── performance/       # Measurable outputs & kinetics                                                                                                     │ │
+│ │ └── infrastructure/    # Supporting materials & components                                                                                                 │ │
+│ │                                                                                                                                                            │ │
+│ │ 🎯 Domain Deep-Dive Analysis                                                                                                                               │ │
+│ │                                                                                                                                                            │ │
+│ │ anodes/ - Biological Interface Optimization                                                                                                                │ │
+│ │                                                                                                                                                            │ │
+│ │ - materials/                                                                                                                                               │ │
+│ │   ├── carbon-based/     # Carbon cloth, felt, paper, brushes                                                                                               │ │
+│ │   ├── graphene-family/  # GO, rGO, graphene aerogels                                                                                                       │ │
+│ │   ├── nanotube/         # SWCNT, MWCNT, aligned arrays                                                                                                     │ │
+│ │   ├── mxene/           # Ti₃C₂Tₓ, V₂CTₓ, emerging 2D materials                                                                                             │ │
+│ │   └── conductive-polymers/ # PEDOT, polyaniline, polypyrrole                                                                                               │ │
+│ │                                                                                                                                                            │ │
+│ │ - modifications/                                                                                                                                           │ │
+│ │   ├── surface-treatments/  # Ammonia, heat, plasma                                                                                                         │ │
+│ │   ├── biocompatibility/   # Surface roughness, hydrophilicity                                                                                              │ │
+│ │   ├── biofilm-enhancement/ # Nutrient coatings, mediators                                                                                                  │ │
+│ │   └── conductivity-boost/  # Metal nanoparticles, doping                                                                                                   │ │
+│ │                                                                                                                                                            │ │
+│ │ - biofilm-interface/                                                                                                                                       │ │
+│ │   ├── adhesion-properties/ # Surface energy, roughness                                                                                                     │ │
+│ │   ├── electron-transfer/   # Direct vs mediated transfer                                                                                                   │ │
+│ │   ├── maintenance/        # Cleaning, regeneration protocols                                                                                               │ │
+│ │   └── lifetime/           # Degradation, replacement schedules                                                                                             │ │
+│ │                                                                                                                                                            │ │
+│ │ cathodes/ - Reduction Catalyst Optimization                                                                                                                │ │
+│ │                                                                                                                                                            │ │
+│ │ - materials/                                                                                                                                               │ │
+│ │   ├── platinum-group/   # Pt, Pd, Pt/C catalysts                                                                                                           │ │
+│ │   ├── non-precious/     # Fe-N-C, CoNxPy, MnO₂                                                                                                             │ │
+│ │   ├── air-cathodes/     # Carbon cloth + PTFE, activated carbon                                                                                            │ │
+│ │   ├── biocathodes/      # Enzymatic, microbial reduction                                                                                                   │ │
+│ │   └── specialty/        # Metal recovery, specific reductions                                                                                              │ │
+│ │                                                                                                                                                            │ │
+│ │ - catalysis/                                                                                                                                               │ │
+│ │   ├── oxygen-reduction/ # ORR activity, overpotential                                                                                                      │ │
+│ │   ├── alternative-acceptance/ # Nitrate, sulfate, CO₂ reduction                                                                                            │ │
+│ │   ├── loading-optimization/ # Catalyst density, distribution                                                                                               │ │
+│ │   └── stability/        # Poisoning resistance, durability                                                                                                 │ │
+│ │                                                                                                                                                            │ │
+│ │ - mass-transfer/                                                                                                                                           │ │
+│ │   ├── diffusion-layers/ # Gas diffusion, liquid transport                                                                                                  │ │
+│ │   ├── membrane-interface/ # PEM integration, ionic transport                                                                                               │ │
+│ │   ├── flow-distribution/ # Uniform reactant supply                                                                                                         │ │
+│ │   └── product-removal/  # Gas venting, liquid drainage                                                                                                     │ │
+│ │                                                                                                                                                            │ │
+│ │ microbes/ - Biological System Design                                                                                                                       │ │
+│ │                                                                                                                                                            │ │
+│ │ - organisms/                                                                                                                                               │ │
+│ │   ├── pure-cultures/    # S. oneidensis, G. sulfurreducens                                                                                                 │ │
+│ │   ├── mixed-communities/ # Wastewater microbiomes, sediments                                                                                               │ │
+│ │   ├── engineered/       # Synthetic biology, enhanced strains                                                                                              │ │
+│ │   └── extremophiles/    # High temperature, pH, salinity                                                                                                   │ │
+│ │                                                                                                                                                            │ │
+│ │ - metabolism/                                                                                                                                              │ │
+│ │   ├── electron-pathways/ # Cytochromes, nanowires, mediators                                                                                               │ │
+│ │   ├── substrate-utilization/ # Acetate, glucose, complex organics                                                                                          │ │
+│ │   ├── growth-kinetics/  # Doubling time, yield coefficients                                                                                                │ │
+│ │   └── stress-response/  # pH shock, temperature variation                                                                                                  │ │
+│ │                                                                                                                                                            │ │
+│ │ - cultivation/                                                                                                                                             │ │
+│ │   ├── inoculation/      # Startup protocols, acclimatization                                                                                               │ │
+│ │   ├── maintenance/      # Feeding schedules, pH control                                                                                                    │ │
+│ │   ├── monitoring/       # OD, viability, community analysis                                                                                                │ │
+│ │   └── preservation/     # Cryostorage, dried cultures                                                                                                      │ │
+│ │                                                                                                                                                            │ │
+│ │ geometries/ - Physical Design Optimization                                                                                                                 │ │
+│ │                                                                                                                                                            │ │
+│ │ - reactor-types/                                                                                                                                           │ │
+│ │   ├── single-chamber/   # Simple MFC, low cost                                                                                                             │ │
+│ │   ├── dual-chamber/     # PEM separated, controlled conditions                                                                                             │ │
+│ │   ├── continuous-flow/  # Tubular, packed bed, fluidized                                                                                                   │ │
+│ │   └── stack-designs/    # Series, parallel, hybrid configurations                                                                                          │ │
+│ │                                                                                                                                                            │ │
+│ │ - flow-patterns/                                                                                                                                           │ │
+│ │   ├── hydraulics/       # Reynolds number, residence time                                                                                                  │ │
+│ │   ├── mixing/          # Mechanical, pneumatic, passive                                                                                                    │ │
+│ │   ├── mass-transport/   # Convection vs diffusion dominance                                                                                                │ │
+│ │   └── scaling-laws/     # Lab to pilot to industrial                                                                                                       │ │
+│ │                                                                                                                                                            │ │
+│ │ - electrode-arrangement/                                                                                                                                   │ │
+│ │   ├── spacing/         # Inter-electrode distance optimization                                                                                             │ │
+│ │   ├── surface-area/    # Area-to-volume ratios, packing                                                                                                    │ │
+│ │   ├── current-collection/ # Electrical connections, resistance                                                                                             │ │
+│ │   └── accessibility/   # Maintenance, replacement access                                                                                                   │ │
+│ │                                                                                                                                                            │ │
+│ │ environments/ - Operational Conditions                                                                                                                     │ │
+│ │                                                                                                                                                            │ │
+│ │ - physicochemical/                                                                                                                                         │ │
+│ │   ├── temperature/     # Mesophilic, thermophilic operation                                                                                                │ │
+│ │   ├── ph-buffering/    # Buffer systems, pH control                                                                                                        │ │
+│ │   ├── ionic-strength/  # Conductivity, osmotic effects                                                                                                     │ │
+│ │   └── redox-potential/ # ORP monitoring, control                                                                                                           │ │
+│ │                                                                                                                                                            │ │
+│ │ - control-systems/                                                                                                                                         │ │
+│ │   ├── automation/      # PID controllers, feedback loops                                                                                                   │ │
+│ │   ├── monitoring/      # Sensors, data acquisition                                                                                                         │ │
+│ │   ├── safety/         # Interlocks, emergency shutdown                                                                                                     │ │
+│ │   └── optimization/    # Model predictive control, AI                                                                                                      │ │
+│ │                                                                                                                                                            │ │
+│ │ - variations/                                                                                                                                              │ │
+│ │   ├── startup/         # Commissioning protocols                                                                                                           │ │
+│ │   ├── steady-state/    # Normal operation parameters                                                                                                       │ │
+│ │   ├── transients/      # Load changes, disturbances                                                                                                        │ │
+│ │   └── shutdown/        # Preservation, restart procedures                                                                                                  │ │
+│ │                                                                                                                                                            │ │
+│ │ substrates/ - Feed & Nutrient Management                                                                                                                   │ │
+│ │                                                                                                                                                            │ │
+│ │ - organic-feedstocks/                                                                                                                                      │ │
+│ │   ├── simple-organics/ # Acetate, glucose, lactate                                                                                                         │ │
+│ │   ├── complex-waste/   # Wastewater, food waste, biomass                                                                                                   │ │
+│ │   ├── industrial-streams/ # Brewery, dairy, pharmaceutical                                                                                                 │ │
+│ │   └── synthetic-media/ # Defined compositions, research grades                                                                                             │ │
+│ │                                                                                                                                                            │ │
+│ │ - nutrients/                                                                                                                                               │ │
+│ │   ├── macro-nutrients/ # N, P, K requirements and ratios                                                                                                   │ │
+│ │   ├── trace-elements/  # Fe, Ni, Co, Mo for enzymes                                                                                                        │ │
+│ │   ├── vitamins/        # B12, riboflavin, biotin                                                                                                           │ │
+│ │   └── buffers/         # Phosphate, bicarbonate, HEPES                                                                                                     │ │
+│ │                                                                                                                                                            │ │
+│ │ - preprocessing/                                                                                                                                           │ │
+│ │   ├── pretreatment/    # Hydrolysis, acidification                                                                                                         │ │
+│ │   ├── sterilization/   # Autoclaving, filtration, UV                                                                                                       │ │
+│ │   ├── conditioning/    # pH adjustment, dilution                                                                                                           │ │
+│ │   └── storage/         # Preservation, stability                                                                                                           │ │
+│ │                                                                                                                                                            │ │
+│ │ performance/ - Metrics & Characterization                                                                                                                  │ │
+│ │                                                                                                                                                            │ │
+│ │ - electrical/                                                                                                                                              │ │
+│ │   ├── power-curves/    # Polarization, power density                                                                                                       │ │
+│ │   ├── impedance/       # EIS analysis, resistance components                                                                                               │ │
+│ │   ├── cyclic-voltammetry/ # Electrode characterization                                                                                                     │ │
+│ │   └── long-term-stability/ # Performance degradation                                                                                                       │ │
+│ │                                                                                                                                                            │ │
+│ │ - efficiency/                                                                                                                                              │ │
+│ │   ├── coulombic/       # Electron recovery from substrate                                                                                                  │ │
+│ │   ├── energy/          # Overall energy conversion efficiency                                                                                              │ │
+│ │   ├── removal/         # COD, BOD, nutrient removal                                                                                                        │ │
+│ │   └── economic/        # Cost per kWh, LCOE analysis                                                                                                       │ │
+│ │                                                                                                                                                            │ │
+│ │ - kinetics/                                                                                                                                                │ │
+│ │   ├── reaction-rates/  # Substrate consumption, product formation                                                                                          │ │
+│ │   ├── mass-transfer/   # Diffusion limitations, transport                                                                                                  │ │
+│ │   ├── modeling/        # Mathematical models, simulation                                                                                                   │ │
+│ │   └── optimization/    # Parameter sensitivity, design space                                                                                               │ │
+│ │                                                                                                                                                            │ │
+│ │ infrastructure/ - Supporting Systems                                                                                                                       │ │
+│ │                                                                                                                                                            │ │
+│ │ - membranes/                                                                                                                                               │ │
+│ │   ├── ion-exchange/    # Nafion, Flemion, alternatives                                                                                                     │ │
+│ │   ├── selective/       # Cation exchange membrane (CEM)                                                                                                    │ │
+│ │   ├── filtration/      # Ultrafiltration, microfiltration                                                                                                  │ │
+│ │   └── specialty/       # Desalination, gas separation                                                                                                      │ │
+│ │                                                                                                                                                            │ │
+│ │ - housing/                                                                                                                                                 │ │
+│ │   ├── materials/       # Polycarbonate, acrylic, stainless steel                                                                                           │ │
+│ │   ├── sealing/         # Gaskets, O-rings, thread compounds                                                                                                │ │
+│ │   ├── connections/     # Fittings, quick-connects, unions                                                                                                  │ │
+│ │   └── instrumentation/ # Ports, electrical feedthroughs                                                                                                    │ │
+│ │                                                                                                                                                            │ │
+│ │ - auxiliary/                                                                                                                                               │ │
+│ │   ├── pumps/          # Peristaltic, diaphragm, centrifugal                                                                                                │ │
+│ │   ├── sensors/        # pH, DO, ORP, conductivity                                                                                                          │ │
+│ │   ├── data-logging/   # DAQ systems, wireless monitoring                                                                                                   │ │
+│ │   └── safety/         # Pressure relief, leak detection                                                                                                    │ │
+│ │                                                                                                                                                            │ │
+│ │ 🚀 Advanced Ultrathink Benefits                                                                                                                            │ │
+│ │                                                                                                                                                            │ │
+│ │ 1. Scientific Accuracy                                                                                                                                     │ │
+│ │                                                                                                                                                            │ │
+│ │ - Anode/Cathode Separation: Matches fundamental electrochemistry                                                                                           │ │
+│ │ - Metabolic Focus: Microbes domain reflects biological complexity                                                                                          │ │
+│ │ - Performance Isolation: Metrics separated from physical domains                                                                                           │ │
+│ │                                                                                                                                                            │ │
+│ │ 2. Practical Workflow Alignment                                                                                                                            │ │
+│ │                                                                                                                                                            │ │
+│ │ Scientist Design Process:                                                                                                                                  │ │
+│ │ 1. Choose substrate → substrates/                                                                                                                          │ │
+│ │ 2. Select microorganisms → microbes/                                                                                                                       │ │
+│ │ 3. Pick anode material → anodes/                                                                                                                           │ │
+│ │ 4. Choose cathode catalyst → cathodes/                                                                                                                     │ │
+│ │ 5. Design reactor geometry → geometries/                                                                                                                   │ │
+│ │ 6. Set operating conditions → environments/                                                                                                                │ │
+│ │ 7. Predict performance → performance/                                                                                                                      │ │
+│ │ 8. Specify infrastructure → infrastructure/                                                                                                                │ │
+│ │                                                                                                                                                            │ │
+│ │ 3. Literature Data Integration                                                                                                                             │ │
+│ │                                                                                                                                                            │ │
+│ │ - Maps directly to existing anodeMaterials, cathodeMaterials fields                                                                                        │ │
+│ │ - organismTypes → microbes domain                                                                                                                          │ │
+│ │ - powerOutput, efficiency → performance domain                                                                                                             │ │
+│ │ - systemType → geometries domain                                                                                                                           │ │
+│ │                                                                                                                                                            │ │
+│ │ 4. Computational Advantages                                                                                                                                │ │
+│ │                                                                                                                                                            │ │
+│ │ // Enable compositional system design                                                                                                                      │ │
+│ │ const system = {                                                                                                                                           │ │
+│ │   anode: AnodeLibrary.getCarbonCloth(),                                                                                                                    │ │
+│ │   cathode: CathodeLibrary.getPlatinumCatalyst(),                                                                                                           │ │
+│ │   microbe: MicrobeLibrary.getShewanella(),                                                                                                                 │ │
+│ │   geometry: GeometryLibrary.getDualChamber(),                                                                                                              │ │
+│ │   environment: EnvironmentLibrary.getMesophilic(),                                                                                                         │ │
+│ │   substrate: SubstrateLibrary.getAcetate()                                                                                                                 │ │
+│ │ }                                                                                                                                                          │ │
+│ │                                                                                                                                                            │ │
+│ │ const prediction = PerformanceLibrary.predict(system)                                                                                                      │ │
+│ │                                                                                                                                                            │ │
+│ │ 🎯 Implementation Priority                                                                                                                                 │ │
+│ │                                                                                                                                                            │ │
+│ │ 1. Phase 1: Anodes, Cathodes, Microbes (core science)                                                                                                      │ │
+│ │ 2. Phase 2: Geometries, Environments (engineering)                                                                                                         │ │
+│ │ 3. Phase 3: Substrates, Performance (application)                                                                                                          │ │
+│ │ 4. Phase 4: Infrastructure (supporting systems)                                                                                                            │ │
+│ │                                                                                                                                                            │ │
+│ │ This architecture transforms MESSAi into a true scientific composition engine where researchers can systematically explore the entire design space of      │ │
+│ │ bioelectrochemical systems.   

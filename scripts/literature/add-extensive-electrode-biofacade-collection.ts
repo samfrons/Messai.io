@@ -264,19 +264,9 @@ async function addExtensiveElectrodeBiofacadePapers(userId: string) {
 // Main execution
 async function main() {
   const args = process.argv.slice(2)
-  const userId = args[0] || 'cmcpnd51o0002shp2x2bbcgmm'
+  const userId = null // No user requirement
   
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { id: true, name: true, email: true }
-  })
-  
-  if (!user) {
-    console.error(`User with ID ${userId} not found`)
-    process.exit(1)
-  }
-  
-  console.log(`Adding extensive electrode and biofacade collection for user: ${user.name || user.email}`)
+  console.log(`Adding extensive electrode and biofacade collection`)
   const result = await addExtensiveElectrodeBiofacadePapers(userId)
   
   console.log(`\n🎉 Successfully expanded database with ${result.added} new papers!`)

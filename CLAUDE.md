@@ -16,7 +16,7 @@ The platform combines:
 - AI-powered predictions for system optimization
 - Comprehensive experiment tracking
 - Scientific material database with 27 electrode options
-- LCARS (Star Trek-inspired) UI theme
+
 
 ## Key Technical Details
 
@@ -31,14 +31,194 @@ The platform combines:
 
 ### Project Structure
 ```
-messai-mvp/
-├── app/              # Next.js pages and API routes
-├── components/       # React components (LCARS themed)
-├── lib/             # Business logic and utilities
-├── docs/            # Comprehensive documentation
-├── examples/        # Usage examples
-└── tests/           # Test suites
+messai/
+├── app/                          # Next.js 14 App Router pages and API routes
+│   ├── api/                      # API endpoints
+│   │   ├── auth/                 # Authentication endpoints (NextAuth.js)
+│   │   ├── predictions/          # AI prediction engine API
+│   │   ├── papers/               # Literature database API
+│   │   ├── literature/           # Enhanced literature features
+│   │   ├── fuel-cell/            # Fuel cell specific APIs
+│   │   └── insights/             # Analytics and insights API
+│   ├── (pages)/                  # Page routes
+│   │   ├── page.tsx              # Main landing/catalog page
+│   │   ├── dashboard/            # User dashboard
+│   │   ├── literature/           # Literature browsing and search
+│   │   │   ├── [id]/             # Paper detail view
+│   │   │   ├── semantic-search/  # AI-powered search
+│   │   │   └── upload/           # Paper upload interface
+│   │   ├── models/               # 3D model showcase
+│   │   ├── systems/              # System configuration
+│   │   ├── platform/             # Platform overview
+│   │   ├── tools/                # Specialized tools
+│   │   │   ├── bioreactor/       # Bioreactor design tool
+│   │   │   └── electroanalytical/# Electroanalytical tool
+│   │   ├── algal-fuel-cell/      # Specialized algae simulator
+│   │   ├── experiment/           # Experiment management
+│   │   │   └── [id]/             # Individual experiment
+│   │   ├── insights/             # Analytics dashboard
+│   │   ├── onboarding/           # User onboarding flow
+│   │   ├── profile/              # User profile
+│   │   ├── settings/             # User settings
+│   │   │   ├── account/          # Account settings
+│   │   │   ├── preferences/      # User preferences
+│   │   │   ├── notifications/    # Notification settings
+│   │   │   └── security/         # Security settings
+│   │   ├── demo/                 # Demo-specific pages
+│   │   ├── marketing/            # Marketing landing
+│   │   └── research-dashboard/   # Research overview
+│   └── globals.css               # Global styles
+│
+├── components/                   # React components organized by type
+│   ├── 3d/                       # Three.js 3D visualization components
+│   │   ├── vanilla-*.tsx         # Pure Three.js implementations
+│   │   ├── safe-*.tsx            # Error-boundary wrapped versions
+│   │   └── worker-*.tsx          # Web Worker based renderers
+│   ├── fuel-cell/                # Fuel cell specific components
+│   ├── literature/               # Literature system components
+│   ├── algal-fuel-cell/          # Algae fuel cell components
+│   ├── lcars/                    # LCARS UI theme components
+│   ├── ui/                       # Generic UI components
+│   ├── unified/                  # Unified system components
+│   └── *.tsx                     # Core feature components
+│
+├── lib/                          # Business logic and utilities
+│   ├── ai-predictions.ts         # MESS prediction engine
+│   ├── fuel-cell-*.ts            # Fuel cell logic
+│   ├── auth/                     # Authentication utilities
+│   ├── literature/               # Literature data processing
+│   ├── types/                    # TypeScript type definitions
+│   ├── demo-mode.ts              # Demo mode configuration
+│   └── *.ts                      # Core utilities
+│
+├── scripts/                      # Development and maintenance scripts
+│   ├── literature/               # Literature system management
+│   │   ├── fetch-*.ts            # Paper fetching scripts
+│   │   ├── enhance-*.ts          # Enhancement pipelines
+│   │   ├── validate-*.ts         # Validation tools
+│   │   └── README.md             # Literature system docs
+│   ├── backup/                   # Database backup utilities
+│   ├── zen/                      # Zen browser integration
+│   ├── test-*.js                 # Testing scripts
+│   └── setup-*.ts                # Setup utilities
+│
+├── prisma/                       # Database schemas and migrations
+│   ├── schema.prisma             # Main Prisma schema
+│   ├── schema.*.prisma           # Environment-specific schemas
+│   ├── seed.ts                   # Database seeding
+│   └── *.db                      # SQLite databases (dev only)
+│
+├── tests/                        # Test suites organized by type
+│   ├── components/               # Component tests
+│   ├── api/                      # API endpoint tests
+│   ├── integration/              # User workflow tests
+│   ├── literature/               # Literature system tests
+│   ├── performance/              # Performance benchmarks
+│   └── setup.ts                  # Test configuration
+│
+├── docs/                         # Project documentation
+│   ├── API.md                    # API documentation
+│   ├── ARCHITECTURE.md           # System architecture
+│   ├── AUTH_*.md                 # Authentication guides
+│   ├── DATABASE_SETUP.md         # Database configuration
+│   └── *.md                      # Feature-specific docs
+│
+├── public/                       # Static assets
+│   ├── papers/                   # PDF storage (literature)
+│   └── test-*.html               # Standalone test pages
+│
+├── requirements/                 # Feature requirements specs
+│   └── YYYY-MM-DD-*/             # Timestamped requirements
+│       ├── metadata.json         # Requirement metadata
+│       └── *.md                  # Requirement documents
+│
+├── types/                        # Global TypeScript types
+│   └── mess-models.ts            # MESS system type definitions
+│
+├── backups/                      # Database and system backups
+│   └── *.json/.sql               # Timestamped backup files
+│
+├── hooks/                        # Custom React hooks
+│   └── useKeyboardShortcuts.ts   # Keyboard navigation
+│
+├── deployment/                   # Deployment configurations
+│   └── fuel-cell-config.md       # System-specific configs
+│
+├── reports/                      # Generated analysis reports
+│   └── pipeline-report-*.json    # Literature pipeline reports
+│
+├── messai-ai/                    # AI/ML experimentation workspace
+│   └── (experimental features)   # Isolated development area
+│
+├── messai-research/              # Research branch mirror
+│   └── (duplicate structure)     # Branch-specific development
+│
+├── vendor/                       # Third-party dependencies
+│   └── (vendored libraries)      # Local copies of dependencies
+│
+├── packages/                     # Monorepo packages (if applicable)
+│   └── (shared packages)         # Shared code between projects
+│
+├── Configuration Files           # Project configuration
+│   ├── next.config.js            # Next.js configuration
+│   ├── tailwind.config.ts        # Tailwind CSS config
+│   ├── tsconfig.json             # TypeScript config
+│   ├── vitest.config.ts          # Test runner config
+│   ├── docker-compose.yml        # Docker configuration
+│   └── vercel.json               # Deployment config
+│
+└── Root Files                    # Project root files
+    ├── CLAUDE.md                 # This file - AI assistant context
+    ├── README.md                 # Project documentation
+    ├── README.literature.md      # Literature system guide
+    ├── README.monorepo.md        # Monorepo setup guide
+    ├── SECURITY.md               # Security guidelines
+    ├── DEPLOYMENT.md             # Deployment instructions
+    ├── CHANGELOG.md              # Version history
+    ├── LICENSE                   # Project license
+    ├── ZEN_SETUP.md              # Zen browser setup
+    ├── package.json              # Dependencies and scripts
+    ├── middleware.ts             # Next.js middleware
+    ├── mess-parameters-json.json # MESS parameter definitions
+    └── ultrathinkplan.txt        # Development planning
 ```
+
+#### Directory Purpose Guide
+
+**Core Application (`app/`)**
+- Contains all Next.js pages and API routes
+- Follows App Router conventions
+- Each subdirectory represents a route or route group
+
+**Components (`components/`)**
+- Reusable React components
+- Organized by feature area or type
+- 3D components have multiple implementations for different use cases
+
+**Business Logic (`lib/`)**
+- Core application logic separated from UI
+- Prediction engines, data processing, utilities
+- Type definitions for TypeScript
+
+**Scripts (`scripts/`)**
+- Automation and maintenance tools
+- Literature system management
+- Database operations and testing
+
+**Database (`prisma/`)**
+- Prisma ORM schemas and migrations
+- Environment-specific configurations
+- Seeding scripts for development
+
+**Testing (`tests/`)**
+- Comprehensive test coverage
+- Organized by test type
+- Includes performance benchmarks
+
+**Documentation (`docs/`)**
+- Technical documentation
+- Architecture decisions
+- Setup and deployment guides
 
 ## Development Guidelines
 

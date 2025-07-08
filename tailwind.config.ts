@@ -64,11 +64,25 @@ const config: Config = {
         info: {
           light: '#3b82f6',
           dark: '#2563eb',
+        },
+        // Landing page specific colors
+        electric: {
+          blue: '#00d4ff',
+        },
+        organic: {
+          green: '#22c55e',
+        },
+        warm: {
+          amber: '#f59e0b',
+        },
+        deep: {
+          navy: '#0a0a0f',
         }
       },
       fontFamily: {
-        sans: ['Söhne', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        sans: ['var(--font-inter)', 'Söhne', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
         mono: ['Söhne Mono', 'Monaco', 'Consolas', 'Courier New', 'monospace'],
+        serif: ['var(--font-playfair)', 'var(--font-crimson)', 'Georgia', 'Times New Roman', 'serif'],
       },
       fontSize: {
         // ChatGPT-style text sizes

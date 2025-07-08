@@ -1,482 +1,233 @@
+// Research Database Schema for MESSAi Platform
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./research.db"
 }
 
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id                 String              @id @default(cuid())
-  email              String              @unique
-  emailVerified      DateTime?
-  password           String?
-  name               String?
-  image              String?
-  role               String              @default("USER")
-  isActive           Boolean             @default(true)
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  lastLoginAt        DateTime?
-  institution        String?
-  researchArea       String?
-  bio                String?
-  twoFactorEnabled   Boolean             @default(false)
-  twoFactorSecret    String?
-  accounts           Account[]
-  experiments        Experiment[]
-  loginAttempts      LoginAttempt[]
-  passwordResets     PasswordReset[]
-  sessions           Session[]
-  profile            UserProfile?
-  settings           UserSettings?
-  verificationTokens VerificationToken[]
-  papers             ResearchPaper[]
-  electrochemicalSystems ElectrochemicalSystem[]
-  fuelCellExperiments FuelCellExperiment[]
-
-  @@index([email])
-}
-
-model VerificationToken {
-  id         String   @id @default(cuid())
-  identifier String
-  token      String   @unique
-  expires    DateTime
-  userId     String?
-  user       User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([identifier, token])
-}
-
-model PasswordReset {
-  id        String   @id @default(cuid())
-  userId    String
-  token     String   @unique
-  expires   DateTime
-  used      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([token])
-}
-
-model LoginAttempt {
-  id        String   @id @default(cuid())
-  email     String
-  ipAddress String
-  userAgent String?
-  success   Boolean
-  userId    String?
-  createdAt DateTime @default(now())
-  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([email, createdAt])
-  @@index([ipAddress, createdAt])
-}
-
-model MFCDesign {
-  id          String       @id @default(cuid())
-  name        String
-  type        String
-  cost        String
-  powerOutput String
-  materials   String
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  experiments Experiment[]
-}
-
-model Experiment {
-  id           String            @id @default(cuid())
-  name         String
-  userId       String
-  designId     String
-  status       String            @default("SETUP")
-  parameters   String
-  isPublic     Boolean           @default(false)
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  design       MFCDesign         @relation(fields: [designId], references: [id])
-  user         User              @relation(fields: [userId], references: [id])
-  measurements Measurement[]
-  papers       ExperimentPaper[]
-
-  @@index([userId])
-  @@index([status])
-}
-
-model Measurement {
-  id           String     @id @default(cuid())
-  experimentId String
-  voltage      Float
-  current      Float
-  power        Float
-  temperature  Float
-  ph           Float
-  substrate    Float?
-  notes        String?
-  timestamp    DateTime   @default(now())
-  experiment   Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
-
-  @@index([experimentId, timestamp])
-}
-
-model RateLimit {
-  id        String   @id @default(cuid())
-  key       String   @unique
-  points    Int      @default(0)
-  expire    DateTime
-  createdAt DateTime @default(now())
-
-  @@index([key, expire])
-}
-
-model UserProfile {
-  id                  String   @id @default(cuid())
-  userId              String   @unique
-  avatar              String?
-  expertise           String?
-  interests           String   @default("[]")
-  publicProfile       Boolean  @default(false)
-  completedOnboarding Boolean  @default(false)
-  onboardingStep      Int      @default(0)
-  linkedIn            String?
-  orcid               String?
-  googleScholar       String?
-  createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
-  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model UserSettings {
-  id                    String   @id @default(cuid())
-  userId                String   @unique
-  emailNotifications    Boolean  @default(true)
-  experimentAlerts      Boolean  @default(true)
-  collaborationRequests Boolean  @default(true)
-  newsletter            Boolean  @default(false)
-  theme                 String   @default("dark")
-  units                 String   @default("metric")
-  language              String   @default("en")
-  dashboardLayout       String?
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @updatedAt
-  user                  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model ResearchPaper {
-  id                String            @id @default(cuid())
-  title             String
-  authors           String            // JSON array
-  abstract          String?
-  doi               String?           @unique
-  pubmedId          String?           @unique
-  arxivId           String?           @unique
-  ieeeId            String?           @unique
-  publicationDate   DateTime?
-  journal           String?
-  volume            String?
-  issue             String?
-  pages             String?
-  keywords          String            // JSON array
-  externalUrl       String
+// Research Papers
+model Paper {
+  id          String   @id @default(cuid())
+  doi         String?  @unique
+  title       String
+  abstract    String?
+  authors     String   // JSON array of authors
+  journal     String?
+  year        Int
+  volume      String?
+  issue       String?
+  pages       String?
+  keywords    String?  // JSON array of keywords
+  url         String?
+  pdfUrl      String?
   
-  // MES-specific fields
-  organismTypes     String?           // JSON array of organism IDs
-  anodeMaterials    String?           // JSON array
-  cathodeMaterials  String?           // JSON array
-  powerOutput       Float?            // mW/m²
-  efficiency        Float?            // percentage
-  systemType        String?           // MFC, MEC, MDC, MES
+  // Validation status
+  verified    Boolean  @default(false)
+  quality     Int      @default(0) // 1-5 rating
+  
+  // Extracted data
+  parameters  Parameter[]
+  experiments Experiment[]
   
   // Metadata
-  source            String            // 'user', 'pubmed', 'crossref', 'ieee'
-  uploadedBy        String
-  isPublic          Boolean           @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  addedBy     String?  // User who added this paper
   
-  // AI-generated fields
-  aiSummary         String?           // Concise AI-generated summary
-  aiKeyFindings     String?           // Key findings in JSON format
-  aiMethodology     String?           // Summarized methodology
-  aiImplications    String?           // Research implications and applications
-  aiDataExtraction  String?           // Structured extracted data in JSON
-  aiInsights        String?           // AI-generated insights and analysis
-  aiProcessingDate  DateTime?         // When AI processing occurred
-  aiModelVersion    String?           // Which AI model/version was used
-  aiConfidence      Float?            // Confidence score for AI extraction (0-1)
-  
-  createdAt         DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  
-  // Relations
-  user              User              @relation(fields: [uploadedBy], references: [id])
-  experiments       ExperimentPaper[]
-  
-  @@index([title])
-  @@index([uploadedBy])
-  @@index([publicationDate])
-  @@index([aiProcessingDate])
+  @@map("papers")
 }
 
-model ExperimentPaper {
-  id           String        @id @default(cuid())
-  experimentId String
-  paperId      String
-  notes        String?
-  citationType String?       // 'background', 'method', 'comparison'
-  createdAt    DateTime      @default(now())
+// Extracted Parameters from Papers
+model Parameter {
+  id          String   @id @default(cuid())
+  paperId     String
+  paper       Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
   
-  experiment   Experiment    @relation(fields: [experimentId], references: [id])
-  paper        ResearchPaper @relation(fields: [paperId], references: [id])
+  // Parameter identification
+  name        String   // e.g., "power_density", "current_density"
+  category    String   // e.g., "performance", "operating_conditions"
+  subcategory String?  // e.g., "electrical_output"
   
-  @@unique([experimentId, paperId])
-  @@index([experimentId])
-  @@index([paperId])
+  // Parameter value
+  value       Float?
+  unit        String?
+  range_min   Float?
+  range_max   Float?
+  
+  // Context
+  conditions  String?  // JSON object of experimental conditions
+  method      String?  // Measurement method
+  uncertainty Float?   // Measurement uncertainty
+  
+  // Validation
+  confidence  Float    @default(0.5) // 0-1 confidence in extraction
+  validated   Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("parameters")
 }
 
-// ============================================================================
-// UNIFIED ELECTROCHEMICAL SYSTEMS MODELS
-// ============================================================================
-
-// Note: SQLite doesn't support enums, so we use String fields with validation in TypeScript
-
-// Unified system model supporting both microbial and fuel cell systems
-model ElectrochemicalSystem {
-  id          String     @id @default(cuid())
-  name        String
-  type        String     // "MICROBIAL" or "FUEL_CELL"
-  userId      String
-  description String?
-  isPublic    Boolean    @default(false)
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+// Experimental Conditions and Results
+model Experiment {
+  id          String   @id @default(cuid())
+  paperId     String
+  paper       Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
   
-  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  // System configuration
+  systemType  String   // MFC, MEC, MDC, MES
+  scale       String   // microfluidic, lab, pilot, industrial
+  application String?  // wastewater, hydrogen, etc.
   
-  // Relations to specific system types
-  fuelCellStacks FuelCellStack[]
+  // Reactor design
+  reactorType    String?
+  volume         Float?
+  electrodeArea  Float?
+  electrodeSpacing Float?
   
-  @@index([userId])
-  @@index([type])
-}
-
-// Fuel cell stack configuration
-model FuelCellStack {
-  id                String                @id @default(cuid())
-  systemId          String
-  name              String
-  type              String                // "PEM", "SOFC", "PAFC", "MCFC", "AFC"
-  cellCount         Int
-  activeArea        Float                 // cm²
-  maxPower          Float                 // W
-  nominalVoltage    Float                 // V
-  operatingTemp     Float                 // °C
-  operatingPressure Float                 // bar
-  efficiency        Float?                // %
-  membraneType      String?
-  anodeCatalyst     String?
-  cathodeCatalyst   String?
-  createdAt         DateTime              @default(now())
-  updatedAt         DateTime              @updatedAt
-  
-  system            ElectrochemicalSystem @relation(fields: [systemId], references: [id], onDelete: Cascade)
-  experiments       FuelCellExperiment[]
-  
-  @@index([systemId])
-  @@index([type])
-}
-
-// Fuel cell experiment tracking
-model FuelCellExperiment {
-  id            String                  @id @default(cuid())
-  name          String
-  stackId       String
-  userId        String
-  status        String                  @default("SETUP") // SETUP, RUNNING, PAUSED, COMPLETED, FAILED
-  modelFidelity String                  @default("BASIC") // "BASIC", "INTERMEDIATE", "ADVANCED"
-  parameters    String                  // JSON configuration
-  notes         String?
-  isPublic      Boolean                 @default(false)
-  createdAt     DateTime                @default(now())
-  updatedAt     DateTime                @updatedAt
-  
-  stack         FuelCellStack           @relation(fields: [stackId], references: [id], onDelete: Cascade)
-  user          User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  measurements  FuelCellMeasurement[]
-  controlData   ControlSystemData[]
-  
-  @@index([userId])
-  @@index([stackId])
-  @@index([status])
-}
-
-// Detailed measurement data for fuel cell experiments
-model FuelCellMeasurement {
-  id                String             @id @default(cuid())
-  experimentId      String
-  timestamp         DateTime           @default(now())
-  
-  // Electrical measurements
-  voltage           Float              // V
-  current           Float              // A
-  power             Float              // W
-  efficiency        Float?             // %
+  // Materials
+  anodeMaterial    String?
+  cathodeMaterial  String?
+  membraneMaterial String?
+  electrolyte      String?
   
   // Operating conditions
-  temperature       Float              // °C
-  pressure          Float              // bar
-  humidity          Float?             // %
+  temperature    Float?
+  pH             Float?
+  pressure       Float?
+  flowRate       Float?
   
-  // Gas flow measurements
-  fuelFlowRate      Float?             // L/min
-  airFlowRate       Float?             // L/min
-  oxygenUtilization Float?             // %
-  fuelUtilization   Float?             // %
+  // Biological parameters
+  microorganisms String? // JSON array
+  substrate      String?
+  substrateConc  Float?
   
-  // Gas composition
-  hydrogenPurity    Float?             // %
-  nitrogenFraction  Float?             // %
-  waterVaporContent Float?             // %
+  // Performance results
+  powerDensity      Float?
+  currentDensity    Float?
+  voltage           Float?
+  efficiency        Float?
+  treatmentEff      Float?
   
-  // Performance metrics
-  powerDensity      Float?             // W/cm²
-  currentDensity    Float?             // A/cm²
+  // Duration and stability
+  duration       Float? // days
+  startupTime    Float? // hours
+  stable         Boolean @default(false)
   
-  notes             String?
+  createdAt      DateTime @default(now())
   
-  experiment        FuelCellExperiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
-  
-  @@index([experimentId, timestamp])
+  @@map("experiments")
 }
 
-// Control system data for fuel cell experiments
-model ControlSystemData {
-  id           String             @id @default(cuid())
-  experimentId String
-  timestamp    DateTime           @default(now())
+// Research Organizations and Authors
+model Organization {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  country     String?
+  type        String?  // university, company, government
+  website     String?
   
-  // Thermal management
-  thermalController String?        // JSON: {setpoint, output, error, pid_params}
+  researchers Researcher[]
   
-  // Humidity control
-  humidityController String?       // JSON: {setpoint, measured, output, control_action}
-  
-  // Pressure control
-  pressureController String?       // JSON: {inlet_pressure, outlet_pressure, valve_position}
-  
-  // Purging control
-  purgingController String?        // JSON: {purge_active, nitrogen_fraction, purge_duration}
-  
-  // Air intake control
-  airIntakeController String?      // JSON: {compressor_speed, air_flow, pressure_ratio}
-  
-  // Stack monitoring
-  stackController String?          // JSON: {cell_voltages, temperature_distribution, safety_status}
-  
-  experiment   FuelCellExperiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
-  
-  @@index([experimentId, timestamp])
+  @@map("organizations")
 }
 
-// Extended materials database supporting both microbial and fuel cell systems
-model ElectrodeMaterial {
-  id              String           @id @default(cuid())
-  name            String
-  category        String           // "TRADITIONAL", "GRAPHENE_BASED", "CARBON_NANOTUBES", "MXENES", "UPCYCLED", "FUEL_CELL_SPECIFIC"
-  systemTypes     String           // JSON array of compatible system types
+model Researcher {
+  id             String       @id @default(cuid())
+  name           String
+  email          String?
+  orcid          String?      @unique
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
   
-  // Basic properties
-  conductivity    Float            // S/cm
-  durability      Float            // 1-10 scale
-  cost            Float            // $/m²
-  density         Float?           // g/cm³
+  specialization String?      // bioelectrochemistry, materials, etc.
+  h_index        Int?
+  citations      Int?
   
-  // Microbial system properties
-  biocompatibility Float?          // 1-10 scale
-  surfaceArea     Float?           // m²/g
-  
-  // Fuel cell properties
-  protonConductivity Float?        // S/cm
-  oxygenPermeability Float?        // Barrer
-  thermalStability   Float?        // °C max
-  
-  // Operating conditions
-  temperatureRange String?         // e.g., "25-80°C"
-  pressureRange    String?         // e.g., "1-10 bar"
-  phRange          String?         // e.g., "6-8"
-  
-  // Performance characteristics
-  electronTransfer Float?          // 1-10 scale
-  corrosionResistance Float?       // 1-10 scale
-  mechanicalStrength Float?        // MPa
-  
-  description     String?
-  manufacturer    String?
-  datasheet       String?          // URL to datasheet
-  
-  createdAt       DateTime         @default(now())
-  updatedAt       DateTime         @updatedAt
-  
-  @@index([category])
-  @@index([name])
+  @@map("researchers")
 }
 
-// Performance optimization results
-model OptimizationResult {
-  id           String   @id @default(cuid())
-  experimentId String   // Can reference either regular or fuel cell experiments
-  systemType   String   // "MICROBIAL" or "FUEL_CELL"
+// Community Contributions
+model Contribution {
+  id          String   @id @default(cuid())
   
-  // Optimization parameters
-  algorithm    String   // e.g., "genetic_algorithm", "particle_swarm", "gradient_descent"
-  objective    String   // e.g., "maximize_power", "maximize_efficiency", "minimize_cost"
-  constraints  String   // JSON array of constraints
+  // Content
+  type        String   // parameter, experiment, validation, correction
+  content     String   // JSON object with contribution data
   
-  // Results
-  optimizedParams String // JSON of optimized parameters
-  objectiveValue  Float  // Achieved objective value
-  iterations      Int    // Number of optimization iterations
-  convergence     Boolean // Whether optimization converged
+  // Source
+  contributorName  String?
+  contributorEmail String?
+  affiliation      String?
   
-  // Performance metrics
-  improvement     Float? // % improvement over baseline
-  confidence      Float? // Confidence in result (0-1)
+  // Target
+  paperId     String?
+  parameterId String?
   
-  notes           String?
-  createdAt       DateTime @default(now())
+  // Status
+  status      String   @default("pending") // pending, approved, rejected
+  reviewedBy  String?
+  reviewedAt  DateTime?
   
-  @@index([systemType])
-  @@index([createdAt])
+  createdAt   DateTime @default(now())
+  
+  @@map("contributions")
+}
+
+// Parameter Categories and Definitions
+model ParameterDefinition {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String
+  subcategory String?
+  
+  description String
+  unit        String?
+  typical_min Float?
+  typical_max Float?
+  
+  synonyms    String?  // JSON array of alternative names
+  
+  @@map("parameter_definitions")
+}
+
+// Research Trends and Analytics
+model SearchQuery {
+  id        String   @id @default(cuid())
+  query     String
+  filters   String?  // JSON object
+  results   Int      @default(0)
+  timestamp DateTime @default(now())
+  
+  @@map("search_queries")
+}
+
+// Data Quality Metrics
+model QualityMetric {
+  id         String   @id @default(cuid())
+  paperId    String
+  
+  // Completeness scores (0-1)
+  abstract_quality    Float @default(0)
+  parameter_coverage  Float @default(0)
+  method_description  Float @default(0)
+  results_clarity     Float @default(0)
+  
+  // Validation scores
+  peer_reviewed      Boolean @default(false)
+  impact_factor      Float?
+  citation_count     Int     @default(0)
+  
+  // Community feedback
+  helpful_votes      Int     @default(0)
+  reported_issues    Int     @default(0)
+  
+  lastUpdated        DateTime @default(now())
+  
+  @@unique([paperId])
+  @@map("quality_metrics")
 }
