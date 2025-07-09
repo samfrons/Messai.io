@@ -376,7 +376,8 @@ class MassivePaperCollector {
           abstract: paper.abstract,
           arxivId: paper.arxivId,
           externalUrl: `https://arxiv.org/abs/${paper.arxivId}`,
-          source: 'arxiv_comprehensive'
+          source: 'arxiv_comprehensive',
+          keywords: [] // arXiv doesn't provide keywords in basic fetch
         }
       }
       
