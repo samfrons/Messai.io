@@ -40,7 +40,8 @@ export async function GET(request: NextRequest) {
     if (realOnly) {
       const realSources = ['crossref_api', 'arxiv_api', 'pubmed_api', 'local_pdf', 'web_search', 
                           'comprehensive_search', 'advanced_electrode_biofacade_search', 
-                          'extensive_electrode_biofacade_collection']
+                          'extensive_electrode_biofacade_collection', 'crossref_comprehensive',
+                          'pubmed_comprehensive']
       
       const realPaperConditions = [
         { source: { in: realSources } },
