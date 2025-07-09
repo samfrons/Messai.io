@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search') || ''
     const userId = searchParams.get('userId') || undefined
     const realOnly = searchParams.get('realOnly') === 'true'
+    const requireMicrobial = searchParams.get('requireMicrobial') !== 'false' // Default true
+    const algaeOnly = searchParams.get('algaeOnly') === 'true'
     
     // Advanced filters
     const microbes = searchParams.get('microbes')?.split(',').filter(Boolean) || []
@@ -148,6 +150,43 @@ export async function GET(request: NextRequest) {
         where.AND = [where.AND]
       }
       where.AND.push(...advancedFilters)
+    }
+    
+    // Microbial relevance filter
+    if (requireMicrobial || algaeOnly) {
+      const microbialKeywords = [
+        'microb', 'bacteria', 'biofilm', 'bioelectrochemical', 'microorganism',
+        'biological', 'biocathode', 'bioanode', 'electroactive', 'electrogenic',
+        'geobacter', 'shewanella', 'pseudomonas', 'consortium', 'mfc', 'mec', 'mdc', 'mes'
+      ]
+      
+      const algaeKeywords = [
+        'algae', 'algal', 'microalgae', 'chlorella', 'spirulina', 'chlamydomonas',
+        'cyanobacteria', 'photosynthetic', 'phototrophic', 'biophotovoltaic'
+      ]
+      
+      const keywordsToUse = algaeOnly ? algaeKeywords : [...microbialKeywords, ...algaeKeywords]
+      
+      // Create conditions for each field we want to check
+      const fieldConditions = keywordsToUse.map(keyword => ({
+        OR: [
+          { title: { contains: keyword, mode: 'insensitive' } },
+          { abstract: { contains: keyword, mode: 'insensitive' } },
+          { keywords: { contains: keyword, mode: 'insensitive' } },
+          { organismTypes: { contains: keyword, mode: 'insensitive' } },
+          { microbialCommunity: { contains: keyword, mode: 'insensitive' } }
+        ]
+      }))
+      
+      // Papers must match at least one keyword in at least one field
+      if (fieldConditions.length > 0) {
+        if (!where.AND) {
+          where.AND = []
+        } else if (!Array.isArray(where.AND)) {
+          where.AND = [where.AND]
+        }
+        where.AND.push({ OR: fieldConditions })
+      }
     }
     
     // Determine sort order
