@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 // Authentication removed for research-only version
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import AdvancedFilterPanel from '@/components/literature/AdvancedFilterPanel'
 
 interface Paper {
   id: string
@@ -79,6 +80,17 @@ export default function LiteraturePage() {
     total: 0,
     totalPages: 0
   })
+  
+  // Advanced filters state
+  const [advancedFilters, setAdvancedFilters] = useState({
+    microbes: [] as string[],
+    systemTypes: [] as string[],
+    configurations: [] as string[],
+    minPower: null as number | null,
+    minEfficiency: null as number | null,
+    hasFullData: false,
+    sortBy: 'date'
+  })
 
   const fetchStats = async () => {
     setStatsLoading(true)
@@ -102,7 +114,14 @@ export default function LiteraturePage() {
         page: pagination.page.toString(),
         limit: pagination.limit.toString(),
         ...(searchTerm && { search: searchTerm }),
-        ...(showRealPapersOnly && { realOnly: 'true' })
+        ...(showRealPapersOnly && { realOnly: 'true' }),
+        ...(advancedFilters.microbes.length > 0 && { microbes: advancedFilters.microbes.join(',') }),
+        ...(advancedFilters.systemTypes.length > 0 && { systemTypes: advancedFilters.systemTypes.join(',') }),
+        ...(advancedFilters.configurations.length > 0 && { configurations: advancedFilters.configurations.join(',') }),
+        ...(advancedFilters.minPower !== null && { minPower: advancedFilters.minPower.toString() }),
+        ...(advancedFilters.minEfficiency !== null && { minEfficiency: advancedFilters.minEfficiency.toString() }),
+        ...(advancedFilters.hasFullData && { hasFullData: 'true' }),
+        ...(advancedFilters.sortBy && { sortBy: advancedFilters.sortBy })
       })
       
       const response = await fetch(`/api/papers?${params}`)
@@ -124,11 +143,16 @@ export default function LiteraturePage() {
 
   useEffect(() => {
     fetchPapers()
-  }, [pagination.page, searchTerm, showRealPapersOnly])
+  }, [pagination.page, searchTerm, showRealPapersOnly, advancedFilters])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     setPagination(prev => ({ ...prev, page: 1 }))
+  }
+  
+  const handleFiltersChange = (filters: typeof advancedFilters) => {
+    setAdvancedFilters(filters)
+    setPagination(prev => ({ ...prev, page: 1 })) // Reset to first page when filters change
   }
 
   const formatAuthors = (authors: string[] | string) => {
@@ -303,6 +327,12 @@ export default function LiteraturePage() {
             </div>
           </div>
         </div>
+        
+        {/* Advanced Filter Panel */}
+        <AdvancedFilterPanel 
+          onFiltersChange={handleFiltersChange}
+          initialFilters={advancedFilters}
+        />
 
         {loading ? (
           <div className="space-y-4">

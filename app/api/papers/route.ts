@@ -15,6 +15,15 @@ export async function GET(request: NextRequest) {
     const userId = searchParams.get('userId') || undefined
     const realOnly = searchParams.get('realOnly') === 'true'
     
+    // Advanced filters
+    const microbes = searchParams.get('microbes')?.split(',').filter(Boolean) || []
+    const systemTypes = searchParams.get('systemTypes')?.split(',').filter(Boolean) || []
+    const configurations = searchParams.get('configurations')?.split(',').filter(Boolean) || []
+    const minPower = searchParams.get('minPower') ? parseFloat(searchParams.get('minPower')!) : null
+    const minEfficiency = searchParams.get('minEfficiency') ? parseFloat(searchParams.get('minEfficiency')!) : null
+    const hasFullData = searchParams.get('hasFullData') === 'true'
+    const sortBy = searchParams.get('sortBy') || 'date' // date, power, efficiency, relevance
+    
     const skip = (page - 1) * limit
     
     // Build where clause
@@ -74,12 +83,102 @@ export async function GET(request: NextRequest) {
       }
     }
     
+    // Advanced filters
+    const advancedFilters: any[] = []
+    
+    // Microbe filter - search in multiple fields
+    if (microbes.length > 0) {
+      const microbeConditions = microbes.map(microbe => ({
+        OR: [
+          { organismTypes: { contains: microbe, mode: 'insensitive' } },
+          { microbialCommunity: { contains: microbe, mode: 'insensitive' } },
+          { microbialClassification: { contains: microbe, mode: 'insensitive' } },
+          { abstract: { contains: microbe, mode: 'insensitive' } }
+        ]
+      }))
+      advancedFilters.push({ OR: microbeConditions })
+    }
+    
+    // System type filter - enhanced with configuration data
+    if (systemTypes.length > 0) {
+      const systemConditions = systemTypes.map(type => ({
+        OR: [
+          { systemType: type },
+          { systemConfiguration: { contains: `"type":"${type}"`, mode: 'insensitive' } }
+        ]
+      }))
+      advancedFilters.push({ OR: systemConditions })
+    }
+    
+    // Configuration filter
+    if (configurations.length > 0) {
+      const configConditions = configurations.map(config => ({
+        systemConfiguration: { contains: config, mode: 'insensitive' }
+      }))
+      advancedFilters.push({ OR: configConditions })
+    }
+    
+    // Performance filters
+    if (minPower !== null) {
+      advancedFilters.push({ powerOutput: { gte: minPower } })
+    }
+    
+    if (minEfficiency !== null) {
+      advancedFilters.push({ efficiency: { gte: minEfficiency } })
+    }
+    
+    // Has full data filter
+    if (hasFullData) {
+      advancedFilters.push({
+        AND: [
+          { powerOutput: { not: null } },
+          { efficiency: { not: null } },
+          { systemConfiguration: { not: null } },
+          { microbialCommunity: { not: null } }
+        ]
+      })
+    }
+    
+    // Apply advanced filters
+    if (advancedFilters.length > 0) {
+      if (!where.AND) {
+        where.AND = []
+      } else if (!Array.isArray(where.AND)) {
+        where.AND = [where.AND]
+      }
+      where.AND.push(...advancedFilters)
+    }
+    
+    // Determine sort order
+    let orderBy: any = { createdAt: 'desc' } // default
+    
+    switch (sortBy) {
+      case 'power':
+        orderBy = { powerOutput: 'desc' }
+        break
+      case 'efficiency':
+        orderBy = { efficiency: 'desc' }
+        break
+      case 'relevance':
+        // For relevance, we'll use a combination of factors
+        // This is simplified - in production, use a scoring algorithm
+        orderBy = [
+          { powerOutput: 'desc' },
+          { efficiency: 'desc' },
+          { createdAt: 'desc' }
+        ]
+        break
+      case 'date':
+      default:
+        orderBy = { createdAt: 'desc' }
+    }
+    
     const [papers, total] = await Promise.all([
       prisma.researchPaper.findMany({
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy,
         select: {
           id: true,
           title: true,
@@ -106,7 +205,12 @@ export async function GET(request: NextRequest) {
           aiModelVersion: true,
           aiProcessingDate: true,
           aiConfidence: true,
-          keywords: true
+          keywords: true,
+          // New categorization fields
+          microbialCommunity: true,
+          microbialClassification: true,
+          systemConfiguration: true,
+          performanceBenchmarks: true
         }
       }),
       prisma.researchPaper.count({ where })
@@ -172,8 +276,13 @@ export async function GET(request: NextRequest) {
         keywords: parseJsonField(paper.keywords),
         // Add processed AI data for easy frontend access
         aiData,
+        // Parse new categorization fields
+        microbialCommunity: parseJsonField(paper.microbialCommunity),
+        microbialClassification: parseJsonField(paper.microbialClassification),
+        systemConfiguration: parseJsonField(paper.systemConfiguration),
+        performanceBenchmarks: parseJsonField(paper.performanceBenchmarks),
         // Enhanced display fields
-        hasPerformanceData: !!(paper.powerOutput || paper.efficiency || (paper.keywords && paper.keywords.includes('HAS_PERFORMANCE_DATA'))),
+        hasPerformanceData: !!(paper.powerOutput || paper.efficiency || paper.performanceBenchmarks || (paper.keywords && paper.keywords.includes('HAS_PERFORMANCE_DATA'))),
         isAiProcessed: !!paper.aiProcessingDate,
         processingMethod: paper.aiModelVersion || null,
         confidenceScore: paper.aiConfidence || null

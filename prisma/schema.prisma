@@ -181,6 +181,12 @@ model ResearchPaper {
   timeSeriesData         String?      // JSON: performance over time, degradation rates
   economicMetrics        String?      // JSON: cost analysis, scale-up projections
   
+  // Enhanced categorization fields for advanced filtering
+  microbialCommunity     String?      // JSON: {dominant: [], consortium: [], pureculture: boolean}
+  microbialClassification String?     // JSON: {phylum: [], class: [], genus: [], species: []}
+  systemConfiguration    String?      // JSON: {type: MFC/MEC/MDC/MES/BES, subtype, scale, architecture}
+  performanceBenchmarks  String?      // JSON: {powerDensity: {max, operating, normalized}, comparativeRank}
+  
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
   
@@ -198,6 +204,8 @@ model ResearchPaper {
   @@index([uploadedBy])
   @@index([isPublic])
   @@index([createdAt])
+  @@index([microbialCommunity])
+  @@index([systemConfiguration])
 }
 
 model ExperimentPaper {
