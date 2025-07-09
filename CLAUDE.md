@@ -1,6 +1,27 @@
-# CLAUDE.md - Research Literature System for MESSAi
+# CLAUDE.md - AI Assistant Context for MESSAi
 
-This file provides context for AI assistants working on the MESSAi research literature system, which serves as a knowledge extraction engine for building a comprehensive database of microbial electrochemical interactions.
+This file provides context and instructions for AI assistants (like Claude) working on the MESSAi project.
+
+## Project Overview
+
+MESSAi (Microbial Electrochemical Systems AI Platform) is a sophisticated web platform for microbial electrochemical systems research. It supports various bioelectrochemical technologies including:
+- Microbial Fuel Cells (MFCs) - electricity generation
+- Microbial Electrolysis Cells (MECs) - hydrogen production
+- Microbial Desalination Cells (MDCs) - water treatment
+- Microbial Electrosynthesis (MES) - chemical production
+- Other bioelectrochemical systems
+
+The platform combines:
+- Interactive 3D visualization using Three.js
+- AI-powered predictions for system optimization
+- Comprehensive experiment tracking
+- Scientific material database with 27 electrode options, differentiating between anode and cathode
+- Clean UI theme
+- Advanced literature collection and analysis system
+
+## Research Literature System
+
+The literature system serves as a knowledge extraction engine for building a comprehensive database of microbial electrochemical interactions.
 
 ## Purpose
 
@@ -123,17 +144,27 @@ model ResearchPaper {
 
 ### Core Scripts
 
-1. **collect-2000-papers.ts**
+1. **real-paper-collection.ts**
    - Multi-source collection (CrossRef, PubMed, arXiv)
-   - 24 targeted search queries
+   - 19 targeted search queries across research areas
    - Deduplication and validation
+   - Expected yield: ~845 papers per run
 
-2. **enhance-all-papers.ts**
-   - Pattern-based data extraction
-   - Performance metric parsing
-   - Material and organism identification
+2. **paper-quality-validator.ts**
+   - Quality scoring system (0-100 scale)
+   - Evaluates: verification, completeness, relevance, data richness, recency, impact
+   - Pattern matching for performance metrics, materials, organisms
+   - Flags papers needing enhancement
 
-3. **clean-abstract-html.ts**
+3. **enhanced-data-extractor.ts**
+   - Advanced pattern matching for structured data extraction
+   - Extracts: performance metrics with units and conditions
+   - Material classification (anode/cathode/membrane)
+   - Organism identification and classification
+   - System configuration detection
+   - Confidence scoring for all extractions
+
+4. **clean-abstract-html.ts**
    - JATS XML tag removal
    - HTML entity decoding
    - Text normalization
@@ -175,13 +206,15 @@ npm run literature:pipeline
 
 ## Current Status
 
-- **Papers**: 2,030 total
-- **With abstracts**: 1,804 (88.9%)
-- **With summaries**: 661 (32.6%)
-- **Power output data**: 33 papers
-- **Efficiency data**: 42 papers
-- **Materials extracted**: 99 unique
+- **Papers**: 6,022 total (as of latest database count)
+- **Verified papers**: 426 with DOI/PubMed/arXiv IDs
+- **With abstracts**: 5,700+ 
+- **With performance data**: 1,200+ papers
+- **Power output data**: 850+ papers
+- **Efficiency data**: 750+ papers
+- **Materials extracted**: 127 unique
 - **Organisms identified**: 99 unique
+- **Sources**: CrossRef API, PubMed API, arXiv API, comprehensive searches
 
 ## Future Enhancements
 
@@ -218,14 +251,67 @@ NEXT_PUBLIC_DEMO_MODE="false"    # For full functionality
 ## Testing
 
 ```bash
-# Test extraction patterns
-npm run test:literature:extraction
+# Run all literature tests
+npm run test:literature
 
-# Test API endpoints
-npm run test:literature:api
-
-# Test domain mapping
-npm run test:literature:domains
+# Test specific components
+npm run test tests/literature/paper-quality-validator.test.ts
+npm run test tests/literature/enhanced-data-extractor.test.ts
+npm run test tests/api/papers-filters.test.ts
+npm run test tests/literature/literature-page.test.tsx
 ```
+
+### Test Coverage
+
+- **Paper Quality Validator**: Pattern matching, scoring logic, edge cases
+- **Enhanced Data Extractor**: Performance metrics, materials, organisms, confidence scoring
+- **Papers API**: Filtering, pagination, data transformation, error handling
+- **Literature UI**: Component rendering, user interactions, API integration
+
+## API Filtering and Source Management
+
+### Real Papers Filter
+The API distinguishes between verified research papers and other sources:
+
+```typescript
+const realSources = [
+  'crossref_api',
+  'crossref_comprehensive', 
+  'pubmed_api',
+  'pubmed_comprehensive',
+  'arxiv_api',
+  'local_pdf',
+  'web_search',
+  'comprehensive_search',
+  'advanced_electrode_biofacade_search',
+  'extensive_electrode_biofacade_collection'
+]
+```
+
+### Frontend Display Optimization
+
+1. **JSON Field Parsing**: All API routes use `parseJsonField` to handle mixed string/array data
+2. **Material Filtering**: Removes artifacts like "null", "undefined", "[object Object]"
+3. **Pagination**: Default 10 papers per page, max 100
+4. **URL Parameters**: Filters persist across page navigation
+
+## Common Issues and Solutions
+
+### Issue: Frontend showing "[object Object]" or nulls
+**Solution**: Implemented parseJsonField function in API routes to properly transform JSON strings
+
+### Issue: Only showing 313 papers instead of 6,000+
+**Solution**: Added crossref_comprehensive and pubmed_comprehensive to realSources array
+
+### Issue: Database migration to PostgreSQL
+**Solution**: Use seed-remote-database.ts script with proper DIRECT_URL connection string
+
+## Important Notes for AI Agents
+
+1. **Data Integrity**: NEVER create fake papers or fabricated scientific data
+2. **Source Verification**: Always check paper.source against realSources for filtering
+3. **Performance**: Use pagination for large datasets, implement proper loading states
+4. **Error Handling**: Wrap all API calls in try-catch, provide meaningful error messages
+5. **Testing**: Run tests before committing any changes to literature system
 
 Remember: The goal is to transform unstructured research literature into a structured, queryable knowledge base that advances the field of microbial electrochemical systems.
