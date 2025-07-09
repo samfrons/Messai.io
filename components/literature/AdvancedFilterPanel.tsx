@@ -82,7 +82,7 @@ export default function AdvancedFilterPanel({ onFiltersChange, initialFilters }:
   // Update parent when filters change
   useEffect(() => {
     onFiltersChange(filters)
-  }, [filters, onFiltersChange])
+  }, [filters]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleMicrobeToggle = (microbe: string) => {
     setFilters(prev => ({

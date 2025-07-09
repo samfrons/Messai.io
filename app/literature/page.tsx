@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 // Authentication removed for research-only version
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -150,10 +150,10 @@ export default function LiteraturePage() {
     setPagination(prev => ({ ...prev, page: 1 }))
   }
   
-  const handleFiltersChange = (filters: typeof advancedFilters) => {
+  const handleFiltersChange = useCallback((filters: typeof advancedFilters) => {
     setAdvancedFilters(filters)
     setPagination(prev => ({ ...prev, page: 1 })) // Reset to first page when filters change
-  }
+  }, [])
 
   const formatAuthors = (authors: string[] | string) => {
     if (Array.isArray(authors)) {
