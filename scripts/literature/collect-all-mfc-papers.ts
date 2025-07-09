@@ -350,7 +350,10 @@ class MassivePaperCollector {
           authors: paper.author?.map((a: any) => `${a.given || ''} ${a.family || ''}`.trim()) || [],
           abstract: paper.abstract,
           journal: paper['container-title']?.[0],
-          publicationDate: paper.published?.['date-parts']?.[0]?.join('-'),
+          publicationDate: paper.published?.['date-parts']?.[0] ? 
+            new Date(paper.published['date-parts'][0][0], 
+                     (paper.published['date-parts'][0][1] || 1) - 1, 
+                     paper.published['date-parts'][0][2] || 1).toISOString() : undefined,
           doi: paper.DOI,
           externalUrl: paper.URL,
           source: 'crossref_comprehensive',
@@ -363,7 +366,8 @@ class MassivePaperCollector {
           abstract: paper.abstract,
           pubmedId: paper.pmid,
           externalUrl: `https://pubmed.ncbi.nlm.nih.gov/${paper.pmid}/`,
-          source: 'pubmed_comprehensive'
+          source: 'pubmed_comprehensive',
+          keywords: [] // PubMed doesn't provide keywords in basic fetch
         }
       } else if (source === 'arxiv') {
         standardPaper = {
@@ -515,9 +519,10 @@ class MassivePaperCollector {
         await new Promise(resolve => setTimeout(resolve, 5000))
       }
       
-      // Safety limit for testing (remove in production)
-      if (batchCount >= 10) {
-        console.log('\n   ⚠️ Reached batch limit (10) for testing. Remove this limit for full collection.')
+      // No limit - collect ALL papers
+      // Safety check: stop after 1000 batches (extremely unlikely but prevents infinite loops)
+      if (batchCount >= 1000) {
+        console.log('\n   ⚠️ Reached maximum batch limit (1000) as a safety measure.')
         break
       }
     }
