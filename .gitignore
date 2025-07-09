@@ -67,6 +67,8 @@ backups/
 *.sql
 *.backup
 *.dump
+collection-log.txt
+*-progress.json
 
 # Requirements builder (uncomment if you want to exclude requirements)
 # requirements/
