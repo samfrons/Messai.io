@@ -1,6 +1,7 @@
 'use client';
 
-import { SessionProvider as NextAuthSessionProvider } from 'next-auth/react';
+// Research-only version: Use mock authentication
+import { SessionProvider as MockSessionProvider } from '@/lib/auth/mock-auth';
 import { ReactNode } from 'react';
 
 interface SessionProviderProps {
@@ -8,5 +9,5 @@ interface SessionProviderProps {
 }
 
 export function SessionProvider({ children }: SessionProviderProps) {
-  return <NextAuthSessionProvider>{children}</NextAuthSessionProvider>;
+  return <MockSessionProvider>{children}</MockSessionProvider>;
 }

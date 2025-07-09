@@ -1,7 +1,7 @@
 'use client'
 
 import { SessionProvider } from '@/components/SessionProvider'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@/lib/auth/mock-auth'
 import { ReactNode, useEffect } from 'react'
 import { getDemoConfig } from '@/lib/demo-mode'
 
