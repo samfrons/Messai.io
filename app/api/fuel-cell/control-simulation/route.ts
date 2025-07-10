@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
     // Use preset or custom simulation parameters
     let simulationParams = validatedInput.simulationParams
     if (validatedInput.preset && !simulationParams) {
-      simulationParams = SIMULATION_PRESETS[validatedInput.preset]
+      simulationParams = SIMULATION_PRESETS[validatedInput.preset] as any
     }
     
     if (!simulationParams) {

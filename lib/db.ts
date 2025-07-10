@@ -17,7 +17,6 @@ function createPrismaClient() {
   if (hasAccelerate && process.env.DATABASE_URL?.includes('postgres')) {
     // Use Accelerate URL if available and we're using PostgreSQL
     connectionUrl = accelerateUrl
-    console.log('Using Prisma Accelerate for connection pooling')
   } else if (process.env.DATABASE_URL?.includes('postgres')) {
     // PostgreSQL without Accelerate
     connectionUrl = process.env.DATABASE_URL
@@ -36,7 +35,8 @@ function createPrismaClient() {
       url.searchParams.set('pool_timeout', '10') // Shorter timeout
       finalUrl = url.toString().replace('postgres://', 'postgresql://')
     } catch (e) {
-      console.warn('Failed to parse database URL:', e)
+      // If URL parsing fails, use the original connection string
+      finalUrl = connectionUrl
     }
   }
 
