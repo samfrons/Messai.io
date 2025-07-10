@@ -32,6 +32,38 @@ The platform combines:
 - **Database**: Prisma ORM (SQLite dev, PostgreSQL prod)
 - **Testing**: Vitest + React Testing Library
 
+## Branch Architecture
+
+MESSAi uses a comprehensive branch structure to support different deployment scenarios:
+
+### **Production Branches**
+- **master** - Stable production base (currently messai-ai branch)
+- **messai-lab** - Lab tools only (clean, focused) → *worktree at `/Users/samfrons/Desktop/messai-lab`*
+- **messai-research** - Research system only → *worktree at `/Users/samfrons/Desktop/messai-research`*
+- **research-lab** - Research + lab tools combined
+- **experiments** - Experiment management platform
+- **full-platform** - All features combined (research + lab + experiments)
+
+### **Development Branches**
+- **research-development** - Research feature development
+- **lab-development** - Lab feature development
+- **experiments-development** - Experiment feature development
+
+### **Combined Branches**
+- **lab-experiments** - Lab tools + experiments
+- **research-experiments** - Research + experiments
+
+### **Deployment Options**
+1. **Lab-only**: Use `messai-lab` for pure laboratory tools
+2. **Research-only**: Use `messai-research` for literature and AI features
+3. **Research + Lab**: Use `research-lab` for academic institutions
+4. **Full Platform**: Use `full-platform` for complete MESSAi experience
+
+### **Development Workflow**
+1. **Feature Development**: Work on dedicated `*-development` branches
+2. **Integration**: Merge development branches to production branches
+3. **Deployment**: Deploy production branches to appropriate environments
+
 ### Current Project Structure
 ```
 messai/
@@ -138,53 +170,17 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 - Design-specific multipliers
 - Random variation for realism
 
-## Research System Guidelines
+## Research System & Tools
 
-### CRITICAL: Data Integrity Rules
-- **NEVER generate fake research papers or fabricated scientific data**
-- **ONLY work with real, verified papers from legitimate sources**
-- **Extrapolation allowed ONLY when explicitly requested and clearly marked**
-- **ALL papers must have verification (DOI, PubMed ID, arXiv ID, or verified PDF)**
+### Data Integrity
+- **ONLY real, verified papers** with DOI/PubMed/arXiv verification
+- **3,721 papers** currently in database with AI-powered extraction
+- **NEVER fabricate** scientific data - extrapolation only when explicitly requested
 
-### Research Database Loading Requirements
-Always ensure the research database loads reliably by:
-
-1. **Error Handling**:
-   - Wrap all research components with ErrorBoundary
-   - Implement retry logic for failed API calls
-   - Show meaningful error messages to users
-   - Log errors for debugging
-
-2. **Performance Optimization**:
-   - Implement pagination (default: 10-20 papers per page)
-   - Add loading states for all async operations
-   - Cache API responses where appropriate
-   - Use database indexes on frequently queried fields
-
-3. **Fallback Strategies**:
-   - If main API fails, show cached data if available
-   - Provide offline mode with limited functionality
-   - Gracefully degrade features rather than crash
-
-4. **Testing Requirements**:
-   - Test with empty database
-   - Test with large datasets (3,700+ papers)
-   - Test network failures and timeouts
-   - Test authentication state changes
-
-## Tools Documentation
-
-### Bioreactor Design Tool (`/app/tools/bioreactor/`)
-- **Purpose**: Interactive 3D bioreactor design and simulation
-- **Features**: Material selection, flow simulation, performance prediction
-- **Components**: `components/3d/bioreactor/` directory
-- **Models**: BioreactorModel.tsx, ElectrodeGeometries.ts, FlowSimulation.ts
-
-### Electroanalytical Tool (`/app/tools/electroanalytical/`)
-- **Purpose**: Electrochemical analysis and visualization
-- **Features**: Voltammetry, impedance analysis, data interpretation
-- **Components**: `components/3d/electroanalytical/` directory
-- **Visualization**: ElectroanalyticalVisualization.tsx
+### Detailed Documentation
+- **Research System**: See `docs/RESEARCH_SYSTEM.md` for full guidelines
+- **Tools Documentation**: See `docs/TOOLS_DOCUMENTATION.md` for bioreactor and electroanalytical tools
+- **Development Tasks**: See `docs/DEVELOPMENT_TASKS.md` for common operations
 
 ## Testing Approach
 
@@ -212,22 +208,28 @@ Always ensure the research database loads reliably by:
 6. **API Rate Limits**: External APIs (CrossRef, PubMed) have rate limits
 7. **Data Integrity**: Research system must only contain verified research
 
-## Common Tasks
+## Database Configuration
 
-### Adding a New System Design
-1. Update `app/page.tsx` with design details
-2. Add 3D model in `components/DesignSpecific3DModels.tsx`
-3. Update prediction multipliers in `lib/ai-predictions.ts`
+### Development (Local SQLite)
+- **Database**: `file:/Users/samfrons/Desktop/Messai/prisma/dev.db`
+- **Schema**: `prisma/schema.sqlite.prisma` 
+- **Usage**: Automatic detection via `NODE_ENV=development`
 
-### Adding Electrode Materials
-1. Update `components/MESSConfigPanel.tsx`
-2. Add material properties and descriptions
-3. Update cost and efficiency ratings
+### Production (PostgreSQL + Prisma Accelerate)
+- **Database**: PostgreSQL with connection pooling
+- **Schema**: `prisma/schema.prisma`
+- **Usage**: Requires `DATABASE_URL` and optional `PRISMA_ACCELERATE_URL`
 
-### Modifying Predictions
-1. Adjust factors in `lib/ai-predictions.ts`
-2. Update API route in `app/api/predictions/route.ts`
-3. Add tests for new prediction logic
+### Commands
+```bash
+# Local development
+npm run dev              # Uses SQLite automatically
+npm run db:studio:dev    # Prisma Studio for SQLite
+
+# Production
+npm run build            # Uses PostgreSQL
+npm run db:studio        # Prisma Studio for PostgreSQL
+```
 
 ## Important Files to Review
 

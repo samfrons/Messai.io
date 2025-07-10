@@ -96,6 +96,39 @@ npx prisma generate
 npm run dev
 ```
 
+## 🏗️ **Branch Architecture**
+
+MESSAi supports multiple deployment scenarios through dedicated branches:
+
+### **🎯 Production Deployments**
+- **`messai-lab`** → Laboratory tools only (bioreactor design, 3D modeling)
+- **`messai-research`** → Research database only (3,721+ papers, AI analysis)  
+- **`research-lab`** → Research + lab tools combined
+- **`experiments`** → Experiment management platform
+- **`full-platform`** → Complete MESSAi experience (all features)
+
+### **⚙️ Development Workflow**
+- **`research-development`** → Research feature development
+- **`lab-development`** → Lab feature development  
+- **`experiments-development`** → Experiment feature development
+
+### **🚀 Quick Branch Setup**
+```bash
+# Lab tools only
+git checkout messai-lab
+
+# Research database only
+git checkout messai-research
+
+# Combined research + lab
+git checkout research-lab
+
+# Full platform
+git checkout full-platform
+```
+
+📖 **[Complete Branch Documentation](docs/BRANCH_ARCHITECTURE.md)**
+
 ## 🛠️ Tech Stack
 
 ### **Core Technologies**
