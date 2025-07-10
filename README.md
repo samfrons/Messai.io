@@ -70,9 +70,7 @@ This repository can run in two modes:
 ## 🏃 Quick Start (Demo Mode)
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-org/messai-mvp.git
-cd messai-mvp
+
 
 # Install dependencies
 npm install
@@ -285,7 +283,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ### **Academic Citation**
 ```bibtex
-@software{messai2024,
+@software{messai2025,
   title={MESSAi: Unified Electrochemical Systems AI Platform},
   author={MESSAi Development Team},
   year={2024},

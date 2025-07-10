@@ -371,19 +371,9 @@ async function addMassiveFinalExpansion(userId: string) {
 // Main execution
 async function main() {
   const args = process.argv.slice(2)
-  const userId = args[0] || 'cmcqy3pmg0006f5ieutyf0dq0'
+  const userId = null // No user requirement
   
-  const user = await prisma.user.findUnique({
-    where: { id: userId },
-    select: { id: true, name: true, email: true }
-  })
-  
-  if (!user) {
-    console.error(`User with ID ${userId} not found`)
-    process.exit(1)
-  }
-  
-  console.log(`Adding massive final expansion for user: ${user.name || user.email}`)
+  console.log(`Adding massive final expansion without user requirement`)
   const result = await addMassiveFinalExpansion(userId)
   
   console.log(`\n🎉 Successfully expanded database with ${result.added} new papers!`)
