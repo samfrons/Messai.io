@@ -60,6 +60,7 @@ messai/
 ├── scripts/            # Development and maintenance scripts
 │   ├── research/       # Research system management
 │   ├── backup/        # Database backup utilities
+│   ├── phase-manager.ts      # Phase tracking automation
 │   └── zen/           # Zen browser integration
 ├── prisma/             # Database schemas and migrations
 │   ├── schema.prisma        # Main schema
@@ -71,7 +72,11 @@ messai/
 ├── docs/              # Project documentation
 ├── public/            # Static assets
 │   └── papers/       # PDF storage
-└── requirements/      # Feature requirements specs
+├── requirements/      # Feature requirements specs
+├── plan.md           # Master project plan
+├── phases/           # Phase-based development tracking
+├── planning-templates/ # Planning document templates
+└── PLANNING.md       # Planning system guide
 ```
 
 ### Future Monorepo Architecture
@@ -267,6 +272,33 @@ For scientific questions or collaborations, the platform targets:
 - Environmental engineering departments
 - Wastewater treatment facilities
 - Sustainable architecture firms
+
+## Project Planning System
+
+MESSAi uses a comprehensive planning system to manage development:
+
+### Key Planning Documents
+- **plan.md**: Master project plan with 6-phase development timeline
+- **PLANNING.md**: Complete guide to using the planning system
+- **phases/**: Active tracking of current phase progress
+
+### Phase Timeline
+1. **Phase 1: Foundation** (Weeks 1-4) ✅ COMPLETED
+2. **Phase 2: Research System** (Weeks 5-8) ✅ COMPLETED
+3. **Phase 3: Laboratory Tools** (Weeks 9-12) 🔄 IN PROGRESS
+4. **Phase 4: Integration** (Weeks 13-16) 📅 UPCOMING
+5. **Phase 5: Experiment Platform** (Weeks 17-20) 📅 FUTURE
+6. **Phase 6: Optimization** (Weeks 21-24) 📅 FUTURE
+
+### Phase Management Commands
+```bash
+npm run phase:status     # Check current phase status
+npm run phase:check      # Verify phase completion
+npm run phase:report     # Generate progress report
+npm run phase:transition # Transition to next phase
+```
+
+See `/plan.md` for the complete project roadmap and `/PLANNING.md` for detailed usage instructions.
 
 ---
 
