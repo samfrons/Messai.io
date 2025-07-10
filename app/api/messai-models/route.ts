@@ -177,12 +177,12 @@ export async function POST(request: NextRequest) {
         )
         
         // Check against validation criteria
-        const validationCriteria = progressiveValidation[stage as ModelStage]
+        const performanceValidation = progressiveValidation[stage as ModelStage]
         const validationResults = {
-          powerDensity: performance.powerDensity >= validationCriteria.requirements.powerDensity.min,
-          efficiency: performance.efficiency >= validationCriteria.requirements.efficiency.min,
-          meetsCriteria: performance.powerDensity >= validationCriteria.requirements.powerDensity.min &&
-                         performance.efficiency >= validationCriteria.requirements.efficiency.min
+          powerDensity: performance.powerDensity >= performanceValidation.requirements.powerDensity.min,
+          efficiency: performance.efficiency >= performanceValidation.requirements.efficiency.min,
+          meetsCriteria: performance.powerDensity >= performanceValidation.requirements.powerDensity.min &&
+                         performance.efficiency >= performanceValidation.requirements.efficiency.min
         }
         
         return NextResponse.json({

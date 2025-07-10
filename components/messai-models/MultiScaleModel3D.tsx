@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { ErrorBoundary } from '@/components/ErrorBoundary'
+import ErrorBoundary from '@/components/ErrorBoundary'
 import type { ModelStage, ModelParameters } from '@/lib/multi-scale-catalog'
 import { multiScaleModels, advancedMaterials, calculatePerformance, bacterialSpecies } from '@/lib/multi-scale-catalog'
 
@@ -343,9 +343,9 @@ export default function MultiScaleModel3D({
       
       // Module chamber
       const moduleGeometry = new THREE.BoxGeometry(0.6, 0.6, 0.4)
-      const module = new THREE.Mesh(moduleGeometry, materials.chamber)
-      module.position.set(x, y, z)
-      moduleGroup.add(module)
+      const moduleUnit = new THREE.Mesh(moduleGeometry, materials.chamber)
+      moduleUnit.position.set(x, y, z)
+      moduleGroup.add(moduleUnit)
       
       // Module electrodes
       const electrodeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.05)
