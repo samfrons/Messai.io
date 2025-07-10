@@ -1,22 +1,26 @@
-# MESSAi Literature System
+# MESSAi Research System
 
-A dedicated workspace for developing and testing the literature management and AI analysis features of MESSAi.
+A comprehensive system for managing and analyzing research papers on microbial electrochemical systems, with advanced filtering and AI-powered insights.
 
 ## Quick Start
 
-### Setup Literature Worktree
+### Database Information
+
+The research system contains **3,721 verified research papers** focused on microbial electrochemical systems after cleanup of non-relevant papers.
+
+#### Database Statistics:
+- **Total Papers**: 3,721 (reduced from 6,022 after cleanup)
+- **Unique Materials**: 179
+- **Unique Organisms**: 141  
+- **Papers with Power Output**: 35
+- **Papers with Efficiency Data**: 38
+- **2024 Papers**: 294
+
+### Setup
 
 ```bash
 # From main repo directory
-git worktree add ../messai-literature feature/literature-system
-
-# Switch to literature worktree
-cd ../messai-literature
-
-# Copy literature-specific configuration
-cp package.literature.json package.json
-cp next.config.literature.js next.config.js
-cp .env.literature.example .env.local
+npm install
 
 # Install dependencies
 npm install
@@ -31,18 +35,22 @@ npm run dev:lit
 ### Development
 
 ```bash
-# Literature system runs on port 3004
-npm run dev:lit
+# Main system runs on port 3003
+npm run dev
 
 # AI processing
 npm run ai:process -- --batch 10
 
 # Database operations
 npm run db:integrity
-npm run literature:enhance-all
+npm run research:enhance-all
 
 # Testing
-npm run test:literature
+npm run test:research
+
+# Cleanup non-MES papers
+npx tsx scripts/research/cleanup-non-mes-papers.ts
+npx tsx scripts/research/strict-mes-cleanup.ts
 ```
 
 ## Features

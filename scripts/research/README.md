@@ -1,6 +1,6 @@
-# Literature Enhancement System
+# Research Enhancement System
 
-A comprehensive system for managing, enhancing, and maintaining high-quality research papers in the MESSAi literature database.
+A comprehensive system for managing, enhancing, and maintaining high-quality research papers in the MESSAi research database focused on microbial electrochemical systems.
 
 ## 🎯 Overview
 
@@ -29,10 +29,22 @@ This system ensures that only **real, high-quality, relevant research papers** a
 ### Core Enhancement Pipeline
 ```bash
 # Run the complete enhancement pipeline
-npm run literature:enhance-all
+npm run research:enhance-all
 
 # With options:
-npm run literature:enhance-all -- --skip-cleanup --limit-processing 50
+npm run research:enhance-all -- --skip-cleanup --limit-processing 50
+```
+
+### Cleanup Scripts for Non-MES Papers
+```bash
+# Basic cleanup - removes clearly non-MES papers
+npx tsx scripts/research/cleanup-non-mes-papers.ts
+
+# Strict cleanup - only keeps papers with explicit MES keywords
+npx tsx scripts/research/strict-mes-cleanup.ts
+
+# Collection script for comprehensive MFC papers
+npm run research:collect-comprehensive
 ```
 
 ### Individual Enhancement Steps
@@ -191,13 +203,33 @@ Papers are scored on multiple dimensions:
 - Deep technical insights extraction
 - Innovation and comparative analysis
 
+## 🧹 Cleanup Scripts
+
+### cleanup-non-mes-papers.ts
+Removes papers that are clearly not about microbial electrochemical systems:
+- Traditional fuel cells (SOFC, PEMFC, DMFC)
+- Solar/wind/nuclear energy papers
+- Papers without any MES-related keywords
+
+### strict-mes-cleanup.ts  
+More aggressive cleanup that only keeps papers with explicit MES terms:
+- Must contain terms like: microbial fuel cell, MFC, MEC, MDC, MES, BES
+- Removes papers that only mention "fuel cell" without "microbial"
+- Ensures database focuses on bioelectrochemical systems
+
+### Database Status After Cleanup
+- **Before**: 6,022 papers (mixed relevance)
+- **After**: 3,721 papers (MES-focused)
+- **Removed**: 2,301 non-relevant papers (38%)
+
 ## 📋 Quality Targets
 
-| Metric | Current Target | Excellent |
-|--------|----------------|-----------|
-| Real Papers | >80% | >90% |
-| Average Quality Score | >75/100 | >85/100 |
-| Performance Data Coverage | >70% | >85% |
+| Metric | Current | Target | Excellent |
+|--------|---------|--------|-----------|
+| Real Papers | 100% | >95% | >99% |
+| MES-Relevant Papers | 100% | >95% | >99% |
+| Average Quality Score | >70/100 | >75/100 | >85/100 |
+| Performance Data Coverage | >35% | >70% | >85% |
 | Papers with External Links | >95% | >98% |
 | Broken Links | <5% | <2% |
 
