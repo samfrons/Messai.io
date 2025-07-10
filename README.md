@@ -28,7 +28,7 @@ MESSAi is a cutting-edge platform for electrochemical systems research, unifying
 - **Cross-Platform Optimization**: Unified algorithms for both system types
 
 ### 🧠 **AI-Powered Research Intelligence**
-- **2,800+ Research Papers** with AI enhancement and cross-referencing
+- **3,721+ Research Papers** with AI enhancement and cross-referencing
 - **Knowledge Graph**: 1,200+ smart knowledge nodes with 2,750+ connections
 - **ML Discovery Engine**: Pattern recognition across research literature
 - **Citation Networks**: Intelligent paper recommendations and research lineages
@@ -53,7 +53,7 @@ This repository can run in two modes:
 ### **🎯 Demo Mode (Default for Cloned Repos)**
 - ✅ **Instant access** - No authentication setup required
 - ✅ **Full feature exploration** with sample data
-- ✅ **2,800+ research papers** in the literature database
+- ✅ **3,721+ research papers** in the research database
 - ✅ **AI insights and predictions** with demo content
 - ✅ **3D system visualization** and design tools
 - ✅ **Sample experiments** from real research institutions
@@ -237,7 +237,7 @@ npm run db:studio    # Open Prisma Studio
 
 ## 📊 Platform Statistics
 
-- **🔬 Research Papers**: 2,800+ with AI enhancement
+- **🔬 Research Papers**: 3,721+ with AI enhancement
 - **⚡ System Designs**: 20+ validated configurations
 - **🧪 Materials Database**: 27+ electrode options
 - **🌐 Global Users**: 500+ researchers worldwide
@@ -295,7 +295,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 ### **Scientific Foundation**
-- Based on 2,800+ peer-reviewed research papers
+- Based on 3,721+ peer-reviewed research papers
 - Algorithms validated against experimental data
 - Collaboration with leading electrochemistry researchers
 - Integration with established simulation frameworks

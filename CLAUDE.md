@@ -15,210 +15,152 @@ The platform combines:
 - Interactive 3D visualization using Three.js
 - AI-powered predictions for system optimization
 - Comprehensive experiment tracking
-- Scientific material database with 27 electrode options
-
+- Scientific material database with 27 electrode options, differentiating between anode and cathode
+- Clean UI theme
+- Advanced research collection and analysis system with 3,721 verified research papers
+- AI-powered data extraction and categorization system
+- Advanced filtering and search capabilities
 
 ## Key Technical Details
 
 ### Architecture
-- **Framework**: Next.js 14 with App Router
+- **Framework**: Next.js 15 with App Router
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS with custom theme that will be implemented at a later date
 - **3D Graphics**: Three.js + React Three Fiber
 - **State Management**: Zustand
-- **Database**: Prisma ORM (PostgreSQL ready)
+- **Database**: Prisma ORM (SQLite dev, PostgreSQL prod)
 - **Testing**: Vitest + React Testing Library
 
 ### Project Structure
 ```
-messai/
-├── app/                          # Next.js 14 App Router pages and API routes
-│   ├── api/                      # API endpoints
-│   │   ├── auth/                 # Authentication endpoints (NextAuth.js)
-│   │   ├── predictions/          # AI prediction engine API
-│   │   ├── papers/               # Literature database API
-│   │   ├── literature/           # Enhanced literature features
-│   │   ├── fuel-cell/            # Fuel cell specific APIs
-│   │   └── insights/             # Analytics and insights API
-│   ├── (pages)/                  # Page routes
-│   │   ├── page.tsx              # Main landing/catalog page
-│   │   ├── dashboard/            # User dashboard
-│   │   ├── literature/           # Literature browsing and search
-│   │   │   ├── [id]/             # Paper detail view
-│   │   │   ├── semantic-search/  # AI-powered search
-│   │   │   └── upload/           # Paper upload interface
-│   │   ├── models/               # 3D model showcase
-│   │   ├── systems/              # System configuration
-│   │   ├── platform/             # Platform overview
-│   │   ├── tools/                # Specialized tools
-│   │   │   ├── bioreactor/       # Bioreactor design tool
-│   │   │   └── electroanalytical/# Electroanalytical tool
-│   │   ├── algal-fuel-cell/      # Specialized algae simulator
-│   │   ├── experiment/           # Experiment management
-│   │   │   └── [id]/             # Individual experiment
-│   │   ├── insights/             # Analytics dashboard
-│   │   ├── onboarding/           # User onboarding flow
-│   │   ├── profile/              # User profile
-│   │   ├── settings/             # User settings
-│   │   │   ├── account/          # Account settings
-│   │   │   ├── preferences/      # User preferences
-│   │   │   ├── notifications/    # Notification settings
-│   │   │   └── security/         # Security settings
-│   │   ├── demo/                 # Demo-specific pages
-│   │   ├── marketing/            # Marketing landing
-│   │   └── research-dashboard/   # Research overview
-│   └── globals.css               # Global styles
-│
-├── components/                   # React components organized by type
-│   ├── 3d/                       # Three.js 3D visualization components
-│   │   ├── vanilla-*.tsx         # Pure Three.js implementations
-│   │   ├── safe-*.tsx            # Error-boundary wrapped versions
-│   │   └── worker-*.tsx          # Web Worker based renderers
-│   ├── fuel-cell/                # Fuel cell specific components
-│   ├── literature/               # Literature system components
-│   ├── algal-fuel-cell/          # Algae fuel cell components
-│   ├── lcars/                    # LCARS UI theme components
-│   ├── ui/                       # Generic UI components
-│   ├── unified/                  # Unified system components
-│   └── *.tsx                     # Core feature components
-│
-├── lib/                          # Business logic and utilities
-│   ├── ai-predictions.ts         # MESS prediction engine
-│   ├── fuel-cell-*.ts            # Fuel cell logic
-│   ├── auth/                     # Authentication utilities
-│   ├── literature/               # Literature data processing
-│   ├── types/                    # TypeScript type definitions
-│   ├── demo-mode.ts              # Demo mode configuration
-│   └── *.ts                      # Core utilities
-│
-├── scripts/                      # Development and maintenance scripts
-│   ├── literature/               # Literature system management
-│   │   ├── fetch-*.ts            # Paper fetching scripts
-│   │   ├── enhance-*.ts          # Enhancement pipelines
-│   │   ├── validate-*.ts         # Validation tools
-│   │   └── README.md             # Literature system docs
-│   ├── backup/                   # Database backup utilities
-│   ├── zen/                      # Zen browser integration
-│   ├── test-*.js                 # Testing scripts
-│   └── setup-*.ts                # Setup utilities
-│
-├── prisma/                       # Database schemas and migrations
-│   ├── schema.prisma             # Main Prisma schema
-│   ├── schema.*.prisma           # Environment-specific schemas
-│   ├── seed.ts                   # Database seeding
-│   └── *.db                      # SQLite databases (dev only)
-│
-├── tests/                        # Test suites organized by type
-│   ├── components/               # Component tests
-│   ├── api/                      # API endpoint tests
-│   ├── integration/              # User workflow tests
-│   ├── literature/               # Literature system tests
-│   ├── performance/              # Performance benchmarks
-│   └── setup.ts                  # Test configuration
-│
-├── docs/                         # Project documentation
-│   ├── API.md                    # API documentation
-│   ├── ARCHITECTURE.md           # System architecture
-│   ├── AUTH_*.md                 # Authentication guides
-│   ├── DATABASE_SETUP.md         # Database configuration
-│   └── *.md                      # Feature-specific docs
-│
-├── public/                       # Static assets
-│   ├── papers/                   # PDF storage (literature)
-│   └── test-*.html               # Standalone test pages
-│
-├── requirements/                 # Feature requirements specs
-│   └── YYYY-MM-DD-*/             # Timestamped requirements
-│       ├── metadata.json         # Requirement metadata
-│       └── *.md                  # Requirement documents
-│
-├── types/                        # Global TypeScript types
-│   └── mess-models.ts            # MESS system type definitions
-│
-├── backups/                      # Database and system backups
-│   └── *.json/.sql               # Timestamped backup files
-│
-├── hooks/                        # Custom React hooks
-│   └── useKeyboardShortcuts.ts   # Keyboard navigation
-│
-├── deployment/                   # Deployment configurations
-│   └── fuel-cell-config.md       # System-specific configs
-│
-├── reports/                      # Generated analysis reports
-│   └── pipeline-report-*.json    # Literature pipeline reports
-│
-├── messai-ai/                    # AI/ML experimentation workspace
-│   └── (experimental features)   # Isolated development area
-│
-├── messai-research/              # Research branch mirror
-│   └── (duplicate structure)     # Branch-specific development
-│
-├── vendor/                       # Third-party dependencies
-│   └── (vendored libraries)      # Local copies of dependencies
-│
-├── packages/                     # Monorepo packages (if applicable)
-│   └── (shared packages)         # Shared code between projects
-│
-├── Configuration Files           # Project configuration
-│   ├── next.config.js            # Next.js configuration
-│   ├── tailwind.config.ts        # Tailwind CSS config
-│   ├── tsconfig.json             # TypeScript config
-│   ├── vitest.config.ts          # Test runner config
-│   ├── docker-compose.yml        # Docker configuration
-│   └── vercel.json               # Deployment config
-│
-└── Root Files                    # Project root files
-    ├── CLAUDE.md                 # This file - AI assistant context
-    ├── README.md                 # Project documentation
-    ├── README.literature.md      # Literature system guide
-    ├── README.monorepo.md        # Monorepo setup guide
-    ├── SECURITY.md               # Security guidelines
-    ├── DEPLOYMENT.md             # Deployment instructions
-    ├── CHANGELOG.md              # Version history
-    ├── LICENSE                   # Project license
-    ├── ZEN_SETUP.md              # Zen browser setup
-    ├── package.json              # Dependencies and scripts
-    ├── middleware.ts             # Next.js middleware
-    ├── mess-parameters-json.json # MESS parameter definitions
-    └── ultrathinkplan.txt        # Development planning
-```
-
-#### Directory Purpose Guide
-
-**Core Application (`app/`)**
-- Contains all Next.js pages and API routes
-- Follows App Router conventions
-- Each subdirectory represents a route or route group
-
-**Components (`components/`)**
-- Reusable React components
-- Organized by feature area or type
-- 3D components have multiple implementations for different use cases
-
-**Business Logic (`lib/`)**
-- Core application logic separated from UI
-- Prediction engines, data processing, utilities
-- Type definitions for TypeScript
-
-**Scripts (`scripts/`)**
-- Automation and maintenance tools
-- Literature system management
-- Database operations and testing
-
-**Database (`prisma/`)**
-- Prisma ORM schemas and migrations
-- Environment-specific configurations
-- Seeding scripts for development
-
-**Testing (`tests/`)**
-- Comprehensive test coverage
-- Organized by test type
-- Includes performance benchmarks
-
-**Documentation (`docs/`)**
-- Technical documentation
-- Architecture decisions
-- Setup and deployment guides
+messai                                                                                                                                   │
+     │ ├── apps/                                                                                                                                            │
+     │ │   ├── public-tools/          # app.messai.io (Public demos)                                                                                        │
+     │ │   └── private-platform/      # messai.io (Full platform + auth)                                                                                    │
+     │ ├── packages/                                                                                                                                        │
+     │ │   ├── domains/              # Scientific domain packages                                                                                           │
+     │ │   │   ├── anodes/           # Biological interface electrodes                                                                                      │
+     │ │   │   ├── cathodes/         # Reduction electrodes (includes copper!)                                                                              │
+     │ │   │   ├── microbes/         # Biological systems & biofilms                                                                                        │
+     │ │   │   ├── geometries/       # Physical configurations & flow                                                                                       │
+     │ │   │   ├── environments/     # Operational conditions & control                                                                                     │
+     │ │   │   ├── substrates/       # Feed materials & nutrients                                                                                           │
+     │ │   │   ├── performance/      # Measurable outputs & kinetics                                                                                        │
+     │ │   │   └── infrastructure/   # Supporting materials & components                                                                                    │
+     │ │   ├── shared/                                                                                                                                      │
+     │ │   │   ├── ui/              # Shared React components                                                                                               │
+     │ │   │   ├── auth/            # Authentication utilities                                                                                              │
+     │ │   │   ├── database/        # Prisma schemas & utilities                                                                                            │
+     │ │   │   └── validation/      # Data validation & types                                                                                               │
+     │ │   └── tools/                                                                                                                                       │
+     │ │       ├── bioreactor/      # Bioreactor simulation engine                                                                                          │
+     │ │       ├── electroanalytical/ # Electroanalytical interface tools                                                                                   │
+     │ │       └── models/          # 3D models & physics engine                                                                                            │
+     │ ├── libs/                    # Core scientific libraries                                                                                             │
+     │ │   ├── prediction-engine/   # AI prediction algorithms                                                                                              │
+     │ │   ├── literature/          # Literature management system                                                                                          │
+     │ │   └── materials/           # Materials database engine                                                                                             │
+     │ └── infrastructure/                                                                                                                                  │
+     │     ├── nx.json             # NX configuration                                                                                                       │
+     │     ├── turbo.json          # Turbo build configuration                                                                                              │
+     │     └── deployment/         # CI/CD & deployment configs                                                                                             │
+     │                                                                                                                                                      │
+     │ 🔬 Enhanced Domain Structures                                                                                                                        │
+     │                                                                                                                                                      │
+     │ cathodes/ Domain - Complete with Copper Integration                                                                                                  │
+     │                                                                                                                                                      │
+     │ packages/domains/cathodes/                                                                                                                           │
+     │ ├── materials/                                                                                                                                       │
+     │ │   ├── precious-metals/       # Pt, Pd, Ru group                                                                                                    │
+     │ │   ├── base-metals/          # Cu, Ni, SS, Ti, Fe (KEY!)                                                                                            │
+     │ │   │   ├── copper/           # Cu, Cu₂O, CuO, Cu alloys                                                                                             │
+     │ │   │   │   ├── metallic/     # Pure copper electrodes                                                                                               │
+     │ │   │   │   ├── oxides/       # Cuprous/cupric oxide                                                                                                 │
+     │ │   │   │   ├── alloys/       # Cu-Zn, Cu-Ni, Cu-Ag                                                                                                  │
+     │ │   │   │   └── nanostructured/ # Cu nanowires, particles                                                                                            │
+     │ │   │   ├── nickel/           # Ni foam, Ni alloys                                                                                                   │
+     │ │   │   ├── stainless-steel/  # SS316, SS304                                                                                                         │
+     │ │   │   ├── titanium/         # Ti, TiO₂, Ti alloys                                                                                                  │
+     │ │   │   └── iron/             # Fe, Fe₂O₃, Fe-N-C                                                                                                    │
+     │ │   ├── carbon-supported/      # Metal-carbon composites                                                                                             │
+     │ │   ├── air-cathodes/         # Gas diffusion electrodes                                                                                             │
+     │ │   └── biocathodes/          # Biological reduction                                                                                                 │
+     │ ├── applications/                                                                                                                                    │
+     │ │   ├── oxygen-reduction/     # ORR optimization                                                                                                     │
+     │ │   ├── metal-recovery/       # Electrowinning (copper focus!)                                                                                       │
+     │ │   ├── alternative-reduction/ # NO₃⁻, SO₄²⁻, CO₂, H⁺                                                                                                │
+     │ │   └── specialized/          # Desalination, sensors                                                                                                │
+     │ ├── surface-treatments/                                                                                                                              │
+     │ │   ├── copper-specific/      # Cu surface engineering                                                                                               │
+     │ │   ├── general-treatments/   # Universal modifications                                                                                              │
+     │ │   └── biocompatibility/     # Biofilm interface                                                                                                    │
+     │ └── characterization/                                                                                                                                │
+     │     ├── electrochemical/      # CV, EIS, performance                                                                                                 │
+     │     ├── physical/             # XPS, SEM, conductivity                                                                                               │
+     │     └── performance/          # System-level metrics                                                                                                 │
+     │                                                                                                                                                      │
+     │ anodes/ Domain - Biological Interface Focus                                                                                                          │
+     │                                                                                                                                                      │
+     │ packages/domains/anodes/                                                                                                                             │
+     │ ├── materials/                                                                                                                                       │
+     │ │   ├── carbon-based/         # Carbon cloth, felt, paper                                                                                            │
+     │ │   ├── graphene-family/      # GO, rGO, aerogels                                                                                                    │
+     │ │   ├── nanotube/            # SWCNT, MWCNT, arrays                                                                                                  │
+     │ │   ├── mxene/               # Ti₃C₂Tₓ, V₂CTₓ, 2D materials                                                                                          │
+     │ │   └── conductive-polymers/  # PEDOT, polyaniline                                                                                                   │
+     │ ├── modifications/                                                                                                                                   │
+     │ │   ├── surface-treatments/   # Ammonia, heat, plasma                                                                                                │
+     │ │   ├── biocompatibility/    # Roughness, hydrophilicity                                                                                             │
+     │ │   ├── biofilm-enhancement/ # Coatings, mediators                                                                                                   │
+     │ │   └── conductivity-boost/   # Metal nanoparticles                                                                                                  │
+     │ ├── biofilm-interface/                                                                                                                               │
+     │ │   ├── adhesion-properties/  # Surface energy, roughness                                                                                            │
+     │ │   ├── electron-transfer/    # Direct vs mediated                                                                                                   │
+     │ │   ├── maintenance/         # Cleaning, regeneration                                                                                                │
+     │ │   └── lifetime/            # Degradation, replacement                                                                                              │
+     │ └── characterization/                                                                                                                                │
+     │     ├── electrochemical/     # Biofilm electrochemistry                                                                                              │
+     │     ├── biological/          # Biofilm analysis                                                                                                      │
+     │     └── performance/         # Power density, stability                                                                                              │
+     │                                                                                                                                                      │
+     │ Other Key Domains                                                                                                                                    │
+     │                                                                                                                                                      │
+     │ packages/domains/microbes/                                                                                                                           │
+     │ ├── organisms/              # Species, consortia                                                                                                     │
+     │ ├── metabolism/             # Electron pathways                                                                                                      │
+     │ ├── cultivation/            # Growth, maintenance                                                                                                    │
+     │ └── characterization/       # Community analysis                                                                                                     │
+     │                                                                                                                                                      │
+     │ packages/domains/geometries/                                                                                                                         │
+     │ ├── reactor-types/          # Single/dual chamber, flow                                                                                              │
+     │ ├── flow-patterns/          # Hydraulics, mixing                                                                                                     │
+     │ ├── electrode-arrangement/  # Spacing, surface area                                                                                                  │
+     │ └── scaling-laws/           # Lab to industrial                                                                                                      │
+     │                                                                                                                                                      │
+     │ packages/domains/environments/                                                                                                                       │
+     │ ├── physicochemical/        # pH, temperature, conductivity                                                                                          │
+     │ ├── control-systems/        # Automation, monitoring                                                                                                 │
+     │ ├── variations/             # Startup, steady-state                                                                                                  │
+     │ └── optimization/           # Model predictive control                                                                                               │
+     │                                                                                                                                                      │
+     │ packages/domains/substrates/                                                                                                                         │
+     │ ├── organic-feedstocks/     # Simple to complex organics                                                                                             │
+     │ ├── nutrients/              # Macro, trace, vitamins                                                                                                 │
+     │ ├── preprocessing/          # Treatment, conditioning                                                                                                │
+     │ └── characterization/       # COD, BOD, composition                                                                                                  │
+     │                                                                                                                                                      │
+     │ packages/domains/performance/                                                                                                                        │
+     │ ├── electrical/             # Power, current, voltage                                                                                                │
+     │ ├── efficiency/             # Coulombic, energy, removal                                                                                             │
+     │ ├── kinetics/               # Reaction rates, modeling                                                                                               │
+     │ └── economics/              # LCOE, CAPEX, OPEX                                                                                                      │
+     │                                                                                                                                                      │
+     │ packages/domains/infrastructure/                                                                                                                     │
+     │ ├── membranes/              # Ion exchange, selective                                                                                                │
+     │ ├── housing/                # Materials, sealing                                                                                                     │
+     │ ├── auxiliary/              # Pumps, sensors, DAQ                                                                                                    │
+     │ └── safety/                 # Pressure relief, monitoring           
 
 ## Development Guidelines
 
@@ -238,11 +180,11 @@ npm run lint        # Check code quality
 npm run format      # Format code with Prettier
 npm run db:studio   # Open Prisma Studio
 
-# Literature system management
-npm run literature:enhance-all    # Full enhancement pipeline
+# Research system management
+npm run research:enhance-all     # Full enhancement pipeline
 npm run db:integrity             # Check database integrity
 npm run db:validate-links        # Validate external URLs
-npm run test:literature          # Run literature tests
+npm run test:research            # Run research tests
 ```
 
 ## Scientific Context
@@ -274,7 +216,46 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 - Design-specific multipliers
 - Random variation for realism
 
-## Literature System Guidelines
+## Database Setup & Configuration
+
+MESSAi supports both local development with SQLite and production deployment with PostgreSQL, with automatic database provider detection and compatibility utilities.
+
+### Local Development (SQLite)
+- **Configuration**: Automatically uses SQLite when `NODE_ENV=development`
+- **Database URL**: `file:/Users/samfrons/Desktop/Messai/prisma/dev.db`
+- **Schema**: Uses `prisma/schema.sqlite.prisma`
+- **Setup**: Automatic database creation via `prisma db push`
+
+### Production (PostgreSQL)
+- **Configuration**: Uses PostgreSQL with Prisma Accelerate for enhanced performance
+- **Connection**: Requires `DATABASE_URL` and optional `PRISMA_ACCELERATE_URL`
+- **Schema**: Uses main `prisma/schema.prisma`
+- **Features**: Connection pooling, case-insensitive searches, advanced indexing
+
+### Database Compatibility
+The application includes database-agnostic query utilities (`lib/database-utils.ts`) that automatically detect the database provider and adjust queries:
+- **SQLite**: Uses simple `contains` filters for text searches
+- **PostgreSQL**: Uses `contains` with `mode: "insensitive"` for case-insensitive searches
+
+### Database Commands
+```bash
+# Local SQLite development
+npm run dev                    # Automatically uses SQLite
+npm run db:studio:dev         # Prisma Studio for SQLite
+npm run db:migrate:dev        # SQLite migrations
+
+# Production PostgreSQL
+npm run build                 # Uses PostgreSQL for production
+npm run db:studio             # Prisma Studio for PostgreSQL
+npx prisma migrate deploy     # Production migrations
+```
+
+### Environment Detection
+Database provider is automatically detected based on `DATABASE_URL`:
+- SQLite: URLs starting with `file:`
+- PostgreSQL: URLs containing `postgres` or `postgresql`
+
+## Research System Guidelines
 
 ### CRITICAL: Data Integrity Rules
 - **NEVER generate fake research papers or fabricated scientific data**
@@ -282,8 +263,8 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 - **Extrapolation allowed ONLY when explicitly requested and clearly marked**
 - **ALL papers must have verification (DOI, PubMed ID, arXiv ID, or verified PDF)**
 
-### Literature Database Loading Requirements
-Always ensure the literature database loads reliably by:
+### Research Database Loading Requirements
+Always ensure the research database loads reliably by:
 
 1. **Error Handling**:
    - Wrap all literature components with ErrorBoundary
@@ -304,7 +285,7 @@ Always ensure the literature database loads reliably by:
 
 4. **Testing Requirements**:
    - Test with empty database
-   - Test with large datasets (1000+ papers)
+   - Test with large datasets (3,700+ papers)
    - Test network failures and timeouts
    - Test authentication state changes
 
@@ -332,7 +313,7 @@ When extracting data from papers for predictive models:
    - Test predictions against literature benchmarks
 
 ### Dynamic Knowledge Base
-The literature system should continuously build upon predictive simulation models by:
+The research system should continuously build upon predictive simulation models by:
 
 1. **Comprehensive Data Extraction**:
    - System designs: geometry, dimensions, flow patterns
@@ -353,6 +334,451 @@ The literature system should continuously build upon predictive simulation model
    - Identify parameter ranges from real experiments
    - Incorporate new materials and methods as discovered
    - Generate data-driven recommendations for users
+
+## 🔬 Literature Data Validation Framework
+
+### Advanced Data Extraction Pipeline (2025-07)
+MESSAi now includes a comprehensive validation framework for literature data extraction that addresses null/undefined issues and ensures high-quality data for predictive models.
+
+#### **Core Components**
+1. **JSON Schema Validation** (`lib/literature/data-validation.ts`)
+   - Zod-based validation for all extracted data
+   - Handles null values properly with `.nullable().optional()`
+   - Type-safe data structures for performance metrics
+   - Automatic data quality scoring (0-100)
+
+2. **Unit Conversion System**
+   - Standardizes all measurements to consistent units:
+     - Power density → mW/m²
+     - Current density → mA/cm²
+     - Temperature → °C
+     - Efficiency → percentage (0-100)
+   - Handles multiple input formats automatically
+
+3. **Enhanced AI Processing**
+   - Multi-model Ollama fallback (deepseek-r1, qwen2.5-coder)
+   - Example-based prompts with successful extractions
+   - Increased timeout handling (60s vs 30s)
+   - Confidence scoring for all extractions
+
+4. **Advanced Pattern Matching** (`scripts/literature/advanced-pattern-matching.ts`)
+   - 50+ regex patterns for bioelectrochemical metrics
+   - Material identification (anode/cathode)
+   - Microorganism classification
+   - System type detection (MFC, MEC, MDC, MES, BES)
+
+#### **API Data Transformation**
+All literature API routes now include enhanced data parsing:
+
+```typescript
+// Automatically parses JSON fields and adds computed properties
+{
+  ...paper,
+  authors: parsedAuthorsArray,           // Not JSON string
+  anodeMaterials: parsedMaterialsArray,  // Not JSON string
+  cathodeMaterials: parsedMaterialsArray,
+  organismTypes: parsedOrganismsArray,
+  keywords: parsedKeywordsArray,
+  aiData: parsedAiExtractionData,        // Full AI extraction results
+  hasPerformanceData: boolean,           // Computed flag
+  isAiProcessed: boolean,                // Processing status
+  processingMethod: string,              // 'pattern-matching-v2' | 'ollama-enhanced-v2'
+  confidenceScore: number                // 0-1 confidence
+}
+```
+
+#### **Database Status (Updated 2025-07-10 - Post Integration)**
+- **Total Papers**: 3,721 verified research papers (after cleanup of non-MES papers)
+- **AI Processed**: 1,200+ (32%+)
+- **With Performance Data**: 850+ (23%+) 
+- **Quality Score**: Comprehensive validation system in place
+- **Frontend Integration**: ✅ **COMPLETE** - Advanced filtering and enhanced data display
+- **Sources**: CrossRef API, PubMed API, arXiv API, comprehensive searches
+- **Authentication**: ✅ **PRESERVED** - Full authentication system integrated with research features
+
+#### **Processing Methods Available**
+1. **Pattern Matching**: Fast regex-based extraction for basic metrics
+2. **Ollama Enhanced**: Local LLM processing with validation
+3. **Google Scholar**: Targeted scraping for specific research areas
+4. **Validation Pipeline**: Quality checks and unit standardization
+
+#### **Running Data Processing**
+```bash
+# Test validation system
+npx tsx scripts/literature/test-validation-system.ts
+
+# Advanced pattern matching (fast)
+npx tsx scripts/literature/advanced-pattern-matching.ts
+
+# Enhanced Ollama processing (thorough)
+npx tsx scripts/literature/enhanced-ollama-processor.ts
+
+# Generate quality report
+npx tsx scripts/literature/final-quality-report.ts
+
+# Google Scholar scraping
+npx tsx scripts/literature/google-scholar-scraper.ts
+```
+
+#### **Data Quality Standards**
+- All extracted values must pass Zod schema validation
+- Units are automatically converted to standard formats
+- Null values are properly handled (no more undefined errors)
+- Confidence scores track extraction reliability
+- Material and organism data is structured consistently
+
+#### **Frontend Integration**
+The validation framework is fully integrated with frontend APIs:
+- `/api/papers` - Returns transformed data with parsed JSON fields
+- `/api/papers/[id]` - Individual papers with full AI extraction data
+- `/api/papers-simple` - Lightweight endpoint with enhanced data
+
+**Enhanced Data Transformation (Complete)**:
+- ✅ JSON string fields automatically parsed to arrays/objects
+- ✅ Smart filtering removes pattern matching artifacts ("the", "while the", etc.)
+- ✅ Null/undefined values properly handled in frontend display
+- ✅ Enhanced fields: `hasPerformanceData`, `isAiProcessed`, `processingMethod`, `confidenceScore`
+- ✅ Improved JSON parsing handles nested objects and prevents "[object Object]" display
+- ✅ Frontend components filter out low-quality extracted data automatically
+- ✅ Database cleanup completed: 290/345 papers had malformed data fixed
+- ✅ API filters properly exclude fake paper sources
+
+#### **Current Database Status**
+- **Total Papers**: 3,721 real, verified research papers (focused on MES)
+- **Sources**: CrossRef API, PubMed API, arXiv API with comprehensive verification
+- **Quality Focus**: Only legitimate papers with DOI/PubMed/arXiv verification
+- **No Fake Papers**: All non-relevant papers removed through cleanup scripts
+- **Data Quality**: Comprehensive cleanup completed, all display issues resolved
+
+#### **Known Extraction Capabilities**
+- **Performance Metrics**: Power density, current density, voltage, efficiency
+- **Materials**: Anode/cathode materials with type classification
+- **Microorganisms**: Species identification with type classification
+- **System Parameters**: pH, temperature, substrate types
+- **Research Data**: Key findings, experimental conditions
+
+### Troubleshooting Data Validation Issues
+1. **Check Processing Status**: Look for `isAiProcessed` and `processingMethod` fields
+2. **Validate API Response**: Ensure JSON fields are parsed as arrays/objects, not strings
+3. **Test Extraction**: Use test scripts to validate individual papers
+4. **Quality Metrics**: Check `confidenceScore` and `hasPerformanceData` flags
+5. **Re-process Papers**: Run enhanced processors on papers with poor quality scores
+
+## 🔬 High-Quality Paper Collection System
+
+MESSAi uses a comprehensive paper collection system (`scripts/literature/real-paper-collection.ts`) that ensures only real, verified research papers enter our database.
+
+### Paper Sources and API Integration
+
+#### **1. CrossRef API (Primary Source)**
+- **Endpoint**: `https://api.crossref.org/works`
+- **Authentication**: No API key required, but User-Agent header mandatory
+- **Rate Limit**: 1 request per second
+- **Returns**: DOI, title, authors, abstract, journal, publication date, URL
+- **Best For**: Recent papers with DOIs from established journals
+
+#### **2. PubMed API (Biomedical Focus)**
+- **Search**: `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi`
+- **Fetch**: `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi`
+- **Process**: Two-step (search for IDs, then fetch full records)
+- **Format**: XML response requiring parsing
+- **Best For**: Biomedical and life sciences research
+
+#### **3. arXiv API (Preprints)**
+- **Endpoint**: `http://export.arxiv.org/api/query`
+- **Format**: Atom XML feed
+- **No authentication required**
+- **Best For**: Latest research, preprints, open access
+
+### Quality Validation System
+
+Every paper must pass quality validation before database entry:
+
+#### **Required Criteria**
+```typescript
+{
+  hasAbstract: boolean        // Min 100 characters
+  hasVerifiableId: boolean    // DOI, PubMed ID, or arXiv ID
+  hasAuthors: boolean         // At least one author
+  isRecentEnough: boolean     // Published 2015 or later
+  isRelevantField: boolean    // Contains bioelectrochemical terms
+  hasPerformanceData?: boolean // Optional but preferred
+}
+```
+
+#### **Relevance Checking**
+Papers must contain at least one core term:
+- microbial fuel cell, bioelectrochemical, microbial electrolysis
+- bioelectricity, electroactive bacteria, electron transfer
+- biocathode, bioanode, biofilm electrode, microbial desalination
+
+### Targeted Search Strategy
+
+The collection system uses 19 targeted searches across key research areas:
+
+#### **1. MXene and 2D Materials (2020+)**
+- `MXene AND (microbial fuel cell OR bioelectrochemical)`
+- `Ti3C2 AND bioelectrochemical AND electrode`
+- `MXene AND "electron transfer" AND bacteria`
+- Expected: ~105 papers
+
+#### **2. Graphene-based Materials (2019+)**
+- `graphene oxide AND "microbial fuel cell" AND performance`
+- `reduced graphene oxide AND bioelectrochemical AND "power density"`
+- Expected: ~140 papers
+
+#### **3. Carbon Nanotubes (2019+)**
+- `carbon nanotube AND "microbial electrolysis" AND hydrogen`
+- Expected: ~40 papers
+
+#### **4. High-Performance Systems (2019+)**
+- `"power density" AND "mW/m2" AND "microbial fuel cell"`
+- `optimization AND "microbial fuel cell" AND "current density"`
+- Expected: ~170 papers
+
+#### **5. Wastewater Treatment (2020+)**
+- `"wastewater treatment" AND "microbial fuel cell" AND removal`
+- `"heavy metal" AND bioelectrochemical AND remediation`
+- Expected: ~140 papers
+
+#### **6. Specific Organisms (2019+)**
+- `Geobacter AND "electron transfer" AND electrode`
+- `Shewanella AND biofilm AND "microbial fuel cell"`
+- Expected: ~110 papers
+
+#### **7. Advanced Materials (2020+)**
+- `"electrode modification" AND bioelectrochemical AND conductivity`
+- `PEDOT AND "microbial fuel cell" AND anode`
+- `"metal oxide" AND cathode AND bioelectrochemical`
+- Expected: ~135 papers
+
+#### **8. AI/ML Integration (2021+)**
+- `"machine learning" AND "microbial fuel cell" AND prediction`
+- `"artificial intelligence" AND bioelectrochemical AND optimization`
+- Expected: ~45 papers
+
+#### **9. Scale-up Studies (2019+)**
+- `"pilot scale" AND "microbial fuel cell" AND performance`
+- `scale-up AND bioelectrochemical AND "wastewater treatment"`
+- Expected: ~75 papers
+
+**Total Expected**: ~845 high-quality papers
+
+### Paper Quality Scoring
+
+The quality validator (`scripts/literature/paper-quality-validator.ts`) assigns each paper a score from 0-100:
+
+#### **Scoring Components**
+1. **Verification (0-20 points)**
+   - DOI present: 20 points
+   - PubMed/arXiv ID: 15 points
+   - External URL with DOI: 10 points
+   - No verification: 0 points
+
+2. **Completeness (0-15 points)**
+   - Score = (fields present / 5) × 15
+   - Required fields: title, authors, abstract, publicationDate, journal
+
+3. **Relevance (0-20 points)**
+   - Core terms: +0.2 per term (max 1.0)
+   - Related terms: +0.1 per term
+
+4. **Data Richness (0-25 points)**
+   - Performance data: +10 points
+   - Materials data: +8 points
+   - Organism data: +7 points
+
+5. **Recency (0-10 points)**
+   - ≤1 year old: 10 points
+   - ≤3 years: 8 points
+   - ≤5 years: 6 points
+   - ≤8 years: 4 points
+   - >8 years: 2 points
+
+6. **Impact (0-10 points)**
+   - High-impact journals: 10 points
+   - Other journals: 5 points
+
+#### **Quality Categories**
+- **Excellent (85-100)**: Immediately usable, high confidence
+- **Good (70-84)**: Suitable for most purposes
+- **Fair (50-69)**: Needs enhancement but usable
+- **Poor (<50)**: Requires significant processing
+
+### Enhanced Data Extraction
+
+The extraction system (`scripts/literature/enhanced-data-extractor.ts`) uses pattern matching to extract structured data:
+
+#### **Extraction Capabilities**
+1. **Performance Data**
+   - Power density (mW/m², W/m³) with conditions
+   - Current density (mA/cm², A/m²) with conditions
+   - Voltage (OCV, operating, max)
+   - Efficiency (coulombic, energy, removal)
+   - Hydrogen production rates
+
+2. **Materials Identification**
+   - Anode materials with modifications
+   - Cathode materials with catalysts
+   - Membrane/separator materials
+   - Surface treatments and coatings
+
+3. **Microorganism Data**
+   - Species names (Geobacter, Shewanella, etc.)
+   - Consortium types (mixed culture, biofilm)
+   - Source information
+
+4. **System Configuration**
+   - Type (MFC, MEC, MDC, MES, BES)
+   - Chamber configuration (single, dual, multi)
+   - Volume and dimensions
+   - Operating conditions (pH, temperature, substrate)
+
+#### **Pattern Matching Engine**
+- 50+ specialized regex patterns
+- Unit-aware extraction (handles various formats)
+- Condition capture (e.g., "at 30°C", "pH 7")
+- Confidence scoring for each extraction
+
+### Database Migration and Cloud Storage
+
+MESSAi now uses Prisma PostgreSQL for secure cloud storage:
+
+#### **Migration Process**
+1. **Local to Cloud Migration**
+   ```bash
+   # Push schema to PostgreSQL
+   npx prisma db push
+   
+   # Migrate data
+   DATABASE_URL="postgres://..." npx tsx scripts/seed-remote-database.ts
+   ```
+
+2. **Current Status (2025-07-08)**
+   - Successfully migrated 313 papers to PostgreSQL
+   - All papers have verified IDs (DOI/PubMed/arXiv)
+   - Ready for continuous enhancement
+   - Secure cloud backup enabled
+
+### Processing Commands
+
+```bash
+# Collect new papers from APIs
+npx tsx scripts/literature/real-paper-collection.ts
+
+# Validate paper quality
+npx tsx scripts/literature/paper-quality-validator.ts
+
+# Extract enhanced data
+npx tsx scripts/literature/enhanced-data-extractor.ts [limit]
+
+# Process single paper
+npx tsx scripts/literature/process-paper.ts [paper-id]
+
+# Generate quality report
+npx tsx scripts/literature/quality-report.ts
+```
+
+### Best Practices for Paper Collection
+
+1. **API Rate Limiting**
+   - CrossRef: 1 second between requests
+   - PubMed: Follow NCBI guidelines
+   - arXiv: Be respectful, no hard limits
+   - Always include proper User-Agent headers
+
+2. **Duplicate Prevention**
+   - Check by DOI first (most reliable)
+   - Then check by exact title match
+   - Consider fuzzy matching for similar titles
+
+3. **Quality Over Quantity**
+   - Better to have 300 high-quality papers than 3000 poor ones
+   - Focus on papers with performance data
+   - Prioritize recent research (2019+)
+   - Ensure relevance to bioelectrochemical systems
+
+4. **Data Integrity**
+   - Never fabricate or modify paper data
+   - Preserve original metadata
+   - Track data provenance
+   - Version control extraction methods
+
+### Future Enhancements
+
+1. **Additional Sources**
+   - IEEE Xplore integration
+   - ScienceDirect API
+   - Web of Science export
+   - Institutional repositories
+
+2. **Advanced Extraction**
+   - Machine learning models for extraction
+   - Image analysis for figures/charts
+   - Table data extraction
+   - Full-text PDF processing
+
+3. **Quality Improvements**
+   - Author disambiguation
+   - Citation network analysis
+   - Research trend identification
+   - Automated review generation
+
+## 🔬 Enhanced Literature System (2025-07-10 Integration)
+
+The MESSAi research system has been significantly enhanced with advanced filtering, search capabilities, and comprehensive data extraction from 3,721 verified research papers focused on microbial electrochemical systems.
+
+### Key Features
+
+#### **Advanced Filtering & Search**
+- **Multi-field filtering**: Filter by microbes, system types, configurations, performance metrics
+- **Performance-based search**: Filter by power output, efficiency ranges
+- **Sort options**: Date, power output, efficiency, relevance-based ranking
+- **Real-time suggestions**: Dynamic filter options based on available data
+- **Authentication-aware**: Respects user permissions while providing full functionality
+
+#### **Enhanced Data Extraction**
+- **Comprehensive field extraction**: 18+ new database fields for detailed categorization
+- **AI-powered processing**: Pattern matching + LLM-based extraction
+- **Performance metrics**: Power density, current density, efficiency with confidence scores
+- **Material classification**: Detailed anode/cathode material categorization
+- **Microbial taxonomy**: Species, genus, and community-level classification
+- **System configuration**: Architecture, scale, and operational parameters
+
+#### **Enhanced API Endpoints**
+- **`/api/papers`**: Advanced filtering with 10+ new parameters
+- **`/api/papers/filters`**: Dynamic filter options endpoint
+- **Authentication preserved**: Full user permission system integrated
+
+#### **Frontend Components**
+- **AdvancedFilterPanel**: Tabbed interface with smart autocomplete
+- **Performance sliders**: Range-based filtering
+- **Quick presets**: High/Medium/Low performance tiers
+- **URL persistence**: Filters persist across navigation
+
+### Enhanced Scripts & Utilities
+
+```bash
+# Comprehensive paper collection (3,700+ papers)
+npm run research:collect-comprehensive
+
+# Enhanced data extraction with confidence scoring
+npm run research:extract-enhanced
+
+# Database backup with compression
+npm run db:backup:enhanced
+
+# Database restore with validation
+npm run db:restore:enhanced
+```
+
+### Current Integration Status
+- ✅ **Schema migration complete**: All new fields added to production database
+- ✅ **API enhancement complete**: Advanced filtering fully functional  
+- ✅ **Frontend integration complete**: AdvancedFilterPanel component ready
+- ✅ **Authentication preserved**: Full security model maintained
+- ✅ **Performance optimized**: Database indexes for fast filtering
+- ✅ **3,721 papers verified**: All with DOI/PubMed/arXiv verification (MES-focused)
 
 ## Common Tasks
 
@@ -376,7 +802,7 @@ The literature system should continuously build upon predictive simulation model
 2. Update API route in `app/api/predictions/route.ts`
 3. Add tests for new prediction logic
 
-### Troubleshooting Literature Loading Issues
+### Troubleshooting Research Loading Issues
 1. Check database connection: `npm run db:studio`
 2. Verify API endpoints: `curl http://localhost:3003/api/papers`
 3. Check error logs in browser console
@@ -533,13 +959,21 @@ When implementing features, verify:
 - `app/page.tsx` - Main design catalog
 - `components/MESS3DModel.tsx` - Core 3D visualization
 - `lib/ai-predictions.ts` - Prediction logic
-- `components/algal-fuel-cell/` - Specialized algae simulator
 - `prisma/schema.prisma` - Database structure
 - `app/literature/` - Literature browsing interface
 - `app/api/papers/` - Paper API endpoints
 - `scripts/literature/` - Enhancement pipeline
 - `components/ErrorBoundary.tsx` - Error handling wrapper
 - `scripts/literature/README.md` - Literature system documentation
+
+### Literature Validation Framework Files (2025-07)
+- `lib/literature/data-validation.ts` - Core validation schemas and unit conversion
+- `scripts/literature/enhanced-ollama-processor.ts` - Multi-model AI processing
+- `scripts/literature/advanced-pattern-matching.ts` - Regex-based extraction (50+ patterns)
+- `scripts/literature/google-scholar-scraper.ts` - Targeted research paper scraping
+- `scripts/literature/test-validation-system.ts` - Validation testing utility
+- `scripts/literature/final-quality-report.ts` - Database quality assessment
+- `quality-validation-report.md` - Latest quality metrics and status
 
 ### Security-Critical Files
 - `lib/demo-mode.ts` - Demo mode configuration
@@ -640,547 +1074,6 @@ When working on MESSAi, always:
     - Cross-references existing sections on system configuration
     - Builds on the requirements directory structure mentioned
     - Aligns with scientific accuracy and testing approach guidelines
-
-## 📚 Research System Architecture & Knowledge Extraction
-
-### Overview
-MESSAi uses a sophisticated research collection system to build a queryable knowledge base from scientific papers. This system is developed in the messai-research branch and shared across the platform.
-
-### Branch Structure
-- **messai-research branch**: Primary development of research tools
-- **Main branch**: Integration point for stable research features
-- **messai-ai-clean branch**: ML models trained on research data
-
-### Database Architecture
-The research system uses a dual-database approach:
-
-1. **Research Database (SQLite - research.db)**
-   - Location: `/messai-research/prisma/research.db`
-   - Content: 6,022+ papers with enhanced extraction
-   - Schema: Optimized for knowledge extraction
-   - Purpose: Research and development
-
-2. **Production Database (PostgreSQL)**
-   - Location: Prisma Cloud
-   - Content: 345 verified papers
-   - Schema: Production-ready with user associations
-   - Purpose: Live platform features
-
-### Enhanced Research Paper Schema
-The ResearchPaper model includes comprehensive fields for scientific data extraction:
-
-```typescript
-// Core metadata fields
-{
-  title: string
-  authors: string[]         // JSON array
-  abstract: string
-  doi?: string             // Unique identifiers
-  pubmedId?: string
-  arxivId?: string
-  ieeeId?: string
-  
-  // Performance extraction
-  organismTypes?: string[]  // Microbial species
-  anodeMaterials?: string[] // Electrode materials
-  cathodeMaterials?: string[]
-  powerOutput?: number      // mW/m²
-  efficiency?: number       // percentage
-  systemType?: string       // MFC, MEC, MDC, MES
-  
-  // AI-enhanced fields
-  aiSummary?: string        // Concise summary
-  aiKeyFindings?: string[]  // Key findings
-  aiMethodology?: string    // Methods summary
-  aiImplications?: string   // Research implications
-  aiDataExtraction?: object // Structured data
-  aiInsights?: string       // AI analysis
-  aiConfidence?: number     // 0-1 confidence score
-  
-  // Comprehensive parameters
-  experimentalConditions?: object  // Temperature, pH, duration
-  reactorConfiguration?: object    // Volume, design, dimensions
-  electrodeSpecifications?: object // Surface area, modifications
-  biologicalParameters?: object    // Inoculum, biofilm age
-  performanceMetrics?: object      // Extended metrics
-  operationalParameters?: object   // HRT, OLR, resistance
-  electrochemicalData?: object     // Impedance, voltammetry
-  timeSeriesData?: object          // Performance over time
-  economicMetrics?: object         // Cost analysis
-  
-  // Enhanced categorization
-  microbialCommunity?: object      // Species composition
-  microbialClassification?: object // Taxonomic data
-  systemConfiguration?: object     // Architecture details
-  performanceBenchmarks?: object   // Comparative metrics
-}
-```
-
-### Knowledge Extraction Pipeline
-```
-Collection → Validation → Extraction → Domain Mapping → Integration
-    ↓            ↓           ↓              ↓              ↓
- 3 APIs      Quality     Patterns      5 Domains      Knowledge
-            Scoring                                     Graph
-```
-
-### Extraction Patterns (messai-research)
-```typescript
-const EXTRACTION_PATTERNS = {
-  powerDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mW\/m[²2]|W\/m[²2])/gi,
-  currentDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mA\/m[²2]|A\/m[²2])/gi,
-  voltage: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mV|V)\s+(?:at|@)/gi,
-  efficiency: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*%\s*(?:coulombic|CE|energy)/gi,
-  materials: /(?:anode|cathode).*?(?:carbon|graphite|steel|copper|platinum)/gi,
-  organisms: /(?:Geobacter|Shewanella|Pseudomonas|mixed culture|consortium)/gi
-}
-```
-
-### Core Scripts (messai-research branch)
-1. **real-paper-collection.ts**: Multi-source paper collection
-   - CrossRef API: DOI-verified papers
-   - PubMed API: Biomedical literature
-   - arXiv API: Preprints
-   - 19 targeted search queries
-   - Expected yield: ~845 papers per run
-
-2. **paper-quality-validator.ts**: Quality scoring (0-100)
-   - Verification score (DOI/PubMed/arXiv presence)
-   - Completeness score (metadata fields)
-   - Relevance score (keyword matching)
-   - Data richness (extracted metrics)
-   - Recency factor (publication date)
-   - Impact assessment (citations if available)
-
-3. **enhanced-data-extractor.ts**: Pattern-based extraction
-   - Performance metrics extraction
-   - Material classification
-   - Organism identification
-   - System configuration detection
-   - Confidence scoring per extraction
-
-4. **clean-abstract-html.ts**: Text normalization
-   - JATS XML tag removal
-   - HTML entity decoding
-   - Unicode normalization
-
-### Research Database Statistics
-- **Total Papers**: 6,022 (messai-research branch)
-- **Verified Papers**: 426 with DOI/PubMed/arXiv IDs
-- **Papers with Abstracts**: 5,700+
-- **Performance Data**: 1,200+ papers
-- **Power Output Data**: 850+ papers
-- **Efficiency Data**: 750+ papers
-- **Unique Materials**: 127 identified
-- **Unique Organisms**: 99 identified
-
-### Real Papers Filtering
-The system distinguishes between verified research and AI-enhanced content:
-
-```typescript
-const realSources = [
-  'crossref_api',
-  'crossref_comprehensive',
-  'pubmed_api',
-  'pubmed_comprehensive',
-  'arxiv_api',
-  'local_pdf',
-  'web_search',
-  'comprehensive_search',
-  'advanced_electrode_biofacade_search',
-  'extensive_electrode_biofacade_collection'
-]
-
-// API filtering
-const isRealPaper = (paper) => {
-  return realSources.includes(paper.source) || 
-         paper.doi || 
-         paper.arxivId || 
-         paper.pubmedId
-}
-```
-
-### API Structure
-```typescript
-// Domain-based queries
-GET /api/research/domains/anodes?material=carbon_cloth
-GET /api/research/domains/cathodes?reaction=oxygen_reduction
-GET /api/research/domains/microbes?species=geobacter
-GET /api/research/domains/performance?metric=power_density
-
-// Cross-domain insights
-GET /api/research/insights/materials-performance
-GET /api/research/insights/microbe-compatibility
-GET /api/research/insights/optimal-conditions
-
-// Paper filtering
-GET /api/papers?realOnly=true&hasPerformanceData=true
-GET /api/papers?systemType=MFC&minPowerOutput=1000
-```
-
-### Scientific Domains Coverage
-1. **Anode Domain**: 2,100+ papers
-2. **Cathode Domain**: 1,800+ papers
-3. **Microbe Domain**: 1,500+ papers
-4. **Environment Domain**: 2,200+ papers
-5. **Performance Domain**: 1,200+ papers
-
-### Integration Points
-- Research data feeds ML predictions
-- Extracted parameters enhance experiment design
-- Knowledge graphs guide material selection
-- Performance benchmarks validate predictions
-- Cross-reference validation ensures data quality
-
-## 🔄 Multi-Branch Development Workflow
-
-### Active Branches and Their Purposes
-1. **master**: Production-ready integrated features
-2. **messai-research**: Research system development
-3. **messai-ai-clean**: ML/AI experimentation
-4. **private/**: Marketing site (not public)
-
-### Research System Workflow
-```
-messai-research (develop) → master (integrate) → all branches (use)
-       ↓                        ↓                      ↓
-  New features            Stable features      Shared knowledge
-```
-
-### Database Synchronization Strategy
-1. **Development**: Use messai-research SQLite for rapid iteration
-2. **Integration**: Migrate verified data to PostgreSQL
-3. **Production**: Serve from PostgreSQL with caching
-4. **Backup**: Regular exports of both databases
-
-### Shared Components
-- `/scripts/research/`: Collection and processing scripts
-- `/lib/research/`: Core extraction logic
-- `/app/api/research/`: API endpoints
-- `/app/research/`: UI components
-
-## 🧬 Scientific Domain Data Management
-
-### Domain-Driven Architecture
-All scientific data is organized into interconnected domains that map to real-world research areas:
-
-#### 1. Anode Domain (messai-research enhanced)
-```typescript
-interface AnodeDomain {
-  materials: {
-    carbonBased: ['carbon cloth', 'graphite felt', 'carbon paper']
-    grapheneFamily: ['GO', 'rGO', 'graphene aerogel']
-    nanotubes: ['SWCNT', 'MWCNT', 'CNT arrays']
-    mxenes: ['Ti₃C₂Tₓ', 'V₂CTₓ', 'Mo₂CTₓ']
-    polymers: ['PEDOT', 'polyaniline', 'polypyrrole']
-  }
-  biofilms: {
-    species: string[]
-    thickness: number // μm
-    coverage: number // %
-  }
-  modifications: {
-    chemical: string[]
-    physical: string[]
-    biological: string[]
-  }
-  performance: {
-    currentDensity: number // mA/cm²
-    chargeTransfer: number // Ω
-    biocompatibility: number // 0-10
-  }
-}
-```
-
-#### 2. Cathode Domain
-```typescript
-interface CathodeDomain {
-  materials: {
-    metals: ['platinum', 'copper', 'stainless steel', 'nickel']
-    carbonBased: ['activated carbon', 'carbon cloth', 'graphite']
-    composites: ['Pt/C', 'metal oxides', 'conductive polymers']
-  }
-  catalysts: {
-    precious: ['Pt', 'Pd', 'Ru', 'Ir']
-    nonPrecious: ['Fe-N-C', 'Co-N-C', 'MnO₂']
-    biological: ['laccase', 'bilirubin oxidase']
-  }
-  reactions: {
-    ORR: 'oxygen reduction'
-    HER: 'hydrogen evolution'
-    metalRecovery: string[]
-    CO2reduction: string[]
-  }
-  performance: {
-    overpotential: number // mV
-    exchangeCurrent: number // A/cm²
-    durability: number // hours
-  }
-}
-```
-
-#### 3. Performance Metrics Extracted
-- **From messai-research**: 1,200+ papers with performance data
-- **Power density**: 850+ data points (mW/m²)
-- **Current density**: 750+ data points (mA/cm²)
-- **Efficiency**: 650+ data points (%)
-- **Treatment**: 500+ data points (% removal)
-
-### Data Flow Between Branches
-```
-messai-research → Extraction → Domain Mapping → Shared Database → All Features
-     ↓                ↓             ↓                ↓              ↓
-  Papers         Patterns      Categories        PostgreSQL      UI/API
-```
-
-## 🔗 Cross-Branch Integration Strategy
-
-### Shared Resources Management
-Resources that must be synchronized across branches:
-
-1. **Research Database**
-   - Primary: messai-research (6,022 papers)
-   - Production: master (345 verified papers)
-   - ML Training: messai-ai-clean (uses both)
-
-2. **API Endpoints**
-   - `/api/papers/*`: Basic CRUD (all branches)
-   - `/api/research/*`: Advanced queries (messai-research)
-   - `/api/predictions/*`: ML integration (messai-ai-clean)
-
-3. **Extraction Patterns**
-   - Location: `/lib/research/patterns.ts`
-   - Shared via: Git subtree or symlinks
-   - Updates: Coordinated across branches
-
-### Integration Workflow
-1. **Feature Development**: messai-research branch
-2. **Testing**: Isolated branch testing
-3. **Integration**: Merge to master
-4. **Distribution**: Cherry-pick to other branches
-
-### Avoiding Conflicts
-- Research system owned by messai-research branch
-- Other branches consume via API
-- Database migrations coordinated
-- Shared types in `/types/research.ts`
-
-## 🛠️ Development Guidelines for Multi-Branch Work
-
-### Before Starting Research Work
-1. Check which branch owns the feature:
-   - Research collection: messai-research
-   - ML predictions: messai-ai-clean
-   - Production features: master
-   - Marketing: private/
-
-2. Verify database state:
-   ```bash
-   # Check messai-research database
-   cd messai-research && npx prisma studio
-   
-   # Check main database
-   cd .. && npx prisma studio
-   ```
-
-3. Coordinate with active agents:
-   - Check git status in all worktrees
-   - Review recent commits
-   - Communication via PR descriptions
-
-### Research System Best Practices
-1. **Data Collection**: Only in messai-research branch
-2. **API Development**: Test in branch, deploy to master
-3. **UI Changes**: Develop in master, backport if needed
-4. **Database Changes**: Always migrate both databases
-
-### Shared Configuration
-Create `.env.shared` for common settings:
-```env
-# Shared across all branches
-RESEARCH_API_BASE=/api/research
-PAPERS_PER_PAGE=10
-EXTRACTION_CONFIDENCE_MIN=0.7
-```
-
-## 🏗️ Repository Architecture & Multi-Domain Strategy
-
-### Domain Separation
-- **app.messai.io**: Open-source scientific platform
-- **messai.io**: Commercial marketing site + user platform
-
-### Complete Repository Structure
-```
-/messai/                        # Public GitHub repository
-├── app/                       # Next.js app directory (PUBLIC)
-│   ├── page.tsx              # Landing page
-│   ├── tools/                # Scientific tools
-│   │   ├── bioreactor/      # Bioreactor design
-│   │   └── electroanalytical/ # Analysis tools
-│   ├── research/             # Research papers browser
-│   ├── models/               # MESS models showcase
-│   └── api/                  # Public API routes
-├── components/                # React components (PUBLIC)
-│   ├── 3d/                  # Three.js visualizations
-│   ├── ui/                  # UI components
-│   └── charts/              # Data visualizations
-├── lib/                      # Core libraries (PUBLIC)
-│   ├── domains/             # Scientific domains
-│   ├── ai-predictions.ts    # Basic ML
-│   └── db.ts                # Database utilities
-├── prisma/                   # Database schema
-│   ├── schema.prisma        # Main schema
-│   └── migrations/          # Version history
-├── public/                   # Static assets
-├── scripts/                  # Utility scripts
-│   └── research/            # Paper processing
-├── tests/                    # Test suites
-├── docs/                     # Documentation
-├── shared/                   # Shared between domains
-│   ├── types/               # TypeScript definitions
-│   ├── utils/               # Common utilities
-│   └── constants/           # Shared constants
-├── private/                  # PRIVATE (not on GitHub)
-│   ├── app/                 # Marketing site
-│   ├── auth/                # Authentication
-│   ├── components/          # Private UI
-│   └── package.json         # Separate deps
-├── messai-ai/               # AI worktree (branch: messai-ai-clean)
-│   ├── lib/                 # Advanced ML
-│   ├── components/          # AI visualizations
-│   └── api/                 # ML endpoints
-└── messai-research/         # Research worktree (branch: messai-research)
-    ├── prisma/              # Research database
-    ├── scripts/             # Collection tools
-    └── lib/                 # Extraction logic
-```
-
-### Import Rules
-1. Public → Public: ✅ Allowed
-2. Public → Shared: ✅ Allowed
-3. Private → Public: ✅ Allowed
-4. Private → Shared: ✅ Allowed
-5. Public → Private: ❌ Forbidden
-6. Shared → Private: ❌ Forbidden
-
-## 🧪 Experiment Management System
-
-### Experiment Lifecycle
-MESSAi supports complete experiment tracking from design to analysis:
-
-#### Database Schema
-```typescript
-// Core experiment model (see prisma/schema.prisma)
-model Experiment {
-  id           String            @id @default(cuid())
-  name         String
-  userId       String            // Links to User (private platform only)
-  designId     String            // Links to MFCDesign
-  status       String            @default("SETUP") // SETUP, RUNNING, COMPLETED, FAILED
-  parameters   String            // JSON configuration
-  isPublic     Boolean           @default(false)
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  
-  // Relations
-  design       MFCDesign         @relation(...)
-  measurements Measurement[]      // Time-series data
-  papers       ExperimentPaper[] // Research references
-}
-
-model Measurement {
-  id           String     @id @default(cuid())
-  experimentId String
-  voltage      Float      // V
-  current      Float      // mA
-  power        Float      // mW
-  temperature  Float      // °C
-  ph           Float
-  substrate    Float?     // g/L
-  notes        String?
-  timestamp    DateTime   @default(now())
-}
-```
-
-#### Experiment States
-1. **SETUP**: Configuration and preparation
-   - Select system design
-   - Configure materials
-   - Set operating parameters
-   - Link reference papers
-
-2. **RUNNING**: Active data collection
-   - Real-time measurements
-   - Automated data logging
-   - Alert thresholds
-   - Performance tracking
-
-3. **COMPLETED**: Analysis phase
-   - Performance summaries
-   - Comparison with predictions
-   - Export capabilities
-   - Report generation
-
-4. **FAILED**: Troubleshooting
-   - Failure analysis
-   - Parameter logs
-   - Recommendations
-
-### Data Collection & Analysis
-
-#### Real-time Monitoring
-```typescript
-// Measurement collection API
-POST /api/experiments/{id}/measurements
-{
-  voltage: 0.65,
-  current: 12.5,
-  temperature: 30.2,
-  ph: 7.1,
-  timestamp: "2024-01-08T10:30:00Z"
-}
-```
-
-#### Analysis Features
-- Time-series visualization
-- Performance metrics calculation
-- Comparison with research benchmarks
-- AI-powered optimization suggestions
-- Export to CSV/JSON
-
-### Integration Points
-
-#### 1. Research System
-- Link papers to experiments
-- Compare with published results
-- Extract best practices
-- Validate performance
-
-#### 2. Prediction Engine
-- Pre-experiment predictions
-- Real-time comparison
-- Parameter optimization
-- Anomaly detection
-
-#### 3. 3D Visualization
-- System configuration display
-- Real-time data overlay
-- Performance heatmaps
-- Component highlighting
-
-### Experiment Sharing
-
-#### Public Platform (app.messai.io)
-- Demo experiments only
-- Educational datasets
-- No user accounts required
-- Read-only access
-
-#### Private Platform (messai.io)
-- Personal experiment library
-- Collaboration features
-- Private/public toggle
-- Team workspaces
 
 Remember: MESSAI is open source but we have the secure separation for our marketing site and freemium software platform. 
 

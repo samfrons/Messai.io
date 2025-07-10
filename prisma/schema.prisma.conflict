@@ -1,0 +1,447 @@
+// Research Database Schema for MESSAi Platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+<<<<<<< HEAD
+  provider = "sqlite"
+  url      = "file:./research.db"
+}
+
+// Research Papers
+model Paper {
+  id          String   @id @default(cuid())
+  doi         String?  @unique
+  title       String
+  abstract    String?
+  authors     String   // JSON array of authors
+  journal     String?
+  year        Int
+  volume      String?
+  issue       String?
+  pages       String?
+  keywords    String?  // JSON array of keywords
+  url         String?
+  pdfUrl      String?
+=======
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                 String              @id @default(cuid())
+  email              String              @unique
+  emailVerified      DateTime?
+  password           String?
+  name               String?
+  image              String?
+  role               String              @default("USER")
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  lastLoginAt        DateTime?
+  institution        String?
+  researchArea       String?
+  accounts           Account[]
+  sessions           Session[]
+  experiments        Experiment[]
+  researchPapers     ResearchPaper[]
+
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  resource  String
+  details   String?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([action, createdAt])
+  @@index([resource, createdAt])
+  @@index([ipAddress, createdAt])
+}
+
+model MFCDesign {
+  id          String       @id @default(cuid())
+  name        String
+  type        String
+  cost        String
+  powerOutput String
+  materials   String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  experiments Experiment[]
+}
+
+model Experiment {
+  id           String            @id @default(cuid())
+  name         String
+  userId       String
+  designId     String
+  status       String            @default("SETUP")
+  parameters   String
+  isPublic     Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  design       MFCDesign         @relation(fields: [designId], references: [id])
+  user         User              @relation(fields: [userId], references: [id])
+  measurements Measurement[]
+  papers       ExperimentPaper[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Measurement {
+  id           String     @id @default(cuid())
+  experimentId String
+  voltage      Float
+  current      Float
+  power        Float
+  temperature  Float
+  ph           Float
+  substrate    Float?
+  notes        String?
+  timestamp    DateTime   @default(now())
+  experiment   Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+
+  @@index([experimentId, timestamp])
+}
+
+model ResearchPaper {
+  id                String            @id @default(cuid())
+  title             String
+  authors           String            // JSON array
+  abstract          String?
+  doi               String?           @unique
+  pubmedId          String?           @unique
+  arxivId           String?           @unique
+  ieeeId            String?           @unique
+  publicationDate   DateTime?
+  journal           String?
+  volume            String?
+  issue             String?
+  pages             String?
+  keywords          String            // JSON array
+  externalUrl       String
+>>>>>>> research-development
+  
+  // Validation status
+  verified    Boolean  @default(false)
+  quality     Int      @default(0) // 1-5 rating
+  
+  // Extracted data
+  parameters  Parameter[]
+  experiments Experiment[]
+  
+  // Metadata
+<<<<<<< HEAD
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  addedBy     String?  // User who added this paper
+  
+  @@map("papers")
+}
+
+// Extracted Parameters from Papers
+model Parameter {
+  id          String   @id @default(cuid())
+  paperId     String
+  paper       Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  
+  // Parameter identification
+  name        String   // e.g., "power_density", "current_density"
+  category    String   // e.g., "performance", "operating_conditions"
+  subcategory String?  // e.g., "electrical_output"
+  
+  // Parameter value
+  value       Float?
+  unit        String?
+  range_min   Float?
+  range_max   Float?
+  
+  // Context
+  conditions  String?  // JSON object of experimental conditions
+  method      String?  // Measurement method
+  uncertainty Float?   // Measurement uncertainty
+  
+  // Validation
+  confidence  Float    @default(0.5) // 0-1 confidence in extraction
+  validated   Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("parameters")
+}
+
+// Experimental Conditions and Results
+model Experiment {
+  id          String   @id @default(cuid())
+  paperId     String
+  paper       Paper    @relation(fields: [paperId], references: [id], onDelete: Cascade)
+  
+  // System configuration
+  systemType  String   // MFC, MEC, MDC, MES
+  scale       String   // microfluidic, lab, pilot, industrial
+  application String?  // wastewater, hydrogen, etc.
+  
+  // Reactor design
+  reactorType    String?
+  volume         Float?
+  electrodeArea  Float?
+  electrodeSpacing Float?
+  
+  // Materials
+  anodeMaterial    String?
+  cathodeMaterial  String?
+  membraneMaterial String?
+  electrolyte      String?
+  
+  // Operating conditions
+  temperature    Float?
+  pH             Float?
+  pressure       Float?
+  flowRate       Float?
+  
+  // Biological parameters
+  microorganisms String? // JSON array
+  substrate      String?
+  substrateConc  Float?
+  
+  // Performance results
+  powerDensity      Float?
+  currentDensity    Float?
+  voltage           Float?
+  efficiency        Float?
+  treatmentEff      Float?
+  
+  // Duration and stability
+  duration       Float? // days
+  startupTime    Float? // hours
+  stable         Boolean @default(false)
+  
+  createdAt      DateTime @default(now())
+  
+  @@map("experiments")
+}
+
+// Research Organizations and Authors
+model Organization {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  country     String?
+  type        String?  // university, company, government
+  website     String?
+  
+  researchers Researcher[]
+  
+  @@map("organizations")
+}
+
+model Researcher {
+  id             String       @id @default(cuid())
+  name           String
+  email          String?
+  orcid          String?      @unique
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+  
+  specialization String?      // bioelectrochemistry, materials, etc.
+  h_index        Int?
+  citations      Int?
+  
+  @@map("researchers")
+}
+
+// Community Contributions
+model Contribution {
+  id          String   @id @default(cuid())
+  
+  // Content
+  type        String   // parameter, experiment, validation, correction
+  content     String   // JSON object with contribution data
+  
+  // Source
+  contributorName  String?
+  contributorEmail String?
+  affiliation      String?
+  
+  // Target
+  paperId     String?
+  parameterId String?
+  
+  // Status
+  status      String   @default("pending") // pending, approved, rejected
+  reviewedBy  String?
+  reviewedAt  DateTime?
+  
+  createdAt   DateTime @default(now())
+  
+  @@map("contributions")
+}
+
+// Parameter Categories and Definitions
+model ParameterDefinition {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  category    String
+  subcategory String?
+  
+  description String
+  unit        String?
+  typical_min Float?
+  typical_max Float?
+  
+  synonyms    String?  // JSON array of alternative names
+  
+  @@map("parameter_definitions")
+}
+
+// Research Trends and Analytics
+model SearchQuery {
+  id        String   @id @default(cuid())
+  query     String
+  filters   String?  // JSON object
+  results   Int      @default(0)
+  timestamp DateTime @default(now())
+  
+  @@map("search_queries")
+}
+
+// Data Quality Metrics
+model QualityMetric {
+  id         String   @id @default(cuid())
+  paperId    String
+  
+  // Completeness scores (0-1)
+  abstract_quality    Float @default(0)
+  parameter_coverage  Float @default(0)
+  method_description  Float @default(0)
+  results_clarity     Float @default(0)
+  
+  // Validation scores
+  peer_reviewed      Boolean @default(false)
+  impact_factor      Float?
+  citation_count     Int     @default(0)
+  
+  // Community feedback
+  helpful_votes      Int     @default(0)
+  reported_issues    Int     @default(0)
+  
+  lastUpdated        DateTime @default(now())
+  
+  @@unique([paperId])
+  @@map("quality_metrics")
+=======
+  source            String            // 'user', 'pubmed', 'crossref', 'ieee'
+  uploadedBy        String?
+  isPublic          Boolean           @default(true)
+  
+  // AI-generated fields
+  aiSummary         String?           // Concise AI-generated summary
+  aiKeyFindings     String?           // Key findings in JSON format
+  aiMethodology     String?           // Summarized methodology
+  aiImplications    String?           // Research implications and applications
+  aiDataExtraction  String?           // Structured extracted data in JSON
+  aiInsights        String?           // AI-generated insights and analysis
+  aiProcessingDate  DateTime?         // When AI processing occurred
+  aiModelVersion    String?           // Which AI model/version was used
+  aiConfidence      Float?            // Confidence score for AI extraction (0-1)
+  
+  // Comprehensive parameter extraction fields
+  experimentalConditions  String?     // JSON: temperature, pH, duration, substrate type/conc
+  reactorConfiguration   String?      // JSON: volume, design, dimensions, flow rates
+  electrodeSpecifications String?     // JSON: surface area, modifications, spacing, connections
+  biologicalParameters   String?      // JSON: inoculum source, biofilm age, microbial diversity
+  performanceMetrics     String?      // JSON: extended metrics beyond basic power/efficiency
+  operationalParameters  String?      // JSON: HRT, OLR, external resistance, feeding mode
+  electrochemicalData    String?      // JSON: impedance, voltammetry, polarization curves
+  timeSeriesData         String?      // JSON: performance over time, degradation rates
+  economicMetrics        String?      // JSON: cost analysis, scale-up projections
+  
+  // Enhanced categorization fields for advanced filtering
+  microbialCommunity     String?      // JSON: {dominant: [], consortium: [], pureculture: boolean}
+  microbialClassification String?     // JSON: {phylum: [], class: [], genus: [], species: []}
+  systemConfiguration    String?      // JSON: {type: MFC/MEC/MDC/MES/BES, subtype, scale, architecture}
+  performanceBenchmarks  String?      // JSON: {powerDensity: {max, operating, normalized}, comparativeRank}
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
+  // Relations
+  user              User?             @relation(fields: [uploadedBy], references: [id])
+  experiments       ExperimentPaper[]
+
+  @@index([doi])
+  @@index([pubmedId])
+  @@index([arxivId])
+  @@index([source])
+  @@index([systemType])
+  @@index([powerOutput])
+  @@index([aiProcessingDate])
+  @@index([uploadedBy])
+  @@index([isPublic])
+  @@index([createdAt])
+  @@index([microbialCommunity])
+  @@index([systemConfiguration])
+}
+
+model ExperimentPaper {
+  id           String     @id @default(cuid())
+  experimentId String
+  paperId      String
+  notes        String?
+  citationType String?    // 'inspiration', 'methodology', 'comparison'
+  createdAt    DateTime   @default(now())
+  experiment   Experiment    @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+  paper        ResearchPaper @relation(fields: [paperId], references: [id], onDelete: Cascade)
+
+  @@unique([experimentId, paperId])
+  @@index([experimentId])
+  @@index([paperId])
+>>>>>>> research-development
+}

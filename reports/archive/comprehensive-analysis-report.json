@@ -1,0 +1,388 @@
+{
+  "generatedAt": "2025-07-05T10:01:05.795Z",
+  "version": "1.0",
+  "databaseOverview": {
+    "totalPapers": 994,
+    "papersBySource": {
+      "local_pdf": 50,
+      "web_search": 24,
+      "ismet_conference": 20,
+      "comprehensive_search": 74,
+      "workshop_reactor-design": 92,
+      "workshop_electroanalytical": 87,
+      "workshop_metagenomics": 83,
+      "final_expansion": 70,
+      "advanced_electrode_biofacade_search": 34,
+      "extensive_electrode_biofacade_collection": 200,
+      "comprehensive_expansion_2024": 260
+    },
+    "papersByYear": {
+      "2022": 1,
+      "2023": 9,
+      "2024": 933,
+      "2025": 1
+    },
+    "systemTypeDistribution": {
+      "MES": 87,
+      "MFC": 385,
+      "MEC": 224,
+      "BES": 213,
+      "MDC": 85
+    },
+    "performanceDataCoverage": {
+      "withPowerOutput": 661,
+      "withEfficiency": 318,
+      "withBothMetrics": 237
+    }
+  },
+  "materialInsights": {
+    "topAnodeMaterials": [
+      {
+        "material": "Mo₂TiC₂Tₓ",
+        "avgPower": 30933.333333333332,
+        "papers": 3
+      },
+      {
+        "material": "Nb₂CTₓ",
+        "avgPower": 28500,
+        "papers": 4
+      },
+      {
+        "material": "Ti₃CNTₓ",
+        "avgPower": 27200,
+        "papers": 3,
+        "efficiency": 78
+      },
+      {
+        "material": "Ti₄N₃Tₓ",
+        "avgPower": 26066.666666666668,
+        "papers": 3
+      },
+      {
+        "material": "V₂CTₓ",
+        "avgPower": 24600,
+        "papers": 4,
+        "efficiency": 89
+      },
+      {
+        "material": "Cr₂CTₓ",
+        "avgPower": 23400,
+        "papers": 3
+      },
+      {
+        "material": "MXene nanosheets",
+        "avgPower": 22750,
+        "papers": 40,
+        "efficiency": 86.95
+      },
+      {
+        "material": "Mo₃C₂Tₓ",
+        "avgPower": 22000,
+        "papers": 3,
+        "efficiency": 95
+      },
+      {
+        "material": "Ti₂CTₓ",
+        "avgPower": 20650,
+        "papers": 4
+      },
+      {
+        "material": "Mo₂CTₓ",
+        "avgPower": 20033.333333333332,
+        "papers": 3,
+        "efficiency": 95
+      },
+      {
+        "material": "ionic liquid modified electrodes",
+        "avgPower": 19587.5,
+        "papers": 4,
+        "efficiency": 93
+      },
+      {
+        "material": "Nb₄C₃Tₓ",
+        "avgPower": 17900,
+        "papers": 3
+      },
+      {
+        "material": "Ti₃C₂Tₓ",
+        "avgPower": 17250,
+        "papers": 4,
+        "efficiency": 78
+      },
+      {
+        "material": "graphene aerogel",
+        "avgPower": 16333.333333333334,
+        "papers": 3
+      },
+      {
+        "material": "conductive hydrogels",
+        "avgPower": 16030,
+        "papers": 4,
+        "efficiency": 81
+      }
+    ],
+    "topCathodeMaterials": [],
+    "emergingMaterials": [
+      {
+        "material": "3D graphene macroporous scaffold",
+        "avgPower": 10000000,
+        "papers": 1
+      },
+      {
+        "material": "3D nitrogen-doped graphene aerogel",
+        "avgPower": 225000,
+        "papers": 1
+      },
+      {
+        "material": "N-GA",
+        "avgPower": 225000,
+        "papers": 1
+      },
+      {
+        "material": "Mo₂TiC₂Tₓ",
+        "avgPower": 30933.333333333332,
+        "papers": 3
+      },
+      {
+        "material": "Nb₂CTₓ MXene",
+        "avgPower": 28500,
+        "papers": 1
+      },
+      {
+        "material": "CNT hybrid",
+        "avgPower": 28500,
+        "papers": 1
+      },
+      {
+        "material": "Nb₂CTₓ",
+        "avgPower": 28500,
+        "papers": 4
+      },
+      {
+        "material": "multi-walled CNTs",
+        "avgPower": 27350,
+        "papers": 2
+      },
+      {
+        "material": "porous carbon",
+        "avgPower": 27350,
+        "papers": 2
+      },
+      {
+        "material": "Ti₃CNTₓ",
+        "avgPower": 27200,
+        "papers": 3
+      }
+    ],
+    "materialTrends": [
+      "Shift towards 2D materials (MXenes, graphene derivatives)",
+      "Increased focus on bio-inspired and biomimetic materials",
+      "Integration of nanotechnology for surface enhancement",
+      "Development of composite and hybrid electrode structures",
+      "Emphasis on sustainable and recyclable materials"
+    ]
+  },
+  "organismInsights": {
+    "topPerformingOrganisms": [
+      {
+        "organism": "microalgae",
+        "avgPower": 619511.607675,
+        "papers": 4,
+        "maxPower": 2475140
+      },
+      {
+        "organism": "mixed electroactive bacteria",
+        "avgPower": 22757.69230769231,
+        "papers": 27,
+        "maxPower": 35800
+      },
+      {
+        "organism": "greywater treatment bacteria",
+        "avgPower": 21906,
+        "papers": 50,
+        "maxPower": 850000
+      },
+      {
+        "organism": "photosynthetic bacteria",
+        "avgPower": 18756.666666666668,
+        "papers": 6,
+        "maxPower": 28900
+      },
+      {
+        "organism": "cyanobacteria",
+        "avgPower": 17348.571428571428,
+        "papers": 8,
+        "maxPower": 28900
+      },
+      {
+        "organism": "soil microbiome",
+        "avgPower": 16910,
+        "papers": 9,
+        "maxPower": 120000
+      },
+      {
+        "organism": "industrial microbiome",
+        "avgPower": 16703.75,
+        "papers": 24,
+        "maxPower": 45000
+      },
+      {
+        "organism": "operational bacteria",
+        "avgPower": 15330,
+        "papers": 30,
+        "maxPower": 45000
+      },
+      {
+        "organism": "environmental bacteria",
+        "avgPower": 14120.681818181818,
+        "papers": 88,
+        "maxPower": 850000
+      },
+      {
+        "organism": "Shewanella",
+        "avgPower": 14087.5,
+        "papers": 52,
+        "maxPower": 40000
+      },
+      {
+        "organism": "syntrophic bacteria",
+        "avgPower": 13440,
+        "papers": 5,
+        "maxPower": 19200
+      },
+      {
+        "organism": "Geobacter sulfurreducens",
+        "avgPower": 13110.9,
+        "papers": 101,
+        "maxPower": 35800
+      },
+      {
+        "organism": "electroactive biofilm",
+        "avgPower": 12339.550561797752,
+        "papers": 90,
+        "maxPower": 33400
+      },
+      {
+        "organism": "acidophilic microbes",
+        "avgPower": 11700,
+        "papers": 4,
+        "maxPower": 22500
+      },
+      {
+        "organism": "radiation-resistant microbes",
+        "avgPower": 11227.5,
+        "papers": 4,
+        "maxPower": 22500
+      }
+    ],
+    "engineeredVsNatural": {
+      "engineered": 76,
+      "natural": 1333,
+      "avgPowerEngineered": 8737.116447368422,
+      "avgPowerNatural": 18048.2793641844
+    },
+    "environmentalAdaptations": []
+  },
+  "systemPerformance": {
+    "bySystemType": [
+      {
+        "type": "MFC",
+        "avgPower": 63667.57435483871,
+        "maxPower": 10000000,
+        "avgEfficiency": 77.83503184713376,
+        "papers": 385
+      },
+      {
+        "type": "BES",
+        "avgPower": 14446.205988023952,
+        "maxPower": 850000,
+        "avgEfficiency": 81.98181818181818,
+        "papers": 213
+      },
+      {
+        "type": "MEC",
+        "avgPower": 9691.619047619048,
+        "maxPower": 45000,
+        "avgEfficiency": 74.22075471698113,
+        "papers": 224
+      },
+      {
+        "type": "MDC",
+        "avgPower": 7553.520682222223,
+        "maxPower": 31200,
+        "avgEfficiency": 63.132,
+        "papers": 85
+      },
+      {
+        "type": "MES",
+        "avgPower": 5339.515151515152,
+        "maxPower": 28900,
+        "avgEfficiency": 66.39285714285714,
+        "papers": 87
+      }
+    ],
+    "scalingTrends": [],
+    "applicationAreas": []
+  },
+  "technologicalTrends": {
+    "recentBreakthroughs": [
+      {
+        "technology": "MXene-based electrodes",
+        "impact": "Ultra-high conductivity and biocompatibility",
+        "papers": 45
+      },
+      {
+        "technology": "3D graphene architectures",
+        "impact": "Exceptional surface area and power density",
+        "papers": 25
+      },
+      {
+        "technology": "Building-integrated systems",
+        "impact": "Real-world scalability and architectural integration",
+        "papers": 50
+      },
+      {
+        "technology": "Engineered microorganisms",
+        "impact": "Enhanced electron transfer and environmental adaptation",
+        "papers": 30
+      },
+      {
+        "technology": "Hybrid energy systems",
+        "impact": "Multi-modal energy harvesting and storage",
+        "papers": 20
+      }
+    ],
+    "researchGaps": [
+      "Long-term stability and durability of advanced materials",
+      "Economic viability of large-scale deployments",
+      "Standardization of performance metrics across studies",
+      "Integration with existing infrastructure systems",
+      "Environmental impact assessment of novel materials"
+    ],
+    "futureDirections": [
+      "Development of self-healing electrode materials",
+      "AI-optimized biofilm engineering",
+      "Circular economy integration for waste-to-energy",
+      "Smart grid integration and energy management",
+      "Extreme environment applications (space, deep sea)"
+    ]
+  },
+  "validationResults": {
+    "dataQualityScore": 100,
+    "outlierAnalysis": [],
+    "consistencyChecks": [
+      {
+        "check": "Power output values within reasonable range",
+        "result": true
+      },
+      {
+        "check": "Efficiency values within valid range",
+        "result": true
+      },
+      {
+        "check": "System types are standardized",
+        "result": true
+      }
+    ]
+  }
+}
