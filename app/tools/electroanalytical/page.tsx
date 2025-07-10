@@ -3,9 +3,33 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+// Dynamic import to avoid SSR issues with Three.js
+const ElectroanalyticalVisualization = dynamic(
+  () => import('@/components/3d/electroanalytical/ElectroanalyticalVisualization'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+        <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-4xl mb-4">⚡</div>
+          <p className="font-serif">Loading Visualization...</p>
+        </div>
+      </div>
+    )
+  }
+)
 
 export default function ElectroanalyticalTool() {
   const [selectedMethod, setSelectedMethod] = useState('cyclic-voltammetry')
+  const [parameters, setParameters] = useState({
+    scanRate: 100,
+    potentialWindow: [-0.5, 0.5],
+    duration: 10,
+    frequency: [0.1, 10000]
+  })
+  const [experimentData, setExperimentData] = useState(null)
 
   const methods = {
     'cyclic-voltammetry': {
@@ -153,12 +177,12 @@ export default function ElectroanalyticalTool() {
             </h2>
             
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
-              <div className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center mb-6">
-                <div className="text-center text-gray-500 dark:text-gray-400">
-                  <div className="text-4xl mb-4">📊</div>
-                  <p className="font-serif">Live data visualization</p>
-                  <p className="text-sm mt-2">Start analysis to see results</p>
-                </div>
+              <div className="aspect-square bg-gray-900 rounded-lg overflow-hidden mb-6">
+                <ElectroanalyticalVisualization
+                  method={selectedMethod}
+                  parameters={parameters}
+                  onDataUpdate={(data) => setExperimentData(data)}
+                />
               </div>
 
               <div className="space-y-4">

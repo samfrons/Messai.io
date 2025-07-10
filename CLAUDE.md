@@ -641,6 +641,547 @@ When working on MESSAi, always:
     - Builds on the requirements directory structure mentioned
     - Aligns with scientific accuracy and testing approach guidelines
 
+## 📚 Research System Architecture & Knowledge Extraction
+
+### Overview
+MESSAi uses a sophisticated research collection system to build a queryable knowledge base from scientific papers. This system is developed in the messai-research branch and shared across the platform.
+
+### Branch Structure
+- **messai-research branch**: Primary development of research tools
+- **Main branch**: Integration point for stable research features
+- **messai-ai-clean branch**: ML models trained on research data
+
+### Database Architecture
+The research system uses a dual-database approach:
+
+1. **Research Database (SQLite - research.db)**
+   - Location: `/messai-research/prisma/research.db`
+   - Content: 6,022+ papers with enhanced extraction
+   - Schema: Optimized for knowledge extraction
+   - Purpose: Research and development
+
+2. **Production Database (PostgreSQL)**
+   - Location: Prisma Cloud
+   - Content: 345 verified papers
+   - Schema: Production-ready with user associations
+   - Purpose: Live platform features
+
+### Enhanced Research Paper Schema
+The ResearchPaper model includes comprehensive fields for scientific data extraction:
+
+```typescript
+// Core metadata fields
+{
+  title: string
+  authors: string[]         // JSON array
+  abstract: string
+  doi?: string             // Unique identifiers
+  pubmedId?: string
+  arxivId?: string
+  ieeeId?: string
+  
+  // Performance extraction
+  organismTypes?: string[]  // Microbial species
+  anodeMaterials?: string[] // Electrode materials
+  cathodeMaterials?: string[]
+  powerOutput?: number      // mW/m²
+  efficiency?: number       // percentage
+  systemType?: string       // MFC, MEC, MDC, MES
+  
+  // AI-enhanced fields
+  aiSummary?: string        // Concise summary
+  aiKeyFindings?: string[]  // Key findings
+  aiMethodology?: string    // Methods summary
+  aiImplications?: string   // Research implications
+  aiDataExtraction?: object // Structured data
+  aiInsights?: string       // AI analysis
+  aiConfidence?: number     // 0-1 confidence score
+  
+  // Comprehensive parameters
+  experimentalConditions?: object  // Temperature, pH, duration
+  reactorConfiguration?: object    // Volume, design, dimensions
+  electrodeSpecifications?: object // Surface area, modifications
+  biologicalParameters?: object    // Inoculum, biofilm age
+  performanceMetrics?: object      // Extended metrics
+  operationalParameters?: object   // HRT, OLR, resistance
+  electrochemicalData?: object     // Impedance, voltammetry
+  timeSeriesData?: object          // Performance over time
+  economicMetrics?: object         // Cost analysis
+  
+  // Enhanced categorization
+  microbialCommunity?: object      // Species composition
+  microbialClassification?: object // Taxonomic data
+  systemConfiguration?: object     // Architecture details
+  performanceBenchmarks?: object   // Comparative metrics
+}
+```
+
+### Knowledge Extraction Pipeline
+```
+Collection → Validation → Extraction → Domain Mapping → Integration
+    ↓            ↓           ↓              ↓              ↓
+ 3 APIs      Quality     Patterns      5 Domains      Knowledge
+            Scoring                                     Graph
+```
+
+### Extraction Patterns (messai-research)
+```typescript
+const EXTRACTION_PATTERNS = {
+  powerDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mW\/m[²2]|W\/m[²2])/gi,
+  currentDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mA\/m[²2]|A\/m[²2])/gi,
+  voltage: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mV|V)\s+(?:at|@)/gi,
+  efficiency: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*%\s*(?:coulombic|CE|energy)/gi,
+  materials: /(?:anode|cathode).*?(?:carbon|graphite|steel|copper|platinum)/gi,
+  organisms: /(?:Geobacter|Shewanella|Pseudomonas|mixed culture|consortium)/gi
+}
+```
+
+### Core Scripts (messai-research branch)
+1. **real-paper-collection.ts**: Multi-source paper collection
+   - CrossRef API: DOI-verified papers
+   - PubMed API: Biomedical literature
+   - arXiv API: Preprints
+   - 19 targeted search queries
+   - Expected yield: ~845 papers per run
+
+2. **paper-quality-validator.ts**: Quality scoring (0-100)
+   - Verification score (DOI/PubMed/arXiv presence)
+   - Completeness score (metadata fields)
+   - Relevance score (keyword matching)
+   - Data richness (extracted metrics)
+   - Recency factor (publication date)
+   - Impact assessment (citations if available)
+
+3. **enhanced-data-extractor.ts**: Pattern-based extraction
+   - Performance metrics extraction
+   - Material classification
+   - Organism identification
+   - System configuration detection
+   - Confidence scoring per extraction
+
+4. **clean-abstract-html.ts**: Text normalization
+   - JATS XML tag removal
+   - HTML entity decoding
+   - Unicode normalization
+
+### Research Database Statistics
+- **Total Papers**: 6,022 (messai-research branch)
+- **Verified Papers**: 426 with DOI/PubMed/arXiv IDs
+- **Papers with Abstracts**: 5,700+
+- **Performance Data**: 1,200+ papers
+- **Power Output Data**: 850+ papers
+- **Efficiency Data**: 750+ papers
+- **Unique Materials**: 127 identified
+- **Unique Organisms**: 99 identified
+
+### Real Papers Filtering
+The system distinguishes between verified research and AI-enhanced content:
+
+```typescript
+const realSources = [
+  'crossref_api',
+  'crossref_comprehensive',
+  'pubmed_api',
+  'pubmed_comprehensive',
+  'arxiv_api',
+  'local_pdf',
+  'web_search',
+  'comprehensive_search',
+  'advanced_electrode_biofacade_search',
+  'extensive_electrode_biofacade_collection'
+]
+
+// API filtering
+const isRealPaper = (paper) => {
+  return realSources.includes(paper.source) || 
+         paper.doi || 
+         paper.arxivId || 
+         paper.pubmedId
+}
+```
+
+### API Structure
+```typescript
+// Domain-based queries
+GET /api/research/domains/anodes?material=carbon_cloth
+GET /api/research/domains/cathodes?reaction=oxygen_reduction
+GET /api/research/domains/microbes?species=geobacter
+GET /api/research/domains/performance?metric=power_density
+
+// Cross-domain insights
+GET /api/research/insights/materials-performance
+GET /api/research/insights/microbe-compatibility
+GET /api/research/insights/optimal-conditions
+
+// Paper filtering
+GET /api/papers?realOnly=true&hasPerformanceData=true
+GET /api/papers?systemType=MFC&minPowerOutput=1000
+```
+
+### Scientific Domains Coverage
+1. **Anode Domain**: 2,100+ papers
+2. **Cathode Domain**: 1,800+ papers
+3. **Microbe Domain**: 1,500+ papers
+4. **Environment Domain**: 2,200+ papers
+5. **Performance Domain**: 1,200+ papers
+
+### Integration Points
+- Research data feeds ML predictions
+- Extracted parameters enhance experiment design
+- Knowledge graphs guide material selection
+- Performance benchmarks validate predictions
+- Cross-reference validation ensures data quality
+
+## 🔄 Multi-Branch Development Workflow
+
+### Active Branches and Their Purposes
+1. **master**: Production-ready integrated features
+2. **messai-research**: Research system development
+3. **messai-ai-clean**: ML/AI experimentation
+4. **private/**: Marketing site (not public)
+
+### Research System Workflow
+```
+messai-research (develop) → master (integrate) → all branches (use)
+       ↓                        ↓                      ↓
+  New features            Stable features      Shared knowledge
+```
+
+### Database Synchronization Strategy
+1. **Development**: Use messai-research SQLite for rapid iteration
+2. **Integration**: Migrate verified data to PostgreSQL
+3. **Production**: Serve from PostgreSQL with caching
+4. **Backup**: Regular exports of both databases
+
+### Shared Components
+- `/scripts/research/`: Collection and processing scripts
+- `/lib/research/`: Core extraction logic
+- `/app/api/research/`: API endpoints
+- `/app/research/`: UI components
+
+## 🧬 Scientific Domain Data Management
+
+### Domain-Driven Architecture
+All scientific data is organized into interconnected domains that map to real-world research areas:
+
+#### 1. Anode Domain (messai-research enhanced)
+```typescript
+interface AnodeDomain {
+  materials: {
+    carbonBased: ['carbon cloth', 'graphite felt', 'carbon paper']
+    grapheneFamily: ['GO', 'rGO', 'graphene aerogel']
+    nanotubes: ['SWCNT', 'MWCNT', 'CNT arrays']
+    mxenes: ['Ti₃C₂Tₓ', 'V₂CTₓ', 'Mo₂CTₓ']
+    polymers: ['PEDOT', 'polyaniline', 'polypyrrole']
+  }
+  biofilms: {
+    species: string[]
+    thickness: number // μm
+    coverage: number // %
+  }
+  modifications: {
+    chemical: string[]
+    physical: string[]
+    biological: string[]
+  }
+  performance: {
+    currentDensity: number // mA/cm²
+    chargeTransfer: number // Ω
+    biocompatibility: number // 0-10
+  }
+}
+```
+
+#### 2. Cathode Domain
+```typescript
+interface CathodeDomain {
+  materials: {
+    metals: ['platinum', 'copper', 'stainless steel', 'nickel']
+    carbonBased: ['activated carbon', 'carbon cloth', 'graphite']
+    composites: ['Pt/C', 'metal oxides', 'conductive polymers']
+  }
+  catalysts: {
+    precious: ['Pt', 'Pd', 'Ru', 'Ir']
+    nonPrecious: ['Fe-N-C', 'Co-N-C', 'MnO₂']
+    biological: ['laccase', 'bilirubin oxidase']
+  }
+  reactions: {
+    ORR: 'oxygen reduction'
+    HER: 'hydrogen evolution'
+    metalRecovery: string[]
+    CO2reduction: string[]
+  }
+  performance: {
+    overpotential: number // mV
+    exchangeCurrent: number // A/cm²
+    durability: number // hours
+  }
+}
+```
+
+#### 3. Performance Metrics Extracted
+- **From messai-research**: 1,200+ papers with performance data
+- **Power density**: 850+ data points (mW/m²)
+- **Current density**: 750+ data points (mA/cm²)
+- **Efficiency**: 650+ data points (%)
+- **Treatment**: 500+ data points (% removal)
+
+### Data Flow Between Branches
+```
+messai-research → Extraction → Domain Mapping → Shared Database → All Features
+     ↓                ↓             ↓                ↓              ↓
+  Papers         Patterns      Categories        PostgreSQL      UI/API
+```
+
+## 🔗 Cross-Branch Integration Strategy
+
+### Shared Resources Management
+Resources that must be synchronized across branches:
+
+1. **Research Database**
+   - Primary: messai-research (6,022 papers)
+   - Production: master (345 verified papers)
+   - ML Training: messai-ai-clean (uses both)
+
+2. **API Endpoints**
+   - `/api/papers/*`: Basic CRUD (all branches)
+   - `/api/research/*`: Advanced queries (messai-research)
+   - `/api/predictions/*`: ML integration (messai-ai-clean)
+
+3. **Extraction Patterns**
+   - Location: `/lib/research/patterns.ts`
+   - Shared via: Git subtree or symlinks
+   - Updates: Coordinated across branches
+
+### Integration Workflow
+1. **Feature Development**: messai-research branch
+2. **Testing**: Isolated branch testing
+3. **Integration**: Merge to master
+4. **Distribution**: Cherry-pick to other branches
+
+### Avoiding Conflicts
+- Research system owned by messai-research branch
+- Other branches consume via API
+- Database migrations coordinated
+- Shared types in `/types/research.ts`
+
+## 🛠️ Development Guidelines for Multi-Branch Work
+
+### Before Starting Research Work
+1. Check which branch owns the feature:
+   - Research collection: messai-research
+   - ML predictions: messai-ai-clean
+   - Production features: master
+   - Marketing: private/
+
+2. Verify database state:
+   ```bash
+   # Check messai-research database
+   cd messai-research && npx prisma studio
+   
+   # Check main database
+   cd .. && npx prisma studio
+   ```
+
+3. Coordinate with active agents:
+   - Check git status in all worktrees
+   - Review recent commits
+   - Communication via PR descriptions
+
+### Research System Best Practices
+1. **Data Collection**: Only in messai-research branch
+2. **API Development**: Test in branch, deploy to master
+3. **UI Changes**: Develop in master, backport if needed
+4. **Database Changes**: Always migrate both databases
+
+### Shared Configuration
+Create `.env.shared` for common settings:
+```env
+# Shared across all branches
+RESEARCH_API_BASE=/api/research
+PAPERS_PER_PAGE=10
+EXTRACTION_CONFIDENCE_MIN=0.7
+```
+
+## 🏗️ Repository Architecture & Multi-Domain Strategy
+
+### Domain Separation
+- **app.messai.io**: Open-source scientific platform
+- **messai.io**: Commercial marketing site + user platform
+
+### Complete Repository Structure
+```
+/messai/                        # Public GitHub repository
+├── app/                       # Next.js app directory (PUBLIC)
+│   ├── page.tsx              # Landing page
+│   ├── tools/                # Scientific tools
+│   │   ├── bioreactor/      # Bioreactor design
+│   │   └── electroanalytical/ # Analysis tools
+│   ├── research/             # Research papers browser
+│   ├── models/               # MESS models showcase
+│   └── api/                  # Public API routes
+├── components/                # React components (PUBLIC)
+│   ├── 3d/                  # Three.js visualizations
+│   ├── ui/                  # UI components
+│   └── charts/              # Data visualizations
+├── lib/                      # Core libraries (PUBLIC)
+│   ├── domains/             # Scientific domains
+│   ├── ai-predictions.ts    # Basic ML
+│   └── db.ts                # Database utilities
+├── prisma/                   # Database schema
+│   ├── schema.prisma        # Main schema
+│   └── migrations/          # Version history
+├── public/                   # Static assets
+├── scripts/                  # Utility scripts
+│   └── research/            # Paper processing
+├── tests/                    # Test suites
+├── docs/                     # Documentation
+├── shared/                   # Shared between domains
+│   ├── types/               # TypeScript definitions
+│   ├── utils/               # Common utilities
+│   └── constants/           # Shared constants
+├── private/                  # PRIVATE (not on GitHub)
+│   ├── app/                 # Marketing site
+│   ├── auth/                # Authentication
+│   ├── components/          # Private UI
+│   └── package.json         # Separate deps
+├── messai-ai/               # AI worktree (branch: messai-ai-clean)
+│   ├── lib/                 # Advanced ML
+│   ├── components/          # AI visualizations
+│   └── api/                 # ML endpoints
+└── messai-research/         # Research worktree (branch: messai-research)
+    ├── prisma/              # Research database
+    ├── scripts/             # Collection tools
+    └── lib/                 # Extraction logic
+```
+
+### Import Rules
+1. Public → Public: ✅ Allowed
+2. Public → Shared: ✅ Allowed
+3. Private → Public: ✅ Allowed
+4. Private → Shared: ✅ Allowed
+5. Public → Private: ❌ Forbidden
+6. Shared → Private: ❌ Forbidden
+
+## 🧪 Experiment Management System
+
+### Experiment Lifecycle
+MESSAi supports complete experiment tracking from design to analysis:
+
+#### Database Schema
+```typescript
+// Core experiment model (see prisma/schema.prisma)
+model Experiment {
+  id           String            @id @default(cuid())
+  name         String
+  userId       String            // Links to User (private platform only)
+  designId     String            // Links to MFCDesign
+  status       String            @default("SETUP") // SETUP, RUNNING, COMPLETED, FAILED
+  parameters   String            // JSON configuration
+  isPublic     Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  
+  // Relations
+  design       MFCDesign         @relation(...)
+  measurements Measurement[]      // Time-series data
+  papers       ExperimentPaper[] // Research references
+}
+
+model Measurement {
+  id           String     @id @default(cuid())
+  experimentId String
+  voltage      Float      // V
+  current      Float      // mA
+  power        Float      // mW
+  temperature  Float      // °C
+  ph           Float
+  substrate    Float?     // g/L
+  notes        String?
+  timestamp    DateTime   @default(now())
+}
+```
+
+#### Experiment States
+1. **SETUP**: Configuration and preparation
+   - Select system design
+   - Configure materials
+   - Set operating parameters
+   - Link reference papers
+
+2. **RUNNING**: Active data collection
+   - Real-time measurements
+   - Automated data logging
+   - Alert thresholds
+   - Performance tracking
+
+3. **COMPLETED**: Analysis phase
+   - Performance summaries
+   - Comparison with predictions
+   - Export capabilities
+   - Report generation
+
+4. **FAILED**: Troubleshooting
+   - Failure analysis
+   - Parameter logs
+   - Recommendations
+
+### Data Collection & Analysis
+
+#### Real-time Monitoring
+```typescript
+// Measurement collection API
+POST /api/experiments/{id}/measurements
+{
+  voltage: 0.65,
+  current: 12.5,
+  temperature: 30.2,
+  ph: 7.1,
+  timestamp: "2024-01-08T10:30:00Z"
+}
+```
+
+#### Analysis Features
+- Time-series visualization
+- Performance metrics calculation
+- Comparison with research benchmarks
+- AI-powered optimization suggestions
+- Export to CSV/JSON
+
+### Integration Points
+
+#### 1. Research System
+- Link papers to experiments
+- Compare with published results
+- Extract best practices
+- Validate performance
+
+#### 2. Prediction Engine
+- Pre-experiment predictions
+- Real-time comparison
+- Parameter optimization
+- Anomaly detection
+
+#### 3. 3D Visualization
+- System configuration display
+- Real-time data overlay
+- Performance heatmaps
+- Component highlighting
+
+### Experiment Sharing
+
+#### Public Platform (app.messai.io)
+- Demo experiments only
+- Educational datasets
+- No user accounts required
+- Read-only access
+
+#### Private Platform (messai.io)
+- Personal experiment library
+- Collaboration features
+- Private/public toggle
+- Team workspaces
+
 Remember: MESSAI is open source but we have the secure separation for our marketing site and freemium software platform. 
 
 ---

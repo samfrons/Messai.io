@@ -1,0 +1,184 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-01-09",
+  "description": "Valid parameter ranges and validation rules for MESS systems",
+  "categories": {
+    "electrical": {
+      "power_density": {
+        "unit": "W/m³",
+        "valid_range": { "min": 0, "max": 1000 },
+        "typical_range": { "min": 5, "max": 100 },
+        "outlier_threshold": 500,
+        "validation_rules": [
+          "Must be positive",
+          "Check units (W/m³ vs mW/m²)",
+          "Verify electrode area calculation"
+        ]
+      },
+      "current_density": {
+        "unit": "A/m²",
+        "valid_range": { "min": 0, "max": 100 },
+        "typical_range": { "min": 0.1, "max": 10 },
+        "outlier_threshold": 50,
+        "validation_rules": [
+          "Must be positive",
+          "Should correlate with power density",
+          "Check electrode surface area"
+        ]
+      },
+      "voltage_output": {
+        "unit": "V",
+        "valid_range": { "min": 0, "max": 2 },
+        "typical_range": { "min": 0.2, "max": 0.8 },
+        "outlier_threshold": 1.2,
+        "validation_rules": [
+          "Must be positive",
+          "Cannot exceed thermodynamic limit (~1.14V)",
+          "Check under load conditions"
+        ]
+      },
+      "coulombic_efficiency": {
+        "unit": "%",
+        "valid_range": { "min": 0, "max": 100 },
+        "typical_range": { "min": 20, "max": 90 },
+        "outlier_threshold": 95,
+        "validation_rules": [
+          "Must be 0-100%",
+          "Higher values need verification",
+          "Check calculation method"
+        ]
+      },
+      "internal_resistance": {
+        "unit": "Ω",
+        "valid_range": { "min": 0, "max": 10000 },
+        "typical_range": { "min": 10, "max": 1000 },
+        "outlier_threshold": 5000,
+        "validation_rules": [
+          "Must be positive",
+          "Should correlate with electrode spacing",
+          "Check measurement method"
+        ]
+      }
+    },
+    "biological": {
+      "biofilm_thickness": {
+        "unit": "μm",
+        "valid_range": { "min": 0, "max": 1000 },
+        "typical_range": { "min": 10, "max": 200 },
+        "outlier_threshold": 500,
+        "validation_rules": [
+          "Must be positive",
+          "Mature biofilms typically 50-200μm",
+          "Check measurement method"
+        ]
+      },
+      "substrate_concentration": {
+        "unit": "g/L",
+        "valid_range": { "min": 0, "max": 50 },
+        "typical_range": { "min": 0.5, "max": 5 },
+        "outlier_threshold": 20,
+        "validation_rules": [
+          "Must be positive",
+          "Higher concentrations may inhibit",
+          "Check substrate type"
+        ]
+      },
+      "doubling_time": {
+        "unit": "hours",
+        "valid_range": { "min": 0.5, "max": 168 },
+        "typical_range": { "min": 2, "max": 24 },
+        "outlier_threshold": 72,
+        "validation_rules": [
+          "Must be positive",
+          "Faster doubling needs verification",
+          "Check growth conditions"
+        ]
+      }
+    },
+    "operating_conditions": {
+      "temperature": {
+        "unit": "°C",
+        "valid_range": { "min": 0, "max": 80 },
+        "typical_range": { "min": 20, "max": 40 },
+        "outlier_threshold": 60,
+        "validation_rules": [
+          "Must be above freezing",
+          "Most mesophiles work 20-40°C",
+          "High temps need thermophiles"
+        ]
+      },
+      "ph": {
+        "unit": "pH",
+        "valid_range": { "min": 1, "max": 14 },
+        "typical_range": { "min": 6, "max": 8 },
+        "outlier_threshold": 10,
+        "validation_rules": [
+          "Must be 1-14",
+          "Most systems work near neutral",
+          "Extreme pH needs special microbes"
+        ]
+      },
+      "pressure": {
+        "unit": "atm",
+        "valid_range": { "min": 0.1, "max": 10 },
+        "typical_range": { "min": 0.8, "max": 1.2 },
+        "outlier_threshold": 5,
+        "validation_rules": [
+          "Must be positive",
+          "Atmospheric pressure typical",
+          "High pressure needs special design"
+        ]
+      }
+    }
+  },
+  "compatibility_rules": {
+    "anode_materials": {
+      "carbon_cloth": {
+        "compatible_microbes": ["S. oneidensis", "G. sulfurreducens", "mixed_culture"],
+        "ph_range": { "min": 6, "max": 8 },
+        "temperature_range": { "min": 15, "max": 45 },
+        "notes": "Excellent biocompatibility, easy to work with"
+      },
+      "graphite_felt": {
+        "compatible_microbes": ["S. oneidensis", "G. sulfurreducens", "mixed_culture"],
+        "ph_range": { "min": 6, "max": 8 },
+        "temperature_range": { "min": 15, "max": 45 },
+        "notes": "High surface area, good for thick biofilms"
+      },
+      "carbon_nanotube": {
+        "compatible_microbes": ["G. sulfurreducens"],
+        "ph_range": { "min": 6.5, "max": 7.5 },
+        "temperature_range": { "min": 20, "max": 35 },
+        "notes": "High performance but may have biocompatibility issues"
+      },
+      "mxene_ti3c2tx": {
+        "compatible_microbes": ["G. sulfurreducens", "engineered_strains"],
+        "ph_range": { "min": 6.8, "max": 7.2 },
+        "temperature_range": { "min": 25, "max": 35 },
+        "notes": "Cutting-edge material, limited long-term data"
+      }
+    },
+    "cathode_materials": {
+      "platinum": {
+        "applications": ["MFC", "MEC"],
+        "temperature_range": { "min": 0, "max": 80 },
+        "notes": "Excellent ORR activity, high cost"
+      },
+      "stainless_steel": {
+        "applications": ["MFC", "MDC"],
+        "temperature_range": { "min": 0, "max": 60 },
+        "notes": "Low cost, moderate performance"
+      },
+      "carbon_pt_catalyst": {
+        "applications": ["MFC", "MEC"],
+        "temperature_range": { "min": 0, "max": 70 },
+        "notes": "Good performance/cost balance"
+      },
+      "air_cathode": {
+        "applications": ["MFC"],
+        "temperature_range": { "min": 5, "max": 50 },
+        "notes": "No catholyte needed, oxygen from air"
+      }
+    }
+  }
+}

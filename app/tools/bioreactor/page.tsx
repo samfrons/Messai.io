@@ -2,8 +2,35 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useState } from 'react'
+import dynamic from 'next/dynamic'
+
+// Dynamic import to avoid SSR issues with Three.js
+const BioreactorModel = dynamic(
+  () => import('@/components/3d/bioreactor/BioreactorModel'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+        <div className="text-center text-gray-500 dark:text-gray-400">
+          <div className="text-4xl mb-4">⚡</div>
+          <p className="font-serif">Loading 3D Model...</p>
+        </div>
+      </div>
+    )
+  }
+)
 
 export default function BioreactorTool() {
+  const [systemType, setSystemType] = useState<'MFC' | 'MEC' | 'MDC' | 'MES'>('MFC')
+  const [scale, setScale] = useState<'laboratory' | 'pilot' | 'industrial'>('laboratory')
+  const [anodeMaterial, setAnodeMaterial] = useState('carbonCloth')
+  const [cathodeMaterial, setCathodeMaterial] = useState('stainlessSteel')
+  const [performanceData, setPerformanceData] = useState({
+    powerOutput: 25.3,
+    efficiency: 78,
+    cost: 1250
+  })
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
@@ -44,11 +71,15 @@ export default function BioreactorTool() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   System Type
                 </label>
-                <select className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                  <option>Microbial Fuel Cell (MFC)</option>
-                  <option>Microbial Electrolysis Cell (MEC)</option>
-                  <option>Microbial Desalination Cell (MDC)</option>
-                  <option>Microbial Electrosynthesis (MES)</option>
+                <select 
+                  value={systemType}
+                  onChange={(e) => setSystemType(e.target.value as any)}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="MFC">Microbial Fuel Cell (MFC)</option>
+                  <option value="MEC">Microbial Electrolysis Cell (MEC)</option>
+                  <option value="MDC">Microbial Desalination Cell (MDC)</option>
+                  <option value="MES">Microbial Electrosynthesis (MES)</option>
                 </select>
               </div>
 
@@ -56,10 +87,14 @@ export default function BioreactorTool() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Scale
                 </label>
-                <select className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                  <option>Laboratory (mL - L)</option>
-                  <option>Pilot Scale (10L - 1000L)</option>
-                  <option>Industrial (>1000L)</option>
+                <select 
+                  value={scale}
+                  onChange={(e) => setScale(e.target.value as any)}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="laboratory">Laboratory (mL - L)</option>
+                  <option value="pilot">Pilot Scale (10L - 1000L)</option>
+                  <option value="industrial">Industrial (>1000L)</option>
                 </select>
               </div>
 
@@ -67,11 +102,15 @@ export default function BioreactorTool() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Anode Material
                 </label>
-                <select className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                  <option>Carbon Cloth</option>
-                  <option>Graphite Felt</option>
-                  <option>Carbon Nanotube</option>
-                  <option>MXene Ti₃C₂Tₓ</option>
+                <select 
+                  value={anodeMaterial}
+                  onChange={(e) => setAnodeMaterial(e.target.value)}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="carbonCloth">Carbon Cloth</option>
+                  <option value="graphiteFelt">Graphite Felt</option>
+                  <option value="carbonNanotube">Carbon Nanotube</option>
+                  <option value="mxeneTi3C2Tx">MXene Ti₃C₂Tₓ</option>
                 </select>
               </div>
 
@@ -79,16 +118,37 @@ export default function BioreactorTool() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                   Cathode Material
                 </label>
-                <select className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
-                  <option>Copper (Cost-effective)</option>
-                  <option>Platinum</option>
-                  <option>Carbon with Pt catalyst</option>
-                  <option>Stainless Steel</option>
+                <select 
+                  value={cathodeMaterial}
+                  onChange={(e) => setCathodeMaterial(e.target.value)}
+                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="copper">Copper (Cost-effective)</option>
+                  <option value="platinum">Platinum</option>
+                  <option value="carbonCloth">Carbon with Pt catalyst</option>
+                  <option value="stainlessSteel">Stainless Steel</option>
                 </select>
               </div>
 
-              <button className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg hover:from-blue-600 hover:to-green-600 transition-all duration-300 font-semibold">
-                Generate Design
+              <button 
+                onClick={() => {
+                  // Calculate performance based on configuration
+                  const baseOutput = systemType === 'MFC' ? 25 : systemType === 'MEC' ? 0 : 15
+                  const scaleFactor = scale === 'laboratory' ? 1 : scale === 'pilot' ? 1.5 : 2
+                  const anodeFactor = anodeMaterial === 'mxeneTi3C2Tx' ? 1.8 : anodeMaterial === 'carbonNanotube' ? 1.5 : 1
+                  const cathodeFactor = cathodeMaterial === 'platinum' ? 1.5 : 1
+                  
+                  const powerOutput = Math.round(baseOutput * scaleFactor * anodeFactor * cathodeFactor * 10) / 10
+                  const efficiency = Math.round(65 + Math.random() * 20)
+                  const baseCost = scale === 'laboratory' ? 500 : scale === 'pilot' ? 5000 : 50000
+                  const materialCost = (anodeMaterial === 'mxeneTi3C2Tx' ? 3 : 1) * (cathodeMaterial === 'platinum' ? 2 : 1)
+                  const cost = Math.round(baseCost * materialCost)
+                  
+                  setPerformanceData({ powerOutput, efficiency, cost })
+                }}
+                className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg hover:from-blue-600 hover:to-green-600 transition-all duration-300 font-semibold"
+              >
+                Calculate Performance
               </button>
             </div>
           </motion.div>
@@ -104,26 +164,28 @@ export default function BioreactorTool() {
               3D Preview
             </h2>
             
-            <div className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-              <div className="text-center text-gray-500 dark:text-gray-400">
-                <div className="text-4xl mb-4">🧬</div>
-                <p className="font-serif">3D Model will render here</p>
-                <p className="text-sm mt-2">Select configuration to preview</p>
-              </div>
+            <div className="aspect-square bg-gray-900 rounded-lg overflow-hidden">
+              <BioreactorModel
+                systemType={systemType}
+                scale={scale}
+                anodeMaterial={anodeMaterial}
+                cathodeMaterial={cathodeMaterial}
+                onPerformanceUpdate={(data) => setPerformanceData(data)}
+              />
             </div>
 
             <div className="mt-6 space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Expected Power Output:</span>
-                <span className="font-semibold text-gray-900 dark:text-white">25.3 mW/m²</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{performanceData.powerOutput} mW/m²</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Efficiency:</span>
-                <span className="font-semibold text-gray-900 dark:text-white">78%</span>
+                <span className="font-semibold text-gray-900 dark:text-white">{performanceData.efficiency}%</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600 dark:text-gray-400">Cost Estimate:</span>
-                <span className="font-semibold text-gray-900 dark:text-white">$1,250</span>
+                <span className="font-semibold text-gray-900 dark:text-white">${performanceData.cost.toLocaleString()}</span>
               </div>
             </div>
           </motion.div>
