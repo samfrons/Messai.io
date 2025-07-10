@@ -15,7 +15,7 @@ export const config = {
   features: {
     // Core features (always enabled)
     experiments: true,
-    literature: true,
+    research: true,
     dashboard: true,
     
     // Premium features (controlled by environment)

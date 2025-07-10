@@ -362,7 +362,7 @@ export default function SystemsPage() {
               Use AI Assistant
             </Link>
             <Link
-              href="/literature"
+              href="/research"
               className="px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors font-medium"
             >
               Browse Research

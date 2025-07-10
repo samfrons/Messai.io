@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, expect, it, vi, beforeEach } from 'vitest'
-import ErrorBoundary, { LiteratureErrorBoundary } from '@/components/ErrorBoundary'
+import ErrorBoundary, { ResearchErrorBoundary } from '@/components/ErrorBoundary'
 
 // Component that throws an error for testing
 const ThrowError = ({ shouldThrow = false }: { shouldThrow?: boolean }) => {
@@ -170,7 +170,7 @@ describe('ErrorBoundary', () => {
   })
 })
 
-describe('LiteratureErrorBoundary', () => {
+describe('ResearchErrorBoundary', () => {
   beforeEach(() => {
     // Suppress console.error for error boundary tests
     vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -182,39 +182,39 @@ describe('LiteratureErrorBoundary', () => {
 
   it('renders children when there is no error', () => {
     render(
-      <LiteratureErrorBoundary>
+      <ResearchErrorBoundary>
         <ThrowError shouldThrow={false} />
-      </LiteratureErrorBoundary>
+      </ResearchErrorBoundary>
     )
 
     expect(screen.getByText('Normal component')).toBeInTheDocument()
   })
 
-  it('renders literature-specific error UI when there is an error', () => {
+  it('renders research-specific error UI when there is an error', () => {
     render(
-      <LiteratureErrorBoundary>
+      <ResearchErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </LiteratureErrorBoundary>
+      </ResearchErrorBoundary>
     )
 
     expect(screen.getByText('📚❌')).toBeInTheDocument()
-    expect(screen.getByText('Literature Loading Error')).toBeInTheDocument()
+    expect(screen.getByText('Research Loading Error')).toBeInTheDocument()
     expect(screen.getByText('Unable to load research papers. Please try refreshing the page.')).toBeInTheDocument()
     expect(screen.getByText('Refresh')).toBeInTheDocument()
   })
 
-  it('tracks literature-specific errors with gtag', () => {
+  it('tracks research-specific errors with gtag', () => {
     const mockGtag = vi.fn()
     ;(global as any).window = { gtag: mockGtag }
 
     render(
-      <LiteratureErrorBoundary>
+      <ResearchErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </LiteratureErrorBoundary>
+      </ResearchErrorBoundary>
     )
 
     expect(mockGtag).toHaveBeenCalledWith('event', 'exception', {
-      description: 'Literature Error: Error: Test error for error boundary',
+      description: 'Research Error: Error: Test error for error boundary',
       fatal: false,
     })
 
@@ -229,9 +229,9 @@ describe('LiteratureErrorBoundary', () => {
     })
 
     render(
-      <LiteratureErrorBoundary>
+      <ResearchErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </LiteratureErrorBoundary>
+      </ResearchErrorBoundary>
     )
 
     fireEvent.click(screen.getByText('Refresh'))
@@ -239,18 +239,18 @@ describe('LiteratureErrorBoundary', () => {
     expect(mockReload).toHaveBeenCalled()
   })
 
-  it('has literature context for error tracking', () => {
+  it('has research context for error tracking', () => {
     const mockErrorHandler = vi.fn()
-    const WrappedLiteratureErrorBoundary = ({ children }: { children: React.ReactNode }) => (
-      <ErrorBoundary context="Literature" onError={mockErrorHandler}>
+    const WrappedResearchErrorBoundary = ({ children }: { children: React.ReactNode }) => (
+      <ErrorBoundary context="Research" onError={mockErrorHandler}>
         {children}
       </ErrorBoundary>
     )
 
     render(
-      <WrappedLiteratureErrorBoundary>
+      <WrappedResearchErrorBoundary>
         <ThrowError shouldThrow={true} />
-      </WrappedLiteratureErrorBoundary>
+      </WrappedResearchErrorBoundary>
     )
 
     expect(mockErrorHandler).toHaveBeenCalledWith(

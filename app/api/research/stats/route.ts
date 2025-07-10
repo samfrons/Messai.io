@@ -177,9 +177,9 @@ export async function GET() {
     
     return NextResponse.json(stats)
   } catch (error) {
-    console.error('Error fetching literature stats:', error)
+    console.error('Error fetching research stats:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch literature statistics' },
+      { error: 'Failed to fetch research statistics' },
       { status: 500 }
     )
   }

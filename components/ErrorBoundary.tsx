@@ -90,17 +90,17 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 }
 
-// Specific error boundary for literature components
-export function LiteratureErrorBoundary({ children }: { children: ReactNode }) {
+// Specific error boundary for research components
+export function ResearchErrorBoundary({ children }: { children: ReactNode }) {
   return (
     <ErrorBoundary
-      context="Literature"
+      context="Research"
       fallback={
         <div className="min-h-[300px] flex items-center justify-center bg-red-50 rounded-lg border border-red-200">
           <div className="text-center p-6">
             <div className="text-4xl mb-3">📚❌</div>
             <h3 className="text-lg font-semibold text-red-800 mb-2">
-              Literature Loading Error
+              Research Loading Error
             </h3>
             <p className="text-red-600 text-sm mb-4">
               Unable to load research papers. Please try refreshing the page.
@@ -115,11 +115,11 @@ export function LiteratureErrorBoundary({ children }: { children: ReactNode }) {
         </div>
       }
       onError={(error, errorInfo) => {
-        console.error('Literature component error:', error)
-        // Track literature-specific errors
+        console.error('Research component error:', error)
+        // Track research-specific errors
         if (typeof window !== 'undefined' && window.gtag) {
           window.gtag('event', 'exception', {
-            description: `Literature Error: ${error.toString()}`,
+            description: `Research Error: ${error.toString()}`,
             fatal: false,
           })
         }
