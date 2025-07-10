@@ -71,11 +71,11 @@ messai/
 ├── docs/              # Project documentation
 ├── public/            # Static assets
 │   └── papers/       # PDF storage
-├── packages/          # Monorepo packages
-│   ├── messai-core/  # Core scientific libraries
-│   └── ui/           # Shared UI components
 └── requirements/      # Feature requirements specs
 ```
+
+### Future Monorepo Architecture
+For the planned monorepo architecture and domain-driven design structure, see `ARCHITECTURE_VISION.md`.
 
 ### Layout System
 The application uses **ConditionalLayout** to provide:
@@ -103,7 +103,7 @@ npm run format      # Format code with Prettier
 npm run db:studio   # Open Prisma Studio
 
 # Research system management
-npm run research:enhance-all     # Full enhancement pipeline
+npm run literature:enhance-all   # Full enhancement pipeline
 npm run db:integrity             # Check database integrity
 npm run db:validate-links        # Validate external URLs
 npm run test:research            # Run research tests
@@ -232,7 +232,7 @@ Always ensure the research database loads reliably by:
 ## Important Files to Review
 
 - `app/page.tsx` - Main design catalog
-- `components/MESS3DModel.tsx` - Core 3D visualization
+- `components/MFC3DModel.tsx` - Core 3D visualization
 - `components/ConditionalLayout.tsx` - Layout system
 - `lib/ai-predictions.ts` - Prediction logic
 - `prisma/schema.prisma` - Database structure
@@ -240,7 +240,7 @@ Always ensure the research database loads reliably by:
 - `app/tools/bioreactor/` - Bioreactor design tool
 - `app/tools/electroanalytical/` - Electroanalytical tool
 - `app/api/papers/` - Paper API endpoints
-- `scripts/research/` - Enhancement pipeline
+- `scripts/literature/` - Literature enhancement pipeline
 - `components/ErrorBoundary.tsx` - Error handling wrapper
 
 ## Future Enhancements
