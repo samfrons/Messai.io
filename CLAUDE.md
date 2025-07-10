@@ -103,7 +103,7 @@ npm run format      # Format code with Prettier
 npm run db:studio   # Open Prisma Studio
 
 # Research system management
-npm run literature:enhance-all   # Full enhancement pipeline
+npm run research:enhance-all     # Full enhancement pipeline
 npm run db:integrity             # Check database integrity
 npm run db:validate-links        # Validate external URLs
 npm run test:research            # Run research tests
@@ -240,7 +240,7 @@ Always ensure the research database loads reliably by:
 - `app/tools/bioreactor/` - Bioreactor design tool
 - `app/tools/electroanalytical/` - Electroanalytical tool
 - `app/api/papers/` - Paper API endpoints
-- `scripts/literature/` - Literature enhancement pipeline
+- `scripts/research/` - Research enhancement pipeline
 - `components/ErrorBoundary.tsx` - Error handling wrapper
 
 ## Future Enhancements
