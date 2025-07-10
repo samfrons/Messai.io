@@ -170,6 +170,23 @@ model ResearchPaper {
   aiModelVersion    String?           // Which AI model/version was used
   aiConfidence      Float?            // Confidence score for AI extraction (0-1)
   
+  // Comprehensive parameter extraction fields
+  experimentalConditions  String?     // JSON: temperature, pH, duration, substrate type/conc
+  reactorConfiguration   String?      // JSON: volume, design, dimensions, flow rates
+  electrodeSpecifications String?     // JSON: surface area, modifications, spacing, connections
+  biologicalParameters   String?      // JSON: inoculum source, biofilm age, microbial diversity
+  performanceMetrics     String?      // JSON: extended metrics beyond basic power/efficiency
+  operationalParameters  String?      // JSON: HRT, OLR, external resistance, feeding mode
+  electrochemicalData    String?      // JSON: impedance, voltammetry, polarization curves
+  timeSeriesData         String?      // JSON: performance over time, degradation rates
+  economicMetrics        String?      // JSON: cost analysis, scale-up projections
+  
+  // Enhanced categorization fields for advanced filtering
+  microbialCommunity     String?      // JSON: {dominant: [], consortium: [], pureculture: boolean}
+  microbialClassification String?     // JSON: {phylum: [], class: [], genus: [], species: []}
+  systemConfiguration    String?      // JSON: {type: MFC/MEC/MDC/MES/BES, subtype, scale, architecture}
+  performanceBenchmarks  String?      // JSON: {powerDensity: {max, operating, normalized}, comparativeRank}
+  
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
   
@@ -187,6 +204,8 @@ model ResearchPaper {
   @@index([uploadedBy])
   @@index([isPublic])
   @@index([createdAt])
+  @@index([microbialCommunity])
+  @@index([systemConfiguration])
 }
 
 model ExperimentPaper {
