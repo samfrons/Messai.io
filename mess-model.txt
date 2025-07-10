@@ -1,0 +1,145 @@
+System Description for Claude Code and Sub-Agents
+Multi-Scale Microbial Fuel Cell Prototype System
+Overview:
+A four-stage scalable MFC system that progresses from microscopic testing units to industrial-scale deployment, with integrated simulation and monitoring capabilities at each level.
+Stage 1: Micro-Scale Test Slide (75mm x 25mm)
+
+Purpose: Rapid material testing and biofilm visualization
+Geometry: Standard microscope slide form factor with layered chambers
+Components:
+
+Transparent acrylic housing (3mm thick)
+Interchangeable electrode strips (anode/cathode pairs)
+Microfluidic channels for substrate flow
+Integrated reference electrode access
+Volume: 200µL - 1mL working volume
+
+
+Key Features: Real-time biofilm monitoring, material characterization, educational demonstrations
+
+Stage 2: Voltaic Pile/Multi-Cell Stack (150mm x 200mm)
+
+Purpose: Voltage/current scaling through series/parallel configurations
+Geometry: Stackable cylindrical or rectangular cells with standardized connections
+Components:
+
+7-10 individual cells per stack
+Shared substrate reservoir system
+Modular electrical connections
+Integrated monitoring ports
+Volume: 50-200mL per cell
+
+
+Key Features: Voltage multiplication, current addition, stackable design
+
+Stage 3: Bench-Scale Reactor (250mm x 200mm)
+
+Purpose: Validate scaling physics and continuous operation
+Geometry: Dual-chamber or single-chamber with air cathode
+Components:
+
+1-5L working volume
+Continuous flow capability
+Temperature, pH, ORP monitoring
+Sampling ports at multiple locations
+Data acquisition system
+
+
+Key Features: Process optimization, long-term stability testing, simulation validation
+
+Stage 4: Industrial-Scale System (Modular)
+
+Purpose: Commercial deployment with waste-to-energy conversion
+Geometry: Array of optimized modules based on validated designs
+Components:
+
+Waste preprocessing system
+MFC module arrays (scalable configuration)
+Power management and conditioning
+SCADA control system
+Remote monitoring capabilities
+
+
+Key Features: Commercial viability, waste processing, grid integration
+
+
+
+System Architecture Description:
+Multi-Scale Microbial Fuel Cell Prototype System - A progressive scaling approach from microscopic testing to industrial deployment with four distinct stages:
+
+Micro-Scale Test Slide (75×25mm): Transparent acrylic housing with interchangeable electrodes, microfluidic channels, 200µL-1mL volume for rapid material testing and biofilm visualization
+Voltaic Pile (150×200mm): Stackable cells with series/parallel configurations, shared substrate reservoir, 7-10 cells per stack, 50-200mL per cell for voltage/current scaling studies
+Bench-Scale Reactor (250×200mm): Dual-chamber system with 1-5L volume, continuous flow capability, integrated monitoring (pH, temperature, ORP), sampling ports for process optimization
+Industrial-Scale System (Modular): Waste preprocessing, MFC module arrays, power management, SCADA control, remote monitoring for commercial deployment
+
+Key Implementation Points for Claude Code:
+
+Modular design with standardized interfaces between scales
+Integrated simulation validation at each stage
+Real-time monitoring with sensor integration
+Material testing platform for systematic electrode evaluation
+Progressive validation approach eliminating scale-up risks
+
+Interactive 3D Prototype Features:
+The Three.js prototype I've created includes:
+
+Four Interactive Stages: Switch between micro-slide, voltaic pile, bench reactor, and industrial system views
+Real-time Animation: Electron flow visualization, biofilm growth simulation
+Interactive Controls: Play/pause, parameter adjustment, camera controls
+Detailed Information: Stage-specific specifications, dimensions, and applications
+Visual Effects: Transparent materials, lighting effects, particle systems for electron flow
+
+Key Controls:
+
+Stage selection buttons for different scales
+Biofilm growth and electron flow sliders
+Auto-rotate and camera reset functionality
+Real-time parameter display and technical specifications
+
+This prototype demonstrates the scalability concept visually and can serve as a foundation for more detailed implementation with Claude Code. The modular Three.js structure makes it easy to expand with additional features like detailed material properties, performance metrics, and simulation data integration.
+
+1. Material Configuration System
+
+Anode Materials: Carbon cloth, graphite, carbon brush, stainless steel, titanium, graphene
+Cathode Materials: Platinum, carbon cloth, nickel, manganese oxide, iron oxide, air cathodes
+Material Properties Database: Each material has conductivity, cost, biocompatibility, and visual properties
+
+2. Advanced Microbial Community Settings
+
+Bacteria Selection: Geobacter, Shewanella, Pseudomonas, Clostridium, mixed cultures
+Biological Parameters:
+
+Biomass concentration (0.01-100 g/L)
+Growth rate (0.01-2 day⁻¹)
+Biofilm thickness (10-1000 μm)
+Cell viability (0-100%)
+
+
+Species-Specific Properties: Each bacteria has optimal pH, temperature, electrogenicity
+
+3. Comprehensive Parameter Controls
+
+Reactor Configuration: Type, volume (25-5000 mL), electrode distance, temperature (4-80°C), pH (2-12)
+Electrode Properties: Surface area (1-1000 cm²), porosity, conductivity, catalyst loading
+Environmental Conditions: Substrate type/concentration, ionic strength, external resistance
+
+4. Real-Time Performance Metrics
+
+Power Generation: Live calculation using Butler-Volmer-Monod kinetics
+Current Density: Based on material properties and environmental factors
+Coulombic Efficiency: Dynamic calculation based on biofilm development
+System Health Monitoring: Temperature, pH, and efficiency warnings
+
+5. Advanced 3D Visualization
+
+Interactive Reactor Model: Transparent chamber with visible electrodes and biofilm
+Dynamic Biofilm Growth: Visual representation that changes with simulation parameters
+Electron Flow Animation: Particles moving through external circuit based on current density
+Material-Specific Colors: Electrodes change appearance based on selected materials
+
+6. Professional Interface Design
+
+MESim Pro Styling: Professional dashboard layout with organized control panels
+Real-Time Updates: All parameters update calculations and visualizations instantly
+Data Export: JSON export of complete simulation state
+Responsive Controls: Grid-based material/bacteria selection with hover effects
