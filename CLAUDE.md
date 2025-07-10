@@ -1021,61 +1021,120 @@ When working on MESSAi, always:
 - Unprotected API routes
 - Local storage of sensitive data
 
-    - MESS Parameters JSON Schema Compliance
-      - How to use the 500+ parameters from mess-parameters-json.json
-      - Parameter categories (18 major categories, 80 subcategories)
-      - Electrode configuration standards (separate anode/cathode parameters)
-      - Type safety and validation requirements
+## 🔄 Multi-Branch Development Workflow
 
-    2. Conflict Prevention Between System Types
+### Active Branch Structure
 
-    - MESS vs Fuel Cell Parameter Mapping
-      - How MFCConfig relates to fuel cell parameters
-      - Avoiding parameter collisions between systems
-      - Proper parameter inheritance and overrides
-      - Interface type definitions for different system types
+MESSAi uses a multi-branch development strategy with git worktrees for parallel development:
 
-    3. Fuel Cell Systems Standards
+#### **Current Branches**
+- **`messai-home`** - Public website and marketing site
+- **`messai-lab`** - Modeling features (bioreactor, electroanalytical tools, 3D models)
+- **`messai-research`** - Research features (literature system, paper collection)
+- **`master`** - Main integration and production deployment branch
+- **`research-development`** - (Future) Dedicated research features development
 
-    - White Paper Compliance Requirements
-      - 700 bar hydrogen storage systems
-      - Multi-fidelity modeling approach (high/medium/low)
-      - Control system integration (thermal, pressure, humidity, flow)
-      - Gas composition management (N2, O2, H2, H2O)
-      - Performance metrics and safety thresholds
+#### **Git Worktree Setup**
+```bash
+# List current worktrees
+git worktree list
 
-    4. Implementation Guidelines
+# Add new worktrees for parallel development
+git worktree add ../messai-lab messai-lab
+git worktree add ../messai-research messai-research
 
-    - Parameter Validation Rules
-      - Type checking for electrode configurations
-      - Range validation for operating conditions
-      - Cross-system parameter compatibility checks
-      - Error handling for invalid combinations
+# Create research-development branch when needed
+git checkout -b research-development messai-research
+git worktree add ../research-development research-development
+```
 
-    5. Code Examples and Best Practices
+### Branch-Specific Development
 
-    - Interface definitions for parameter structures
-    - How to extend existing configs without conflicts
-    - Validation functions for parameter checking
-    - Migration strategies for adding new parameters
+#### **`messai-home` Branch**
+- **Purpose**: Public website, marketing pages, demos
+- **Focus**: User acquisition, showcasing platform capabilities
+- **Deployment**: app.messai.io (public demos)
+- **Key Files**: Marketing components, public demos, landing pages
 
-    Key Points to Address
+#### **`messai-lab` Branch** 
+- **Purpose**: Advanced modeling and 3D visualization features
+- **Focus**: Bioreactor design tools, electroanalytical interfaces
+- **Recent Work**: Bioreactor and electroanalytical tools with 3D models
+- **Key Files**: `app/tools/`, `components/3d/`, modeling engines
 
-    1. Parameter Consistency: Ensure MESS and fuel cell parameters use consistent naming and units
-    2. Type Safety: Leverage TypeScript interfaces to prevent configuration errors  
-    3. Validation: Add runtime checks for parameter ranges and compatibility
-    4. Documentation: Clear examples of proper parameter usage
-    5. Conflict Resolution: Guidelines for handling overlapping parameter spaces
-    6. Future-Proofing: How to add new system types without breaking existing ones
+#### **`messai-research` Branch**
+- **Purpose**: Literature system, research paper management
+- **Focus**: Paper collection, AI extraction, research database
+- **Database**: 3,721 verified research papers
+- **Key Files**: Literature components, research scripts, API endpoints
 
-    Integration with Existing CLAUDE.md
+#### **`master` Branch**
+- **Purpose**: Integration and production deployment
+- **Focus**: Stable releases, feature integration
+- **Deployment**: Production instances
+- **Strategy**: Merge stable features from development branches
 
-    - Will be added as a new major section after "AI Prediction Model"
-    - Cross-references existing sections on system configuration
-    - Builds on the requirements directory structure mentioned
-    - Aligns with scientific accuracy and testing approach guidelines
+### Workflow Process
 
-Remember: MESSAI is open source but we have the secure separation for our marketing site and freemium software platform. 
+#### **Feature Development Cycle**
+1. **Work in specialized branch** (messai-lab, messai-research, messai-home)
+2. **Test thoroughly** within branch context
+3. **Create integration PR** to master
+4. **Deploy** stable features from master
+
+#### **Cross-Branch Integration**
+```bash
+# From feature branch, sync with master
+git checkout messai-lab
+git rebase master
+
+# Merge stable features to master
+git checkout master
+git merge --no-ff messai-lab
+git push origin master
+```
+
+### Deployment Strategy
+
+#### **Branch-Specific Deployments**
+- **messai-home** → app.messai.io (public marketing)
+- **messai-research** → research.messai.io (research tools)
+- **messai-lab** → lab.messai.io (modeling tools)
+- **master** → messai.io (integrated platform)
+
+#### **Common Issues & Solutions**
+
+**1. Build Errors (from git log analysis)**
+- Next.js 15 compatibility issues
+- Database connection pool exhaustion
+- CSP errors with Vercel scripts
+- Authentication conflicts between branches
+
+**2. Worktree Management**
+- Regularly `git worktree prune` to clean up
+- Recreate worktrees if paths break
+- Coordinate schema changes across branches
+
+**3. Database Synchronization**
+- Use branch-specific databases for development
+- Coordinate migrations before integration
+- Test compatibility between SQLite (dev) and PostgreSQL (prod)
+
+### Missing Infrastructure
+
+#### **Deployment Automation**
+- No `vercel.json` configuration files
+- No GitHub Actions workflows
+- Manual deployment process
+- No automated testing between branches
+
+#### **Recommended Additions**
+1. **`vercel.json`** per branch with specific configs
+2. **`.github/workflows/`** for CI/CD automation
+3. **Branch protection rules** for master
+4. **Automated testing** before integration
+
+Remember: MESSAi is open source but maintains secure separation for marketing site and freemium software platform. 
 
 ---
 

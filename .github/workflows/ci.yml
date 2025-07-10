@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, master, messai-home, messai-lab, messai-research, research-development]
   pull_request:
-    branches: [main, develop]
+    branches: [main, master]
 
 jobs:
   lint:
@@ -95,3 +95,42 @@ jobs:
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+  branch-specific:
+    name: Branch Specific Tests
+    runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Setup test database
+        run: |
+          DATABASE_URL="file:./test.db" npx prisma generate --schema=prisma/schema.sqlite.prisma
+          DATABASE_URL="file:./test.db" npx prisma db push --schema=prisma/schema.sqlite.prisma
+      
+      - name: Research branch tests
+        if: contains(github.ref, 'research')
+        run: npm run test:research
+        env:
+          DATABASE_URL: "file:./test.db"
+      
+      - name: Lab branch tests  
+        if: contains(github.ref, 'lab')
+        run: npm run test -- --testPathPattern="3d|bioreactor|electroanalytical"
+        env:
+          DATABASE_URL: "file:./test.db"
+      
+      - name: Home branch tests
+        if: contains(github.ref, 'home')
+        run: npm run test -- --testPathPattern="marketing"
+        env:
+          DATABASE_URL: "file:./test.db"

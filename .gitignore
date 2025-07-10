@@ -105,3 +105,22 @@ SAFE_PUSH_GUIDE.md
 # Security documentation that might contain sensitive info
 docs/SECURITY_*.md
 docs/*_SECURITY_*.md
+
+# Backup and report files
+reports/archive/
+*.report.json
+knowledge-graph.json
+cross-reference-system.json
+
+# Development databases and logs
+dev-server.log
+server.log
+
+# Fake data scripts (prevent accidental commit)
+**/massive-*.ts
+**/massive-*.js
+**/fake-*.ts
+**/expansion-*.ts
+
+# Research development branch artifacts
+messai-research/
