@@ -71,7 +71,7 @@ export default function PaperCard({ paper, onSelect, showActions = false }: Pape
             </button>
           ) : (
             <Link
-              href={`/literature/${paper.id}`}
+              href={`/research/${paper.id}`}
               className="hover:text-blue-600 transition-colors"
             >
               {paper.title}
@@ -151,7 +151,7 @@ export default function PaperCard({ paper, onSelect, showActions = false }: Pape
             </a>
             {!onSelect && (
               <Link
-                href={`/literature/${paper.id}`}
+                href={`/research/${paper.id}`}
                 className="text-sm text-gray-600 hover:text-gray-800"
               >
                 Details

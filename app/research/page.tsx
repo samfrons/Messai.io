@@ -49,7 +49,7 @@ interface PaginationInfo {
   totalPages: number
 }
 
-interface LiteratureStats {
+interface ResearchStats {
   totalPapers: number
   aiEnhanced: number
   uniqueMaterials: number
@@ -63,13 +63,13 @@ interface LiteratureStats {
   sources: Array<{ source: string; count: number }>
 }
 
-export default function LiteraturePage() {
+export default function ResearchPage() {
   const { data: session } = useSession()
   const router = useRouter()
   const [papers, setPapers] = useState<Paper[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
-  const [stats, setStats] = useState<LiteratureStats | null>(null)
+  const [stats, setStats] = useState<ResearchStats | null>(null)
   const [statsLoading, setStatsLoading] = useState(true)
   const [showRealPapersOnly, setShowRealPapersOnly] = useState(false)
   const [pagination, setPagination] = useState<PaginationInfo>({
@@ -82,7 +82,7 @@ export default function LiteraturePage() {
   const fetchStats = async () => {
     setStatsLoading(true)
     try {
-      const response = await fetch('/api/literature/stats')
+      const response = await fetch('/api/research/stats')
       if (response.ok) {
         const data = await response.json()
         setStats(data)
@@ -266,7 +266,7 @@ export default function LiteraturePage() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Research Literature</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Research Database</h1>
           <p className="mt-2 text-gray-600">
             Browse and search scientific papers on microbial electrochemical systems
           </p>
@@ -323,7 +323,7 @@ export default function LiteraturePage() {
               <div
                 key={paper.id}
                 className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all duration-200 cursor-pointer group overflow-hidden"
-                onClick={() => router.push(`/literature/${paper.id}`)}
+                onClick={() => router.push(`/research/${paper.id}`)}
               >
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-2">

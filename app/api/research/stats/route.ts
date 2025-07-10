@@ -3,7 +3,7 @@ import prisma from '@/lib/db'
 
 export async function GET() {
   try {
-    console.log('Fetching literature stats...')
+    console.log('Fetching research stats...')
     
     // Get basic counts in parallel
     const [
