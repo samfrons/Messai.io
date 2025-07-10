@@ -6,23 +6,27 @@ const globalForPrisma = globalThis as unknown as {
 
 function createPrismaClient() {
   const isProduction = process.env.NODE_ENV === 'production'
+  const isDevelopment = process.env.NODE_ENV === 'development'
   
-  // Check if we should use Prisma Accelerate
+  // Check if we should use Prisma Accelerate (production only)
   const accelerateUrl = process.env.PRISMA_ACCELERATE_URL
-  const hasAccelerate = !!accelerateUrl
+  const hasAccelerate = !!accelerateUrl && isProduction
   
-  // Determine which URL to use
+  // Determine which URL to use based on environment
   let connectionUrl: string
   
   if (hasAccelerate && process.env.DATABASE_URL?.includes('postgres')) {
-    // Use Accelerate URL if available and we're using PostgreSQL
+    // Production with Prisma Accelerate
     connectionUrl = accelerateUrl
-  } else if (process.env.DATABASE_URL?.includes('postgres')) {
-    // PostgreSQL without Accelerate
+  } else if (process.env.DATABASE_URL?.includes('postgres') && (isProduction || process.env.FORCE_POSTGRES === 'true')) {
+    // Production PostgreSQL or forced PostgreSQL
+    connectionUrl = process.env.DATABASE_URL
+  } else if (process.env.DATABASE_URL?.startsWith('file:')) {
+    // Explicit SQLite URL
     connectionUrl = process.env.DATABASE_URL
   } else {
-    // SQLite for local development
-    connectionUrl = 'file:/Users/samfrons/Desktop/Messai/prisma/dev.db'
+    // Default to SQLite for local development
+    connectionUrl = 'file:./prisma/dev.db'
   }
 
   // For non-Accelerate PostgreSQL connections, add connection pooling params

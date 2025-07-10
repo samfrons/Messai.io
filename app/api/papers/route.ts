@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from '@/lib/auth/auth-options'
 import prisma from '@/lib/db'
+import { createStringFilter, createSearchFilters } from '@/lib/database-utils'
 
 // GET /api/papers - List papers with pagination and advanced filtering
 export async function GET(request: NextRequest) {
@@ -76,11 +77,11 @@ export async function GET(request: NextRequest) {
     
     if (search) {
       const searchConditions = [
-        { title: { contains: search, mode: 'insensitive' } },
-        { abstract: { contains: search, mode: 'insensitive' } },
-        { keywords: { contains: search, mode: 'insensitive' } },
-        { journal: { contains: search, mode: 'insensitive' } },
-        { authors: { contains: search, mode: 'insensitive' } }
+        { title: createStringFilter(search) },
+        { abstract: createStringFilter(search) },
+        { keywords: createStringFilter(search) },
+        { journal: createStringFilter(search) },
+        { authors: createStringFilter(search) }
       ]
       
       if (where.OR) {
@@ -102,10 +103,10 @@ export async function GET(request: NextRequest) {
     if (microbes.length > 0) {
       const microbeConditions = microbes.map(microbe => ({
         OR: [
-          { organismTypes: { contains: microbe, mode: 'insensitive' } },
-          { microbialCommunity: { contains: microbe, mode: 'insensitive' } },
-          { microbialClassification: { contains: microbe, mode: 'insensitive' } },
-          { abstract: { contains: microbe, mode: 'insensitive' } }
+          { organismTypes: createStringFilter(microbe) },
+          { microbialCommunity: createStringFilter(microbe) },
+          { microbialClassification: createStringFilter(microbe) },
+          { abstract: createStringFilter(microbe) }
         ]
       }))
       advancedFilters.push({ OR: microbeConditions })
@@ -116,7 +117,7 @@ export async function GET(request: NextRequest) {
       const systemConditions = systemTypes.map(type => ({
         OR: [
           { systemType: type },
-          { systemConfiguration: { contains: `"type":"${type}"`, mode: 'insensitive' } }
+          { systemConfiguration: createStringFilter(`"type":"${type}"`) }
         ]
       }))
       advancedFilters.push({ OR: systemConditions })
@@ -125,7 +126,7 @@ export async function GET(request: NextRequest) {
     // Configuration filter
     if (configurations.length > 0) {
       const configConditions = configurations.map(config => ({
-        systemConfiguration: { contains: config, mode: 'insensitive' }
+        systemConfiguration: createStringFilter(config)
       }))
       advancedFilters.push({ OR: configConditions })
     }
@@ -179,11 +180,11 @@ export async function GET(request: NextRequest) {
       // Create conditions for each field we want to check
       const fieldConditions = keywordsToUse.map(keyword => ({
         OR: [
-          { title: { contains: keyword, mode: 'insensitive' } },
-          { abstract: { contains: keyword, mode: 'insensitive' } },
-          { keywords: { contains: keyword, mode: 'insensitive' } },
-          { organismTypes: { contains: keyword, mode: 'insensitive' } },
-          { microbialCommunity: { contains: keyword, mode: 'insensitive' } }
+          { title: createStringFilter(keyword) },
+          { abstract: createStringFilter(keyword) },
+          { keywords: createStringFilter(keyword) },
+          { organismTypes: createStringFilter(keyword) },
+          { microbialCommunity: createStringFilter(keyword) }
         ]
       }))
       

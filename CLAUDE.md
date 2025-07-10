@@ -17,7 +17,7 @@ The platform combines:
 - Comprehensive experiment tracking
 - Scientific material database with 27 electrode options, differentiating between anode and cathode
 - Clean UI theme
-- Advanced literature collection and analysis system with 6,000+ verified research papers
+- Advanced research collection and analysis system with 3,721 verified research papers
 - AI-powered data extraction and categorization system
 - Advanced filtering and search capabilities
 
@@ -29,7 +29,7 @@ The platform combines:
 - **Styling**: Tailwind CSS with custom theme that will be implemented at a later date
 - **3D Graphics**: Three.js + React Three Fiber
 - **State Management**: Zustand
-- **Database**: Prisma ORM (PostgreSQL ready)
+- **Database**: Prisma ORM (SQLite dev, PostgreSQL prod)
 - **Testing**: Vitest + React Testing Library
 
 ### Project Structure
@@ -180,11 +180,11 @@ npm run lint        # Check code quality
 npm run format      # Format code with Prettier
 npm run db:studio   # Open Prisma Studio
 
-# Literature system management
-npm run literature:enhance-all    # Full enhancement pipeline
+# Research system management
+npm run research:enhance-all     # Full enhancement pipeline
 npm run db:integrity             # Check database integrity
 npm run db:validate-links        # Validate external URLs
-npm run test:literature          # Run literature tests
+npm run test:research            # Run research tests
 ```
 
 ## Scientific Context
@@ -216,7 +216,46 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 - Design-specific multipliers
 - Random variation for realism
 
-## Literature System Guidelines
+## Database Setup & Configuration
+
+MESSAi supports both local development with SQLite and production deployment with PostgreSQL, with automatic database provider detection and compatibility utilities.
+
+### Local Development (SQLite)
+- **Configuration**: Automatically uses SQLite when `NODE_ENV=development`
+- **Database URL**: `file:/Users/samfrons/Desktop/Messai/prisma/dev.db`
+- **Schema**: Uses `prisma/schema.sqlite.prisma`
+- **Setup**: Automatic database creation via `prisma db push`
+
+### Production (PostgreSQL)
+- **Configuration**: Uses PostgreSQL with Prisma Accelerate for enhanced performance
+- **Connection**: Requires `DATABASE_URL` and optional `PRISMA_ACCELERATE_URL`
+- **Schema**: Uses main `prisma/schema.prisma`
+- **Features**: Connection pooling, case-insensitive searches, advanced indexing
+
+### Database Compatibility
+The application includes database-agnostic query utilities (`lib/database-utils.ts`) that automatically detect the database provider and adjust queries:
+- **SQLite**: Uses simple `contains` filters for text searches
+- **PostgreSQL**: Uses `contains` with `mode: "insensitive"` for case-insensitive searches
+
+### Database Commands
+```bash
+# Local SQLite development
+npm run dev                    # Automatically uses SQLite
+npm run db:studio:dev         # Prisma Studio for SQLite
+npm run db:migrate:dev        # SQLite migrations
+
+# Production PostgreSQL
+npm run build                 # Uses PostgreSQL for production
+npm run db:studio             # Prisma Studio for PostgreSQL
+npx prisma migrate deploy     # Production migrations
+```
+
+### Environment Detection
+Database provider is automatically detected based on `DATABASE_URL`:
+- SQLite: URLs starting with `file:`
+- PostgreSQL: URLs containing `postgres` or `postgresql`
+
+## Research System Guidelines
 
 ### CRITICAL: Data Integrity Rules
 - **NEVER generate fake research papers or fabricated scientific data**
@@ -224,8 +263,8 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 - **Extrapolation allowed ONLY when explicitly requested and clearly marked**
 - **ALL papers must have verification (DOI, PubMed ID, arXiv ID, or verified PDF)**
 
-### Literature Database Loading Requirements
-Always ensure the literature database loads reliably by:
+### Research Database Loading Requirements
+Always ensure the research database loads reliably by:
 
 1. **Error Handling**:
    - Wrap all literature components with ErrorBoundary
@@ -246,7 +285,7 @@ Always ensure the literature database loads reliably by:
 
 4. **Testing Requirements**:
    - Test with empty database
-   - Test with large datasets (1000+ papers)
+   - Test with large datasets (3,700+ papers)
    - Test network failures and timeouts
    - Test authentication state changes
 
@@ -274,7 +313,7 @@ When extracting data from papers for predictive models:
    - Test predictions against literature benchmarks
 
 ### Dynamic Knowledge Base
-The literature system should continuously build upon predictive simulation models by:
+The research system should continuously build upon predictive simulation models by:
 
 1. **Comprehensive Data Extraction**:
    - System designs: geometry, dimensions, flow patterns
@@ -349,13 +388,13 @@ All literature API routes now include enhanced data parsing:
 ```
 
 #### **Database Status (Updated 2025-07-10 - Post Integration)**
-- **Total Papers**: 6,022 verified research papers
-- **AI Processed**: 1,200+ (19.9%+)
-- **With Performance Data**: 850+ (14.1%+) 
+- **Total Papers**: 3,721 verified research papers (after cleanup of non-MES papers)
+- **AI Processed**: 1,200+ (32%+)
+- **With Performance Data**: 850+ (23%+) 
 - **Quality Score**: Comprehensive validation system in place
 - **Frontend Integration**: ✅ **COMPLETE** - Advanced filtering and enhanced data display
 - **Sources**: CrossRef API, PubMed API, arXiv API, comprehensive searches
-- **Authentication**: ✅ **PRESERVED** - Full authentication system integrated with literature features
+- **Authentication**: ✅ **PRESERVED** - Full authentication system integrated with research features
 
 #### **Processing Methods Available**
 1. **Pattern Matching**: Fast regex-based extraction for basic metrics
@@ -405,11 +444,11 @@ The validation framework is fully integrated with frontend APIs:
 - ✅ API filters properly exclude fake paper sources
 
 #### **Current Database Status**
-- **Total Papers**: 345 real, verified research papers
-- **Sources**: CrossRef API (262), PubMed API (77), arXiv API (5), PubMed (1)
+- **Total Papers**: 3,721 real, verified research papers (focused on MES)
+- **Sources**: CrossRef API, PubMed API, arXiv API with comprehensive verification
 - **Quality Focus**: Only legitimate papers with DOI/PubMed/arXiv verification
-- **No Fake Papers**: The `massive-final-expansion.ts` script (generates 2000 fake papers) is NOT used
-- **Data Quality**: 290 papers cleaned of extraction artifacts, all display issues resolved
+- **No Fake Papers**: All non-relevant papers removed through cleanup scripts
+- **Data Quality**: Comprehensive cleanup completed, all display issues resolved
 
 #### **Known Extraction Capabilities**
 - **Performance Metrics**: Power density, current density, voltage, efficiency
@@ -687,7 +726,7 @@ npx tsx scripts/literature/quality-report.ts
 
 ## 🔬 Enhanced Literature System (2025-07-10 Integration)
 
-The MESSAi literature system has been significantly enhanced with advanced filtering, search capabilities, and comprehensive data extraction from 6,000+ verified research papers.
+The MESSAi research system has been significantly enhanced with advanced filtering, search capabilities, and comprehensive data extraction from 3,721 verified research papers focused on microbial electrochemical systems.
 
 ### Key Features
 
@@ -720,11 +759,11 @@ The MESSAi literature system has been significantly enhanced with advanced filte
 ### Enhanced Scripts & Utilities
 
 ```bash
-# Comprehensive paper collection (6,000+ papers)
-npm run literature:collect-comprehensive
+# Comprehensive paper collection (3,700+ papers)
+npm run research:collect-comprehensive
 
 # Enhanced data extraction with confidence scoring
-npm run literature:extract-enhanced
+npm run research:extract-enhanced
 
 # Database backup with compression
 npm run db:backup:enhanced
@@ -739,7 +778,7 @@ npm run db:restore:enhanced
 - ✅ **Frontend integration complete**: AdvancedFilterPanel component ready
 - ✅ **Authentication preserved**: Full security model maintained
 - ✅ **Performance optimized**: Database indexes for fast filtering
-- ✅ **6,022 papers verified**: All with DOI/PubMed/arXiv verification
+- ✅ **3,721 papers verified**: All with DOI/PubMed/arXiv verification (MES-focused)
 
 ## Common Tasks
 
@@ -763,7 +802,7 @@ npm run db:restore:enhanced
 2. Update API route in `app/api/predictions/route.ts`
 3. Add tests for new prediction logic
 
-### Troubleshooting Literature Loading Issues
+### Troubleshooting Research Loading Issues
 1. Check database connection: `npm run db:studio`
 2. Verify API endpoints: `curl http://localhost:3003/api/papers`
 3. Check error logs in browser console
