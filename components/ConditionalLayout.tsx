@@ -74,6 +74,13 @@ export default function ConditionalLayout({ children }: ConditionalLayoutProps) 
               </svg>
               Research Library
             </a>
+
+            <a href="/parameters" className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+              <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+              </svg>
+              Parameters Library
+            </a>
           </nav>
 
           {/* User section - simplified for public tools */}
