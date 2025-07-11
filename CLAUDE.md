@@ -1,93 +1,212 @@
-# CLAUDE.md - AI Assistant Context for MESSAi
+# CLAUDE.md - AI Assistant Context for MESSAI
 
-This file provides context and instructions for AI assistants (like Claude) working on the MESSAi project.
+> **Priority**: This file helps AI assistants work effectively on MESSAi. Read the Quick Start first, then reference other sections as needed.
+
 
 ## Project Overview
 
-MESSAi (Microbial Electrochemical Systems AI Platform) is a sophisticated web platform for microbial electrochemical systems research. It supports various bioelectrochemical technologies including:
-- Microbial Fuel Cells (MFCs) - electricity generation
-- Microbial Electrolysis Cells (MECs) - hydrogen production
-- Microbial Desalination Cells (MDCs) - water treatment
-- Microbial Electrosynthesis (MES) - chemical production
-- Other bioelectrochemical systems
+MESSAI (Microbial Electrochemical Systems AI Platform) is a sophisticated web platform for microbial electrochemical systems research, modeling, development, and operation.
 
-The platform combines:
-- Interactive 3D visualization using Three.js
-- AI-powered predictions for system optimization
-- Comprehensive experiment tracking
-- Scientific material database with 27 electrode options, differentiating between anode and cathode
-- Clean UI theme
-- Advanced research collection and analysis system with 3,721 verified research papers
-- AI-powered data extraction and categorization system
-- Advanced filtering and search capabilities
 
 ## Key Technical Details
 
 ### Architecture
-- **Framework**: Next.js 15 with App Router
+- **Framework**: Next.js 14 with App Router
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS with custom theme that will be implemented at a later date
 - **3D Graphics**: Three.js + React Three Fiber
 - **State Management**: Zustand
-- **Database**: Prisma ORM (SQLite dev, PostgreSQL prod)
+- **Database**: Prisma ORM (PostgreSQL ready)
 - **Testing**: Vitest + React Testing Library
 
-### Current Project Structure
+### Project Structure
 ```
 messai/
-├── app/                 # Next.js App Router pages and API routes
-│   ├── api/            # API endpoints for all features
-│   ├── research/       # Research papers browsing interface
-│   ├── tools/          # Specialized tools
-│   │   ├── bioreactor/        # Bioreactor design tool
-│   │   └── electroanalytical/ # Electroanalytical tool
-│   ├── dashboard/      # User dashboard
-│   ├── experiment/     # Experiment tracking
-│   └── [pages]/        # Other application pages
-├── components/          # React components
-│   ├── 3d/            # Three.js visualization components
-│   │   ├── bioreactor/        # Bioreactor 3D components
-│   │   └── electroanalytical/ # Electroanalytical visualizations
-│   ├── research/       # Research system components
-│   ├── fuel-cell/     # Fuel cell specific components
-│   ├── ui/            # Generic UI components
-│   └── unified/       # Unified system components
-├── lib/                # Business logic and utilities
-│   ├── ai-predictions.ts     # Prediction algorithms
-│   ├── database-utils.ts     # Database compatibility
-│   ├── auth/                 # Authentication utilities
-│   └── types/               # TypeScript type definitions
-├── scripts/            # Development and maintenance scripts
-│   ├── research/       # Research system management
-│   ├── backup/        # Database backup utilities
-│   ├── phase-manager.ts      # Phase tracking automation
-│   └── zen/           # Zen browser integration
-├── prisma/             # Database schemas and migrations
-│   ├── schema.prisma        # Main schema
-│   └── seed.ts             # Database seeding
-├── tests/              # Test suites
-│   ├── components/    # Component tests
-│   ├── api/          # API tests
-│   └── integration/  # Integration tests
-├── docs/              # Project documentation
-├── public/            # Static assets
-│   └── papers/       # PDF storage
-├── requirements/      # Feature requirements specs
-├── plan.md           # Master project plan
-├── phases/           # Phase-based development tracking
-├── planning-templates/ # Planning document templates
-└── PLANNING.md       # Planning system guide
+├── app/                          # Next.js 14 App Router pages and API routes
+│   ├── api/                      # API endpoints
+│   │   ├── auth/                 # Authentication endpoints (NextAuth.js)
+│   │   ├── predictions/          # AI prediction engine API
+│   │   ├── papers/               # Research database API
+│   │   ├── research/           # Enhanced research features
+│   │   ├── fuel-cell/            # Fuel cell specific APIs
+│   │   └── insights/             # Analytics and insights API
+│   ├── (pages)/                  # Page routes
+│   │   ├── page.tsx              # Main landing/catalog page
+│   │   ├── dashboard/            # User dashboard
+│   │   ├── research/           # Research browsing and search
+│   │   │   ├── [id]/             # Paper detail view
+│   │   │   ├── semantic-search/  # AI-powered search
+│   │   │   └── upload/           # Paper upload interface
+│   │   ├── models/               # 3D model showcase
+│   │   ├── systems/              # System configuration
+│   │   ├── platform/             # Platform overview
+│   │   ├── tools/                # Specialized tools
+│   │   │   ├── bioreactor/       # Bioreactor design tool
+│   │   │   └── electroanalytical/# Electroanalytical tool
+│   │   ├── experiment/           # Experiment management
+│   │   │   └── [id]/             # Individual experiment
+│   │   ├── insights/             # Analytics dashboard
+│   │   ├── onboarding/           # User onboarding flow
+│   │   ├── profile/              # User profile
+│   │   ├── settings/             # User settings
+│   │   │   ├── account/          # Account settings
+│   │   │   ├── preferences/      # User preferences
+│   │   │   ├── notifications/    # Notification settings
+│   │   │   └── security/         # Security settings
+│   │   ├── demo/                 # Demo-specific pages
+│   │   ├── marketing/            # Marketing landing
+│   │   └── research-dashboard/   # Research overview
+│   └── globals.css               # Global styles
+│
+├── components/                   # React components organized by type
+│   ├── 3d/                       # Three.js 3D visualization components
+│   │   ├── vanilla-*.tsx         # Pure Three.js implementations
+│   │   ├── safe-*.tsx            # Error-boundary wrapped versions
+│   │   └── worker-*.tsx          # Web Worker based renderers
+│   ├── fuel-cell/                # Fuel cell specific components
+│   ├── research/               # Research system components
+│   ├── lcars/                    # LCARS UI theme components
+│   ├── ui/                       # Generic UI components
+│   ├── unified/                  # Unified system components
+│   └── *.tsx                     # Core feature components
+│
+├── lib/                          # Business logic and utilities
+│   ├── ai-predictions.ts         # MESS prediction engine
+│   ├── fuel-cell-*.ts            # Fuel cell logic
+│   ├── auth/                     # Authentication utilities
+│   ├── research/               # Research data processing
+│   ├── types/                    # TypeScript type definitions
+│   ├── demo-mode.ts              # Demo mode configuration
+│   └── *.ts                      # Core utilities
+│
+├── scripts/                      # Development and maintenance scripts
+│   ├── research/               # Research system management
+│   │   ├── fetch-*.ts            # Paper fetching scripts
+│   │   ├── enhance-*.ts          # Enhancement pipelines
+│   │   ├── validate-*.ts         # Validation tools
+│   │   └── README.md             # Research system docs
+│   ├── backup/                   # Database backup utilities
+│   ├── zen/                      # Zen browser integration
+│   ├── test-*.js                 # Testing scripts
+│   └── setup-*.ts                # Setup utilities
+│
+├── prisma/                       # Database schemas and migrations
+│   ├── schema.prisma             # Main Prisma schema
+│   ├── schema.*.prisma           # Environment-specific schemas
+│   ├── seed.ts                   # Database seeding
+│   └── *.db                      # SQLite databases (dev only)
+│
+├── tests/                        # Test suites organized by type
+│   ├── components/               # Component tests
+│   ├── api/                      # API endpoint tests
+│   ├── integration/              # User workflow tests
+│   ├── research/               # Research system tests
+│   ├── performance/              # Performance benchmarks
+│   └── setup.ts                  # Test configuration
+│
+├── docs/                         # Project documentation
+│   ├── API.md                    # API documentation
+│   ├── ARCHITECTURE.md           # System architecture
+│   ├── AUTH_*.md                 # Authentication guides
+│   ├── DATABASE_SETUP.md         # Database configuration
+│   └── *.md                      # Feature-specific docs
+│
+├── public/                       # Static assets
+│   ├── papers/                   # PDF storage (research)
+│   └── test-*.html               # Standalone test pages
+│
+├── requirements/                 # Feature requirements specs
+│   └── YYYY-MM-DD-*/             # Timestamped requirements
+│       ├── metadata.json         # Requirement metadata
+│       └── *.md                  # Requirement documents
+│
+├── types/                        # Global TypeScript types
+│   └── mess-models.ts            # MESS system type definitions
+│
+├── backups/                      # Database and system backups
+│   └── *.json/.sql               # Timestamped backup files
+│
+├── hooks/                        # Custom React hooks
+│   └── useKeyboardShortcuts.ts   # Keyboard navigation
+│
+├── deployment/                   # Deployment configurations
+│   └── fuel-cell-config.md       # System-specific configs
+│
+├── reports/                      # Generated analysis reports
+│   └── pipeline-report-*.json    # Research pipeline reports
+│
+├── messai-ai/                    # AI/ML experimentation workspace
+│   └── (experimental features)   # Isolated development area
+│
+├── messai-research/              # Research branch mirror
+│   └── (duplicate structure)     # Branch-specific development
+│
+├── vendor/                       # Third-party dependencies
+│   └── (vendored libraries)      # Local copies of dependencies
+│
+├── packages/                     # Monorepo packages (if applicable)
+│   └── (shared packages)         # Shared code between projects
+│
+├── Configuration Files           # Project configuration
+│   ├── next.config.js            # Next.js configuration
+│   ├── tailwind.config.ts        # Tailwind CSS config
+│   ├── tsconfig.json             # TypeScript config
+│   ├── vitest.config.ts          # Test runner config
+│   ├── docker-compose.yml        # Docker configuration
+│   └── vercel.json               # Deployment config
+│
+└── Root Files                    # Project root files
+    ├── CLAUDE.md                 # This file - AI assistant context
+    ├── README.md                 # Project documentation
+    ├── README.research.md      # Research system guide
+    ├── README.monorepo.md        # Monorepo setup guide
+    ├── SECURITY.md               # Security guidelines
+    ├── DEPLOYMENT.md             # Deployment instructions
+    ├── CHANGELOG.md              # Version history
+    ├── LICENSE                   # Project license
+    ├── ZEN_SETUP.md              # Zen browser setup
+    ├── package.json              # Dependencies and scripts
+    ├── middleware.ts             # Next.js middleware
+    ├── mess-parameters-json.json # MESS parameter definitions
+    └── ultrathinkplan.txt        # Development planning
 ```
 
-### Future Monorepo Architecture
-For the planned monorepo architecture and domain-driven design structure, see `ARCHITECTURE_VISION.md`.
+#### Directory Purpose Guide
 
-### Layout System
-The application uses **ConditionalLayout** to provide:
-- **Landing page**: Full-width display for homepage (`/`)
-- **Application pages**: Sidebar navigation for all other routes
-- **Responsive design**: Mobile-friendly navigation
-- **Authentication context**: Shows/hides auth-specific features
+**Core Application (`app/`)**
+- Contains all Next.js pages and API routes
+- Follows App Router conventions
+- Each subdirectory represents a route or route group
+
+**Components (`components/`)**
+- Reusable React components
+- Organized by feature area or type
+- 3D components have multiple implementations for different use cases
+
+**Business Logic (`lib/`)**
+- Core application logic separated from UI
+- Prediction engines, data processing, utilities
+- Type definitions for TypeScript
+
+**Scripts (`scripts/`)**
+- Automation and maintenance tools
+- Research system management
+- Database operations and testing
+
+**Database (`prisma/`)**
+- Prisma ORM schemas and migrations
+- Environment-specific configurations
+- Seeding scripts for development
+
+**Testing (`tests/`)**
+- Comprehensive test coverage
+- Organized by test type
+- Includes performance benchmarks
+
+**Documentation (`docs/`)**
+- Technical documentation
+- Architecture decisions
+- Setup and deployment guides
 
 ## Development Guidelines
 
@@ -108,10 +227,10 @@ npm run format      # Format code with Prettier
 npm run db:studio   # Open Prisma Studio
 
 # Research system management
-npm run research:enhance-all     # Full enhancement pipeline
+npm run research:enhance-all    # Full enhancement pipeline
 npm run db:integrity             # Check database integrity
 npm run db:validate-links        # Validate external URLs
-npm run test:research            # Run research tests
+npm run test:research          # Run research tests
 ```
 
 ## Scientific Context
@@ -173,51 +292,62 @@ Always ensure the research database loads reliably by:
 
 4. **Testing Requirements**:
    - Test with empty database
-   - Test with large datasets (3,700+ papers)
+   - Test with large datasets (1000+ papers)
    - Test network failures and timeouts
    - Test authentication state changes
 
-## Tools Documentation
+### Data Extraction Standards
+When extracting data from papers for predictive models:
 
-### Bioreactor Design Tool (`/app/tools/bioreactor/`)
-- **Purpose**: Interactive 3D bioreactor design and simulation
-- **Features**: Material selection, flow simulation, performance prediction
-- **Components**: `components/3d/bioreactor/` directory
-- **Models**: BioreactorModel.tsx, ElectrodeGeometries.ts, FlowSimulation.ts
+1. **Structured Extraction**:
+   - System designs and configurations
+   - Microbial communities and performance metrics
+   - Electroanalytical methods and results
+   - Anode/cathode material performance data
+   - Maintenance and optimization protocols
+   - Operating conditions and their impacts
 
-### Electroanalytical Tool (`/app/tools/electroanalytical/`)
-- **Purpose**: Electrochemical analysis and visualization
-- **Features**: Voltammetry, impedance analysis, data interpretation
-- **Components**: `components/3d/electroanalytical/` directory
-- **Visualization**: ElectroanalyticalVisualization.tsx
+2. **Quality Assurance**:
+   - Verify units and experimental conditions
+   - Cross-reference multiple papers for validation
+   - Flag contradictory findings for review
+   - Track confidence scores for extracted values
 
-## Testing Approach
+3. **Model Integration**:
+   - New data must pass quality checks before integration
+   - Maintain traceability to source papers
+   - Version control for model parameter updates
+   - Test predictions against research benchmarks
 
-- **Unit Tests**: Individual functions and components
-- **Integration Tests**: User workflows
-- **API Tests**: Endpoint validation
-- **Performance Tests**: 3D rendering optimization
-- **Accessibility Tests**: WCAG compliance
-- **Research Tests**: Loading states, error handling, data integrity
+### Dynamic Knowledge Base
+The research system should continuously build upon predictive simulation models by:
 
-## Deployment
+1. **Comprehensive Data Extraction**:
+   - System designs: geometry, dimensions, flow patterns
+   - Microbial communities: species composition, growth conditions
+   - Electroanalytical methods: voltammetry, impedance, chronoamperometry
+   - Material performance: degradation rates, surface modifications
+   - Maintenance protocols: cleaning, regeneration, troubleshooting
+   - Operating parameters: startup procedures, optimization strategies
 
-- **Development**: Local with SQLite and ConditionalLayout
-- **Production**: Vercel + PostgreSQL
-- **Docker**: Full stack available with docker-compose
-- **CI/CD**: GitHub Actions configured
+2. **Knowledge Graph Construction**:
+   - Link papers to materials, organisms, and performance metrics
+   - Track experimental conditions and outcomes
+   - Build relationships between different system configurations
+   - Identify optimal parameter combinations from research
 
-## Known Considerations
-
-1. **3D Performance**: May need optimization for older devices
-2. **Scientific Accuracy**: All predictions based on published research
-3. **Browser Support**: WebGL required for 3D visualization
-4. **Mobile Experience**: Responsive but optimized for desktop
-5. **Research Loading**: Large datasets may require pagination optimization
-6. **API Rate Limits**: External APIs (CrossRef, PubMed) have rate limits
-7. **Data Integrity**: Research system must only contain verified research
+3. **Predictive Model Enhancement**:
+   - Use extracted data to validate and refine predictions
+   - Identify parameter ranges from real experiments
+   - Incorporate new materials and methods as discovered
+   - Generate data-driven recommendations for users
 
 ## Common Tasks
+
+## Requirements
+1. Always review the requirements we delinated together in 'requirements' directory when implementing
+2. Use ultrathink to ensure there are no conflicts and you are not breaking features
+
 
 ### Adding a New System Design
 1. Update `app/page.tsx` with design details
@@ -234,19 +364,149 @@ Always ensure the research database loads reliably by:
 2. Update API route in `app/api/predictions/route.ts`
 3. Add tests for new prediction logic
 
-## Important Files to Review
+### Troubleshooting Research Loading Issues
+1. Check database connection: `npm run db:studio`
+2. Verify API endpoints: `curl http://localhost:3003/api/papers`
+3. Check error logs in browser console
+4. Run integrity check: `npm run db:integrity`
+5. Clear cache and retry
+6. Verify authentication state if papers are missing
+7. Check pagination settings if results are limited
 
-- `app/page.tsx` - Main design catalog
-- `components/MFC3DModel.tsx` - Core 3D visualization
-- `components/ConditionalLayout.tsx` - Layout system
-- `lib/ai-predictions.ts` - Prediction logic
-- `prisma/schema.prisma` - Database structure
-- `app/research/` - Research browsing interface
-- `app/tools/bioreactor/` - Bioreactor design tool
-- `app/tools/electroanalytical/` - Electroanalytical tool
-- `app/api/papers/` - Paper API endpoints
-- `scripts/research/` - Research enhancement pipeline
-- `components/ErrorBoundary.tsx` - Error handling wrapper
+### Working with Demo Mode
+1. **Check current mode**: Look for `getDemoConfig()` usage
+2. **Add demo content**: Place in appropriate demo data files
+3. **Hide authenticated features**: Add `auth-only-nav` class
+4. **External links**: Use production URL from config
+
+### Security Considerations for New Features
+1. **Input Validation**: Always validate and sanitize user inputs
+2. **Output Encoding**: Use React's built-in XSS protection
+3. **Database Queries**: Use Prisma's parameterized queries only
+4. **File Operations**: Validate file types and sizes
+5. **API Routes**: Check authentication and demo mode
+
+## 🔒 Security & Demo Mode Guidelines
+
+### Demo Mode vs Production
+MESSAi operates in two distinct modes with different security requirements:
+
+#### **Demo Mode (Default for Cloned Repos)**
+- **Environment**: Set `DEMO_MODE="true"` and `NEXT_PUBLIC_DEMO_MODE="true"`
+- **Authentication**: Completely disabled - no local auth forms
+- **User Menu**: Shows external links to messai.io for account creation
+- **Navigation**: Hides authenticated-only features (My Dashboard, My Experiments)
+- **Data**: Uses safe, curated demo content only
+- **Purpose**: Showcase platform capabilities without security complexity
+
+#### **Production Mode (messai.io)**
+- **Environment**: Set `DEMO_MODE="false"` and configure full auth
+- **Authentication**: Full NextAuth.js with database sessions
+- **User Menu**: Local login/signup forms
+- **Navigation**: Shows personal features when authenticated
+- **Data**: Real user data with proper protection
+- **Purpose**: Full research platform with user accounts
+
+### Security Best Practices
+
+#### **Environment Variables**
+- NEVER commit `.env.local` or any file with real credentials
+- Use `.env.example` as template with dummy values
+- Production secrets must be set in deployment environment only
+- Always check for accidental credential commits before pushing
+
+#### **Authentication Security**
+- In demo mode: Remove ALL authentication endpoints
+- Use `getDemoConfig()` utility to check mode consistently
+- External links must use `target="_blank" rel="noopener noreferrer"`
+- Production URLs should come from environment variables
+
+#### **API Route Protection**
+```typescript
+// Always check demo mode in API routes
+import { getDemoConfig } from '@/lib/demo-mode'
+
+export async function POST(request: Request) {
+  const demoConfig = getDemoConfig()
+  
+  if (demoConfig.isDemo) {
+    return NextResponse.json({ error: 'Not available in demo mode' }, { status: 403 })
+  }
+  
+  // Production logic here
+}
+```
+
+#### **Demo Content Guidelines**
+- Use realistic but fictional data
+- No real researcher names without permission
+- No unpublished research data
+- Performance metrics should be clearly marked as examples
+- Email addresses should use example.com domain
+
+### Implementation Checklist
+When implementing features, verify:
+- [ ] Demo mode properly disables authentication
+- [ ] External links to production are clearly marked
+- [ ] No sensitive data in demo content
+- [ ] API routes check demo mode
+- [ ] Navigation respects authentication state
+- [ ] Environment variables are properly separated
+
+## Testing Approach
+
+- **Unit Tests**: Individual functions and components
+- **Integration Tests**: User workflows
+- **API Tests**: Endpoint validation
+- **Performance Tests**: 3D rendering optimization
+- **Accessibility Tests**: WCAG compliance
+- **Research Tests**: Loading states, error handling, data integrity
+- **Security Tests**: Demo mode verification, API protection, input validation
+
+### Security Testing
+- **Demo Mode Tests**: Verify auth is properly disabled
+- **API Protection Tests**: Ensure routes check authentication
+- **Input Validation Tests**: Test against malicious inputs
+- **Navigation Tests**: Verify auth-based visibility
+- **External Link Tests**: Check proper attributes
+
+## Deployment
+
+### Security Configuration
+
+#### **Development (Demo Mode)**
+- Local with SQLite
+- Demo mode enabled by default
+- No real authentication required
+- Safe for public repositories
+
+#### **Production (messai.io)**
+- Vercel + PostgreSQL
+- Full authentication enabled
+- Environment variables in Vercel dashboard
+- SSL/TLS required
+- Regular security audits
+
+### Pre-Deployment Checklist
+- [ ] Remove all console.log with sensitive data
+- [ ] Verify demo mode is default in .env.example
+- [ ] Check no credentials in codebase
+- [ ] Validate all API routes have proper protection
+- [ ] Test demo mode functionality
+- [ ] Verify external links work correctly
+
+- **Docker**: Full stack available with docker-compose
+- **CI/CD**: GitHub Actions configured
+
+## Known Considerations
+
+1. **3D Performance**: May need optimization for older devices
+2. **Scientific Accuracy**: All predictions based on published research
+3. **Browser Support**: WebGL required for 3D visualization
+4. **Mobile Experience**: Responsive but optimized for desktop
+5. **Research Loading**: Large datasets may require pagination optimization
+6. **API Rate Limits**: External APIs (CrossRef, PubMed) have rate limits
+7. **Data Integrity**: Research system must only contain verified research
 
 ## Future Enhancements
 
@@ -255,6 +515,26 @@ Always ensure the research database loads reliably by:
 - Machine learning model improvements
 - Mobile native app
 - Multi-language support
+
+## Important Files to Review
+
+- `app/page.tsx` - Main design catalog
+- `components/MESS3DModel.tsx` - Core 3D visualization
+- `lib/ai-predictions.ts` - Prediction logic
+- `prisma/schema.prisma` - Database structure
+- `app/research/` - Research browsing interface
+- `app/api/papers/` - Paper API endpoints
+- `scripts/research/` - Enhancement pipeline
+- `components/ErrorBoundary.tsx` - Error handling wrapper
+- `scripts/research/README.md` - Research system documentation
+
+### Security-Critical Files
+- `lib/demo-mode.ts` - Demo mode configuration
+- `middleware.ts` - Route protection logic
+- `components/ClientLayout.tsx` - Navigation visibility
+- `components/UserMenu.tsx` - Authentication UI
+- `.env.example` - Safe environment template
+- `app/api/*` - All API routes need protection
 
 ## Research References
 
@@ -273,32 +553,616 @@ For scientific questions or collaborations, the platform targets:
 - Wastewater treatment facilities
 - Sustainable architecture firms
 
-## Project Planning System
+## 🤖 AI Assistant Security Guidelines
 
-MESSAi uses a comprehensive planning system to manage development:
+When working on MESSAi, always:
 
-### Key Planning Documents
-- **plan.md**: Master project plan with 6-phase development timeline
-- **PLANNING.md**: Complete guide to using the planning system
-- **phases/**: Active tracking of current phase progress
+1. **Assume Demo Mode First**: Default to demo-safe implementations
+2. **Protect Credentials**: Never generate real API keys or passwords
+3. **Check Before Committing**: Verify no sensitive data in changes
+4. **Use Safe Examples**: Demo data should be clearly fictional
+5. **Validate Everything**: Input validation is mandatory
+6. **Document Security**: Note security implications in comments
+7. **Test Both Modes**: Ensure features work in demo and production
 
-### Phase Timeline
-1. **Phase 1: Foundation** (Weeks 1-4) ✅ COMPLETED
-2. **Phase 2: Research System** (Weeks 5-8) ✅ COMPLETED
-3. **Phase 3: Laboratory Tools** (Weeks 9-12) 🔄 IN PROGRESS
-4. **Phase 4: Integration** (Weeks 13-16) 📅 UPCOMING
-5. **Phase 5: Experiment Platform** (Weeks 17-20) 📅 FUTURE
-6. **Phase 6: Optimization** (Weeks 21-24) 📅 FUTURE
+### Red Flags to Avoid
+- Hardcoded credentials or API keys
+- Real email addresses in demo data
+- Bypassing authentication checks
+- Direct database queries without Prisma
+- Missing input validation
+- Unprotected API routes
+- Local storage of sensitive data
 
-### Phase Management Commands
-```bash
-npm run phase:status     # Check current phase status
-npm run phase:check      # Verify phase completion
-npm run phase:report     # Generate progress report
-npm run phase:transition # Transition to next phase
+    - MESS Parameters JSON Schema Compliance
+      - How to use the 500+ parameters from mess-parameters-json.json
+      - Parameter categories (18 major categories, 80 subcategories)
+      - Electrode configuration standards (separate anode/cathode parameters)
+      - Type safety and validation requirements
+
+    2. Conflict Prevention Between System Types
+
+    - MESS vs Fuel Cell Parameter Mapping
+      - How MFCConfig relates to fuel cell parameters
+      - Avoiding parameter collisions between systems
+      - Proper parameter inheritance and overrides
+      - Interface type definitions for different system types
+
+    3. Fuel Cell Systems Standards
+
+    - White Paper Compliance Requirements
+      - 700 bar hydrogen storage systems
+      - Multi-fidelity modeling approach (high/medium/low)
+      - Control system integration (thermal, pressure, humidity, flow)
+      - Gas composition management (N2, O2, H2, H2O)
+      - Performance metrics and safety thresholds
+
+    4. Implementation Guidelines
+
+    - Parameter Validation Rules
+      - Type checking for electrode configurations
+      - Range validation for operating conditions
+      - Cross-system parameter compatibility checks
+      - Error handling for invalid combinations
+
+    5. Code Examples and Best Practices
+
+    - Interface definitions for parameter structures
+    - How to extend existing configs without conflicts
+    - Validation functions for parameter checking
+    - Migration strategies for adding new parameters
+
+    Key Points to Address
+
+    1. Parameter Consistency: Ensure MESS and fuel cell parameters use consistent naming and units
+    2. Type Safety: Leverage TypeScript interfaces to prevent configuration errors  
+    3. Validation: Add runtime checks for parameter ranges and compatibility
+    4. Documentation: Clear examples of proper parameter usage
+    5. Conflict Resolution: Guidelines for handling overlapping parameter spaces
+    6. Future-Proofing: How to add new system types without breaking existing ones
+
+    Integration with Existing CLAUDE.md
+
+    - Will be added as a new major section after "AI Prediction Model"
+    - Cross-references existing sections on system configuration
+    - Builds on the requirements directory structure mentioned
+    - Aligns with scientific accuracy and testing approach guidelines
+
+## 📚 Research System Architecture & Knowledge Extraction
+
+### Overview
+MESSAi uses a sophisticated research collection system to build a queryable knowledge base from scientific papers. This system is developed in the messai-research branch and shared across the platform.
+
+### Branch Structure
+- **messai-research branch**: Primary development of research tools
+- **Main branch**: Integration point for stable research features
+
+### Database Architecture
+The research system uses a dual-database approach:
+
+1. **Research Database (SQLite - research.db)**
+   - Location: `/messai-research/prisma/research.db`
+   - Content: 6,022+ papers with enhanced extraction
+   - Schema: Optimized for knowledge extraction
+   - Purpose: Research and development
+
+2. **Production Database (PostgreSQL)**
+   - Location: Prisma Cloud
+   - Content: 345 verified papers
+   - Schema: Production-ready with user associations
+   - Purpose: Live platform features
+
+### Enhanced Research Paper Schema
+The ResearchPaper model includes comprehensive fields for scientific data extraction:
+
+```typescript
+// Core metadata fields
+{
+  title: string
+  authors: string[]         // JSON array
+  abstract: string
+  doi?: string             // Unique identifiers
+  pubmedId?: string
+  arxivId?: string
+  ieeeId?: string
+  
+  // Performance extraction
+  organismTypes?: string[]  // Microbial species
+  anodeMaterials?: string[] // Electrode materials
+  cathodeMaterials?: string[]
+  powerOutput?: number      // mW/m²
+  efficiency?: number       // percentage
+  systemType?: string       // MFC, MEC, MDC, MES
+  
+  // AI-enhanced fields
+  aiSummary?: string        // Concise summary
+  aiKeyFindings?: string[]  // Key findings
+  aiMethodology?: string    // Methods summary
+  aiImplications?: string   // Research implications
+  aiDataExtraction?: object // Structured data
+  aiInsights?: string       // AI analysis
+  aiConfidence?: number     // 0-1 confidence score
+  
+  // Comprehensive parameters
+  experimentalConditions?: object  // Temperature, pH, duration
+  reactorConfiguration?: object    // Volume, design, dimensions
+  electrodeSpecifications?: object // Surface area, modifications
+  biologicalParameters?: object    // Inoculum, biofilm age
+  performanceMetrics?: object      // Extended metrics
+  operationalParameters?: object   // HRT, OLR, resistance
+  electrochemicalData?: object     // Impedance, voltammetry
+  timeSeriesData?: object          // Performance over time
+  economicMetrics?: object         // Cost analysis
+  
+  // Enhanced categorization
+  microbialCommunity?: object      // Species composition
+  microbialClassification?: object // Taxonomic data
+  systemConfiguration?: object     // Architecture details
+  performanceBenchmarks?: object   // Comparative metrics
+}
 ```
 
-See `/plan.md` for the complete project roadmap and `/PLANNING.md` for detailed usage instructions.
+### Knowledge Extraction Pipeline
+```
+Collection → Validation → Extraction → Domain Mapping → Integration
+    ↓            ↓           ↓              ↓              ↓
+ 3 APIs      Quality     Patterns      5 Domains      Knowledge
+            Scoring                                     Graph
+```
+
+### Extraction Patterns (messai-research)
+```typescript
+const EXTRACTION_PATTERNS = {
+  powerDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mW\/m[²2]|W\/m[²2])/gi,
+  currentDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mA\/m[²2]|A\/m[²2])/gi,
+  voltage: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mV|V)\s+(?:at|@)/gi,
+  efficiency: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*%\s*(?:coulombic|CE|energy)/gi,
+  materials: /(?:anode|cathode).*?(?:carbon|graphite|steel|copper|platinum)/gi,
+  organisms: /(?:Geobacter|Shewanella|Pseudomonas|mixed culture|consortium)/gi
+}
+```
+
+### Core Scripts (messai-research branch)
+1. **real-paper-collection.ts**: Multi-source paper collection
+   - CrossRef API: DOI-verified papers
+   - PubMed API: Biomedical research
+   - arXiv API: Preprints
+   - 19 targeted search queries
+   - Expected yield: ~845 papers per run
+
+2. **paper-quality-validator.ts**: Quality scoring (0-100)
+   - Verification score (DOI/PubMed/arXiv presence)
+   - Completeness score (metadata fields)
+   - Relevance score (keyword matching)
+   - Data richness (extracted metrics)
+   - Recency factor (publication date)
+   - Impact assessment (citations if available)
+
+3. **enhanced-data-extractor.ts**: Pattern-based extraction
+   - Performance metrics extraction
+   - Material classification
+   - Organism identification
+   - System configuration detection
+   - Confidence scoring per extraction
+
+4. **clean-abstract-html.ts**: Text normalization
+   - JATS XML tag removal
+   - HTML entity decoding
+   - Unicode normalization
+
+### Research Database Statistics
+- **Total Papers**: 6,022 (messai-research branch)
+- **Verified Papers**: 426 with DOI/PubMed/arXiv IDs
+- **Papers with Abstracts**: 5,700+
+- **Performance Data**: 1,200+ papers
+- **Power Output Data**: 850+ papers
+- **Efficiency Data**: 750+ papers
+- **Unique Materials**: 127 identified
+- **Unique Organisms**: 99 identified
+
+### Real Papers Filtering
+The system distinguishes between verified research and AI-enhanced content:
+
+```typescript
+const realSources = [
+  'crossref_api',
+  'crossref_comprehensive',
+  'pubmed_api',
+  'pubmed_comprehensive',
+  'arxiv_api',
+  'local_pdf',
+  'web_search',
+  'comprehensive_search',
+  'advanced_electrode_biofacade_search',
+  'extensive_electrode_biofacade_collection'
+]
+
+// API filtering
+const isRealPaper = (paper) => {
+  return realSources.includes(paper.source) || 
+         paper.doi || 
+         paper.arxivId || 
+         paper.pubmedId
+}
+```
+
+### API Structure
+```typescript
+// Domain-based queries
+GET /api/research/domains/anodes?material=carbon_cloth
+GET /api/research/domains/cathodes?reaction=oxygen_reduction
+GET /api/research/domains/microbes?species=geobacter
+GET /api/research/domains/performance?metric=power_density
+
+// Cross-domain insights
+GET /api/research/insights/materials-performance
+GET /api/research/insights/microbe-compatibility
+GET /api/research/insights/optimal-conditions
+
+// Paper filtering
+GET /api/papers?realOnly=true&hasPerformanceData=true
+GET /api/papers?systemType=MFC&minPowerOutput=1000
+```
+
+### Scientific Domains Coverage
+1. **Anode Domain**: 2,100+ papers
+2. **Cathode Domain**: 1,800+ papers
+3. **Microbe Domain**: 1,500+ papers
+4. **Environment Domain**: 2,200+ papers
+5. **Performance Domain**: 1,200+ papers
+
+### Integration Points
+- Research data feeds ML predictions
+- Extracted parameters enhance experiment design
+- Knowledge graphs guide material selection
+- Performance benchmarks validate predictions
+- Cross-reference validation ensures data quality
+
+
+
+### Research System Workflow
+```
+messai-research (develop) → master (integrate) → all branches (use)
+       ↓                        ↓                      ↓
+  New features            Stable features      Shared knowledge
+```
+
+### Database Synchronization Strategy
+1. **Development**: Use messai-research SQLite for rapid iteration
+2. **Integration**: Migrate verified data to PostgreSQL
+3. **Production**: Serve from PostgreSQL with caching
+4. **Backup**: Regular exports of both databases
+
+### Shared Components
+- `/scripts/research/`: Collection and processing scripts
+- `/lib/research/`: Core extraction logic
+- `/app/api/research/`: API endpoints
+- `/app/research/`: UI components
+
+## 🧬 Scientific Domain Data Management
+
+### Domain-Driven Architecture
+All scientific data is organized into interconnected domains that map to real-world research areas:
+
+#### 1. Anode Domain (messai-research enhanced)
+```typescript
+interface AnodeDomain {
+  materials: {
+    carbonBased: ['carbon cloth', 'graphite felt', 'carbon paper']
+    grapheneFamily: ['GO', 'rGO', 'graphene aerogel']
+    nanotubes: ['SWCNT', 'MWCNT', 'CNT arrays']
+    mxenes: ['Ti₃C₂Tₓ', 'V₂CTₓ', 'Mo₂CTₓ']
+    polymers: ['PEDOT', 'polyaniline', 'polypyrrole']
+  }
+  biofilms: {
+    species: string[]
+    thickness: number // μm
+    coverage: number // %
+  }
+  modifications: {
+    chemical: string[]
+    physical: string[]
+    biological: string[]
+  }
+  performance: {
+    currentDensity: number // mA/cm²
+    chargeTransfer: number // Ω
+    biocompatibility: number // 0-10
+  }
+}
+```
+
+#### 2. Cathode Domain
+```typescript
+interface CathodeDomain {
+  materials: {
+    metals: ['platinum', 'copper', 'stainless steel', 'nickel']
+    carbonBased: ['activated carbon', 'carbon cloth', 'graphite']
+    composites: ['Pt/C', 'metal oxides', 'conductive polymers']
+  }
+  catalysts: {
+    precious: ['Pt', 'Pd', 'Ru', 'Ir']
+    nonPrecious: ['Fe-N-C', 'Co-N-C', 'MnO₂']
+    biological: ['laccase', 'bilirubin oxidase']
+  }
+  reactions: {
+    ORR: 'oxygen reduction'
+    HER: 'hydrogen evolution'
+    metalRecovery: string[]
+    CO2reduction: string[]
+  }
+  performance: {
+    overpotential: number // mV
+    exchangeCurrent: number // A/cm²
+    durability: number // hours
+  }
+}
+```
+
+#### 3. Performance Metrics Extracted
+- **From messai-research**: 1,200+ papers with performance data
+- **Power density**: 850+ data points (mW/m²)
+- **Current density**: 750+ data points (mA/cm²)
+- **Efficiency**: 650+ data points (%)
+- **Treatment**: 500+ data points (% removal)
+
+### Data Flow Between Branches
+```
+messai-research → Extraction → Domain Mapping → Shared Database → All Features
+     ↓                ↓             ↓                ↓              ↓
+  Papers         Patterns      Categories        PostgreSQL      UI/API
+```
+
+## 🔗 Cross-Branch Integration Strategy
+
+### Shared Resources Management
+Resources that must be synchronized across branches:
+
+1. **Research Database**
+   - Primary: messai-research (6,022 papers)
+   - Production: master (345 verified papers)
+   - ML Training: messai-ai-clean (uses both)
+
+2. **API Endpoints**
+   - `/api/papers/*`: Basic CRUD (all branches)
+   - `/api/research/*`: Advanced queries (messai-research)
+   - `/api/predictions/*`: ML integration (messai-ai-clean)
+
+3. **Extraction Patterns**
+   - Location: `/lib/research/patterns.ts`
+   - Shared via: Git subtree or symlinks
+   - Updates: Coordinated across branches
+
+### Integration Workflow
+1. **Feature Development**: messai-research branch
+2. **Testing**: Isolated branch testing
+3. **Integration**: Merge to master
+4. **Distribution**: Cherry-pick to other branches
+
+### Avoiding Conflicts
+- Research system owned by messai-research branch
+- Other branches consume via API
+- Database migrations coordinated
+- Shared types in `/types/research.ts`
+
+## 🛠️ Development Guidelines for Multi-Branch Work
+
+### Before Starting Research Work
+1. Check which branch owns the feature:
+   - Research collection: messai-research
+   - ML predictions: messai-ai-clean
+   - Production features: master
+   - Marketing: private/
+
+2. Verify database state:
+   ```bash
+   # Check messai-research database
+   cd messai-research && npx prisma studio
+   
+   # Check main database
+   cd .. && npx prisma studio
+   ```
+
+3. Coordinate with active agents:
+   - Check git status in all worktrees
+   - Review recent commits
+   - Communication via PR descriptions
+
+### Research System Best Practices
+1. **Data Collection**: Only in messai-research branch
+2. **API Development**: Test in branch, deploy to master
+3. **UI Changes**: Develop in master, backport if needed
+4. **Database Changes**: Always migrate both databases
+
+### Shared Configuration
+Create `.env.shared` for common settings:
+```env
+# Shared across all branches
+RESEARCH_API_BASE=/api/research
+PAPERS_PER_PAGE=10
+EXTRACTION_CONFIDENCE_MIN=0.7
+```
+
+## 🏗️ Repository Architecture & Multi-Domain Strategy
+
+### Domain Separation
+- **app.messai.io**: Open-source scientific platform
+- **messai.io**: Commercial marketing site + user platform
+
+### Complete Repository Structure
+```
+/messai/                        # Public GitHub repository
+├── app/                       # Next.js app directory (PUBLIC)
+│   ├── page.tsx              # Landing page
+│   ├── tools/                # Scientific tools
+│   │   ├── bioreactor/      # Bioreactor design
+│   │   └── electroanalytical/ # Analysis tools
+│   ├── research/             # Research papers browser
+│   ├── models/               # MESS models showcase
+│   └── api/                  # Public API routes
+├── components/                # React components (PUBLIC)
+│   ├── 3d/                  # Three.js visualizations
+│   ├── ui/                  # UI components
+│   └── charts/              # Data visualizations
+├── lib/                      # Core libraries (PUBLIC)
+│   ├── domains/             # Scientific domains
+│   ├── ai-predictions.ts    # Basic ML
+│   └── db.ts                # Database utilities
+├── prisma/                   # Database schema
+│   ├── schema.prisma        # Main schema
+│   └── migrations/          # Version history
+├── public/                   # Static assets
+├── scripts/                  # Utility scripts
+│   └── research/            # Paper processing
+├── tests/                    # Test suites
+├── docs/                     # Documentation
+├── shared/                   # Shared between domains
+│   ├── types/               # TypeScript definitions
+│   ├── utils/               # Common utilities
+│   └── constants/           # Shared constants
+├── private/                  # PRIVATE (not on GitHub)
+│   ├── app/                 # Marketing site
+│   ├── auth/                # Authentication
+│   ├── components/          # Private UI
+│   └── package.json         # Separate deps
+├── messai-ai/               # AI worktree (branch: messai-ai-clean)
+│   ├── lib/                 # Advanced ML
+│   ├── components/          # AI visualizations
+│   └── api/                 # ML endpoints
+└── messai-research/         # Research worktree (branch: messai-research)
+    ├── prisma/              # Research database
+    ├── scripts/             # Collection tools
+    └── lib/                 # Extraction logic
+```
+
+### Import Rules
+1. Public → Public: ✅ Allowed
+2. Public → Shared: ✅ Allowed
+3. Private → Public: ✅ Allowed
+4. Private → Shared: ✅ Allowed
+5. Public → Private: ❌ Forbidden
+6. Shared → Private: ❌ Forbidden
+
+## 🧪 Experiment Management System
+
+### Experiment Lifecycle
+MESSAi supports complete experiment tracking from design to analysis:
+
+#### Database Schema
+```typescript
+// Core experiment model (see prisma/schema.prisma)
+model Experiment {
+  id           String            @id @default(cuid())
+  name         String
+  userId       String            // Links to User (private platform only)
+  designId     String            // Links to MFCDesign
+  status       String            @default("SETUP") // SETUP, RUNNING, COMPLETED, FAILED
+  parameters   String            // JSON configuration
+  isPublic     Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  
+  // Relations
+  design       MFCDesign         @relation(...)
+  measurements Measurement[]      // Time-series data
+  papers       ExperimentPaper[] // Research references
+}
+
+model Measurement {
+  id           String     @id @default(cuid())
+  experimentId String
+  voltage      Float      // V
+  current      Float      // mA
+  power        Float      // mW
+  temperature  Float      // °C
+  ph           Float
+  substrate    Float?     // g/L
+  notes        String?
+  timestamp    DateTime   @default(now())
+}
+```
+
+#### Experiment States
+1. **SETUP**: Configuration and preparation
+   - Select system design
+   - Configure materials
+   - Set operating parameters
+   - Link reference papers
+
+2. **RUNNING**: Active data collection
+   - Real-time measurements
+   - Automated data logging
+   - Alert thresholds
+   - Performance tracking
+
+3. **COMPLETED**: Analysis phase
+   - Performance summaries
+   - Comparison with predictions
+   - Export capabilities
+   - Report generation
+
+4. **FAILED**: Troubleshooting
+   - Failure analysis
+   - Parameter logs
+   - Recommendations
+
+### Data Collection & Analysis
+
+#### Real-time Monitoring
+```typescript
+// Measurement collection API
+POST /api/experiments/{id}/measurements
+{
+  voltage: 0.65,
+  current: 12.5,
+  temperature: 30.2,
+  ph: 7.1,
+  timestamp: "2025-01-08T10:30:00Z"
+}
+```
+
+#### Analysis Features
+- Time-series visualization
+- Performance metrics calculation
+- Comparison with research benchmarks
+- AI-powered optimization suggestions
+- Export to CSV/JSON
+
+### Integration Points
+
+#### 1. Research System
+- Link papers to experiments
+- Compare with published results
+- Extract best practices
+- Validate performance
+
+#### 2. Prediction Engine
+- Pre-experiment predictions
+- Real-time comparison
+- Parameter optimization
+- Anomaly detection
+
+#### 3. 3D Visualization
+- System configuration display
+- Real-time data overlay
+- Performance heatmaps
+- Component highlighting
+
+### Experiment Sharing
+
+#### Public Platform (app.messai.io)
+- Demo experiments only
+- Educational datasets
+- No user accounts required
+- Read-only access
+
+#### Private Platform (messai.io)
+- Personal experiment library
+- Collaboration features
+- Private/public toggle
+- Team workspaces
+
+Remember: MESSAI is open source but we have the secure separation for our marketing site and freemium software platform. 
 
 ---
 
