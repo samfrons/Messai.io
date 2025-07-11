@@ -233,6 +233,43 @@ npm run db:validate-links        # Validate external URLs
 npm run test:research          # Run research tests
 ```
 
+### Database Setup for Local Development
+
+The project uses a dual-database approach:
+- **Local Development**: SQLite database (`prisma/dev.db`)
+- **Production**: PostgreSQL on Prisma Cloud
+
+#### Setting Up Local Development Database
+
+1. **Environment Configuration**:
+   - The project automatically uses SQLite in development mode
+   - `.env.development.local` overrides database settings for local development
+   - Ensure `NODE_ENV=development` when running locally
+
+2. **Generate Prisma Client for SQLite**:
+   ```bash
+   npm run db:generate:dev
+   ```
+
+3. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Database Management Commands**:
+   ```bash
+   npm run db:studio:dev      # Open Prisma Studio for SQLite
+   npm run db:migrate:dev     # Run migrations on SQLite
+   npm run db:seed:dev        # Seed SQLite database
+   npm run db:reset:dev       # Reset SQLite database
+   ```
+
+#### Important Notes:
+- The local SQLite database contains 345 research papers for development
+- Production deployment automatically uses PostgreSQL without any changes
+- Never commit `.env.development.local` as it contains local overrides
+- The SQLite schema (`prisma/schema.sqlite.prisma`) is used only for local development
+
 ## Scientific Context
 
 ### Bioelectrochemical System Designs (13 types)

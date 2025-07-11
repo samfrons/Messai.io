@@ -412,7 +412,7 @@ export default function DemoExperimentsPage() {
               </Link>
             )}
             <Link
-              href="/literature"
+              href="/research"
               className="px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-green-600 transition-colors font-medium"
             >
               Browse Research

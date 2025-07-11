@@ -240,7 +240,7 @@ export default function MESSModels() {
                 Design Custom System
               </Link>
               <Link
-                href="/literature"
+                href="/research"
                 className="px-8 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors font-semibold"
               >
                 Browse Research

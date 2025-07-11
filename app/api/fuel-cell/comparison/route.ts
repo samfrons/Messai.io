@@ -162,7 +162,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(response, { status: 200 })
 
   } catch (error) {
-    console.error('Fuel cell comparison API error:', error)
+    // Log error in development only
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Fuel cell comparison API error:', error)
+    }
 
     if (error instanceof z.ZodError) {
       return NextResponse.json({
@@ -217,7 +220,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(response)
 
   } catch (error) {
-    console.error('Comparison capabilities API error:', error)
+    // Log error in development only
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Comparison capabilities API error:', error)
+    }
     return NextResponse.json({
       success: false,
       error: 'Failed to retrieve capabilities'

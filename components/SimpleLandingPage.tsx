@@ -160,7 +160,7 @@ export default function SimpleLandingPage() {
                 </p>
                 
                 <Link 
-                  href="/literature"
+                  href="/research"
                   className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg hover:from-blue-600 hover:to-green-600 transition-all duration-300 font-medium text-center block"
                 >
                   Browse Library
@@ -243,7 +243,7 @@ export default function SimpleLandingPage() {
                 <h3 className="text-xl font-serif font-semibold text-white mb-4">Research Library</h3>
                 <p className="text-gray-300 font-serif mb-6">Curated scientific literature and data</p>
                 <Link
-                  href="/literature"
+                  href="/research"
                   className="w-full py-3 border-2 border-white/30 text-white rounded-lg hover:border-white/50 hover:bg-white/10 transition-all duration-300 font-semibold backdrop-blur-sm block text-center"
                 >
                   Browse Library

@@ -2,7 +2,7 @@
 
 import { PrismaClient } from '@prisma/client'
 import axios from 'axios'
-import { DataValidator, UnitConverter, DataQualityScorer, SUCCESSFUL_EXTRACTION_EXAMPLES, type ExtractedData } from '../../lib/literature/data-validation'
+import { DataValidator, UnitConverter, DataQualityScorer, SUCCESSFUL_EXTRACTION_EXAMPLES, type ExtractedData } from '../../lib/research/data-validation'
 
 const prisma = new PrismaClient()
 

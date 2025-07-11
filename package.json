@@ -109,6 +109,8 @@
     "@types/nodemailer": "^6.4.17",
     "@types/three": "^0.169.0",
     "@vercel/blob": "^1.1.1",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "autoprefixer": "^10.4.21",
     "axios": "^1.10.0",
     "bcryptjs": "^3.0.2",

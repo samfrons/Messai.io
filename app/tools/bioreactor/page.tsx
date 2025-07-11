@@ -94,7 +94,7 @@ export default function BioreactorTool() {
                 >
                   <option value="laboratory">Laboratory (mL - L)</option>
                   <option value="pilot">Pilot Scale (10L - 1000L)</option>
-                  <option value="industrial">Industrial (>1000L)</option>
+                  <option value="industrial">Industrial ({'>'}1000L)</option>
                 </select>
               </div>
 

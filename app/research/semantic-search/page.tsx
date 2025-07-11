@@ -86,10 +86,10 @@ export default function SemanticSearchPage() {
               <p className="text-gray-600">Intelligent research discovery using natural language</p>
             </div>
             <Link
-              href="/literature"
+              href="/research"
               className="ml-auto px-4 py-2 text-blue-600 hover:text-blue-700 font-medium"
             >
-              ← Back to Literature
+              ← Back to Research
             </Link>
           </div>
 
@@ -239,7 +239,7 @@ Examples:
                 <div className="p-6">
                   <h3 
                     className="text-xl font-semibold text-gray-900 mb-3 hover:text-blue-700 cursor-pointer"
-                    onClick={() => router.push(`/literature/${result.paper.id}`)}
+                    onClick={() => router.push(`/research/${result.paper.id}`)}
                   >
                     {result.paper.title}
                   </h3>

@@ -62,7 +62,7 @@ export default function UploadPaperPage() {
   })
 
   if (!session) {
-    router.push('/auth/login?callbackUrl=/literature/upload')
+    router.push('/auth/login?callbackUrl=/research/upload')
     return null
   }
 
@@ -93,7 +93,7 @@ export default function UploadPaperPage() {
       const data = await response.json()
 
       if (response.ok) {
-        router.push(`/literature/${data.id}`)
+        router.push(`/research/${data.id}`)
       } else {
         setError(data.error || 'Failed to create paper')
       }
@@ -152,7 +152,7 @@ export default function UploadPaperPage() {
         {/* Header */}
         <div className="mb-8">
           <Link
-            href="/literature"
+            href="/research"
             className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-4"
           >
             ← Back to Literature
@@ -453,7 +453,7 @@ export default function UploadPaperPage() {
           {/* Submit */}
           <div className="flex justify-end gap-4">
             <Link
-              href="/literature"
+              href="/research"
               className="px-6 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
             >
               Cancel

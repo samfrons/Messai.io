@@ -779,7 +779,7 @@ export default function Enhanced3DSystemPanel({ system, onClose }: Enhanced3DSys
           <div className="flex gap-2">
             {system.researchBacked && (
               <Link
-                href={`/literature?search=${encodeURIComponent(system.name)}`}
+                href={`/research?search=${encodeURIComponent(system.name)}`}
                 className="text-blue-600 dark:text-blue-400 hover:underline text-xs"
               >
                 📖 Research →

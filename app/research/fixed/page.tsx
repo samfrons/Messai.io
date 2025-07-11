@@ -141,7 +141,7 @@ export default function FixedLiteraturePage() {
               <div
                 key={paper.id}
                 className="bg-white p-6 rounded shadow hover:shadow-lg transition-shadow cursor-pointer"
-                onClick={() => router.push(`/literature/${paper.id}`)}
+                onClick={() => router.push(`/research/${paper.id}`)}
               >
                 <h3 className="text-xl font-semibold mb-2">{paper.title}</h3>
                 <p className="text-gray-600 mb-2">{formatAuthors(paper.authors)}</p>

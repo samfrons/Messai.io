@@ -154,6 +154,17 @@ export default function MFCConfigPanel({ config, selectedComponent, onConfigChan
     const electrodeConfig = config[type]
     const isHighlighted = selectedComponent === type
 
+    // Safety check for missing electrode configuration
+    if (!electrodeConfig) {
+      return (
+        <div className="bg-gray-100 rounded-lg border border-gray-200 p-4">
+          <h3 className="text-lg font-semibold text-gray-500 capitalize">
+            {type} Configuration (Not Initialized)
+          </h3>
+        </div>
+      )
+    }
+
     return (
       <div className={`bg-white rounded-lg border shadow-sm ${isHighlighted ? 'border-blue-500 ring-2 ring-blue-200' : 'border-gray-200'}`}>
         <button

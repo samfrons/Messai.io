@@ -93,7 +93,7 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
         const data = await response.json()
         setPaper(data)
       } else if (response.status === 404) {
-        router.push('/literature')
+        router.push('/research')
       }
     } catch (error) {
       console.error('Error fetching paper:', error)
@@ -112,7 +112,7 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
       })
       
       if (response.ok) {
-        router.push('/literature')
+        router.push('/research')
       }
     } catch (error) {
       console.error('Error deleting paper:', error)
@@ -297,7 +297,7 @@ export default function PaperDetailPage({ params }: { params: Promise<{ id: stri
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Back Button */}
         <Link
-          href="/literature"
+          href="/research"
           className="inline-flex items-center text-blue-600 hover:text-blue-800 mb-6"
         >
           ← Back to Literature

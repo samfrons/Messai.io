@@ -100,10 +100,10 @@ export default function PlatformPage() {
                 Browse Systems
               </Link>
               <Link 
-                href="/literature"
+                href="/research"
                 className="px-6 py-3 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors font-medium"
               >
-                Literature Database
+                Research Database
               </Link>
             </div>
           </div>

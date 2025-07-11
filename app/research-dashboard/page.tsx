@@ -79,7 +79,7 @@ export default function ResearchDashboardPage() {
             </div>
             <div className="flex gap-3">
               <Link
-                href="/literature"
+                href="/research"
                 className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
               >
                 Browse Literature
@@ -223,7 +223,7 @@ export default function ResearchDashboardPage() {
 
         {/* AI Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Link href="/literature/semantic-search" className="group">
+          <Link href="/research/semantic-search" className="group">
             <div className="bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl p-6 text-white hover:shadow-lg transition-shadow">
               <div className="text-3xl mb-3">🧠</div>
               <h3 className="text-lg font-semibold mb-2">Semantic Search</h3>
@@ -269,7 +269,7 @@ export default function ResearchDashboardPage() {
           <h2 className="text-xl font-semibold text-gray-900 mb-4">🚀 Quick Actions</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <Link
-              href="/literature?filter=high-performance"
+              href="/research?filter=high-performance"
               className="p-4 border border-gray-200 rounded-lg hover:border-blue-300 hover:bg-blue-50 text-center"
             >
               <div className="text-2xl mb-2">⚡</div>
@@ -278,7 +278,7 @@ export default function ResearchDashboardPage() {
             </Link>
             
             <Link
-              href="/literature?filter=recent"
+              href="/research?filter=recent"
               className="p-4 border border-gray-200 rounded-lg hover:border-green-300 hover:bg-green-50 text-center"
             >
               <div className="text-2xl mb-2">🆕</div>
@@ -287,7 +287,7 @@ export default function ResearchDashboardPage() {
             </Link>
             
             <Link
-              href="/literature?filter=mxene"
+              href="/research?filter=mxene"
               className="p-4 border border-gray-200 rounded-lg hover:border-purple-300 hover:bg-purple-50 text-center"
             >
               <div className="text-2xl mb-2">🧪</div>
@@ -296,7 +296,7 @@ export default function ResearchDashboardPage() {
             </Link>
             
             <Link
-              href="/literature?filter=ai-generated"
+              href="/research?filter=ai-generated"
               className="p-4 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 text-center"
             >
               <div className="text-2xl mb-2">🤖</div>

@@ -224,7 +224,7 @@ export default function InsightsPage() {
                     Create Account
                   </Link>
                   <Link
-                    href="/literature"
+                    href="/research"
                     className="px-4 py-2 bg-white text-blue-600 border border-blue-300 text-sm rounded-lg hover:bg-blue-50 transition-colors"
                   >
                     Browse Literature
@@ -353,7 +353,7 @@ export default function InsightsPage() {
                     {insight.papers.slice(0, 2).map((paper) => (
                       <Link
                         key={paper.id}
-                        href={`/literature/${paper.id}`}
+                        href={`/research/${paper.id}`}
                         className="block text-xs text-blue-600 hover:text-blue-800 hover:underline"
                       >
                         {paper.title.length > 60 
@@ -392,8 +392,8 @@ export default function InsightsPage() {
         <div className="mt-12 text-center text-sm text-gray-500">
           <p>Insights are generated using AI analysis of research patterns and performance data.</p>
           <p className="mt-1">
-            <Link href="/literature" className="text-blue-600 hover:underline">
-              ← Back to Literature Database
+            <Link href="/research" className="text-blue-600 hover:underline">
+              ← Back to Research Database
             </Link>
           </p>
         </div>

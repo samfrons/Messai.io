@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 
 import { PrismaClient } from '@prisma/client'
-import { DataValidator, UnitConverter, type ExtractedData } from '../../lib/literature/data-validation'
+import { DataValidator, UnitConverter, type ExtractedData } from '../../lib/research/data-validation'
 
 const prisma = new PrismaClient()
 
