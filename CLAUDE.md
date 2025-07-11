@@ -535,6 +535,105 @@ When implementing features, verify:
 - **Docker**: Full stack available with docker-compose
 - **CI/CD**: GitHub Actions configured
 
+## 🏗️ Branch Architecture & Worktree Management
+
+MESSAi uses a sophisticated multi-branch, multi-worktree architecture to support specialized deployments while maintaining a unified codebase.
+
+### Worktree Configuration
+
+**Active Worktrees:**
+
+```bash
+# Main Development Worktree
+/Users/samfrons/Desktop/Messai           
+├── Branch: master (primary)
+├── Purpose: Full platform integration
+├── Features: All systems, demo mode
+└── Status: Active development
+
+# Laboratory Tools Worktree  
+/Users/samfrons/Desktop/messai-lab       
+├── Branch: messai-lab
+├── Purpose: Laboratory-only deployments
+├── Features: Bioreactor, electroanalytical, materials
+└── Status: Phase 3 development
+
+# Research System Worktree
+/Users/samfrons/Desktop/messai-research  
+├── Branch: messai-research
+├── Purpose: Research/literature system
+├── Features: 3,721+ papers, AI insights
+└── Status: Enhancement ongoing
+
+# Marketing/Landing Worktree
+/Users/samfrons/Desktop/messai-home      
+├── Branch: messai-home
+├── Purpose: Bio-inspired marketing site
+├── Features: Public-facing landing page
+└── Status: Design phase
+```
+
+### Branch Structure
+
+**Production Branches:**
+- `master` - Main production branch with full platform
+- `messai-lab` - Laboratory tools only
+- `messai-research` - Research and literature system
+- `messai-home` - Marketing and landing page
+
+**Development Branches:**
+- `research-development` - Active research feature development
+- `lab-development` - Laboratory feature development
+- `messai-models` - Multi-scale MESS models
+- `messai-ai` - AI/ML experimentation
+
+### Deployment Scenarios
+
+1. **Laboratory-Only**: Branch `messai-lab` → lab.messai.io
+2. **Research-Only**: Branch `messai-research` → research.messai.io
+3. **Combined**: Branch `research-lab` (planned) → platform.messai.io
+4. **Full Platform**: Branch `master` → app.messai.io
+5. **Demo/Educational**: Branch `master` (demo mode) → demo.messai.io
+
+### Development Workflow
+
+```bash
+# Working with worktrees
+git worktree list -v              # List all worktrees
+git worktree add PATH BRANCH      # Add new worktree
+git worktree remove PATH          # Remove worktree
+
+# Feature development flow
+cd /Users/samfrons/Desktop/messai-lab
+git checkout lab-development
+git checkout -b feature/new-bioreactor-model
+# ... develop and test ...
+git checkout lab-development
+git merge feature/new-bioreactor-model
+```
+
+### Integration Strategy
+
+**Phase 3 (Current)**: Laboratory Tools - 40% complete
+**Phase 4 (Feb-Mar 2025)**: System Integration
+**Phase 5 (Mar-Apr 2025)**: Experiment Platform
+
+Integration flow: `messai-lab` → `master` ← `messai-research`
+
+### Important Notes
+
+- Each worktree should be self-contained
+- 15 stashes contain important uncommitted work
+- Never force push to production branches
+- Use descriptive branch names: `feature/`, `fix/`, `enhance/`
+
+For comprehensive branch architecture documentation, see:
+- `/docs/BRANCH_ARCHITECTURE.md` - Technical guide
+- `/docs/DEPLOYMENT_SCENARIOS.md` - Deployment options
+- `/docs/BRANCHES.md` - Branch management guide
+- `/docs/INTEGRATION_PLAN.md` - Phase-based integration strategy
+- `/docs/WORKTREES.md` - Worktree management guide
+
 ## Known Considerations
 
 1. **3D Performance**: May need optimization for older devices
