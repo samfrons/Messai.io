@@ -1338,6 +1338,1700 @@ const applicationWastewaterParameters: Parameter[] = [
   }
 ]
 
+// Environmental Parameters - Vibration & Mechanical
+const vibrationParameters: Parameter[] = [
+  {
+    id: 'env-vibration-frequency',
+    name: 'Vibration Frequency',
+    description: 'Vibration frequency applied to system',
+    unit: 'Hz',
+    range: { min: 0, max: 1000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'vibration',
+    tags: ['vibration', 'frequency', 'mechanical']
+  },
+  {
+    id: 'env-vibration-amplitude',
+    name: 'Vibration Amplitude',
+    description: 'Vibration amplitude',
+    unit: 'mm',
+    range: { min: 0, max: 10, typical: 0 },
+    category: 'environmental',
+    subcategory: 'vibration',
+    tags: ['vibration', 'amplitude', 'displacement']
+  },
+  {
+    id: 'env-vibration-acceleration',
+    name: 'Vibration Acceleration',
+    description: 'Vibration acceleration in g-force',
+    unit: 'g',
+    range: { min: 0, max: 10, typical: 0 },
+    category: 'environmental',
+    subcategory: 'vibration',
+    tags: ['vibration', 'acceleration', 'g-force']
+  },
+  {
+    id: 'env-mechanical-shock',
+    name: 'Mechanical Shock',
+    description: 'Mechanical shock magnitude',
+    unit: 'g',
+    range: { min: 0, max: 100, typical: 0 },
+    category: 'environmental',
+    subcategory: 'vibration',
+    tags: ['shock', 'mechanical', 'impact']
+  },
+  {
+    id: 'env-shear-stress',
+    name: 'Shear Stress',
+    description: 'Fluid shear stress on biofilm',
+    unit: 'Pa',
+    range: { min: 0, max: 1000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'vibration',
+    tags: ['shear', 'stress', 'fluid']
+  }
+]
+
+// Environmental Parameters - Sound & Ultrasound
+const soundParameters: Parameter[] = [
+  {
+    id: 'env-sound-frequency',
+    name: 'Sound Frequency',
+    description: 'Audible sound frequency',
+    unit: 'Hz',
+    range: { min: 20, max: 20000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'sound',
+    tags: ['sound', 'frequency', 'audio']
+  },
+  {
+    id: 'env-sound-intensity',
+    name: 'Sound Intensity',
+    description: 'Sound pressure level',
+    unit: 'dB',
+    range: { min: 0, max: 140, typical: 30 },
+    category: 'environmental',
+    subcategory: 'sound',
+    tags: ['sound', 'intensity', 'decibel']
+  },
+  {
+    id: 'env-ultrasound-frequency',
+    name: 'Ultrasound Frequency',
+    description: 'Ultrasonic frequency',
+    unit: 'kHz',
+    range: { min: 20, max: 1000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'sound',
+    tags: ['ultrasound', 'frequency', 'ultrasonic']
+  },
+  {
+    id: 'env-ultrasound-power',
+    name: 'Ultrasound Power',
+    description: 'Ultrasonic power density',
+    unit: 'W/cm²',
+    range: { min: 0, max: 10, typical: 0 },
+    category: 'environmental',
+    subcategory: 'sound',
+    tags: ['ultrasound', 'power', 'intensity']
+  },
+  {
+    id: 'env-ultrasound-duration',
+    name: 'Ultrasound Duration',
+    description: 'Ultrasound exposure time',
+    unit: 'min',
+    range: { min: 0, max: 60, typical: 0 },
+    category: 'environmental',
+    subcategory: 'sound',
+    tags: ['ultrasound', 'duration', 'exposure']
+  }
+]
+
+// Environmental Parameters - Electromagnetic Fields
+const electromagneticParameters: Parameter[] = [
+  {
+    id: 'env-magnetic-field-strength',
+    name: 'Magnetic Field Strength',
+    description: 'Magnetic field strength',
+    unit: 'mT',
+    range: { min: 0, max: 1000, typical: 0.05 },
+    category: 'environmental',
+    subcategory: 'electromagnetic',
+    tags: ['magnetic', 'field', 'strength']
+  },
+  {
+    id: 'env-magnetic-field-frequency',
+    name: 'Magnetic Field Frequency',
+    description: 'AC magnetic field frequency',
+    unit: 'Hz',
+    range: { min: 0, max: 1000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'electromagnetic',
+    tags: ['magnetic', 'frequency', 'AC']
+  },
+  {
+    id: 'env-electric-field-strength',
+    name: 'Electric Field Strength',
+    description: 'Electric field strength',
+    unit: 'V/m',
+    range: { min: 0, max: 10000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'electromagnetic',
+    tags: ['electric', 'field', 'strength']
+  },
+  {
+    id: 'env-em-frequency',
+    name: 'Electromagnetic Frequency',
+    description: 'EM radiation frequency',
+    unit: 'MHz',
+    range: { min: 0, max: 3000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'electromagnetic',
+    tags: ['electromagnetic', 'frequency', 'radiation']
+  },
+  {
+    id: 'env-em-power',
+    name: 'Electromagnetic Power',
+    description: 'EM power density',
+    unit: 'W/m²',
+    range: { min: 0, max: 1000, typical: 0 },
+    category: 'environmental',
+    subcategory: 'electromagnetic',
+    tags: ['electromagnetic', 'power', 'density']
+  }
+]
+
+// Biological Parameters - Microbial Kinetics
+const microbialKineticsParameters: Parameter[] = [
+  {
+    id: 'bio-max-growth-rate',
+    name: 'Maximum Growth Rate',
+    description: 'Maximum specific growth rate (μmax)',
+    unit: '1/h',
+    range: { min: 0.01, max: 2, typical: 0.2 },
+    category: 'biological',
+    subcategory: 'kinetics',
+    tags: ['growth', 'rate', 'μmax']
+  },
+  {
+    id: 'bio-half-saturation',
+    name: 'Half Saturation Constant',
+    description: 'Ks for substrate utilization',
+    unit: 'g/L',
+    range: { min: 0.001, max: 10, typical: 0.1 },
+    category: 'biological',
+    subcategory: 'kinetics',
+    tags: ['Ks', 'saturation', 'Monod']
+  },
+  {
+    id: 'bio-yield-coefficient',
+    name: 'Yield Coefficient',
+    description: 'Biomass yield from substrate',
+    unit: 'g/g',
+    range: { min: 0.1, max: 0.8, typical: 0.4 },
+    category: 'biological',
+    subcategory: 'kinetics',
+    tags: ['yield', 'biomass', 'Y']
+  },
+  {
+    id: 'bio-decay-rate',
+    name: 'Decay Rate',
+    description: 'Endogenous decay rate',
+    unit: '1/h',
+    range: { min: 0.001, max: 0.1, typical: 0.01 },
+    category: 'biological',
+    subcategory: 'kinetics',
+    tags: ['decay', 'death', 'kd']
+  },
+  {
+    id: 'bio-maintenance-coefficient',
+    name: 'Maintenance Coefficient',
+    description: 'Maintenance energy requirement',
+    unit: '1/h',
+    range: { min: 0.001, max: 0.1, typical: 0.02 },
+    category: 'biological',
+    subcategory: 'kinetics',
+    tags: ['maintenance', 'energy', 'm']
+  }
+]
+
+// Material Parameters - Advanced Carbon Materials
+const advancedCarbonParameters: Parameter[] = [
+  {
+    id: 'mat-graphene-oxide-reduction',
+    name: 'Graphene Oxide Reduction Degree',
+    description: 'Degree of GO reduction to rGO',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 80 },
+    category: 'material',
+    subcategory: 'advanced-carbon',
+    tags: ['graphene', 'reduction', 'rGO']
+  },
+  {
+    id: 'mat-graphene-sheet-size',
+    name: 'Graphene Sheet Size',
+    description: 'Lateral size of graphene sheets',
+    unit: 'μm',
+    range: { min: 0.1, max: 100, typical: 10 },
+    category: 'material',
+    subcategory: 'advanced-carbon',
+    tags: ['graphene', 'size', 'dimension']
+  },
+  {
+    id: 'mat-cnt-diameter',
+    name: 'Carbon Nanotube Diameter',
+    description: 'Diameter of carbon nanotubes',
+    unit: 'nm',
+    range: { min: 1, max: 100, typical: 20 },
+    category: 'material',
+    subcategory: 'advanced-carbon',
+    tags: ['CNT', 'diameter', 'nanotube']
+  },
+  {
+    id: 'mat-cnt-length',
+    name: 'Carbon Nanotube Length',
+    description: 'Length of carbon nanotubes',
+    unit: 'μm',
+    range: { min: 0.1, max: 1000, typical: 100 },
+    category: 'material',
+    subcategory: 'advanced-carbon',
+    tags: ['CNT', 'length', 'nanotube']
+  },
+  {
+    id: 'mat-carbon-activation',
+    name: 'Carbon Activation Level',
+    description: 'Degree of activation for activated carbon',
+    unit: 'm²/g',
+    range: { min: 500, max: 3000, typical: 1000 },
+    category: 'material',
+    subcategory: 'advanced-carbon',
+    tags: ['activated carbon', 'BET', 'surface area']
+  }
+]
+
+// Material Parameters - MXene Materials
+const mxeneParameters: Parameter[] = [
+  {
+    id: 'mat-mxene-conductivity',
+    name: 'MXene Electrical Conductivity',
+    description: 'Electrical conductivity of MXene',
+    unit: 'S/m',
+    range: { min: 1000, max: 20000, typical: 10000 },
+    category: 'material',
+    subcategory: 'mxene',
+    tags: ['MXene', 'conductivity', 'electrical']
+  },
+  {
+    id: 'mat-mxene-hydrophilicity',
+    name: 'MXene Hydrophilicity',
+    description: 'Water contact angle of MXene',
+    unit: '°',
+    range: { min: 0, max: 90, typical: 30 },
+    category: 'material',
+    subcategory: 'mxene',
+    tags: ['MXene', 'hydrophilic', 'contact angle']
+  },
+  {
+    id: 'mat-mxene-interlayer-spacing',
+    name: 'MXene Interlayer Spacing',
+    description: 'Distance between MXene layers',
+    unit: 'nm',
+    range: { min: 0.1, max: 5, typical: 1 },
+    category: 'material',
+    subcategory: 'mxene',
+    tags: ['MXene', 'interlayer', 'spacing']
+  },
+  {
+    id: 'mat-mxene-oxidation-resistance',
+    name: 'MXene Oxidation Resistance',
+    description: 'Resistance to oxidation in air',
+    unit: 'h',
+    range: { min: 1, max: 1000, typical: 24 },
+    category: 'material',
+    subcategory: 'mxene',
+    tags: ['MXene', 'oxidation', 'stability']
+  }
+]
+
+// Operational Parameters - Flow Control
+const flowControlParameters: Parameter[] = [
+  {
+    id: 'op-flow-control-mode',
+    name: 'Flow Control Mode',
+    description: 'Flow control strategy',
+    unit: '-',
+    category: 'operational',
+    subcategory: 'flow-control',
+    tags: ['flow', 'control', 'mode'],
+    notes: 'Manual, PID, cascade, or adaptive control'
+  },
+  {
+    id: 'op-flow-setpoint',
+    name: 'Flow Setpoint',
+    description: 'Target flow rate',
+    unit: 'L/h',
+    range: { min: 0, max: 1000, typical: 10 },
+    category: 'operational',
+    subcategory: 'flow-control',
+    tags: ['flow', 'setpoint', 'target']
+  },
+  {
+    id: 'op-pump-capacity',
+    name: 'Pump Capacity',
+    description: 'Maximum pump flow rate',
+    unit: 'L/h',
+    range: { min: 0, max: 10000, typical: 100 },
+    category: 'operational',
+    subcategory: 'flow-control',
+    tags: ['pump', 'capacity', 'maximum']
+  },
+  {
+    id: 'op-flow-accuracy',
+    name: 'Flow Control Accuracy',
+    description: 'Flow control precision',
+    unit: '%',
+    range: { min: 0.1, max: 10, typical: 2 },
+    category: 'operational',
+    subcategory: 'flow-control',
+    tags: ['flow', 'accuracy', 'precision']
+  }
+]
+
+// Operational Parameters - Mixing Control
+const mixingControlParameters: Parameter[] = [
+  {
+    id: 'op-mixer-speed',
+    name: 'Mixer Speed',
+    description: 'Mixer rotation speed',
+    unit: 'rpm',
+    range: { min: 0, max: 2000, typical: 200 },
+    category: 'operational',
+    subcategory: 'mixing',
+    tags: ['mixer', 'speed', 'rpm']
+  },
+  {
+    id: 'op-mixer-power',
+    name: 'Mixing Power',
+    description: 'Power input for mixing',
+    unit: 'W/m³',
+    range: { min: 0, max: 1000, typical: 50 },
+    category: 'operational',
+    subcategory: 'mixing',
+    tags: ['mixing', 'power', 'energy']
+  },
+  {
+    id: 'op-mixing-time',
+    name: 'Mixing Time',
+    description: 'Time for complete mixing',
+    unit: 's',
+    range: { min: 1, max: 3600, typical: 60 },
+    category: 'operational',
+    subcategory: 'mixing',
+    tags: ['mixing', 'time', 'homogenization']
+  },
+  {
+    id: 'op-reynolds-mixing',
+    name: 'Mixing Reynolds Number',
+    description: 'Reynolds number for mixing',
+    unit: '-',
+    range: { min: 1, max: 100000, typical: 10000 },
+    category: 'operational',
+    subcategory: 'mixing',
+    tags: ['Reynolds', 'mixing', 'turbulence']
+  }
+]
+
+// Performance Parameters - Efficiency Metrics
+const efficiencyMetricsParameters: Parameter[] = [
+  {
+    id: 'perf-voltage-efficiency',
+    name: 'Voltage Efficiency',
+    description: 'Ratio of operating to theoretical voltage',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 70 },
+    category: 'performance',
+    subcategory: 'efficiency',
+    tags: ['voltage', 'efficiency', 'electrical']
+  },
+  {
+    id: 'perf-faradaic-efficiency',
+    name: 'Faradaic Efficiency',
+    description: 'Efficiency of electron transfer',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 85 },
+    category: 'performance',
+    subcategory: 'efficiency',
+    tags: ['faradaic', 'efficiency', 'electrons']
+  },
+  {
+    id: 'perf-substrate-conversion',
+    name: 'Substrate Conversion',
+    description: 'Fraction of substrate converted',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 80 },
+    category: 'performance',
+    subcategory: 'efficiency',
+    tags: ['substrate', 'conversion', 'utilization']
+  },
+  {
+    id: 'perf-cod-to-current',
+    name: 'COD to Current Efficiency',
+    description: 'Conversion of COD to electrical current',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 50 },
+    category: 'performance',
+    subcategory: 'efficiency',
+    tags: ['COD', 'current', 'conversion']
+  }
+]
+
+// Reactor-Level Parameters - Flow Distribution
+const reactorFlowParameters: Parameter[] = [
+  {
+    id: 'reactor-manifold-type',
+    name: 'Manifold Type',
+    description: 'Flow distribution manifold design',
+    unit: '-',
+    category: 'reactor-level',
+    subcategory: 'flow-distribution',
+    tags: ['manifold', 'flow', 'distribution'],
+    notes: 'Z-type, U-type, parallel, or custom'
+  },
+  {
+    id: 'reactor-inlet-diameter',
+    name: 'Inlet Diameter',
+    description: 'Main inlet pipe diameter',
+    unit: 'mm',
+    range: { min: 5, max: 100, typical: 25 },
+    category: 'reactor-level',
+    subcategory: 'flow-distribution',
+    tags: ['inlet', 'diameter', 'pipe']
+  },
+  {
+    id: 'reactor-flow-uniformity',
+    name: 'Flow Uniformity',
+    description: 'Flow distribution uniformity',
+    unit: '%',
+    range: { min: 50, max: 100, typical: 90 },
+    category: 'reactor-level',
+    subcategory: 'flow-distribution',
+    tags: ['flow', 'uniformity', 'distribution']
+  },
+  {
+    id: 'reactor-pressure-drop',
+    name: 'Manifold Pressure Drop',
+    description: 'Pressure drop across manifold',
+    unit: 'kPa',
+    range: { min: 0, max: 100, typical: 5 },
+    category: 'reactor-level',
+    subcategory: 'flow-distribution',
+    tags: ['pressure drop', 'manifold', 'hydraulic']
+  }
+]
+
+// Economic Parameters - Revenue & Payback
+const economicRevenueParameters: Parameter[] = [
+  {
+    id: 'econ-electricity-price',
+    name: 'Electricity Price',
+    description: 'Price of electricity generated',
+    unit: '$/kWh',
+    range: { min: 0.01, max: 1, typical: 0.1 },
+    category: 'economic',
+    subcategory: 'revenue',
+    tags: ['electricity', 'price', 'revenue']
+  },
+  {
+    id: 'econ-treatment-credit',
+    name: 'Treatment Credit',
+    description: 'Revenue from wastewater treatment',
+    unit: '$/m³',
+    range: { min: 0, max: 10, typical: 0.5 },
+    category: 'economic',
+    subcategory: 'revenue',
+    tags: ['treatment', 'credit', 'revenue']
+  },
+  {
+    id: 'econ-payback-period',
+    name: 'Payback Period',
+    description: 'Time to recover investment',
+    unit: 'years',
+    range: { min: 0.5, max: 50, typical: 5 },
+    category: 'economic',
+    subcategory: 'revenue',
+    tags: ['payback', 'ROI', 'investment']
+  },
+  {
+    id: 'econ-net-present-value',
+    name: 'Net Present Value',
+    description: 'NPV of the project',
+    unit: '$',
+    range: { min: -1e6, max: 1e9, typical: 100000 },
+    category: 'economic',
+    subcategory: 'revenue',
+    tags: ['NPV', 'value', 'financial']
+  }
+]
+
+// Application-Specific Parameters - Hydrogen Production
+const applicationHydrogenParameters: Parameter[] = [
+  {
+    id: 'app-h2-production-rate',
+    name: 'Hydrogen Production Rate',
+    description: 'Rate of H2 generation',
+    unit: 'L/L/d',
+    range: { min: 0, max: 100, typical: 10 },
+    category: 'application-specific',
+    subcategory: 'hydrogen',
+    tags: ['hydrogen', 'production', 'rate']
+  },
+  {
+    id: 'app-h2-yield',
+    name: 'Hydrogen Yield',
+    description: 'H2 yield from substrate',
+    unit: 'mol H2/mol substrate',
+    range: { min: 0, max: 12, typical: 4 },
+    category: 'application-specific',
+    subcategory: 'hydrogen',
+    tags: ['hydrogen', 'yield', 'efficiency']
+  },
+  {
+    id: 'app-h2-purity',
+    name: 'Hydrogen Purity',
+    description: 'Purity of produced hydrogen',
+    unit: '%',
+    range: { min: 50, max: 100, typical: 95 },
+    category: 'application-specific',
+    subcategory: 'hydrogen',
+    tags: ['hydrogen', 'purity', 'quality']
+  },
+  {
+    id: 'app-h2-energy-efficiency',
+    name: 'H2 Energy Efficiency',
+    description: 'Energy efficiency of H2 production',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 60 },
+    category: 'application-specific',
+    subcategory: 'hydrogen',
+    tags: ['hydrogen', 'energy', 'efficiency']
+  }
+]
+
+// Application-Specific Parameters - Desalination
+const applicationDesalinationParameters: Parameter[] = [
+  {
+    id: 'app-desal-salt-removal',
+    name: 'Salt Removal Efficiency',
+    description: 'Removal of dissolved salts',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 90 },
+    category: 'application-specific',
+    subcategory: 'desalination',
+    tags: ['salt', 'removal', 'desalination']
+  },
+  {
+    id: 'app-desal-tds-reduction',
+    name: 'TDS Reduction',
+    description: 'Total dissolved solids reduction',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 85 },
+    category: 'application-specific',
+    subcategory: 'desalination',
+    tags: ['TDS', 'reduction', 'desalination']
+  },
+  {
+    id: 'app-desal-water-recovery',
+    name: 'Water Recovery Rate',
+    description: 'Fraction of water recovered',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 70 },
+    category: 'application-specific',
+    subcategory: 'desalination',
+    tags: ['water', 'recovery', 'desalination']
+  },
+  {
+    id: 'app-desal-energy-consumption',
+    name: 'Desalination Energy Use',
+    description: 'Energy per volume desalinated',
+    unit: 'kWh/m³',
+    range: { min: 0, max: 10, typical: 2 },
+    category: 'application-specific',
+    subcategory: 'desalination',
+    tags: ['energy', 'consumption', 'desalination']
+  }
+]
+
+// Emerging Technology Parameters - Bioprinting
+const emergingBioprintingParameters: Parameter[] = [
+  {
+    id: 'emerging-bioprint-resolution',
+    name: 'Bioprinting Resolution',
+    description: '3D printing resolution for bioelectrodes',
+    unit: 'μm',
+    range: { min: 10, max: 1000, typical: 100 },
+    category: 'emerging-tech',
+    subcategory: 'bioprinting',
+    tags: ['bioprinting', '3D printing', 'resolution']
+  },
+  {
+    id: 'emerging-bioprint-speed',
+    name: 'Bioprinting Speed',
+    description: 'Speed of bioprinting process',
+    unit: 'mm/s',
+    range: { min: 0.1, max: 100, typical: 10 },
+    category: 'emerging-tech',
+    subcategory: 'bioprinting',
+    tags: ['bioprinting', 'speed', 'fabrication']
+  },
+  {
+    id: 'emerging-bioprint-viability',
+    name: 'Cell Viability Post-Printing',
+    description: 'Cell survival after bioprinting',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 85 },
+    category: 'emerging-tech',
+    subcategory: 'bioprinting',
+    tags: ['bioprinting', 'viability', 'cells']
+  },
+  {
+    id: 'emerging-bioink-viscosity',
+    name: 'Bioink Viscosity',
+    description: 'Viscosity of bioink material',
+    unit: 'Pa·s',
+    range: { min: 0.001, max: 1000, typical: 1 },
+    category: 'emerging-tech',
+    subcategory: 'bioprinting',
+    tags: ['bioink', 'viscosity', 'material']
+  }
+]
+
+// Emerging Technology Parameters - Nanomaterials
+const emergingNanomaterialParameters: Parameter[] = [
+  {
+    id: 'emerging-nano-particle-size',
+    name: 'Nanoparticle Size',
+    description: 'Average nanoparticle diameter',
+    unit: 'nm',
+    range: { min: 1, max: 1000, typical: 50 },
+    category: 'emerging-tech',
+    subcategory: 'nanomaterials',
+    tags: ['nanoparticle', 'size', 'diameter']
+  },
+  {
+    id: 'emerging-nano-surface-area',
+    name: 'Nano Surface Area',
+    description: 'Specific surface area of nanomaterial',
+    unit: 'm²/g',
+    range: { min: 10, max: 3000, typical: 500 },
+    category: 'emerging-tech',
+    subcategory: 'nanomaterials',
+    tags: ['nanomaterial', 'surface area', 'specific']
+  },
+  {
+    id: 'emerging-nano-conductivity',
+    name: 'Nano Conductivity Enhancement',
+    description: 'Conductivity increase from nanomaterials',
+    unit: 'fold',
+    range: { min: 1, max: 1000, typical: 10 },
+    category: 'emerging-tech',
+    subcategory: 'nanomaterials',
+    tags: ['nanomaterial', 'conductivity', 'enhancement']
+  },
+  {
+    id: 'emerging-nano-stability',
+    name: 'Nanomaterial Stability',
+    description: 'Stability duration of nanomaterials',
+    unit: 'days',
+    range: { min: 1, max: 1000, typical: 90 },
+    category: 'emerging-tech',
+    subcategory: 'nanomaterials',
+    tags: ['nanomaterial', 'stability', 'duration']
+  }
+]
+
+// Integration Parameters - System Integration
+const integrationSystemParameters: Parameter[] = [
+  {
+    id: 'integration-grid-connection',
+    name: 'Grid Connection Voltage',
+    description: 'Voltage for grid integration',
+    unit: 'V',
+    range: { min: 110, max: 480, typical: 240 },
+    category: 'integration',
+    subcategory: 'system',
+    tags: ['grid', 'voltage', 'connection']
+  },
+  {
+    id: 'integration-power-quality',
+    name: 'Power Quality Factor',
+    description: 'Quality of power output',
+    unit: '-',
+    range: { min: 0, max: 1, typical: 0.95 },
+    category: 'integration',
+    subcategory: 'system',
+    tags: ['power', 'quality', 'factor']
+  },
+  {
+    id: 'integration-response-time',
+    name: 'System Response Time',
+    description: 'Response to load changes',
+    unit: 's',
+    range: { min: 0.001, max: 100, typical: 1 },
+    category: 'integration',
+    subcategory: 'system',
+    tags: ['response', 'time', 'dynamics']
+  },
+  {
+    id: 'integration-automation-level',
+    name: 'Automation Level',
+    description: 'Degree of system automation',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 70 },
+    category: 'integration',
+    subcategory: 'system',
+    tags: ['automation', 'control', 'level']
+  }
+]
+
+// Integration Parameters - Scale-up
+const integrationScaleupParameters: Parameter[] = [
+  {
+    id: 'integration-scale-factor',
+    name: 'Scale-up Factor',
+    description: 'Scale increase from lab to pilot',
+    unit: '-',
+    range: { min: 1, max: 10000, typical: 100 },
+    category: 'integration',
+    subcategory: 'scaleup',
+    tags: ['scale', 'factor', 'pilot']
+  },
+  {
+    id: 'integration-reynolds-scale',
+    name: 'Reynolds Number at Scale',
+    description: 'Reynolds number at larger scale',
+    unit: '-',
+    range: { min: 1, max: 1e6, typical: 10000 },
+    category: 'integration',
+    subcategory: 'scaleup',
+    tags: ['Reynolds', 'scale', 'flow']
+  },
+  {
+    id: 'integration-mixing-scale',
+    name: 'Mixing Time at Scale',
+    description: 'Mixing time at larger scale',
+    unit: 's',
+    range: { min: 1, max: 3600, typical: 300 },
+    category: 'integration',
+    subcategory: 'scaleup',
+    tags: ['mixing', 'time', 'scale']
+  },
+  {
+    id: 'integration-performance-retention',
+    name: 'Performance Retention',
+    description: 'Performance retained after scale-up',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 80 },
+    category: 'integration',
+    subcategory: 'scaleup',
+    tags: ['performance', 'retention', 'scale']
+  }
+]
+
+// Modeling Parameters - Simulation
+const modelingSimulationParameters: Parameter[] = [
+  {
+    id: 'model-time-step',
+    name: 'Simulation Time Step',
+    description: 'Time step for numerical simulation',
+    unit: 's',
+    range: { min: 0.001, max: 3600, typical: 1 },
+    category: 'modeling',
+    subcategory: 'simulation',
+    tags: ['simulation', 'time step', 'numerical']
+  },
+  {
+    id: 'model-convergence-criteria',
+    name: 'Convergence Criteria',
+    description: 'Convergence tolerance for simulation',
+    unit: '-',
+    range: { min: 1e-10, max: 0.01, typical: 1e-6 },
+    category: 'modeling',
+    subcategory: 'simulation',
+    tags: ['convergence', 'tolerance', 'simulation']
+  },
+  {
+    id: 'model-mesh-size',
+    name: 'Mesh Size',
+    description: 'Finite element mesh size',
+    unit: 'mm',
+    range: { min: 0.01, max: 100, typical: 1 },
+    category: 'modeling',
+    subcategory: 'simulation',
+    tags: ['mesh', 'size', 'FEM']
+  },
+  {
+    id: 'model-iterations',
+    name: 'Maximum Iterations',
+    description: 'Maximum solver iterations',
+    unit: '-',
+    range: { min: 10, max: 10000, typical: 1000 },
+    category: 'modeling',
+    subcategory: 'simulation',
+    tags: ['iterations', 'solver', 'maximum']
+  }
+]
+
+// Modeling Parameters - Kinetic Models
+const modelingKineticParameters: Parameter[] = [
+  {
+    id: 'model-monod-constant',
+    name: 'Monod Constant',
+    description: 'Half-saturation constant for Monod kinetics',
+    unit: 'g/L',
+    range: { min: 0.001, max: 10, typical: 0.1 },
+    category: 'modeling',
+    subcategory: 'kinetics',
+    tags: ['Monod', 'kinetics', 'Ks']
+  },
+  {
+    id: 'model-inhibition-constant',
+    name: 'Inhibition Constant',
+    description: 'Substrate inhibition constant',
+    unit: 'g/L',
+    range: { min: 0.1, max: 100, typical: 10 },
+    category: 'modeling',
+    subcategory: 'kinetics',
+    tags: ['inhibition', 'Ki', 'kinetics']
+  },
+  {
+    id: 'model-activation-energy',
+    name: 'Activation Energy',
+    description: 'Activation energy for reactions',
+    unit: 'kJ/mol',
+    range: { min: 10, max: 200, typical: 50 },
+    category: 'modeling',
+    subcategory: 'kinetics',
+    tags: ['activation', 'energy', 'Arrhenius']
+  },
+  {
+    id: 'model-reaction-order',
+    name: 'Reaction Order',
+    description: 'Order of reaction kinetics',
+    unit: '-',
+    range: { min: 0, max: 3, typical: 1 },
+    category: 'modeling',
+    subcategory: 'kinetics',
+    tags: ['reaction', 'order', 'kinetics']
+  }
+]
+
+// Experimental Parameters - Measurement
+const experimentalMeasurementParameters: Parameter[] = [
+  {
+    id: 'exp-measurement-frequency',
+    name: 'Measurement Frequency',
+    description: 'Frequency of data collection',
+    unit: 'Hz',
+    range: { min: 0.001, max: 1000, typical: 1 },
+    category: 'experimental',
+    subcategory: 'measurement',
+    tags: ['measurement', 'frequency', 'sampling']
+  },
+  {
+    id: 'exp-measurement-accuracy',
+    name: 'Measurement Accuracy',
+    description: 'Accuracy of measurements',
+    unit: '%',
+    range: { min: 0.01, max: 10, typical: 1 },
+    category: 'experimental',
+    subcategory: 'measurement',
+    tags: ['accuracy', 'measurement', 'precision']
+  },
+  {
+    id: 'exp-calibration-interval',
+    name: 'Calibration Interval',
+    description: 'Time between calibrations',
+    unit: 'days',
+    range: { min: 1, max: 365, typical: 30 },
+    category: 'experimental',
+    subcategory: 'measurement',
+    tags: ['calibration', 'interval', 'maintenance']
+  },
+  {
+    id: 'exp-data-points',
+    name: 'Data Points per Test',
+    description: 'Number of data points collected',
+    unit: '-',
+    range: { min: 10, max: 100000, typical: 1000 },
+    category: 'experimental',
+    subcategory: 'measurement',
+    tags: ['data', 'points', 'collection']
+  }
+]
+
+// Experimental Parameters - Test Conditions
+const experimentalTestParameters: Parameter[] = [
+  {
+    id: 'exp-test-duration',
+    name: 'Test Duration',
+    description: 'Duration of experimental test',
+    unit: 'h',
+    range: { min: 0.1, max: 10000, typical: 24 },
+    category: 'experimental',
+    subcategory: 'test-conditions',
+    tags: ['test', 'duration', 'time']
+  },
+  {
+    id: 'exp-replicate-count',
+    name: 'Number of Replicates',
+    description: 'Number of experimental replicates',
+    unit: '-',
+    range: { min: 1, max: 20, typical: 3 },
+    category: 'experimental',
+    subcategory: 'test-conditions',
+    tags: ['replicates', 'statistics', 'experiments']
+  },
+  {
+    id: 'exp-control-type',
+    name: 'Control Type',
+    description: 'Type of experimental control',
+    unit: '-',
+    category: 'experimental',
+    subcategory: 'test-conditions',
+    tags: ['control', 'experiment', 'type'],
+    notes: 'Positive, negative, or blank control'
+  },
+  {
+    id: 'exp-randomization',
+    name: 'Randomization Applied',
+    description: 'Whether randomization is used',
+    unit: '-',
+    category: 'experimental',
+    subcategory: 'test-conditions',
+    tags: ['randomization', 'design', 'statistics'],
+    notes: 'True or false'
+  }
+]
+
+// Cell-Level Parameters - Micro-Scale Test Cells
+const cellMicroScaleParameters: Parameter[] = [
+  {
+    id: 'cell-slide-length',
+    name: 'Microscope Slide Length',
+    description: 'Length of microscope slide test cell',
+    unit: 'mm',
+    range: { min: 50, max: 100, typical: 75 },
+    category: 'cell-level',
+    subcategory: 'micro-scale',
+    tags: ['microscope', 'slide', 'dimension']
+  },
+  {
+    id: 'cell-slide-width',
+    name: 'Microscope Slide Width',
+    description: 'Width of microscope slide test cell',
+    unit: 'mm',
+    range: { min: 20, max: 30, typical: 25 },
+    category: 'cell-level',
+    subcategory: 'micro-scale',
+    tags: ['microscope', 'slide', 'dimension']
+  },
+  {
+    id: 'cell-chamber-volume',
+    name: 'Micro Chamber Volume',
+    description: 'Working chamber volume in microfluidic cell',
+    unit: 'μL',
+    range: { min: 100, max: 1000, typical: 500 },
+    category: 'cell-level',
+    subcategory: 'micro-scale',
+    tags: ['chamber', 'volume', 'microfluidic']
+  },
+  {
+    id: 'cell-channel-width',
+    name: 'Microfluidic Channel Width',
+    description: 'Width of microfluidic channels',
+    unit: 'μm',
+    range: { min: 50, max: 1000, typical: 200 },
+    category: 'cell-level',
+    subcategory: 'micro-scale',
+    tags: ['microfluidic', 'channel', 'width']
+  },
+  {
+    id: 'cell-channel-depth',
+    name: 'Microfluidic Channel Depth',
+    description: 'Depth of microfluidic channels',
+    unit: 'μm',
+    range: { min: 20, max: 500, typical: 100 },
+    category: 'cell-level',
+    subcategory: 'micro-scale',
+    tags: ['microfluidic', 'channel', 'depth']
+  }
+]
+
+// Cell-Level Parameters - Cell Materials
+const cellMaterialsParameters: Parameter[] = [
+  {
+    id: 'cell-wall-thickness',
+    name: 'Cell Wall Thickness',
+    description: 'Thickness of cell housing walls',
+    unit: 'mm',
+    range: { min: 2, max: 20, typical: 5 },
+    category: 'cell-level',
+    subcategory: 'materials',
+    tags: ['wall', 'thickness', 'housing']
+  },
+  {
+    id: 'cell-material-transparency',
+    name: 'Material Transparency',
+    description: 'Optical transparency of cell material',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 90 },
+    category: 'cell-level',
+    subcategory: 'materials',
+    tags: ['transparency', 'optical', 'material']
+  },
+  {
+    id: 'cell-chemical-resistance',
+    name: 'Chemical Resistance Rating',
+    description: 'Resistance to chemical attack',
+    unit: '-',
+    range: { min: 1, max: 10, typical: 8 },
+    category: 'cell-level',
+    subcategory: 'materials',
+    tags: ['chemical', 'resistance', 'durability']
+  },
+  {
+    id: 'cell-temperature-limit',
+    name: 'Maximum Temperature',
+    description: 'Maximum operating temperature for cell material',
+    unit: '°C',
+    range: { min: 20, max: 200, typical: 80 },
+    category: 'cell-level',
+    subcategory: 'materials',
+    tags: ['temperature', 'limit', 'material']
+  },
+  {
+    id: 'cell-pressure-rating',
+    name: 'Pressure Rating',
+    description: 'Maximum pressure rating for cell',
+    unit: 'bar',
+    range: { min: 1, max: 50, typical: 5 },
+    category: 'cell-level',
+    subcategory: 'materials',
+    tags: ['pressure', 'rating', 'maximum']
+  }
+]
+
+// Performance Parameters - Power Output Metrics
+const performancePowerMetrics: Parameter[] = [
+  {
+    id: 'perf-power-density-normalized',
+    name: 'Normalized Power Density',
+    description: 'Power per kg of catalyst',
+    unit: 'W/kg',
+    range: { min: 0, max: 500, typical: 20 },
+    category: 'performance',
+    subcategory: 'power-metrics',
+    tags: ['power', 'normalized', 'catalyst']
+  },
+  {
+    id: 'perf-maximum-power-point',
+    name: 'Maximum Power Point',
+    description: 'Peak power output of system',
+    unit: 'W',
+    range: { min: 0, max: 10000, typical: 10 },
+    category: 'performance',
+    subcategory: 'power-metrics',
+    tags: ['power', 'maximum', 'peak']
+  },
+  {
+    id: 'perf-power-stability',
+    name: 'Power Stability',
+    description: 'Power degradation rate over time',
+    unit: '%/d',
+    range: { min: -10, max: 0, typical: -0.5 },
+    category: 'performance',
+    subcategory: 'power-metrics',
+    tags: ['power', 'stability', 'degradation']
+  },
+  {
+    id: 'perf-short-circuit-current',
+    name: 'Short Circuit Current',
+    description: 'Current at zero voltage',
+    unit: 'A',
+    range: { min: 0, max: 100, typical: 1 },
+    category: 'performance',
+    subcategory: 'power-metrics',
+    tags: ['current', 'short circuit', 'electrical']
+  },
+  {
+    id: 'perf-fill-factor',
+    name: 'Fill Factor',
+    description: 'Ratio of max power to product of Isc and Voc',
+    unit: '-',
+    range: { min: 0, max: 1, typical: 0.7 },
+    category: 'performance',
+    subcategory: 'power-metrics',
+    tags: ['fill factor', 'efficiency', 'electrical']
+  }
+]
+
+// Performance Parameters - Chemical Production
+const performanceChemicalParameters: Parameter[] = [
+  {
+    id: 'perf-ch4-production-rate',
+    name: 'Methane Production Rate',
+    description: 'Rate of methane generation',
+    unit: 'L/m²/d',
+    range: { min: 0, max: 50, typical: 5 },
+    category: 'performance',
+    subcategory: 'chemical-production',
+    tags: ['methane', 'production', 'biogas']
+  },
+  {
+    id: 'perf-ch4-content',
+    name: 'Methane Content in Biogas',
+    description: 'Percentage of CH4 in biogas',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 65 },
+    category: 'performance',
+    subcategory: 'chemical-production',
+    tags: ['methane', 'biogas', 'content']
+  },
+  {
+    id: 'perf-biogas-yield',
+    name: 'Biogas Yield',
+    description: 'Biogas produced per gram substrate',
+    unit: 'L/g',
+    range: { min: 0, max: 1, typical: 0.5 },
+    category: 'performance',
+    subcategory: 'chemical-production',
+    tags: ['biogas', 'yield', 'production']
+  },
+  {
+    id: 'perf-product-selectivity',
+    name: 'Product Selectivity',
+    description: 'Selectivity for target product',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 80 },
+    category: 'performance',
+    subcategory: 'chemical-production',
+    tags: ['selectivity', 'product', 'efficiency']
+  },
+  {
+    id: 'perf-production-rate',
+    name: 'Volumetric Production Rate',
+    description: 'Product generation rate per volume',
+    unit: 'g/L/h',
+    range: { min: 0, max: 10, typical: 1 },
+    category: 'performance',
+    subcategory: 'chemical-production',
+    tags: ['production', 'rate', 'volumetric']
+  }
+]
+
+// Performance Parameters - Treatment Efficiency
+const performanceTreatmentParameters: Parameter[] = [
+  {
+    id: 'perf-toc-removal',
+    name: 'Total Organic Carbon Removal',
+    description: 'TOC removal efficiency',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 75 },
+    category: 'performance',
+    subcategory: 'treatment',
+    tags: ['TOC', 'removal', 'organic']
+  },
+  {
+    id: 'perf-specific-removal-rate',
+    name: 'Specific Removal Rate',
+    description: 'Pollutant removal per electrode area',
+    unit: 'g/m²/d',
+    range: { min: 0, max: 100, typical: 20 },
+    category: 'performance',
+    subcategory: 'treatment',
+    tags: ['removal', 'rate', 'specific']
+  },
+  {
+    id: 'perf-ammonia-recovery',
+    name: 'Ammonia Recovery Efficiency',
+    description: 'Recovery of ammonia from wastewater',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 80 },
+    category: 'performance',
+    subcategory: 'treatment',
+    tags: ['ammonia', 'recovery', 'nutrient']
+  },
+  {
+    id: 'perf-metal-removal',
+    name: 'Heavy Metal Removal',
+    description: 'Removal efficiency for heavy metals',
+    unit: '%',
+    range: { min: 0, max: 100, typical: 90 },
+    category: 'performance',
+    subcategory: 'treatment',
+    tags: ['metal', 'removal', 'heavy metal']
+  },
+  {
+    id: 'perf-pathogen-reduction',
+    name: 'Pathogen Log Reduction',
+    description: 'Log reduction of pathogens',
+    unit: 'log',
+    range: { min: 0, max: 6, typical: 3 },
+    category: 'performance',
+    subcategory: 'treatment',
+    tags: ['pathogen', 'reduction', 'disinfection']
+  }
+]
+
+// Operational Parameters - Batch Operation
+const operationalBatchParameters: Parameter[] = [
+  {
+    id: 'op-batch-volume',
+    name: 'Batch Volume',
+    description: 'Volume of each batch',
+    unit: 'L',
+    range: { min: 0.1, max: 10000, typical: 10 },
+    category: 'operational',
+    subcategory: 'batch',
+    tags: ['batch', 'volume', 'operation']
+  },
+  {
+    id: 'op-batch-duration',
+    name: 'Batch Duration',
+    description: 'Time for one batch cycle',
+    unit: 'h',
+    range: { min: 1, max: 1000, typical: 24 },
+    category: 'operational',
+    subcategory: 'batch',
+    tags: ['batch', 'duration', 'cycle']
+  },
+  {
+    id: 'op-fill-time',
+    name: 'Fill Time',
+    description: 'Time to fill reactor',
+    unit: 'min',
+    range: { min: 1, max: 60, typical: 5 },
+    category: 'operational',
+    subcategory: 'batch',
+    tags: ['fill', 'time', 'batch']
+  },
+  {
+    id: 'op-drain-time',
+    name: 'Drain Time',
+    description: 'Time to empty reactor',
+    unit: 'min',
+    range: { min: 1, max: 60, typical: 5 },
+    category: 'operational',
+    subcategory: 'batch',
+    tags: ['drain', 'time', 'batch']
+  },
+  {
+    id: 'op-idle-time',
+    name: 'Idle Time',
+    description: 'Time between batches',
+    unit: 'min',
+    range: { min: 0, max: 1440, typical: 30 },
+    category: 'operational',
+    subcategory: 'batch',
+    tags: ['idle', 'time', 'batch']
+  }
+]
+
+// Operational Parameters - Continuous Operation
+const operationalContinuousParameters: Parameter[] = [
+  {
+    id: 'op-dilution-rate',
+    name: 'Dilution Rate',
+    description: 'Flow rate divided by reactor volume',
+    unit: '1/h',
+    range: { min: 0.001, max: 10, typical: 0.042 },
+    category: 'operational',
+    subcategory: 'continuous',
+    tags: ['dilution', 'rate', 'continuous']
+  },
+  {
+    id: 'op-recycle-ratio',
+    name: 'Recycle Ratio',
+    description: 'Ratio of recycle to feed flow',
+    unit: '-',
+    range: { min: 0, max: 10, typical: 0 },
+    category: 'operational',
+    subcategory: 'continuous',
+    tags: ['recycle', 'ratio', 'flow']
+  },
+  {
+    id: 'op-steady-state-criteria',
+    name: 'Steady State Criteria',
+    description: 'Allowable variation for steady state',
+    unit: '%',
+    range: { min: 0.1, max: 10, typical: 1 },
+    category: 'operational',
+    subcategory: 'continuous',
+    tags: ['steady state', 'criteria', 'stability']
+  },
+  {
+    id: 'op-startup-time',
+    name: 'Startup Time',
+    description: 'Time to reach steady state',
+    unit: 'h',
+    range: { min: 1, max: 1000, typical: 72 },
+    category: 'operational',
+    subcategory: 'continuous',
+    tags: ['startup', 'time', 'steady state']
+  }
+]
+
+// Operational Parameters - Startup & Shutdown
+const operationalStartupParameters: Parameter[] = [
+  {
+    id: 'op-inoculum-volume',
+    name: 'Inoculum Volume',
+    description: 'Percentage of reactor volume as inoculum',
+    unit: '%',
+    range: { min: 1, max: 50, typical: 10 },
+    category: 'operational',
+    subcategory: 'startup',
+    tags: ['inoculum', 'volume', 'startup']
+  },
+  {
+    id: 'op-acclimation-time',
+    name: 'Acclimation Time',
+    description: 'Time for microbial adaptation',
+    unit: 'd',
+    range: { min: 1, max: 60, typical: 7 },
+    category: 'operational',
+    subcategory: 'startup',
+    tags: ['acclimation', 'adaptation', 'startup']
+  },
+  {
+    id: 'op-initial-substrate',
+    name: 'Initial Substrate Concentration',
+    description: 'Starting substrate level',
+    unit: 'g/L',
+    range: { min: 0.1, max: 10, typical: 1 },
+    category: 'operational',
+    subcategory: 'startup',
+    tags: ['substrate', 'initial', 'startup']
+  },
+  {
+    id: 'op-flush-cycles',
+    name: 'System Flush Cycles',
+    description: 'Number of flush cycles during shutdown',
+    unit: '-',
+    range: { min: 0, max: 10, typical: 3 },
+    category: 'operational',
+    subcategory: 'startup',
+    tags: ['flush', 'shutdown', 'cycles']
+  },
+  {
+    id: 'op-storage-temperature',
+    name: 'Storage Temperature',
+    description: 'Temperature for system storage',
+    unit: '°C',
+    range: { min: -80, max: 40, typical: 4 },
+    category: 'operational',
+    subcategory: 'startup',
+    tags: ['storage', 'temperature', 'preservation']
+  }
+]
+
+// Material Parameters - Metal-Based Cathodes
+const metalCathodeParameters: Parameter[] = [
+  {
+    id: 'mat-pt-loading',
+    name: 'Platinum Loading',
+    description: 'Amount of Pt catalyst on cathode',
+    unit: 'mg/cm²',
+    range: { min: 0.01, max: 5, typical: 0.5 },
+    category: 'material',
+    subcategory: 'metal-cathode',
+    tags: ['platinum', 'loading', 'catalyst']
+  },
+  {
+    id: 'mat-pt-particle-size',
+    name: 'Pt Particle Size',
+    description: 'Size of platinum nanoparticles',
+    unit: 'nm',
+    range: { min: 1, max: 100, typical: 5 },
+    category: 'material',
+    subcategory: 'metal-cathode',
+    tags: ['platinum', 'particle', 'size']
+  },
+  {
+    id: 'mat-ni-foam-porosity',
+    name: 'Nickel Foam Porosity',
+    description: 'Porosity of nickel foam cathode',
+    unit: '%',
+    range: { min: 80, max: 98, typical: 95 },
+    category: 'material',
+    subcategory: 'metal-cathode',
+    tags: ['nickel', 'foam', 'porosity']
+  },
+  {
+    id: 'mat-cu-surface-enhancement',
+    name: 'Copper Surface Enhancement',
+    description: 'Surface area increase factor for Cu cathode',
+    unit: '-',
+    range: { min: 1, max: 1000, typical: 10 },
+    category: 'material',
+    subcategory: 'metal-cathode',
+    tags: ['copper', 'surface', 'enhancement']
+  }
+]
+
+// Material Parameters - Metal Oxide Cathodes
+const metalOxideParameters: Parameter[] = [
+  {
+    id: 'mat-mno2-crystal-structure',
+    name: 'MnO2 Crystal Structure',
+    description: 'Crystal phase of manganese dioxide',
+    unit: '-',
+    category: 'material',
+    subcategory: 'metal-oxide',
+    tags: ['MnO2', 'crystal', 'structure'],
+    notes: 'α, β, γ, δ, or amorphous'
+  },
+  {
+    id: 'mat-fe-oxide-phase',
+    name: 'Iron Oxide Phase',
+    description: 'Phase of iron oxide catalyst',
+    unit: '-',
+    category: 'material',
+    subcategory: 'metal-oxide',
+    tags: ['iron oxide', 'phase', 'catalyst'],
+    notes: 'Fe2O3, Fe3O4, or FeOOH'
+  },
+  {
+    id: 'mat-co-oxide-phase',
+    name: 'Cobalt Oxide Phase',
+    description: 'Phase of cobalt oxide catalyst',
+    unit: '-',
+    category: 'material',
+    subcategory: 'metal-oxide',
+    tags: ['cobalt oxide', 'phase', 'catalyst'],
+    notes: 'CoO, Co3O4, or CoOOH'
+  },
+  {
+    id: 'mat-oxide-particle-size',
+    name: 'Metal Oxide Particle Size',
+    description: 'Average particle size of metal oxide',
+    unit: 'nm',
+    range: { min: 5, max: 500, typical: 50 },
+    category: 'material',
+    subcategory: 'metal-oxide',
+    tags: ['metal oxide', 'particle', 'size']
+  }
+]
+
+// Material Parameters - Air Cathodes
+const airCathodeParameters: Parameter[] = [
+  {
+    id: 'mat-gdl-thickness',
+    name: 'Gas Diffusion Layer Thickness',
+    description: 'Thickness of GDL',
+    unit: 'μm',
+    range: { min: 100, max: 1000, typical: 300 },
+    category: 'material',
+    subcategory: 'air-cathode',
+    tags: ['GDL', 'thickness', 'gas diffusion']
+  },
+  {
+    id: 'mat-ptfe-loading',
+    name: 'PTFE Loading',
+    description: 'PTFE content in GDL',
+    unit: 'wt%',
+    range: { min: 0, max: 60, typical: 30 },
+    category: 'material',
+    subcategory: 'air-cathode',
+    tags: ['PTFE', 'loading', 'hydrophobic']
+  },
+  {
+    id: 'mat-catalyst-loading',
+    name: 'Catalyst Loading',
+    description: 'Total catalyst loading on air cathode',
+    unit: 'mg/cm²',
+    range: { min: 0.1, max: 10, typical: 2 },
+    category: 'material',
+    subcategory: 'air-cathode',
+    tags: ['catalyst', 'loading', 'air cathode']
+  },
+  {
+    id: 'mat-ionomer-content',
+    name: 'Ionomer Content',
+    description: 'Ionomer in catalyst layer',
+    unit: 'wt%',
+    range: { min: 0, max: 50, typical: 20 },
+    category: 'material',
+    subcategory: 'air-cathode',
+    tags: ['ionomer', 'content', 'catalyst layer']
+  }
+]
+
+// Material Parameters - Ion Exchange Membranes
+const ionExchangeParameters: Parameter[] = [
+  {
+    id: 'mat-pem-conductivity',
+    name: 'PEM Conductivity',
+    description: 'Proton conductivity of membrane',
+    unit: 'S/cm',
+    range: { min: 0.001, max: 0.2, typical: 0.08 },
+    category: 'material',
+    subcategory: 'ion-exchange',
+    tags: ['PEM', 'conductivity', 'proton']
+  },
+  {
+    id: 'mat-pem-water-uptake',
+    name: 'PEM Water Uptake',
+    description: 'Water absorption of membrane',
+    unit: '%',
+    range: { min: 5, max: 50, typical: 20 },
+    category: 'material',
+    subcategory: 'ion-exchange',
+    tags: ['PEM', 'water', 'absorption']
+  },
+  {
+    id: 'mat-aem-iec',
+    name: 'AEM Ion Exchange Capacity',
+    description: 'Ion exchange capacity of AEM',
+    unit: 'meq/g',
+    range: { min: 0.5, max: 3, typical: 1.5 },
+    category: 'material',
+    subcategory: 'ion-exchange',
+    tags: ['AEM', 'IEC', 'capacity']
+  },
+  {
+    id: 'mat-bpm-voltage',
+    name: 'Bipolar Membrane Voltage',
+    description: 'Water dissociation voltage for BPM',
+    unit: 'V',
+    range: { min: 0.8, max: 2, typical: 1.2 },
+    category: 'material',
+    subcategory: 'ion-exchange',
+    tags: ['BPM', 'voltage', 'water splitting']
+  }
+]
+
+// Material Parameters - Porous Separators
+const porousSeparatorParameters: Parameter[] = [
+  {
+    id: 'mat-separator-pore-size',
+    name: 'Separator Pore Size',
+    description: 'Average pore size of separator',
+    unit: 'μm',
+    range: { min: 0.01, max: 10, typical: 0.5 },
+    category: 'material',
+    subcategory: 'separator',
+    tags: ['pore size', 'separator', 'membrane']
+  },
+  {
+    id: 'mat-separator-porosity',
+    name: 'Separator Porosity',
+    description: 'Porosity of separator membrane',
+    unit: '%',
+    range: { min: 20, max: 80, typical: 40 },
+    category: 'material',
+    subcategory: 'separator',
+    tags: ['porosity', 'separator', 'membrane']
+  },
+  {
+    id: 'mat-separator-hydrophobicity',
+    name: 'Separator Hydrophobicity',
+    description: 'Water contact angle of separator',
+    unit: '°',
+    range: { min: 0, max: 180, typical: 120 },
+    category: 'material',
+    subcategory: 'separator',
+    tags: ['hydrophobicity', 'contact angle', 'separator']
+  },
+  {
+    id: 'mat-separator-thickness',
+    name: 'Separator Thickness',
+    description: 'Thickness of porous separator',
+    unit: 'μm',
+    range: { min: 10, max: 500, typical: 100 },
+    category: 'material',
+    subcategory: 'separator',
+    tags: ['thickness', 'separator', 'dimension']
+  }
+]
+
+// Biological Parameters - Specific Organisms
+const specificOrganismParameters: Parameter[] = [
+  {
+    id: 'bio-geobacter-temperature',
+    name: 'Geobacter Optimal Temperature',
+    description: 'Optimal growth temperature for Geobacter',
+    unit: '°C',
+    range: { min: 25, max: 35, typical: 30 },
+    category: 'biological',
+    subcategory: 'organisms',
+    tags: ['Geobacter', 'temperature', 'optimal']
+  },
+  {
+    id: 'bio-shewanella-ph',
+    name: 'Shewanella Optimal pH',
+    description: 'Optimal pH for Shewanella',
+    unit: '-',
+    range: { min: 6.5, max: 8, typical: 7.5 },
+    category: 'biological',
+    subcategory: 'organisms',
+    tags: ['Shewanella', 'pH', 'optimal']
+  },
+  {
+    id: 'bio-pseudomonas-phenazine',
+    name: 'Pseudomonas Phenazine Production',
+    description: 'Phenazine mediator production by Pseudomonas',
+    unit: '-',
+    category: 'biological',
+    subcategory: 'organisms',
+    tags: ['Pseudomonas', 'phenazine', 'mediator'],
+    notes: 'True or false'
+  },
+  {
+    id: 'bio-clostridium-h2-yield',
+    name: 'Clostridium H2 Yield',
+    description: 'Hydrogen yield from glucose by Clostridium',
+    unit: 'mol/mol',
+    range: { min: 1, max: 4, typical: 2.5 },
+    category: 'biological',
+    subcategory: 'organisms',
+    tags: ['Clostridium', 'hydrogen', 'yield']
+  }
+]
+
+// Biological Parameters - Substrate Utilization
+const substrateUtilizationParameters: Parameter[] = [
+  {
+    id: 'bio-substrate-uptake-rate',
+    name: 'Substrate Uptake Rate',
+    description: 'Specific substrate uptake rate',
+    unit: 'g/g/h',
+    range: { min: 0.01, max: 10, typical: 1 },
+    category: 'biological',
+    subcategory: 'substrate-utilization',
+    tags: ['substrate', 'uptake', 'rate']
+  },
+  {
+    id: 'bio-substrate-affinity',
+    name: 'Substrate Affinity',
+    description: 'Affinity for substrate',
+    unit: 'L/g/h',
+    range: { min: 0.1, max: 100, typical: 10 },
+    category: 'biological',
+    subcategory: 'substrate-utilization',
+    tags: ['substrate', 'affinity', 'kinetics']
+  },
+  {
+    id: 'bio-substrate-inhibition',
+    name: 'Substrate Inhibition Constant',
+    description: 'Substrate inhibition concentration',
+    unit: 'g/L',
+    range: { min: 0.1, max: 100, typical: 10 },
+    category: 'biological',
+    subcategory: 'substrate-utilization',
+    tags: ['substrate', 'inhibition', 'kinetics']
+  }
+]
+
 // Function to get all parameters
 export function getAllParameters(): Parameter[] {
   return [
@@ -1346,26 +3040,62 @@ export function getAllParameters(): Parameter[] {
     ...pressureParameters,
     ...gasCompositionParameters,
     ...lightParameters,
+    ...vibrationParameters,
+    ...soundParameters,
+    ...electromagneticParameters,
     ...cellGeometryParameters,
     ...cellElectrodeParameters,
     ...cellPerformanceParameters,
+    ...cellMicroScaleParameters,
+    ...cellMaterialsParameters,
     ...microorganismParameters,
+    ...microbialKineticsParameters,
+    ...specificOrganismParameters,
+    ...substrateUtilizationParameters,
     ...anodeMaterialParameters,
     ...cathodeMaterialParameters,
     ...membraneMaterialParameters,
+    ...advancedCarbonParameters,
+    ...mxeneParameters,
+    ...metalCathodeParameters,
+    ...metalOxideParameters,
+    ...airCathodeParameters,
+    ...ionExchangeParameters,
+    ...porousSeparatorParameters,
     ...biofilmParameters,
     ...substrateParameters,
     ...processControlParameters,
+    ...flowControlParameters,
+    ...mixingControlParameters,
+    ...operationalBatchParameters,
+    ...operationalContinuousParameters,
+    ...operationalStartupParameters,
     ...systemOutputParameters,
+    ...efficiencyMetricsParameters,
+    ...performancePowerMetrics,
+    ...performanceChemicalParameters,
+    ...performanceTreatmentParameters,
     ...reactorSystemParameters,
     ...reactorStackParameters,
+    ...reactorFlowParameters,
     ...economicCapitalParameters,
     ...economicOperatingParameters,
+    ...economicRevenueParameters,
     ...safetyLimitsParameters,
     ...safetyHazardsParameters,
     ...monitoringSensorParameters,
     ...monitoringDataParameters,
-    ...applicationWastewaterParameters
+    ...applicationWastewaterParameters,
+    ...applicationHydrogenParameters,
+    ...applicationDesalinationParameters,
+    ...emergingBioprintingParameters,
+    ...emergingNanomaterialParameters,
+    ...integrationSystemParameters,
+    ...integrationScaleupParameters,
+    ...modelingSimulationParameters,
+    ...modelingKineticParameters,
+    ...experimentalMeasurementParameters,
+    ...experimentalTestParameters
   ]
 }
 

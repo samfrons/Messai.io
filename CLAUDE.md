@@ -32,38 +32,6 @@ The platform combines:
 - **Database**: Prisma ORM (SQLite dev, PostgreSQL prod)
 - **Testing**: Vitest + React Testing Library
 
-## Branch Architecture
-
-MESSAi uses a comprehensive branch structure to support different deployment scenarios:
-
-### **Production Branches**
-- **master** - Stable production base (currently messai-ai branch)
-- **messai-lab** - Lab tools only (clean, focused) → *worktree at `/Users/samfrons/Desktop/messai-lab`*
-- **messai-research** - Research system only → *worktree at `/Users/samfrons/Desktop/messai-research`*
-- **research-lab** - Research + lab tools combined
-- **experiments** - Experiment management platform
-- **full-platform** - All features combined (research + lab + experiments)
-
-### **Development Branches**
-- **research-development** - Research feature development
-- **lab-development** - Lab feature development
-- **experiments-development** - Experiment feature development
-
-### **Combined Branches**
-- **lab-experiments** - Lab tools + experiments
-- **research-experiments** - Research + experiments
-
-### **Deployment Options**
-1. **Lab-only**: Use `messai-lab` for pure laboratory tools
-2. **Research-only**: Use `messai-research` for literature and AI features
-3. **Research + Lab**: Use `research-lab` for academic institutions
-4. **Full Platform**: Use `full-platform` for complete MESSAi experience
-
-### **Development Workflow**
-1. **Feature Development**: Work on dedicated `*-development` branches
-2. **Integration**: Merge development branches to production branches
-3. **Deployment**: Deploy production branches to appropriate environments
-
 ### Current Project Structure
 ```
 messai/
@@ -81,7 +49,6 @@ messai/
 │   │   ├── bioreactor/        # Bioreactor 3D components
 │   │   └── electroanalytical/ # Electroanalytical visualizations
 │   ├── research/       # Research system components
-│   ├── fuel-cell/     # Fuel cell specific components
 │   ├── ui/            # Generic UI components
 │   └── unified/       # Unified system components
 ├── lib/                # Business logic and utilities
@@ -92,6 +59,7 @@ messai/
 ├── scripts/            # Development and maintenance scripts
 │   ├── research/       # Research system management
 │   ├── backup/        # Database backup utilities
+│   ├── phase-manager.ts      # Phase tracking automation
 │   └── zen/           # Zen browser integration
 ├── prisma/             # Database schemas and migrations
 │   ├── schema.prisma        # Main schema
@@ -103,7 +71,11 @@ messai/
 ├── docs/              # Project documentation
 ├── public/            # Static assets
 │   └── papers/       # PDF storage
-└── requirements/      # Feature requirements specs
+├── requirements/      # Feature requirements specs
+├── plan.md           # Master project plan
+├── phases/           # Phase-based development tracking
+├── planning-templates/ # Planning document templates
+└── PLANNING.md       # Planning system guide
 ```
 
 ### Future Monorepo Architecture
@@ -135,7 +107,7 @@ npm run format      # Format code with Prettier
 npm run db:studio   # Open Prisma Studio
 
 # Research system management
-npm run literature:enhance-all   # Full enhancement pipeline
+npm run research:enhance-all     # Full enhancement pipeline
 npm run db:integrity             # Check database integrity
 npm run db:validate-links        # Validate external URLs
 npm run test:research            # Run research tests
@@ -170,17 +142,53 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 - Design-specific multipliers
 - Random variation for realism
 
-## Research System & Tools
+## Research System Guidelines
 
-### Data Integrity
-- **ONLY real, verified papers** with DOI/PubMed/arXiv verification
-- **3,721 papers** currently in database with AI-powered extraction
-- **NEVER fabricate** scientific data - extrapolation only when explicitly requested
+### CRITICAL: Data Integrity Rules
+- **NEVER generate fake research papers or fabricated scientific data**
+- **ONLY work with real, verified papers from legitimate sources**
+- **Extrapolation allowed ONLY when explicitly requested and clearly marked**
+- **ALL papers must have verification (DOI, PubMed ID, arXiv ID, or verified PDF)**
 
-### Detailed Documentation
-- **Research System**: See `docs/RESEARCH_SYSTEM.md` for full guidelines
-- **Tools Documentation**: See `docs/TOOLS_DOCUMENTATION.md` for bioreactor and electroanalytical tools
-- **Development Tasks**: See `docs/DEVELOPMENT_TASKS.md` for common operations
+### Research Database Loading Requirements
+Always ensure the research database loads reliably by:
+
+1. **Error Handling**:
+   - Wrap all research components with ErrorBoundary
+   - Implement retry logic for failed API calls
+   - Show meaningful error messages to users
+   - Log errors for debugging
+
+2. **Performance Optimization**:
+   - Implement pagination (default: 10-20 papers per page)
+   - Add loading states for all async operations
+   - Cache API responses where appropriate
+   - Use database indexes on frequently queried fields
+
+3. **Fallback Strategies**:
+   - If main API fails, show cached data if available
+   - Provide offline mode with limited functionality
+   - Gracefully degrade features rather than crash
+
+4. **Testing Requirements**:
+   - Test with empty database
+   - Test with large datasets (3,700+ papers)
+   - Test network failures and timeouts
+   - Test authentication state changes
+
+## Tools Documentation
+
+### Bioreactor Design Tool (`/app/tools/bioreactor/`)
+- **Purpose**: Interactive 3D bioreactor design and simulation
+- **Features**: Material selection, flow simulation, performance prediction
+- **Components**: `components/3d/bioreactor/` directory
+- **Models**: BioreactorModel.tsx, ElectrodeGeometries.ts, FlowSimulation.ts
+
+### Electroanalytical Tool (`/app/tools/electroanalytical/`)
+- **Purpose**: Electrochemical analysis and visualization
+- **Features**: Voltammetry, impedance analysis, data interpretation
+- **Components**: `components/3d/electroanalytical/` directory
+- **Visualization**: ElectroanalyticalVisualization.tsx
 
 ## Testing Approach
 
@@ -208,28 +216,22 @@ The prediction engine (`lib/ai-predictions.ts`) uses:
 6. **API Rate Limits**: External APIs (CrossRef, PubMed) have rate limits
 7. **Data Integrity**: Research system must only contain verified research
 
-## Database Configuration
+## Common Tasks
 
-### Development (Local SQLite)
-- **Database**: `file:/Users/samfrons/Desktop/Messai/prisma/dev.db`
-- **Schema**: `prisma/schema.sqlite.prisma` 
-- **Usage**: Automatic detection via `NODE_ENV=development`
+### Adding a New System Design
+1. Update `app/page.tsx` with design details
+2. Add 3D model in `components/DesignSpecific3DModels.tsx`
+3. Update prediction multipliers in `lib/ai-predictions.ts`
 
-### Production (PostgreSQL + Prisma Accelerate)
-- **Database**: PostgreSQL with connection pooling
-- **Schema**: `prisma/schema.prisma`
-- **Usage**: Requires `DATABASE_URL` and optional `PRISMA_ACCELERATE_URL`
+### Adding Electrode Materials
+1. Update `components/MESSConfigPanel.tsx`
+2. Add material properties and descriptions
+3. Update cost and efficiency ratings
 
-### Commands
-```bash
-# Local development
-npm run dev              # Uses SQLite automatically
-npm run db:studio:dev    # Prisma Studio for SQLite
-
-# Production
-npm run build            # Uses PostgreSQL
-npm run db:studio        # Prisma Studio for PostgreSQL
-```
+### Modifying Predictions
+1. Adjust factors in `lib/ai-predictions.ts`
+2. Update API route in `app/api/predictions/route.ts`
+3. Add tests for new prediction logic
 
 ## Important Files to Review
 
@@ -242,33 +244,37 @@ npm run db:studio        # Prisma Studio for PostgreSQL
 - `app/tools/bioreactor/` - Bioreactor design tool
 - `app/tools/electroanalytical/` - Electroanalytical tool
 - `app/api/papers/` - Paper API endpoints
-- `scripts/literature/` - Literature enhancement pipeline
+- `scripts/research/` - Research enhancement pipeline
 - `components/ErrorBoundary.tsx` - Error handling wrapper
 
-## Future Enhancements
 
-- Real-time sensor integration
-- Collaborative experiments
-- Machine learning model improvements
-- Mobile native app
-- Multi-language support
 
-## Research References
+## Project Planning System
 
-The platform is based on peer-reviewed research:
-- Logan, B.E. (2008). Microbial Fuel Cells (comprehensive MFC reference)
-- Rozendal, R.A. et al. (2008). Hydrogen Production with MECs
-- Wang, H. & Ren, Z.J. (2013). Bioelectrochemical Metal Recovery
-- Anasori, B. et al. (2017). 2D Metal Carbides (MXenes)
-- Rabaey, K. & Rozendal, R.A. (2010). Microbial Electrosynthesis
+MESSAi uses a comprehensive planning system to manage development:
 
-## Contact
+### Key Planning Documents
+- **plan.md**: Master project plan with 6-phase development timeline
+- **PLANNING.md**: Complete guide to using the planning system
+- **phases/**: Active tracking of current phase progress
 
-For scientific questions or collaborations, the platform targets:
-- University research labs
-- Environmental engineering departments
-- Wastewater treatment facilities
-- Sustainable architecture firms
+### Phase Timeline
+1. **Phase 1: Foundation** (Weeks 1-4) ✅ COMPLETED
+2. **Phase 2: Research System** (Weeks 5-8) ✅ COMPLETED
+3. **Phase 3: Laboratory Tools** (Weeks 9-12) 🔄 IN PROGRESS
+4. **Phase 4: Integration** (Weeks 13-16) 📅 UPCOMING
+5. **Phase 5: Experiment Platform** (Weeks 17-20) 📅 FUTURE
+6. **Phase 6: Optimization** (Weeks 21-24) 📅 FUTURE
+
+### Phase Management Commands
+```bash
+npm run phase:status     # Check current phase status
+npm run phase:check      # Verify phase completion
+npm run phase:report     # Generate progress report
+npm run phase:transition # Transition to next phase
+```
+
+See `/plan.md` for the complete project roadmap and `/PLANNING.md` for detailed usage instructions.
 
 ---
 
