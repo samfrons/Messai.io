@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # MESSAi Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: messai-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://messai_user:messai_password@db:5432/messai_db
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=${NEXTAUTH_SECRET}
+      - NODE_ENV=production
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - messai-network
+    volumes:
+      - uploaded-files:/app/uploads
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: messai-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=messai_user
+      - POSTGRES_PASSWORD=messai_password
+      - POSTGRES_DB=messai_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - messai-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U messai_user -d messai_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (optional, for session storage)
+  redis:
+    image: redis:7-alpine
+    container_name: messai-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - messai-network
+    command: redis-server --appendonly yes
+
+  # Nginx Reverse Proxy (optional, for production)
+  nginx:
+    image: nginx:alpine
+    container_name: messai-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - app
+    networks:
+      - messai-network
+
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  uploaded-files:
+    driver: local
+
+networks:
+  messai-network:
+    driver: bridge
