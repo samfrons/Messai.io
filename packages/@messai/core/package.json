@@ -1,0 +1,26 @@
+{
+  "name": "@messai/core",
+  "version": "0.1.0",
+  "description": "MESSAi core business logic and scientific calculations",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint . --max-warnings 0",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}

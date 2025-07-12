@@ -1,0 +1,314 @@
+{
+  "graph": {
+    "nodes": {
+      "@messai/core": {
+        "name": "@messai/core",
+        "type": "lib",
+        "data": {
+          "root": "packages/@messai/core",
+          "name": "@messai/core",
+          "tags": [
+            "npm:public",
+            "scope:shared",
+            "type:lib"
+          ],
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "dev"
+              ]
+            },
+            "description": "MESSAi core business logic and scientific calculations",
+            "js": {
+              "packageName": "@messai/core",
+              "packageMain": "dist/index.js",
+              "isInPackageManagerWorkspaces": true
+            }
+          },
+          "targets": {
+            "dev": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "dev"
+              },
+              "metadata": {
+                "scriptContent": "tsup --watch",
+                "runCommand": "pnpm run dev"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": false
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {},
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "nx:run-commands",
+              "outputs": [
+                "{projectRoot}/dist/**"
+              ],
+              "options": {
+                "command": "tsup",
+                "cwd": "packages/@messai/core"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "cache": true
+            },
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "options": {
+                "lintFilePatterns": [
+                  "packages/@messai/core/**/*.{ts,tsx,js,jsx}"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "test": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "jest",
+                "cwd": "packages/@messai/core"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "type-check": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "tsc --noEmit",
+                "cwd": "packages/@messai/core"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            }
+          },
+          "sourceRoot": "packages/@messai/core/src",
+          "projectType": "library",
+          "implicitDependencies": []
+        }
+      },
+      "@messai/ui": {
+        "name": "@messai/ui",
+        "type": "lib",
+        "data": {
+          "root": "packages/@messai/ui",
+          "name": "@messai/ui",
+          "tags": [
+            "npm:public",
+            "scope:shared",
+            "type:lib"
+          ],
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "dev"
+              ]
+            },
+            "description": "MESSAi shared UI components and design system",
+            "js": {
+              "packageName": "@messai/ui",
+              "packageMain": "dist/index.js",
+              "isInPackageManagerWorkspaces": true
+            }
+          },
+          "targets": {
+            "dev": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "dev"
+              },
+              "metadata": {
+                "scriptContent": "tsup --watch",
+                "runCommand": "pnpm run dev"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": false
+            },
+            "nx-release-publish": {
+              "executor": "@nx/js:release-publish",
+              "dependsOn": [
+                "^nx-release-publish"
+              ],
+              "options": {},
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "nx:run-commands",
+              "outputs": [
+                "{projectRoot}/dist/**"
+              ],
+              "options": {
+                "command": "tsup",
+                "cwd": "packages/@messai/ui"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "cache": true
+            },
+            "lint": {
+              "executor": "@nx/eslint:lint",
+              "outputs": [
+                "{options.outputFile}"
+              ],
+              "options": {
+                "lintFilePatterns": [
+                  "packages/@messai/ui/**/*.{ts,tsx,js,jsx}"
+                ]
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "test": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "jest",
+                "cwd": "packages/@messai/ui"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "type-check": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "tsc --noEmit",
+                "cwd": "packages/@messai/ui"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            }
+          },
+          "sourceRoot": "packages/@messai/ui/src",
+          "projectType": "library",
+          "implicitDependencies": []
+        }
+      },
+      "web": {
+        "name": "web",
+        "type": "app",
+        "data": {
+          "root": "apps/web",
+          "name": "web",
+          "tags": [
+            "npm:private"
+          ],
+          "metadata": {
+            "targetGroups": {
+              "NPM Scripts": [
+                "start"
+              ]
+            },
+            "js": {
+              "packageName": "@messai/web",
+              "isInPackageManagerWorkspaces": true
+            }
+          },
+          "targets": {
+            "start": {
+              "executor": "nx:run-script",
+              "options": {
+                "script": "start"
+              },
+              "metadata": {
+                "scriptContent": "next start",
+                "runCommand": "pnpm run start"
+              },
+              "configurations": {},
+              "parallelism": true
+            },
+            "build": {
+              "executor": "nx:run-commands",
+              "outputs": [
+                "{projectRoot}/.next"
+              ],
+              "options": {
+                "command": "next build",
+                "cwd": "apps/web"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "dependsOn": [
+                "^build"
+              ],
+              "cache": true
+            },
+            "dev": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "next dev",
+                "cwd": "apps/web"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": false
+            },
+            "lint": {
+              "executor": "nx:run-commands",
+              "outputs": [],
+              "options": {
+                "command": "next lint",
+                "cwd": "apps/web"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            },
+            "type-check": {
+              "executor": "nx:run-commands",
+              "options": {
+                "command": "tsc --noEmit",
+                "cwd": "apps/web"
+              },
+              "configurations": {},
+              "parallelism": true,
+              "cache": true
+            }
+          },
+          "sourceRoot": "apps/web",
+          "projectType": "application",
+          "implicitDependencies": []
+        }
+      }
+    },
+    "dependencies": {
+      "@messai/core": [],
+      "@messai/ui": [],
+      "web": [
+        {
+          "source": "web",
+          "target": "@messai/ui",
+          "type": "static"
+        },
+        {
+          "source": "web",
+          "target": "@messai/core",
+          "type": "static"
+        }
+      ]
+    }
+  }
+}
