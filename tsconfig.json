@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
     "strict": true,
-    "moduleResolution": "bundler",
     "allowImportingTsExtensions": false,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -16,17 +11,8 @@
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@messai/core": ["packages/@messai/core/src/index.ts"],
-      "@messai/core/*": ["packages/@messai/core/src/*"],
-      "@messai/ui": ["packages/@messai/ui/src/index.ts"],
-      "@messai/ui/*": ["packages/@messai/ui/src/*"]
-    }
+    "declarationMap": true
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "**/dist", "**/build", "**/.next", ".nx/cache"]
+  "extends": "./tsconfig.base.json"
 }

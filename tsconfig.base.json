@@ -1,0 +1,31 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": true,
+    "moduleResolution": "bundler",
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@messai/core": ["packages/@messai/core/src/index.ts"],
+      "@messai/core/*": ["packages/@messai/core/src/*"],
+      "@messai/ui": ["packages/@messai/ui/src/index.ts"],
+      "@messai/ui/*": ["packages/@messai/ui/src/*"],
+      "api": ["libs/data-access/api/src/index.ts"],
+      "core": ["libs/domain/core/src/index.ts"],
+      "database": ["libs/data-access/database/src/index.ts"],
+      "feature-experiments": ["libs/feature/experiments/src/index.ts"],
+      "feature-laboratory": ["libs/feature/laboratory/src/index.ts"],
+      "feature-research": ["libs/feature/research/src/index.ts"],
+      "laboratory": ["libs/domain/laboratory/src/index.ts"],
+      "research": ["libs/domain/research/src/index.ts"],
+      "ui-3d": ["libs/ui/3d/src/index.ts"],
+      "ui-charts": ["libs/ui/charts/src/index.ts"],
+      "ui-components": ["libs/ui/components/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "**/dist", "**/build", "**/.next", ".nx/cache"]
+}

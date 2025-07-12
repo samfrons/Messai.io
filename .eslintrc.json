@@ -13,7 +13,23 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "*",
+                "sourceTag": "scope:domain",
+                "onlyDependOnLibsWithTags": ["scope:domain"]
+              },
+              {
+                "sourceTag": "scope:data",
+                "onlyDependOnLibsWithTags": ["scope:domain", "scope:data"]
+              },
+              {
+                "sourceTag": "scope:feature",
+                "onlyDependOnLibsWithTags": ["scope:domain", "scope:data", "scope:ui", "scope:feature"]
+              },
+              {
+                "sourceTag": "scope:ui",
+                "onlyDependOnLibsWithTags": ["scope:ui"]
+              },
+              {
+                "sourceTag": "scope:app",
                 "onlyDependOnLibsWithTags": ["*"]
               }
             ]

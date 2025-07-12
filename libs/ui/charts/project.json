@@ -1,0 +1,9 @@
+{
+  "name": "ui-charts",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/ui/charts/src",
+  "projectType": "library",
+  "tags": ["scope:ui", "type:ui"],
+  "// targets": "to see all targets run: nx show project ui-charts --web",
+  "targets": {}
+}

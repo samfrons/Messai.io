@@ -1,0 +1,43 @@
+{
+  "name": "database",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/data-access/database/src",
+  "projectType": "library",
+  "tags": ["scope:data", "type:util"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/data-access/database",
+        "main": "libs/data-access/database/src/index.ts",
+        "tsConfig": "libs/data-access/database/tsconfig.lib.json",
+        "assets": ["libs/data-access/database/*.md"]
+      }
+    },
+    "db:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma generate --schema=libs/data-access/database/prisma/schema.prisma"
+      }
+    },
+    "db:push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma db push --schema=libs/data-access/database/prisma/schema.prisma"
+      }
+    },
+    "db:migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma migrate dev --schema=libs/data-access/database/prisma/schema.prisma"
+      }
+    },
+    "db:studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma studio --schema=libs/data-access/database/prisma/schema.prisma"
+      }
+    }
+  }
+}
