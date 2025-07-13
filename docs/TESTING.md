@@ -1,562 +1,364 @@
 # MESSAi Testing Guide
 
-Comprehensive guide for testing the MESSAi platform, covering unit tests, integration tests, and end-to-end testing strategies.
+This guide covers the comprehensive testing strategy for the MESSAi platform, including unit tests, integration tests, and end-to-end testing.
 
-## Table of Contents
-- [Testing Philosophy](#testing-philosophy)
-- [Test Structure](#test-structure)
-- [Running Tests](#running-tests)
-- [Writing Tests](#writing-tests)
-- [Testing Patterns](#testing-patterns)
-- [Mocking Strategies](#mocking-strategies)
-- [Performance Testing](#performance-testing)
-- [Accessibility Testing](#accessibility-testing)
-- [CI/CD Integration](#cicd-integration)
+## 🧪 Testing Strategy
 
-## Testing Philosophy
+### Testing Pyramid
+```
+        E2E Tests (Few)
+     ━━━━━━━━━━━━━━━━━━━
+    Integration Tests (Some)  
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Unit Tests (Many)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
 
-We follow these principles:
-1. **Test user behavior, not implementation details**
-2. **Write tests that give confidence the application works**
-3. **Maintain a healthy test pyramid** (many unit tests, fewer integration, fewest E2E)
-4. **Keep tests maintainable and readable**
-5. **Test critical paths thoroughly**
+### Coverage Requirements
+- **Statements**: 80% minimum
+- **Branches**: 70% minimum
+- **Functions**: 75% minimum
+- **Lines**: 80% minimum
 
-## Test Structure
+## 🛠️ Testing Tools
+
+### Unit & Integration Testing
+- **Framework**: [Vitest](https://vitest.dev/) - Fast unit test framework
+- **UI Testing**: [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- **Mocking**: Vitest built-in mocks + MSW for API mocking
+- **Coverage**: V8 coverage provider
+
+### End-to-End Testing
+- **Framework**: [Playwright](https://playwright.dev/) - Cross-browser testing
+- **Browsers**: Chromium, Firefox, WebKit, Mobile Chrome/Safari
+
+## 🚀 Quick Start
+
+### Running Tests
+
+```bash
+# Run all unit tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:coverage
+
+# Run tests for CI (with coverage and verbose output)
+pnpm test:ci
+
+# Run E2E tests
+pnpm test:e2e
+
+# Run E2E tests with UI
+pnpm test:e2e:ui
+```
+
+### Writing Your First Test
+
+```typescript
+// components/Button.test.tsx
+import { render, screen } from '@testing-library/react'
+import { Button } from './Button'
+
+describe('Button', () => {
+  it('renders button with text', () => {
+    render(<Button>Click me</Button>)
+    expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument()
+  })
+
+  it('calls onClick when clicked', async () => {
+    const handleClick = vi.fn()
+    render(<Button onClick={handleClick}>Click me</Button>)
+    
+    await userEvent.click(screen.getByRole('button'))
+    expect(handleClick).toHaveBeenCalledOnce()
+  })
+})
+```
+
+## 📁 Test Organization
 
 ```
 tests/
-├── unit/                 # Isolated unit tests
-├── integration/          # Component integration tests
-├── e2e/                  # End-to-end tests
-├── api/                  # API endpoint tests
-├── accessibility/        # A11y tests
-├── performance/          # Performance tests
-├── regression/           # Regression test suite
-├── mocks/               # Shared mocks and fixtures
-├── utils/               # Test utilities
-└── setup.ts             # Global test setup
+├── setup.ts                 # Global test setup
+├── utils/                   # Test utilities and helpers
+│   ├── test-utils.tsx      # Custom render functions
+│   ├── mocks/              # Mock data and factories
+│   └── fixtures/           # Test fixtures
+├── e2e/                    # End-to-end tests
+│   ├── homepage.spec.ts    # Homepage E2E tests
+│   └── api-health.spec.ts  # API health checks
+└── __mocks__/              # Global mocks
+
+packages/@messai/*/
+└── src/
+    ├── lib/
+    │   └── utils.test.ts   # Unit tests colocated with source
+    └── components/
+        └── Button.test.tsx # Component tests
 ```
 
-## Running Tests
-
-### Basic Commands
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run with coverage
-npm run test:coverage
-
-# Run specific test suites
-npm run test:unit
-npm run test:integration
-npm run test:e2e
-
-# Run tests with UI
-npm run test:ui
-```
-
-### Advanced Options
-
-```bash
-# Run tests matching pattern
-npm test -- Button
-
-# Run tests in specific file
-npm test -- components/Button.test.tsx
-
-# Debug tests
-npm test -- --inspect-brk
-
-# Run failed tests only
-npm test -- --only-failures
-```
-
-## Writing Tests
+## 🎯 Testing Guidelines
 
 ### Unit Tests
 
-Test individual functions and components in isolation.
+**What to Test:**
+- Pure functions and utilities
+- Component rendering and behavior
+- State management logic
+- Custom hooks
 
+**Example - Testing Utilities:**
 ```typescript
-// lib/ai-predictions.test.ts
-import { describe, it, expect } from 'vitest';
-import { calculatePowerOutput } from './ai-predictions';
+// packages/@messai/core/src/utils/temperature.test.ts
+import { celsiusToKelvin, kelvinToCelsius } from './temperature'
 
-describe('calculatePowerOutput', () => {
-  it('should calculate power within expected range', () => {
-    const result = calculatePowerOutput({
-      temperature: 28,
-      ph: 7.0,
-      substrateConcentration: 1.5,
-      designType: 'mason-jar'
-    });
-    
-    expect(result).toBeGreaterThan(0);
-    expect(result).toBeLessThan(1000);
-  });
-
-  it('should apply temperature factor correctly', () => {
-    const cold = calculatePowerOutput({
-      temperature: 15,
-      ph: 7.0,
-      substrateConcentration: 1.5,
-      designType: 'mason-jar'
-    });
-    
-    const optimal = calculatePowerOutput({
-      temperature: 30,
-      ph: 7.0,
-      substrateConcentration: 1.5,
-      designType: 'mason-jar'
-    });
-    
-    expect(optimal).toBeGreaterThan(cold);
-  });
-});
+describe('Temperature Conversion', () => {
+  describe('celsiusToKelvin', () => {
+    it('converts celsius to kelvin correctly', () => {
+      expect(celsiusToKelvin(25)).toBe(298.15)
+      expect(celsiusToKelvin(0)).toBe(273.15)
+      expect(celsiusToKelvin(-273.15)).toBe(0)
+    })
+  })
+})
 ```
 
-### Component Tests
-
-Test React components with user interactions.
-
+**Example - Testing React Components:**
 ```typescript
-// components/MFCConfigPanel.test.tsx
-import { render, screen, fireEvent } from '@testing-library/react';
-import { MFCConfigPanel } from './MFCConfigPanel';
+// components/MFCDashboard.test.tsx
+import { render, screen } from '@testing-library/react'
+import { MFCDashboard } from './MFCDashboard'
+import { mockMFCData } from '../../../tests/utils/mocks'
 
-describe('MFCConfigPanel', () => {
-  const mockOnChange = vi.fn();
-  
-  beforeEach(() => {
-    mockOnChange.mockClear();
-  });
+describe('MFCDashboard', () => {
+  it('displays MFC performance metrics', () => {
+    render(<MFCDashboard data={mockMFCData} />)
+    
+    expect(screen.getByText('Power Output')).toBeInTheDocument()
+    expect(screen.getByText('0.5 mW')).toBeInTheDocument()
+    expect(screen.getByText('Voltage')).toBeInTheDocument()
+  })
 
-  it('should display all material options', () => {
-    render(<MFCConfigPanel onChange={mockOnChange} />);
-    
-    expect(screen.getByText('Carbon Cloth')).toBeInTheDocument();
-    expect(screen.getByText('Graphene Oxide')).toBeInTheDocument();
-    expect(screen.getByText('MXene Ti₃C₂Tₓ')).toBeInTheDocument();
-  });
-
-  it('should call onChange when material is selected', () => {
-    render(<MFCConfigPanel onChange={mockOnChange} />);
-    
-    const select = screen.getByLabelText('Anode Material');
-    fireEvent.change(select, { target: { value: 'graphene-oxide' } });
-    
-    expect(mockOnChange).toHaveBeenCalledWith({
-      anodeMaterial: 'graphene-oxide'
-    });
-  });
-});
+  it('handles loading state', () => {
+    render(<MFCDashboard data={null} isLoading={true} />)
+    expect(screen.getByRole('progressbar')).toBeInTheDocument()
+  })
+})
 ```
 
 ### Integration Tests
 
-Test multiple components working together.
+**What to Test:**
+- API route handlers
+- Database operations
+- Component integration
+- Third-party service integration
 
+**Example - API Route Testing:**
 ```typescript
-// tests/integration/experiment-workflow.test.tsx
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { ExperimentPage } from '@/app/experiment/page';
-
-describe('Experiment Workflow', () => {
-  it('should complete full experiment creation flow', async () => {
-    const user = userEvent.setup();
-    render(<ExperimentPage />);
-    
-    // Select design
-    await user.click(screen.getByText('Mason Jar MFC'));
-    
-    // Configure parameters
-    await user.type(screen.getByLabelText('Temperature'), '28.5');
-    await user.type(screen.getByLabelText('pH'), '7.1');
-    
-    // Submit
-    await user.click(screen.getByText('Start Experiment'));
-    
-    // Verify prediction appears
-    await waitFor(() => {
-      expect(screen.getByText(/Predicted Power:/)).toBeInTheDocument();
-    });
-  });
-});
-```
-
-### API Tests
-
-Test API endpoints directly.
-
-```typescript
-// tests/api/predictions.test.ts
-import { createMocks } from 'node-mocks-http';
-import handler from '@/app/api/predictions/route';
+// apps/web/app/api/predictions/route.test.ts
+import { POST } from './route'
+import { mockRequest } from '../../../../tests/utils/test-utils'
 
 describe('/api/predictions', () => {
-  it('should return prediction for valid input', async () => {
-    const { req, res } = createMocks({
+  it('returns prediction for valid MFC configuration', async () => {
+    const request = mockRequest({
       method: 'POST',
       body: {
-        temperature: 28.5,
-        ph: 7.1,
-        substrateConcentration: 1.2,
-        designType: 'mason-jar'
+        configuration: mockMFCConfig,
+        parameters: mockParameters
       }
-    });
-    
-    await handler(req, res);
-    
-    expect(res._getStatusCode()).toBe(200);
-    const json = JSON.parse(res._getData());
-    expect(json).toHaveProperty('predictedPower');
-    expect(json).toHaveProperty('confidenceInterval');
-  });
+    })
 
-  it('should validate input parameters', async () => {
-    const { req, res } = createMocks({
-      method: 'POST',
-      body: {
-        temperature: 100, // Invalid
-        ph: 7.1,
-        substrateConcentration: 1.2,
-        designType: 'mason-jar'
-      }
-    });
-    
-    await handler(req, res);
-    
-    expect(res._getStatusCode()).toBe(400);
-    expect(JSON.parse(res._getData())).toHaveProperty('error');
-  });
-});
-```
+    const response = await POST(request)
+    const data = await response.json()
 
-## Testing Patterns
-
-### Testing 3D Components
-
-```typescript
-// components/MFC3DModel.test.tsx
-import { render } from '@testing-library/react';
-import { MFC3DModel } from './MFC3DModel';
-import * as THREE from 'three';
-
-// Mock Three.js
-vi.mock('three', () => ({
-  WebGLRenderer: vi.fn(),
-  Scene: vi.fn(),
-  PerspectiveCamera: vi.fn(),
-  // ... other mocks
-}));
-
-describe('MFC3DModel', () => {
-  it('should create scene with correct elements', () => {
-    const { container } = render(
-      <MFC3DModel design="mason-jar" />
-    );
-    
-    // Verify Three.js objects were created
-    expect(THREE.Scene).toHaveBeenCalled();
-    expect(THREE.PerspectiveCamera).toHaveBeenCalled();
-  });
-});
-```
-
-### Testing Async Operations
-
-```typescript
-describe('Async Operations', () => {
-  it('should handle loading states', async () => {
-    render(<DataLoader />);
-    
-    // Initial loading state
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
-    
-    // Wait for data
-    await waitFor(() => {
-      expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
-      expect(screen.getByText('Data loaded')).toBeInTheDocument();
-    });
-  });
-});
-```
-
-### Testing Error Boundaries
-
-```typescript
-describe('Error Handling', () => {
-  it('should display error message on failure', () => {
-    const ThrowError = () => {
-      throw new Error('Test error');
-    };
-    
-    render(
-      <ErrorBoundary>
-        <ThrowError />
-      </ErrorBoundary>
-    );
-    
-    expect(screen.getByText(/Something went wrong/)).toBeInTheDocument();
-  });
-});
-```
-
-## Mocking Strategies
-
-### Mocking External Dependencies
-
-```typescript
-// mocks/server.ts
-import { setupServer } from 'msw/node';
-import { rest } from 'msw';
-
-export const server = setupServer(
-  rest.post('/api/predictions', (req, res, ctx) => {
-    return res(
-      ctx.json({
-        predictedPower: 150,
-        confidenceInterval: { lower: 120, upper: 180 }
-      })
-    );
+    expect(response.status).toBe(200)
+    expect(data).toHaveProperty('powerOutput')
+    expect(data).toHaveProperty('efficiency')
   })
-);
-
-// In test setup
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+})
 ```
 
-### Mocking Modules
+### End-to-End Tests
 
+**What to Test:**
+- Critical user journeys
+- Authentication flows
+- Cross-browser compatibility
+- Performance requirements
+
+**Example - User Journey:**
 ```typescript
-// Mock Prisma client
-vi.mock('@prisma/client', () => ({
-  PrismaClient: vi.fn(() => ({
-    experiment: {
-      create: vi.fn(),
-      findMany: vi.fn(() => Promise.resolve([])),
-      update: vi.fn()
-    }
-  }))
-}));
+// tests/e2e/mfc-configuration.spec.ts
+import { test, expect } from '@playwright/test'
+
+test('complete MFC configuration flow', async ({ page }) => {
+  await page.goto('/dashboard')
+  
+  // Navigate to configuration
+  await page.click('[data-testid="new-configuration"]')
+  
+  // Fill configuration form
+  await page.fill('[data-testid="anode-material"]', 'Graphite')
+  await page.fill('[data-testid="cathode-material"]', 'Platinum')
+  await page.fill('[data-testid="electrolyte"]', 'Phosphate Buffer')
+  
+  // Submit and verify prediction
+  await page.click('[data-testid="generate-prediction"]')
+  
+  await expect(page.locator('[data-testid="power-output"]')).toBeVisible()
+  await expect(page.locator('[data-testid="efficiency-score"]')).toBeVisible()
+})
 ```
 
-## Performance Testing
+## 🔧 Test Configuration
 
-### Component Render Performance
+### Vitest Configuration
+Key settings in `vitest.config.ts`:
+- **Environment**: jsdom for React components
+- **Setup Files**: Global test setup
+- **Coverage**: V8 provider with thresholds
+- **Path Aliases**: Match production aliases
 
+### Playwright Configuration
+Key settings in `playwright.config.ts`:
+- **Base URL**: http://localhost:3001
+- **Browsers**: Desktop and mobile viewports
+- **Web Server**: Auto-start dev server
+- **Traces**: Enabled on failure for debugging
+
+## 🎨 Testing Best Practices
+
+### General Principles
+1. **Test Behavior, Not Implementation**: Focus on what users see and do
+2. **Write Descriptive Test Names**: Test names should describe the expected behavior
+3. **Arrange-Act-Assert**: Structure tests clearly
+4. **Test Edge Cases**: Empty states, error conditions, boundary values
+5. **Keep Tests Independent**: Each test should be able to run in isolation
+
+### Mock Strategy
 ```typescript
-import { measureRender } from './test-utils';
+// Good: Mock at the boundary
+vi.mock('@/lib/api', () => ({
+  fetchMFCData: vi.fn(() => Promise.resolve(mockMFCData))
+}))
 
-describe('Performance', () => {
-  it('should render quickly', async () => {
-    const renderTime = await measureRender(
-      <MFCDashboard experiments={mockExperiments} />
-    );
-    
-    expect(renderTime).toBeLessThan(100); // ms
-  });
-});
+// Avoid: Mocking internal implementation details
+// vi.mock('./components/InternalComponent')
 ```
 
-### Bundle Size Testing
+### Data-Testid Usage
+```jsx
+// Use semantic roles when possible
+<button>Submit</button> // ✅ getByRole('button', { name: 'Submit' })
 
-```typescript
-describe('Bundle Size', () => {
-  it('should not exceed size limit', () => {
-    const stats = require('.next/build-stats.json');
-    const mainBundleSize = stats.bundles.main.size;
-    
-    expect(mainBundleSize).toBeLessThan(250000); // 250KB
-  });
-});
+// Use data-testid for complex selectors
+<div data-testid="mfc-power-chart">...</div> // ✅ getByTestId('mfc-power-chart')
 ```
 
-## Accessibility Testing
+## 🐛 Debugging Tests
 
-### Basic A11y Tests
+### Failed Unit Tests
+```bash
+# Run specific test file
+pnpm test Button.test.tsx
 
-```typescript
-import { axe } from 'jest-axe';
+# Run tests matching pattern
+pnpm test --grep "power calculation"
 
-describe('Accessibility', () => {
-  it('should have no accessibility violations', async () => {
-    const { container } = render(<MFCConfigPanel />);
-    const results = await axe(container);
-    
-    expect(results).toHaveNoViolations();
-  });
-});
+# Debug mode
+pnpm test --inspect-brk
 ```
 
-### Keyboard Navigation
+### Failed E2E Tests
+```bash
+# Run with headed browser
+pnpm test:e2e --headed
 
-```typescript
-describe('Keyboard Navigation', () => {
-  it('should be fully keyboard accessible', async () => {
-    const user = userEvent.setup();
-    render(<DesignCatalog />);
-    
-    // Tab through elements
-    await user.tab();
-    expect(screen.getByText('Mason Jar MFC')).toHaveFocus();
-    
-    // Activate with Enter
-    await user.keyboard('{Enter}');
-    expect(screen.getByText('Design Details')).toBeInTheDocument();
-  });
-});
-```
+# Run specific test
+pnpm test:e2e tests/e2e/homepage.spec.ts
 
-## CI/CD Integration
+# Debug mode
+pnpm test:e2e --debug
 
-### GitHub Actions Configuration
-
-```yaml
-# .github/workflows/test.yml
-name: Tests
-
-on: [push, pull_request]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          
-      - name: Install dependencies
-        run: npm ci
-        
-      - name: Run tests
-        run: npm run test:ci
-        
-      - name: Upload coverage
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./coverage/coverage-final.json
-```
-
-### Pre-commit Hooks
-
-```json
-// package.json
-{
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test:critical"
-    }
-  }
-}
-```
-
-## Testing Best Practices
-
-### Do's
-- ✅ Test user-facing behavior
-- ✅ Use descriptive test names
-- ✅ Keep tests independent
-- ✅ Mock external dependencies
-- ✅ Test edge cases
-- ✅ Use data-testid for querying
-
-### Don'ts
-- ❌ Test implementation details
-- ❌ Mock everything
-- ❌ Write brittle selectors
-- ❌ Ignore flaky tests
-- ❌ Skip error cases
-- ❌ Use arbitrary delays
-
-### Test File Template
-
-```typescript
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-
-describe('ComponentName', () => {
-  // Setup
-  beforeEach(() => {
-    // Reset mocks
-    vi.clearAllMocks();
-  });
-
-  // Basic rendering
-  describe('rendering', () => {
-    it('should render with default props', () => {
-      render(<Component />);
-      expect(screen.getByRole('button')).toBeInTheDocument();
-    });
-  });
-
-  // User interactions
-  describe('interactions', () => {
-    it('should handle click events', async () => {
-      const user = userEvent.setup();
-      const handleClick = vi.fn();
-      
-      render(<Component onClick={handleClick} />);
-      await user.click(screen.getByRole('button'));
-      
-      expect(handleClick).toHaveBeenCalledOnce();
-    });
-  });
-
-  // Edge cases
-  describe('edge cases', () => {
-    it('should handle empty data gracefully', () => {
-      render(<Component data={[]} />);
-      expect(screen.getByText('No data available')).toBeInTheDocument();
-    });
-  });
-});
-```
-
-## Debugging Tests
-
-### VS Code Debugging
-
-```json
-// .vscode/launch.json
-{
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Debug Tests",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": ["test", "--", "--inspect-brk"],
-      "port": 9229
-    }
-  ]
-}
+# Generate trace
+pnpm test:e2e --trace on
 ```
 
 ### Common Issues
 
-1. **Async timing issues**: Use `waitFor` instead of arbitrary delays
-2. **State not updating**: Ensure proper act() wrapping
-3. **Can't find element**: Check if element is rendered conditionally
-4. **Mock not working**: Verify mock is imported before component
+**❌ Tests timing out:**
+```typescript
+// Increase timeout for slow operations
+test('slow operation', async ({ page }) => {
+  test.setTimeout(60000) // 60 seconds
+  // ... test code
+})
+```
 
-## Resources
+**❌ Element not found:**
+```typescript
+// Wait for element to appear
+await expect(page.locator('[data-testid="result"]')).toBeVisible()
+
+// Wait for network request
+await page.waitForResponse('**/api/predictions')
+```
+
+## 📊 Coverage Reports
+
+### Viewing Coverage
+```bash
+# Generate and view coverage report
+pnpm test:coverage
+
+# Coverage files are generated in:
+coverage/
+├── index.html          # Browse coverage in browser
+├── lcov.info          # LCOV format for CI tools
+└── coverage-final.json # JSON format
+```
+
+### Coverage Exclusions
+Files excluded from coverage (configured in `vitest.config.ts`):
+- Configuration files (`*.config.*`)
+- Type definitions (`*.d.ts`)
+- Test files themselves
+- Build output directories
+
+## 🔄 CI/CD Integration
+
+### GitHub Actions
+Tests automatically run on:
+- Pull request creation/updates
+- Push to main branch
+- Scheduled runs (nightly)
+
+### Quality Gates
+All tests must pass before:
+- Merging pull requests
+- Deploying to staging
+- Releasing to production
+
+### Performance Monitoring
+- Bundle size tracking
+- Test execution time monitoring
+- Coverage trend analysis
+
+## 📚 Resources
 
 - [Vitest Documentation](https://vitest.dev/)
-- [Testing Library Docs](https://testing-library.com/)
-- [MSW Documentation](https://mswjs.io/)
-- [Jest-Axe for A11y](https://github.com/nickcolley/jest-axe)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Playwright Documentation](https://playwright.dev/)
+- [Testing Best Practices](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
+
+---
+
+💡 **Need Help?** Check our [Troubleshooting Guide](./TROUBLESHOOTING.md) or ask in the team Discord.
+
+*Last updated: 2025-07-13*

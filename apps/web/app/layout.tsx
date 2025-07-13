@@ -1,9 +1,30 @@
 import type { Metadata } from 'next'
+import { Inter, Playfair_Display, Crimson_Text } from 'next/font/google'
 import './globals.css'
+import ConditionalLayout from '@/components/ConditionalLayout'
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter'
+})
+
+const playfairDisplay = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-playfair'
+})
+
+const crimsonText = Crimson_Text({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  display: 'swap',
+  variable: '--font-crimson'
+})
 
 export const metadata: Metadata = {
-  title: 'MESSAi - Microbial Electrochemical Systems AI Platform',
-  description: 'Clean architecture foundation for bioelectrochemical systems research and development',
+  title: 'MESSAi - AI-Powered MFC Research Platform',
+  description: 'Advanced platform for microbial fuel cell research with AI predictions and 3D modeling',
 }
 
 export default function RootLayout({
@@ -12,21 +33,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-gray-50 font-sans antialiased">
-        <header className="border-b border-gray-200 bg-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex h-16 items-center justify-between">
-              <div className="flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">MESSAi</h1>
-                <span className="ml-2 text-sm text-gray-500">Clean Architecture</span>
-              </div>
-            </div>
-          </div>
-        </header>
-        <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <html lang="en" className={`${inter.variable} ${playfairDisplay.variable} ${crimsonText.variable}`}>
+      <body className="min-h-screen bg-white dark:bg-gray-900 antialiased">
+        <ConditionalLayout>
           {children}
-        </main>
+        </ConditionalLayout>
       </body>
     </html>
   )

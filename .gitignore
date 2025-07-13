@@ -47,6 +47,11 @@ logs
 
 # TypeScript
 *.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Package manager
+package-lock.json
+yarn.lock
 
 # Database
 *.db

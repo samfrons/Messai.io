@@ -1,9 +1,0 @@
-{
-  "name": "ui-3d",
-  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/ui/3d/src",
-  "projectType": "library",
-  "tags": ["scope:ui", "type:ui"],
-  "// targets": "to see all targets run: nx show project ui-3d --web",
-  "targets": {}
-}

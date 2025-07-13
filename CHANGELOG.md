@@ -1,90 +1,101 @@
 # Changelog
 
-All notable changes to MESSAi will be documented in this file.
+All notable changes to the MESSAi Platform will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Added
-- Comprehensive documentation structure in `/docs` directory
-- GitHub Actions CI/CD workflow
-- Issue and PR templates
-- Code formatting with Prettier
-- ESLint configuration
-- Environment variable examples
-- Complete project metadata in package.json
+### ✨ Features
+- Comprehensive testing infrastructure with Vitest and Playwright
+- GitHub Actions CI/CD pipeline with automated testing and deployment
+- Semantic release workflow with conventional commits
+- Environment variable validation with Zod schemas
+- Security middleware with CSP headers and CORS protection
 
-### Changed
-- Restructured README for better clarity and conciseness
-- Updated project structure for better organization
+### 🐛 Bug Fixes
+- Fixed port configuration to use 3001 consistently
+- Resolved TypeScript path mapping issues after structure cleanup
+- Removed duplicate configuration files
 
-## [0.1.0] - 2024-01-15
+### 🔒 Security
+- Added comprehensive security middleware for Next.js
+- Implemented environment variable validation
+- Created security alert documentation for credential management
+- Added pre-commit hooks for code quality
 
-### Added
-- Initial release of MESSAi platform
-- 13 validated MFC designs from laboratory to industrial scale
-- Interactive 3D visualization with Three.js
-- AI-powered prediction engine for power output
-- 27 electrode materials database including graphene and MXenes
-- LCARS-themed user interface inspired by Star Trek
-- Experiment tracking and management system
-- Real-time parameter adjustment and visualization
-- Algal fuel cell specialized simulator
-- Comprehensive test suite with Vitest
-- API endpoint for predictions
-- Prisma ORM integration for database management
+### ♻️ Code Refactoring
+- Consolidated testing setup to use Vitest only (removed Jest)
+- Cleaned up monorepo structure (removed /libs, consolidated to /packages)
+- Updated TypeScript configuration to use ES2022 target
+- Removed embedded git worktrees and duplicate project copies
 
-### Features
-- **Design Catalog**: Browse and select from validated MFC designs
-- **3D Models**: Interactive manipulation of MFC components
-- **AI Predictions**: Machine learning models for optimization
-- **Material Library**: Extensive electrode material options
-- **Experiment Dashboard**: Track and compare experiments
-- **Data Export**: Export experiment data for analysis
-- **Responsive Design**: Works on desktop and mobile devices
+### 📚 Documentation
+- Created comprehensive TESTING.md guide
+- Updated CONTRIBUTING.md with detailed guidelines
+- Added improvement tracking documentation
+- Created security alert documentation
 
-### Technical
-- Built with Next.js 14 App Router
-- TypeScript for type safety
+### 🏗️ Build System
+- Upgraded Next.js from 14.1.0 to 15.x
+- Added Playwright for E2E testing
+- Configured coverage thresholds (80% statements, 70% branches)
+- Set up automated release process with semantic-release
+
+### 🧪 Testing
+- Added unit test coverage requirements
+- Implemented E2E testing with Playwright
+- Created test utilities and mock data factories
+- Added CI/CD test automation
+
+## [1.0.0] - 2025-07-13
+
+### ✨ Features
+- Initial MESSAi platform release
+- Nx monorepo architecture with clean structure
+- Next.js 15 web application
+- TypeScript strict mode throughout
 - Tailwind CSS for styling
-- Zustand for state management
-- Chart.js and Recharts for data visualization
-- Comprehensive testing coverage
+- Scientific constants and utilities for MES research
+- Basic UI component library
+- Health check API endpoint
 
-## [0.0.1] - 2024-01-01
-
-### Added
-- Project initialization
-- Basic project structure
-- Core dependencies setup
+### 🏗️ Project Structure
+- Clean Nx monorepo setup
+- Package organization with @messai namespace
+- PNPM workspace configuration
+- Proper TypeScript configuration
+- ESLint and Prettier setup
 
 ---
 
-## Version History Guide
+## Semantic Versioning Guide
 
-### Version Numbering
-- **Major** (X.0.0): Breaking changes, major feature additions
-- **Minor** (0.X.0): New features, backwards compatible
-- **Patch** (0.0.X): Bug fixes, minor improvements
+### Version Format: MAJOR.MINOR.PATCH
 
-### Future Releases Planning
+- **MAJOR**: Breaking changes that require user action
+- **MINOR**: New features that are backward compatible
+- **PATCH**: Bug fixes and small improvements
 
-#### [0.2.0] - Planned
-- Real-time sensor data integration
-- Collaborative experiment sharing
-- Enhanced ML models with user data training
-- Mobile app companion
+### Commit Types → Version Bumps
 
-#### [0.3.0] - Planned
-- Multi-language support
-- Advanced data export formats (MATLAB, R)
-- Integration with laboratory equipment
-- Cloud synchronization
+- `feat:` → MINOR version bump
+- `fix:` → PATCH version bump
+- `perf:` → PATCH version bump
+- `refactor:` → PATCH version bump
+- `BREAKING CHANGE:` → MAJOR version bump
+- `docs:`, `style:`, `test:`, `chore:` → No version bump
 
-#### [1.0.0] - Planned
-- Production-ready release
-- Enterprise features
-- Advanced analytics dashboard
-- API v2 with GraphQL support
+### Release Process
+
+1. Commits are analyzed for conventional commit format
+2. Version is determined based on commit types
+3. CHANGELOG.md is automatically updated
+4. Git tag is created with new version
+5. GitHub release is published
+6. Deployment to staging and production
+
+---
+
+*This changelog is automatically maintained by [semantic-release](https://github.com/semantic-release/semantic-release).*
