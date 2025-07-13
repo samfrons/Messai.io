@@ -14,7 +14,7 @@ interface State {
   error?: Error
 }
 
-class ErrorBoundary extends Component<Props, State> {
+export default class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false
   }
@@ -89,8 +89,6 @@ class ErrorBoundary extends Component<Props, State> {
     return this.props.children
   }
 }
-
-export { ErrorBoundary as default }
 
 // Specific error boundary for literature components
 export function LiteratureErrorBoundary({ children }: { children: ReactNode }) {

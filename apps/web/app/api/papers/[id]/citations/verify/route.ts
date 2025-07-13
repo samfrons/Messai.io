@@ -6,7 +6,7 @@ import { getDemoConfig } from '@/lib/demo-mode'
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     // Check authentication
@@ -30,9 +30,10 @@ export async function POST(
       )
     }
 
-    const { id: paperId } = await params
+    const paperId = params.id
 
     // Verify citations
+    console.log(`[API] Verifying citations for paper: ${paperId}`)
     const result = await verifyCitations(paperId)
 
     return NextResponse.json({
@@ -48,6 +49,8 @@ export async function POST(
     })
 
   } catch (error) {
+    console.error('[API] Citation verification error:', error)
+    
     if (error instanceof Error && error.message === 'Paper not found') {
       return NextResponse.json(
         { error: 'Paper not found' },

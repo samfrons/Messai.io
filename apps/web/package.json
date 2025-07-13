@@ -10,8 +10,6 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@messai/core": "workspace:*",
-    "@messai/ui": "workspace:*",
     "@auth/prisma-adapter": "^2.7.4",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.10.1", 
@@ -36,6 +34,7 @@
     "lucide-react": "^0.469.0",
     "next": "14.2.29",
     "next-auth": "5.0.0-beta.25",
+    "nodemailer": "^6.9.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.55.0",
@@ -56,6 +55,7 @@
     "eslint": "^9.18.0",
     "eslint-config-next": "14.2.29",
     "postcss": "^8.5.3",
+    "prisma": "^6.1.0",
     "tailwindcss": "^3.5.7",
     "typescript": "^5.7.3"
   }

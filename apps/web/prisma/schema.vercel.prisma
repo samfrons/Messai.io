@@ -1,0 +1,205 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                 String              @id @default(cuid())
+  email              String              @unique
+  emailVerified      DateTime?
+  password           String?
+  name               String?
+  image              String?
+  role               String              @default("USER")
+  isActive           Boolean             @default(true)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  lastLoginAt        DateTime?
+  institution        String?
+  researchArea       String?
+  accounts           Account[]
+  sessions           Session[]
+  experiments        Experiment[]
+  researchPapers     ResearchPaper[]
+
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  action    String
+  resource  String
+  details   String?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([action, createdAt])
+  @@index([resource, createdAt])
+  @@index([ipAddress, createdAt])
+}
+
+model MFCDesign {
+  id          String       @id @default(cuid())
+  name        String
+  type        String
+  cost        String
+  powerOutput String
+  materials   String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  experiments Experiment[]
+}
+
+model Experiment {
+  id           String            @id @default(cuid())
+  name         String
+  userId       String
+  designId     String
+  status       String            @default("SETUP")
+  parameters   String
+  isPublic     Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  design       MFCDesign         @relation(fields: [designId], references: [id])
+  user         User              @relation(fields: [userId], references: [id])
+  measurements Measurement[]
+  papers       ExperimentPaper[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Measurement {
+  id           String     @id @default(cuid())
+  experimentId String
+  voltage      Float
+  current      Float
+  power        Float
+  temperature  Float
+  ph           Float
+  substrate    Float?
+  notes        String?
+  timestamp    DateTime   @default(now())
+  experiment   Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+
+  @@index([experimentId, timestamp])
+}
+
+model ResearchPaper {
+  id                String            @id @default(cuid())
+  title             String
+  authors           String            // JSON array
+  abstract          String?
+  doi               String?           @unique
+  pubmedId          String?           @unique
+  arxivId           String?           @unique
+  ieeeId            String?           @unique
+  publicationDate   DateTime?
+  journal           String?
+  volume            String?
+  issue             String?
+  pages             String?
+  keywords          String            // JSON array
+  externalUrl       String
+  
+  // MES-specific fields
+  organismTypes     String?           // JSON array of organism IDs
+  anodeMaterials    String?           // JSON array
+  cathodeMaterials  String?           // JSON array
+  powerOutput       Float?            // mW/m²
+  efficiency        Float?            // percentage
+  systemType        String?           // MFC, MEC, MDC, MES
+  
+  // Metadata
+  source            String            // 'user', 'pubmed', 'crossref', 'ieee'
+  uploadedBy        String?
+  isPublic          Boolean           @default(true)
+  
+  // AI-generated fields
+  aiSummary         String?           // Concise AI-generated summary
+  aiKeyFindings     String?           // Key findings in JSON format
+  aiMethodology     String?           // Summarized methodology
+  aiImplications    String?           // Research implications and applications
+  aiDataExtraction  String?           // Structured extracted data in JSON
+  aiInsights        String?           // AI-generated insights and analysis
+  aiProcessingDate  DateTime?         // When AI processing occurred
+  aiModelVersion    String?           // Which AI model/version was used
+  aiConfidence      Float?            // Confidence score for AI extraction (0-1)
+  
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  
+  // Relations
+  user              User?             @relation(fields: [uploadedBy], references: [id])
+  experiments       ExperimentPaper[]
+
+  @@index([doi])
+  @@index([pubmedId])
+  @@index([arxivId])
+  @@index([source])
+  @@index([systemType])
+  @@index([powerOutput])
+  @@index([aiProcessingDate])
+  @@index([uploadedBy])
+  @@index([isPublic])
+  @@index([createdAt])
+}
+
+model ExperimentPaper {
+  id           String     @id @default(cuid())
+  experimentId String
+  paperId      String
+  notes        String?
+  citationType String?    // 'inspiration', 'methodology', 'comparison'
+  createdAt    DateTime   @default(now())
+  experiment   Experiment    @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+  paper        ResearchPaper @relation(fields: [paperId], references: [id], onDelete: Cascade)
+
+  @@unique([experimentId, paperId])
+  @@index([experimentId])
+  @@index([paperId])
+}

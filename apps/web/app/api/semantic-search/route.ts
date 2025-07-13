@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { PrismaClient } from '@prisma/client'
-import { SemanticKnowledgeGraph, EmbeddingService } from '@messai/ai'
 
 const prisma = new PrismaClient()
-const knowledgeGraph = new SemanticKnowledgeGraph(prisma)
-const embeddingService = new EmbeddingService(prisma)
 
 // Simple semantic search implementation
 function calculateSemanticSimilarity(query: string, paper: any): number {
@@ -151,7 +148,7 @@ function generateSuggestedQueries(query: string, entities: string[]): string[] {
 
 export async function POST(request: NextRequest) {
   try {
-    const { query, limit = 10, useAdvanced = true } = await request.json()
+    const { query, limit = 10 } = await request.json()
     
     if (!query || typeof query !== 'string') {
       return NextResponse.json(
@@ -160,62 +157,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Use advanced semantic search with knowledge graph if enabled
-    if (useAdvanced) {
-      try {
-        // Use knowledge graph for semantic search
-        const kgResults = await knowledgeGraph.semanticSearch(query, limit)
-        
-        // Also perform embedding-based search
-        const embeddingResults = await embeddingService.semanticSearch(query, limit)
-        
-        // Merge and deduplicate results
-        const mergedResults = new Map()
-        
-        kgResults.forEach(result => {
-          mergedResults.set(result.paper.id, {
-            ...result,
-            source: 'knowledge_graph'
-          })
-        })
-        
-        embeddingResults.forEach(result => {
-          const existing = mergedResults.get(result.paper.id)
-          if (existing) {
-            // Average the scores
-            existing.relevanceScore = (existing.relevanceScore + result.similarity) / 2
-            existing.source = 'both'
-          } else {
-            mergedResults.set(result.paper.id, {
-              relevanceScore: result.similarity,
-              paper: result.paper,
-              explanation: result.explanation,
-              relatedConcepts: [],
-              suggestedQueries: [],
-              source: 'embeddings'
-            })
-          }
-        })
-        
-        const finalResults = Array.from(mergedResults.values())
-          .sort((a, b) => b.relevanceScore - a.relevanceScore)
-          .slice(0, limit)
-        
-        return NextResponse.json({
-          results: finalResults,
-          queryIntent: knowledgeGraph.detectQueryIntent(query),
-          entities: knowledgeGraph.extractEntities(query),
-          totalResults: finalResults.length,
-          searchMethod: 'advanced'
-        })
-        
-      } catch (advancedError) {
-        console.error('Advanced search error, falling back to basic:', advancedError)
-        // Fall back to basic search
-      }
-    }
-
-    // Basic semantic search (fallback or when advanced is disabled)
+    // Get papers from database
     const papers = await prisma.researchPaper.findMany({
       select: {
         id: true,
@@ -254,8 +196,7 @@ export async function POST(request: NextRequest) {
             },
             explanation: generateExplanation(query, paper, entities),
             relatedConcepts: generateRelatedConcepts(paper),
-            suggestedQueries: generateSuggestedQueries(query, entities),
-            source: 'basic'
+            suggestedQueries: generateSuggestedQueries(query, entities)
           }
         }
         
@@ -269,8 +210,7 @@ export async function POST(request: NextRequest) {
       results,
       queryIntent,
       entities,
-      totalResults: results.length,
-      searchMethod: 'basic'
+      totalResults: results.length
     })
 
   } catch (error) {

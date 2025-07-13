@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display, Crimson_Text } from 'next/font/google'
-import '@/styles/globals.css'
+import './globals.css'
 import ConditionalLayout from '@/components/ConditionalLayout'
 
 const inter = Inter({ 

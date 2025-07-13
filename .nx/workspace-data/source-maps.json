@@ -1,3638 +1,4 @@
 {
-  "libs/data-access/api": {
-    "root": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "libs/data-access/api/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/data-access/api/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "tags.npm:private": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.targetGroups": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageName": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageMain": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.isInPackageManagerWorkspaces": [
-      "libs/data-access/api/package.json",
-      "nx/core/package-json"
-    ],
-    "$schema": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:data": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:util": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.executor": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.outputs": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.outputPath": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.main": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.tsConfig": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.assets": [
-      "libs/data-access/api/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.dependsOn": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.inputs": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/data-access/database": {
-    "root": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "libs/data-access/database/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/data-access/database/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "tags.npm:private": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.targetGroups": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageName": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageMain": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.isInPackageManagerWorkspaces": [
-      "libs/data-access/database/package.json",
-      "nx/core/package-json"
-    ],
-    "$schema": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:data": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:util": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.executor": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.outputs": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.outputPath": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.main": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.tsConfig": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.assets": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:generate": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:generate.executor": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:generate.options": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:generate.options.command": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:push": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:push.executor": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:push.options": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:push.options.command": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:migrate": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:migrate.executor": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:migrate.options": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:migrate.options.command": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:studio": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:studio.executor": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:studio.options": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.db:studio.options.command": [
-      "libs/data-access/database/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.dependsOn": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.inputs": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/domain/core": {
-    "root": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "libs/domain/core/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/domain/core/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "tags.npm:private": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.targetGroups": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageName": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageMain": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.isInPackageManagerWorkspaces": [
-      "libs/domain/core/package.json",
-      "nx/core/package-json"
-    ],
-    "$schema": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:domain": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:core": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.executor": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.outputs": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.outputPath": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.main": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.tsConfig": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.assets": [
-      "libs/domain/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.dependsOn": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.inputs": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/domain/laboratory": {
-    "root": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "libs/domain/laboratory/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/domain/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "tags.npm:private": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.targetGroups": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageName": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageMain": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.isInPackageManagerWorkspaces": [
-      "libs/domain/laboratory/package.json",
-      "nx/core/package-json"
-    ],
-    "$schema": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:domain": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:feature": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.executor": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.outputs": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.outputPath": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.main": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.tsConfig": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.assets": [
-      "libs/domain/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.dependsOn": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.inputs": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/domain/research": {
-    "root": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "libs/domain/research/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/domain/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "tags.npm:private": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.targetGroups": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageName": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.packageMain": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "metadata.js.isInPackageManagerWorkspaces": [
-      "libs/domain/research/package.json",
-      "nx/core/package-json"
-    ],
-    "$schema": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:domain": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:feature": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.executor": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.outputs": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.outputPath": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.main": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.tsConfig": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.build.options.assets": [
-      "libs/domain/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.dependsOn": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.inputs": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.build.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "messai-lab": {
-    "root": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "messai-lab/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "messai-lab/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "messai-research-development": {
-    "root": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.lint.options": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.inputs": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.outputs": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.executor": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.cwd": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.options.command": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.technologies.0": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.description": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.command": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.lint.metadata.help.example": [
-      "messai-research-development/.eslintrc.json",
-      "@nx/eslint/plugin"
-    ],
-    "targets.test": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "messai-research-development/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.lint.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/feature/experiments": {
-    "root": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/feature/experiments/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "$schema": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "// targets": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:feature": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:feature": [
-      "libs/feature/experiments/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/feature/laboratory": {
-    "root": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/feature/laboratory/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "$schema": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "// targets": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:feature": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:feature": [
-      "libs/feature/laboratory/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/feature/research": {
-    "root": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/feature/research/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "$schema": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "// targets": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:feature": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:feature": [
-      "libs/feature/research/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/ui/3d": {
-    "root": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/ui/3d/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "$schema": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "// targets": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:ui": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:ui": [
-      "libs/ui/3d/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/ui/charts": {
-    "root": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/ui/charts/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "$schema": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "// targets": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:ui": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:ui": [
-      "libs/ui/charts/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "libs/ui/components": {
-    "root": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "targets": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "libs/ui/components/vite.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "name": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "$schema": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "sourceRoot": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "projectType": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "// targets": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "tags": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:ui": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:ui": [
-      "libs/ui/components/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  "messai-lab/messai-ai": {
-    "root": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "messai-lab/messai-ai/vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
-  ".": {
-    "root": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.test.inputs": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.outputs": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.executor": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.cwd": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.options.command": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.technologies.0": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.description": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.command": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.metadata.help.example": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.cache": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.inputs": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.executor": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.cwd": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.options.command": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.description": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.technologies.0": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.command": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.typecheck.metadata.help.example": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.build-deps.dependsOn": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.continuous": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.dependsOn": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.executor": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.watch-deps.options.command": [
-      "vitest.config.ts",
-      "@nx/vite/plugin"
-    ],
-    "targets.test.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ]
-  },
   "apps/web": {
     "root": [
       "apps/web/project.json",
@@ -3666,6 +32,10 @@
       "apps/web/package.json",
       "nx/core/package-json"
     ],
+    "metadata.targetGroups.NPM Scripts.1": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
     "metadata.js": [
       "apps/web/package.json",
       "nx/core/package-json"
@@ -3679,6 +49,34 @@
       "nx/core/package-json"
     ],
     "targets": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.executor": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options.script": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.scriptContent": [
+      "apps/web/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.runCommand": [
       "apps/web/package.json",
       "nx/core/package-json"
     ],
@@ -3710,15 +108,11 @@
       "apps/web/package.json",
       "nx/core/package-json"
     ],
+    "$schema": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
     "sourceRoot": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.scope:app": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:app": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
@@ -3734,35 +128,83 @@
       "apps/web/project.json",
       "nx/core/project-json"
     ],
+    "targets.build.defaultConfiguration": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
     "targets.build.options": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.build.options.command": [
+    "targets.build.configurations": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.build.options.cwd": [
+    "targets.build.options.outputPath": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.dev": [
+    "targets.build.configurations.production": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.dev.executor": [
+    "targets.build.configurations.development": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.dev.options": [
+    "targets.serve": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.dev.options.command": [
+    "targets.serve.executor": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.dev.options.cwd": [
+    "targets.serve.defaultConfiguration": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.buildTarget": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.dev": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.options.port": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.buildTarget": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.development.dev": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.buildTarget": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.serve.configurations.production.dev": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
@@ -3782,11 +224,27 @@
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.lint.options.command": [
+    "targets.lint.options.lintFilePatterns": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.lint.options.cwd": [
+    "targets.test": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "apps/web/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
       "apps/web/project.json",
       "nx/core/project-json"
     ],
@@ -3806,35 +264,11 @@
       "apps/web/project.json",
       "nx/core/project-json"
     ],
-    "targets.type-check.options.cwd": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.serve": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.serve.executor": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.serve.options": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.serve.dependsOn": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.serve.options.command": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.serve.options.cwd": [
-      "apps/web/project.json",
-      "nx/core/project-json"
-    ],
     "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
       "nx.json",
       "nx/target-defaults"
     ],
@@ -3846,11 +280,7 @@
       "nx.json",
       "nx/target-defaults"
     ],
-    "targets.dev.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.dev.parallelism": [
+    "targets.lint.inputs": [
       "nx.json",
       "nx/target-defaults"
     ],
@@ -3859,6 +289,506 @@
       "nx/target-defaults"
     ],
     "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "packages/@messai/3d": {
+    "root": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.executor": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options.script": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.scriptContent": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.runCommand": [
+      "packages/@messai/3d/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.scope:shared": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:3d": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.format": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.bundle": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.external": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.executor": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.options": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.options.command": [
+      "packages/@messai/3d/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "packages/@messai/ai": {
+    "root": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.executor": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options.script": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.scriptContent": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.runCommand": [
+      "packages/@messai/ai/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.scope:shared": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.format": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.bundle": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.external": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.executor": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.options": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.options.command": [
+      "packages/@messai/ai/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
       "nx.json",
       "nx/target-defaults"
     ],
@@ -3892,6 +822,30 @@
       "packages/@messai/core/package.json",
       "nx/core/package-json"
     ],
+    "tags.npm:microbial-fuel-cell": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:mfc": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:bioelectrochemistry": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:prediction": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:scientific-computing": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:renewable-energy": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
     "metadata.targetGroups": [
       "packages/@messai/core/package.json",
       "nx/core/package-json"
@@ -3901,6 +855,10 @@
       "nx/core/package-json"
     ],
     "metadata.targetGroups.NPM Scripts.0": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.1": [
       "packages/@messai/core/package.json",
       "nx/core/package-json"
     ],
@@ -3956,6 +914,34 @@
       "packages/@messai/core/package.json",
       "nx/core/package-json"
     ],
+    "targets.typecheck": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.typecheck.executor": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.typecheck.options": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.typecheck.metadata": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.typecheck.options.script": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.typecheck.metadata.scriptContent": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.typecheck.metadata.runCommand": [
+      "packages/@messai/core/package.json",
+      "nx/core/package-json"
+    ],
     "targets.nx-release-publish": [
       "packages/@messai/core/package.json",
       "nx/core/package-json"
@@ -3972,15 +958,15 @@
       "packages/@messai/core/package.json",
       "nx/core/package-json"
     ],
+    "$schema": [
+      "packages/@messai/core/project.json",
+      "nx/core/project-json"
+    ],
     "sourceRoot": [
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
     "tags.scope:shared": [
-      "packages/@messai/core/project.json",
-      "nx/core/project-json"
-    ],
-    "tags.type:lib": [
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
@@ -4000,11 +986,27 @@
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
-    "targets.build.options.command": [
+    "targets.build.options.outputPath": [
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
-    "targets.build.options.cwd": [
+    "targets.build.options.main": [
+      "packages/@messai/core/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "packages/@messai/core/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.format": [
+      "packages/@messai/core/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.bundle": [
+      "packages/@messai/core/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.external": [
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
@@ -4036,15 +1038,15 @@
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
+    "targets.test.outputs": [
+      "packages/@messai/core/project.json",
+      "nx/core/project-json"
+    ],
     "targets.test.options": [
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
-    "targets.test.options.command": [
-      "packages/@messai/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.options.cwd": [
+    "targets.test.options.jestConfig": [
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
@@ -4064,19 +1066,11 @@
       "packages/@messai/core/project.json",
       "nx/core/project-json"
     ],
-    "targets.type-check.options.cwd": [
-      "packages/@messai/core/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.dev.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.dev.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
     "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
       "nx.json",
       "nx/target-defaults"
     ],
@@ -4088,11 +1082,19 @@
       "nx.json",
       "nx/target-defaults"
     ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
     "targets.lint.cache": [
       "nx.json",
       "nx/target-defaults"
     ],
     "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
       "nx.json",
       "nx/target-defaults"
     ],
@@ -4109,6 +1111,502 @@
       "nx/target-defaults"
     ],
     "targets.type-check.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "packages/@messai/database": {
+    "root": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:private": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.executor": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options.script": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.scriptContent": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.runCommand": [
+      "packages/@messai/database/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.scope:shared": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.outputs": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.outputPath": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.main": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.format": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.bundle": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.external": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.outputs": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.outputs": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.jestConfig": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.executor": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.options": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.options.command": [
+      "packages/@messai/database/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ]
+  },
+  "packages/@messai/ml": {
+    "root": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "name": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "projectType": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "tags": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "tags.npm:public": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.0": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.targetGroups.NPM Scripts.1": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.description": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageName": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageExports": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.packageMain": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "metadata.js.isInPackageManagerWorkspaces": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.executor": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.options.script": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.scriptContent": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.dev.metadata.runCommand": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check.executor": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check.options": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check.metadata": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check.options.script": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check.metadata.scriptContent": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.type-check.metadata.runCommand": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.executor": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.dependsOn": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "targets.nx-release-publish.options": [
+      "packages/@messai/ml/package.json",
+      "nx/core/package-json"
+    ],
+    "$schema": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "sourceRoot": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.scope:ml": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "tags.type:library": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.executor": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.command": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.cwd": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.executor": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.test.options.config": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.executor": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.lint.options.lintFilePatterns": [
+      "packages/@messai/ml/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.type-check.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.type-check.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.cache": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.lint.parallelism": [
       "nx.json",
       "nx/target-defaults"
     ]
@@ -4214,6 +1712,10 @@
       "packages/@messai/ui/package.json",
       "nx/core/package-json"
     ],
+    "$schema": [
+      "packages/@messai/ui/project.json",
+      "nx/core/project-json"
+    ],
     "sourceRoot": [
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
@@ -4222,7 +1724,7 @@
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
-    "tags.type:lib": [
+    "tags.type:ui": [
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
@@ -4242,11 +1744,27 @@
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
-    "targets.build.options.command": [
+    "targets.build.options.outputPath": [
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
-    "targets.build.options.cwd": [
+    "targets.build.options.main": [
+      "packages/@messai/ui/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.tsConfig": [
+      "packages/@messai/ui/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.format": [
+      "packages/@messai/ui/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.bundle": [
+      "packages/@messai/ui/project.json",
+      "nx/core/project-json"
+    ],
+    "targets.build.options.external": [
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
@@ -4278,15 +1796,15 @@
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
+    "targets.test.outputs": [
+      "packages/@messai/ui/project.json",
+      "nx/core/project-json"
+    ],
     "targets.test.options": [
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
-    "targets.test.options.command": [
-      "packages/@messai/ui/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.test.options.cwd": [
+    "targets.test.options.jestConfig": [
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
@@ -4306,19 +1824,11 @@
       "packages/@messai/ui/project.json",
       "nx/core/project-json"
     ],
-    "targets.type-check.options.cwd": [
-      "packages/@messai/ui/project.json",
-      "nx/core/project-json"
-    ],
-    "targets.dev.cache": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
-    "targets.dev.parallelism": [
-      "nx.json",
-      "nx/target-defaults"
-    ],
     "targets.build.dependsOn": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.build.inputs": [
       "nx.json",
       "nx/target-defaults"
     ],
@@ -4330,11 +1840,19 @@
       "nx.json",
       "nx/target-defaults"
     ],
+    "targets.lint.inputs": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
     "targets.lint.cache": [
       "nx.json",
       "nx/target-defaults"
     ],
     "targets.lint.parallelism": [
+      "nx.json",
+      "nx/target-defaults"
+    ],
+    "targets.test.inputs": [
       "nx.json",
       "nx/target-defaults"
     ],

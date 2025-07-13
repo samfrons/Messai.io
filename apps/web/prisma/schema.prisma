@@ -1,0 +1,421 @@
+// Unified Prisma Schema for MESSAi Platform
+// Supports SQLite (dev) and PostgreSQL (prod)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User Authentication and Management
+model User {
+  id       String @id @default(cuid())
+  email    String @unique
+  name     String?
+  image    String?
+  role     String @default("USER") // USER, RESEARCHER, ADMIN
+  
+  // Profile fields
+  institution   String?
+  researchArea  String?
+  orcid         String?
+  bio           String?
+  
+  // Platform settings
+  isActive      Boolean  @default(true)
+  emailVerified DateTime?
+  
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  accounts    Account[]
+  sessions    Session[]
+  papers      ResearchPaper[]
+  experiments Experiment[]
+  
+  @@map("users")
+}
+
+// NextAuth.js Account model
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+// NextAuth.js Session model
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// Enhanced Research Papers with AI processing
+model ResearchPaper {
+  id           String   @id @default(cuid())
+  
+  // Core metadata
+  doi          String?  @unique
+  title        String
+  abstract     String?
+  authors      String   // JSON array of authors
+  journal      String?
+  publicationDate DateTime?
+  year         Int?
+  volume       String?
+  issue        String?
+  pages        String?
+  keywords     String?  // JSON array of keywords
+  externalUrl  String?
+  pdfUrl       String?
+  
+  // Alternative identifiers
+  arxivId      String?  @unique
+  pubmedId     String?  @unique
+  ieeeId       String?  @unique
+  
+  // Scientific categorization
+  systemType   String?  // MFC, MEC, MDC, MES, BES
+  scale        String?  // microfluidic, lab, pilot, industrial
+  application  String?  // wastewater, hydrogen, etc.
+  
+  // Extracted materials and organisms
+  organismTypes    String?  // JSON array of microbial species
+  anodeMaterials   String?  // JSON array of anode materials
+  cathodeMaterials String?  // JSON array of cathode materials
+  
+  // Performance metrics
+  powerOutput    Float?   // mW/m² or W/m²
+  currentDensity Float?   // mA/cm² or A/cm²
+  voltage        Float?   // V
+  efficiency     Float?   // % (coulombic efficiency)
+  treatmentEff   Float?   // % (treatment efficiency)
+  
+  // Experimental conditions
+  temperature     Float?  // °C
+  pH              Float?  // pH units
+  substrate       String? // substrate type
+  substrateConc   Float?  // g/L
+  duration        Float?  // days
+  
+  // AI-enhanced fields
+  aiSummary       String?  // AI-generated summary
+  aiKeyFindings   String?  // JSON array of key findings
+  aiMethodology   String?  // Methods summary
+  aiImplications  String?  // Research implications
+  aiDataExtraction String? // JSON object of structured data
+  aiInsights      String?  // AI analysis
+  aiConfidence    Float?   // 0-1 confidence score
+  aiProcessingDate DateTime?
+  
+  // Data quality and validation
+  source       String   @default("user") // user, api, crossref, pubmed, arxiv
+  quality      Int      @default(0)      // 1-5 rating
+  verified     Boolean  @default(false)
+  confidence   Float    @default(0.5)    // 0-1 confidence in extraction
+  
+  // User and visibility
+  uploadedBy   String?  // User ID
+  user         User?    @relation(fields: [uploadedBy], references: [id])
+  isPublic     Boolean  @default(true)
+  
+  // Timestamps
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  // Relations
+  experiments  Experiment[]
+  
+  @@map("research_papers")
+}
+
+// MESS Model Designs
+model MFCDesign {
+  id           String @id @default(cuid())
+  name         String
+  description  String?
+  category     String // microfluidic, benchtop, pilot, industrial
+  
+  // Physical specifications
+  chamberVolume     Float?  // L
+  anodeArea         Float?  // cm²
+  cathodeArea       Float?  // cm²
+  membraneArea      Float?  // cm²
+  electrodeSpacing  Float?  // cm
+  
+  // Materials
+  anodeMaterial     String?
+  cathodeMaterial   String?
+  membraneMaterial  String?
+  electrolyte       String?
+  
+  // Performance characteristics
+  maxPowerDensity   Float?  // mW/m²
+  maxCurrentDensity Float?  // mA/cm²
+  typicalVoltage    Float?  // V
+  startupTime       Float?  // hours
+  
+  // Cost and availability
+  materialCost      Float?  // USD
+  laborHours        Float?  // hours
+  difficulty        String? // easy, medium, hard
+  
+  // System configuration
+  config           String   // JSON configuration object
+  isPublic         Boolean  @default(true)
+  
+  // Timestamps
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  // Relations
+  experiments      Experiment[]
+  
+  @@map("mfc_designs")
+}
+
+// Experiment Tracking
+model Experiment {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  
+  // User and design association
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+  designId     String?
+  design       MFCDesign? @relation(fields: [designId], references: [id])
+  paperId      String?
+  paper        ResearchPaper? @relation(fields: [paperId], references: [id])
+  
+  // Experiment configuration
+  parameters   String   // JSON configuration
+  objectives   String?  // Experiment goals
+  hypothesis   String?  // Expected outcomes
+  
+  // Status tracking
+  status       String   @default("SETUP") // SETUP, RUNNING, COMPLETED, FAILED
+  progress     Float    @default(0)       // 0-100 completion
+  
+  // Results
+  actualPower     Float?   // mW
+  actualVoltage   Float?   // V
+  actualCurrent   Float?   // mA
+  maxPower        Float?   // mW
+  efficiency      Float?   // %
+  duration        Float?   // hours
+  
+  // Analysis
+  summary         String?  // Results summary
+  conclusions     String?  // Key learnings
+  recommendations String?  // Next steps
+  
+  // Sharing
+  isPublic     Boolean  @default(false)
+  
+  // Timestamps
+  startedAt    DateTime?
+  completedAt  DateTime?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  // Relations
+  measurements Measurement[]
+  
+  @@map("experiments")
+}
+
+// Time-series measurements
+model Measurement {
+  id           String   @id @default(cuid())
+  experimentId String
+  experiment   Experiment @relation(fields: [experimentId], references: [id], onDelete: Cascade)
+  
+  // Electrical measurements
+  voltage      Float?   // V
+  current      Float?   // mA
+  power        Float?   // mW
+  resistance   Float?   // Ω
+  
+  // Environmental conditions
+  temperature  Float?   // °C
+  ph           Float?   // pH units
+  dissolvedO2  Float?   // mg/L
+  conductivity Float?   // mS/cm
+  
+  // Biological parameters
+  substrate    Float?   // g/L
+  biomass      Float?   // g/L
+  biofilmAge   Float?   // days
+  
+  // Metadata
+  notes        String?
+  
+  // Timestamp
+  timestamp    DateTime @default(now())
+  
+  @@map("measurements")
+}
+
+// Parameter definitions for standardization
+model ParameterDefinition {
+  id          String @id @default(cuid())
+  name        String @unique
+  category    String
+  subcategory String?
+  description String
+  unit        String?
+  
+  // Typical ranges
+  minValue    Float?
+  maxValue    Float?
+  typicalMin  Float?
+  typicalMax  Float?
+  
+  // Alternative names
+  synonyms    String?  // JSON array
+  
+  // Validation
+  required    Boolean  @default(false)
+  dataType    String   @default("number") // number, string, boolean, array
+  
+  @@map("parameter_definitions")
+}
+
+// Material database
+model Material {
+  id           String @id @default(cuid())
+  name         String @unique
+  type         String // electrode, membrane, electrolyte
+  category     String // carbon, metal, polymer, ceramic
+  subcategory  String?
+  
+  // Properties
+  conductivity   Float?  // S/cm
+  surfaceArea    Float?  // m²/g
+  cost           Float?  // USD/kg or USD/m²
+  availability   String? // commercial, research, custom
+  
+  // Performance characteristics
+  currentDensity  Float?  // mA/cm²
+  stability       Float?  // days
+  biocompatibility Float? // 1-10 scale
+  
+  // Physical properties
+  porosity       Float?  // %
+  thickness      Float?  // mm
+  flexibility    String? // rigid, flexible, moldable
+  
+  // Chemical properties
+  pHRange        String? // pH range
+  chemicalFormula String?
+  
+  // Usage data
+  papersCount    Int     @default(0)
+  avgPerformance Float?  // normalized performance score
+  
+  // Description and notes
+  description    String?
+  applications   String? // JSON array
+  limitations    String?
+  
+  @@map("materials")
+}
+
+// Microorganism database
+model Microorganism {
+  id           String @id @default(cuid())
+  name         String @unique
+  scientificName String?
+  genus        String?
+  species      String?
+  strain       String?
+  
+  // Classification
+  domain       String? // Bacteria, Archaea
+  phylum       String?
+  class        String?
+  order        String?
+  family       String?
+  
+  // Characteristics
+  metabolism   String? // exoelectrogenic, fermentative, etc.
+  substrate    String? // preferred substrates
+  optimalTemp  Float?  // °C
+  optimalPH    Float?  // pH
+  optimalSalt  Float?  // g/L NaCl
+  
+  // Performance
+  maxCurrent   Float?  // mA/cm²
+  efficiency   Float?  // %
+  growthRate   Float?  // 1/h
+  
+  // Applications
+  systemTypes  String? // JSON array: MFC, MEC, etc.
+  advantages   String?
+  limitations  String?
+  
+  // Research data
+  papersCount  Int     @default(0)
+  isolation    String? // where isolated from
+  references   String? // key papers
+  
+  @@map("microorganisms")
+}
+
+// System performance benchmarks
+model PerformanceBenchmark {
+  id           String @id @default(cuid())
+  systemType   String // MFC, MEC, MDC, MES
+  scale        String // microfluidic, lab, pilot, industrial
+  
+  // Performance metrics
+  powerDensity    Float? // mW/m² or W/m²
+  currentDensity  Float? // mA/cm² or A/cm²
+  voltage         Float? // V
+  efficiency      Float? // %
+  
+  // Operating conditions
+  temperature     Float? // °C
+  pH              Float?
+  substrateConc   Float? // g/L
+  hrt             Float? // hours (hydraulic retention time)
+  
+  // Configuration
+  anodeMaterial   String?
+  cathodeMaterial String?
+  microorganism   String?
+  
+  // Metadata
+  source          String? // paper DOI or reference
+  year            Int?
+  quality         Int     @default(3) // 1-5 confidence
+  verified        Boolean @default(false)
+  
+  createdAt       DateTime @default(now())
+  
+  @@map("performance_benchmarks")
+}

@@ -7,7 +7,7 @@ export const config = {
   // App configuration
   app: {
     name: 'MESSAi',
-    url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3003',
+    url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3001',
     description: 'Microbial Electrochemical Systems AI Platform',
   },
   

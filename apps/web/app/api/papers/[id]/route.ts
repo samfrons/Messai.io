@@ -53,6 +53,14 @@ export async function GET(
         createdAt: true,
         updatedAt: true,
         // Relations
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            institution: true
+          }
+        },
         experiments: {
           include: {
             experiment: {
@@ -86,72 +94,7 @@ export async function GET(
       )
     }
     
-    // Transform paper data similar to list endpoint
-    const parseJsonField = (field: string | null): any => {
-      if (!field) return null
-      
-      // If it's already an array or object, return as-is
-      if (typeof field === 'object') return field
-      
-      // Handle string fields
-      if (typeof field === 'string') {
-        const trimmed = field.trim()
-        
-        // Skip obviously non-JSON strings
-        if (!trimmed.startsWith('[') && !trimmed.startsWith('{') && !trimmed.startsWith('"')) {
-          return field
-        }
-        
-        try {
-          const parsed = JSON.parse(trimmed)
-          // If parsed result is an object, make sure it's properly handled
-          if (typeof parsed === 'object' && parsed !== null) {
-            if (Array.isArray(parsed)) {
-              return parsed.filter(item => item && typeof item === 'string' && item.trim().length > 0)
-            }
-            // Convert object to array of values if it has string values
-            if (typeof parsed === 'object') {
-              const values = Object.values(parsed).filter(val => typeof val === 'string' && val.trim().length > 0)
-              return values.length > 0 ? values : null
-            }
-          }
-          return parsed
-        } catch {
-          return field
-        }
-      }
-      
-      return field
-    }
-
-    // Parse AI extraction data
-    let aiData = null
-    if (paper.aiDataExtraction) {
-      try {
-        aiData = JSON.parse(paper.aiDataExtraction)
-      } catch {
-        aiData = null
-      }
-    }
-
-    const transformedPaper = {
-      ...paper,
-      // Parse JSON string fields into arrays/objects
-      authors: parseJsonField(paper.authors),
-      anodeMaterials: parseJsonField(paper.anodeMaterials),
-      cathodeMaterials: parseJsonField(paper.cathodeMaterials),
-      organismTypes: parseJsonField(paper.organismTypes),
-      keywords: parseJsonField(paper.keywords),
-      // Add processed AI data for easy frontend access
-      aiData,
-      // Enhanced display fields
-      hasPerformanceData: !!(paper.powerOutput || paper.efficiency || (paper.keywords && paper.keywords.includes('HAS_PERFORMANCE_DATA'))),
-      isAiProcessed: !!paper.aiProcessingDate,
-      processingMethod: paper.aiModelVersion || null,
-      confidenceScore: paper.aiConfidence || null
-    }
-    
-    return NextResponse.json(transformedPaper)
+    return NextResponse.json(paper)
   } catch (error) {
     console.error('Error fetching paper:', error)
     return NextResponse.json(
@@ -253,6 +196,15 @@ export async function PUT(
     const paper = await prisma.researchPaper.update({
       where: { id },
       data: updateData,
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true
+          }
+        }
+      }
     })
     
     return NextResponse.json(paper)

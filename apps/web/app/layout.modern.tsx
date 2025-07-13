@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import '@/styles/globals.modern.css'
+import './globals.modern.css'
 import ClientLayout from '@/components/ClientLayout'
 
 const inter = Inter({ 
