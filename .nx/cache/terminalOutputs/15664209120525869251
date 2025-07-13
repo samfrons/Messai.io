@@ -1,0 +1,12 @@
+> next dev
+
+ [33m[1m⚠[22m[39m Port 3000 is in use, trying 3001 instead.
+  [1m[38;2;173;127;168m ▲ Next.js 14.1.0[39m[22m
+   - Local:        http://localhost:3001
+
+ [33m[1m⚠[22m[39m Invalid next.config.js options detected: 
+ [33m[1m⚠[22m[39m     Unrecognized key(s) in object: 'transpilePackages' at "experimental"
+ [33m[1m⚠[22m[39m See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ [33m[1m⚠[22m[39m `transpilePackages` has been moved out of `experimental`. Please update your next.config.js file accordingly.
+ [32m[1m✓[22m[39m Ready in 1560ms
+[?25h

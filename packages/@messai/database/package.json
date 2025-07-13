@@ -1,0 +1,26 @@
+{
+  "name": "@messai/database",
+  "version": "0.1.0",
+  "description": "Database schemas and utilities for MESSAi",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.1.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "prisma": "^6.1.0"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "@messai/ml",
+  "version": "0.1.0",
+  "description": "Advanced ML infrastructure and AI capabilities for MESSAI platform",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.21.0",
+    "@tensorflow/tfjs-node": "^4.21.0",
+    "openai": "^5.8.2",
+    "zod": "^3.25.72",
+    "lodash": "^4.17.21",
+    "date-fns": "^3.6.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.7",
+    "@types/uuid": "^9.0.8",
+    "typescript": "^5.8.3",
+    "tsup": "^8.0.1",
+    "vitest": "^3.2.4"
+  },
+  "peerDependencies": {
+    "@messai/core": "*"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./mlops": {
+      "types": "./dist/mlops/index.d.ts",
+      "default": "./dist/mlops/index.js"
+    },
+    "./research": {
+      "types": "./dist/research/index.d.ts",
+      "default": "./dist/research/index.js"
+    },
+    "./maintenance": {
+      "types": "./dist/maintenance/index.d.ts",
+      "default": "./dist/maintenance/index.js"
+    },
+    "./discovery": {
+      "types": "./dist/discovery/index.d.ts",
+      "default": "./dist/discovery/index.js"
+    },
+    "./analytics": {
+      "types": "./dist/analytics/index.d.ts",
+      "default": "./dist/analytics/index.js"
+    }
+  }
+}

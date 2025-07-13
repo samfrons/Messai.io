@@ -1,0 +1,21 @@
+{
+  "run": {
+    "command": "nx run database:db:generate",
+    "startTime": "2025-07-12T20:06:52.544Z",
+    "endTime": "2025-07-12T20:06:53.183Z",
+    "inner": false
+  },
+  "tasks": [
+    {
+      "taskId": "database:db:generate",
+      "target": "db:generate",
+      "projectName": "database",
+      "hash": "15149826456612131075",
+      "startTime": "2025-07-12T20:06:52.579Z",
+      "endTime": "2025-07-12T20:06:53.182Z",
+      "params": "",
+      "cacheStatus": "cache-miss",
+      "status": 0
+    }
+  ]
+}

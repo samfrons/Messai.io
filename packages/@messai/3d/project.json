@@ -1,0 +1,49 @@
+{
+  "name": "@messai/3d",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@messai/3d/src",
+  "projectType": "library",
+  "tags": ["scope:shared", "type:3d"],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@messai/3d",
+        "main": "packages/@messai/3d/src/index.ts",
+        "tsConfig": "packages/@messai/3d/tsconfig.json",
+        "format": ["esm", "cjs"],
+        "bundle": true,
+        "external": [
+          "react",
+          "react-dom",
+          "@react-three/fiber",
+          "@react-three/drei",
+          "three",
+          "clsx",
+          "tailwind-merge"
+        ]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/@messai/3d/**/*.{ts,tsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@messai/3d/jest.config.ts"
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p packages/@messai/3d/tsconfig.json"
+      }
+    }
+  }
+}

@@ -1,1189 +1,469 @@
-# CLAUDE.md - AI Assistant Context for MESSAi
+# [MESSAI.AI] - AI Context Template (claude-master)
 
-This file provides context and instructions for AI assistants (like Claude) working on the MESSAi project.
+## 1. Project Overview
+- **Vision:**   To democratize microbial electrochemical systems research, development, education and commericalization by creating the world's most comprehensive, AI-powered platform that unifies and standardizes knowledge extraction, experimentation, and design, accelerating the transition to sustainable energy solutions.
 
-## Project Overview
+- **Mission:**   MESSAI empowers researchers, engineers, and innovators worldwide with cutting-edge tools for designing, simulating, and optimizing electrochemical systems
+  through intelligent 3D modeling, AI-driven predictions, and collaborative research capabilities.
 
-MESSAi (Microbial Electrochemical Systems AI Platform) is a sophisticated web platform for microbial electrochemical systems research. It supports various bioelectrochemical technologies including:
-- Microbial Fuel Cells (MFCs) - electricity generation
-- Microbial Electrolysis Cells (MECs) - hydrogen production
-- Microbial Desalination Cells (MDCs) - water treatment
-- Microbial Electrosynthesis (MES) - chemical production
-- Other bioelectrochemical systems
+- **Value Proposition**
 
-The platform combines:
-- Interactive 3D visualization using Three.js
-- AI-powered predictions for system optimization
-- Comprehensive experiment tracking
-- Scientific material database with 27 electrode options
+  MESSAI bridges the gap between complex electrochemical theory and practical implementation by providing:
+  - Unified Platform: Single interface and intelligent database for both microbial (MFC, MEC, MDC) and fuel cell (PEM, SOFC, PAFC), and electrochemical bioreactor systems
+  - AI Intelligence: Machine learning models trained on 3,721+ research papers for accurate predictions
+  - 3D Visualization: Interactive, real-time system modeling and visualization
+  - Knowledge Base: Comprehensive research library with AI-enhanced insights
+  - Collaborative Tools: Experiment tracking, sharing, and team collaboration features
 
+- **Core Features & Capabilities**
 
-## Key Technical Details
+1. Research Intelligence System (Phase 1)
+  - 3,721+ Enhanced Papers: AI-summarized with extracted performance metrics that informs our prediction engine
+  - Knowledge Graph: 1,200+ nodes with 2,750+ connections
+  - Smart Search: Semantic search across abstracts, methods, and results
+  - Citation Networks: Discover research lineages and related work
+  - External Integration: PubMed, CrossRef, IEEE Xplore APIs
 
-### Architecture
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript (strict mode)
-- **Styling**: Tailwind CSS with custom theme that will be implemented at a later date
-- **3D Graphics**: Three.js + React Three Fiber
-- **State Management**: Zustand
-- **Database**: Prisma ORM (PostgreSQL ready)
-- **Testing**: Vitest + React Testing Library
+2. MESS Parameter Database (Phase 2)
 
-### Project Structure
-```
-messai/
-├── app/                          # Next.js 14 App Router pages and API routes
-│   ├── api/                      # API endpoints
-│   │   ├── auth/                 # Authentication endpoints (NextAuth.js)
-│   │   ├── predictions/          # AI prediction engine API
-│   │   ├── papers/               # Literature database API
-│   │   ├── literature/           # Enhanced literature features
-│   │   ├── fuel-cell/            # Fuel cell specific APIs
-│   │   └── insights/             # Analytics and insights API
-│   ├── (pages)/                  # Page routes
-│   │   ├── page.tsx              # Main landing/catalog page
-│   │   ├── dashboard/            # User dashboard
-│   │   ├── literature/           # Literature browsing and search
-│   │   │   ├── [id]/             # Paper detail view
-│   │   │   ├── semantic-search/  # AI-powered search
-│   │   │   └── upload/           # Paper upload interface
-│   │   ├── models/               # 3D model showcase
-│   │   ├── systems/              # System configuration
-│   │   ├── platform/             # Platform overview
-│   │   ├── tools/                # Specialized tools
-│   │   │   ├── bioreactor/       # Bioreactor design tool
-│   │   │   └── electroanalytical/# Electroanalytical tool
-│   │   ├── algal-fuel-cell/      # Specialized algae simulator
-│   │   ├── experiment/           # Experiment management
-│   │   │   └── [id]/             # Individual experiment
-│   │   ├── insights/             # Analytics dashboard
-│   │   ├── onboarding/           # User onboarding flow
-│   │   ├── profile/              # User profile
-│   │   ├── settings/             # User settings
-│   │   │   ├── account/          # Account settings
-│   │   │   ├── preferences/      # User preferences
-│   │   │   ├── notifications/    # Notification settings
-│   │   │   └── security/         # Security settings
-│   │   ├── demo/                 # Demo-specific pages
-│   │   ├── marketing/            # Marketing landing
-│   │   └── research-dashboard/   # Research overview
-│   └── globals.css               # Global styles
-│
-├── components/                   # React components organized by type
-│   ├── 3d/                       # Three.js 3D visualization components
-│   │   ├── vanilla-*.tsx         # Pure Three.js implementations
-│   │   ├── safe-*.tsx            # Error-boundary wrapped versions
-│   │   └── worker-*.tsx          # Web Worker based renderers
-│   ├── fuel-cell/                # Fuel cell specific components
-│   ├── literature/               # Literature system components
-│   ├── algal-fuel-cell/          # Algae fuel cell components
-│   ├── lcars/                    # LCARS UI theme components
-│   ├── ui/                       # Generic UI components
-│   ├── unified/                  # Unified system components
-│   └── *.tsx                     # Core feature components
-│
-├── lib/                          # Business logic and utilities
-│   ├── ai-predictions.ts         # MESS prediction engine
-│   ├── fuel-cell-*.ts            # Fuel cell logic
-│   ├── auth/                     # Authentication utilities
-│   ├── literature/               # Literature data processing
-│   ├── types/                    # TypeScript type definitions
-│   ├── demo-mode.ts              # Demo mode configuration
-│   └── *.ts                      # Core utilities
-│
-├── scripts/                      # Development and maintenance scripts
-│   ├── literature/               # Literature system management
-│   │   ├── fetch-*.ts            # Paper fetching scripts
-│   │   ├── enhance-*.ts          # Enhancement pipelines
-│   │   ├── validate-*.ts         # Validation tools
-│   │   └── README.md             # Literature system docs
-│   ├── backup/                   # Database backup utilities
-│   ├── zen/                      # Zen browser integration
-│   ├── test-*.js                 # Testing scripts
-│   └── setup-*.ts                # Setup utilities
-│
-├── prisma/                       # Database schemas and migrations
-│   ├── schema.prisma             # Main Prisma schema
-│   ├── schema.*.prisma           # Environment-specific schemas
-│   ├── seed.ts                   # Database seeding
-│   └── *.db                      # SQLite databases (dev only)
-│
-├── tests/                        # Test suites organized by type
-│   ├── components/               # Component tests
-│   ├── api/                      # API endpoint tests
-│   ├── integration/              # User workflow tests
-│   ├── literature/               # Literature system tests
-│   ├── performance/              # Performance benchmarks
-│   └── setup.ts                  # Test configuration
-│
-├── docs/                         # Project documentation
-│   ├── API.md                    # API documentation
-│   ├── ARCHITECTURE.md           # System architecture
-│   ├── AUTH_*.md                 # Authentication guides
-│   ├── DATABASE_SETUP.md         # Database configuration
-│   └── *.md                      # Feature-specific docs
-│
-├── public/                       # Static assets
-│   ├── papers/                   # PDF storage (literature)
-│   └── test-*.html               # Standalone test pages
-│
-├── requirements/                 # Feature requirements specs
-│   └── YYYY-MM-DD-*/             # Timestamped requirements
-│       ├── metadata.json         # Requirement metadata
-│       └── *.md                  # Requirement documents
-│
-├── types/                        # Global TypeScript types
-│   └── mess-models.ts            # MESS system type definitions
-│
-├── backups/                      # Database and system backups
-│   └── *.json/.sql               # Timestamped backup files
-│
-├── hooks/                        # Custom React hooks
-│   └── useKeyboardShortcuts.ts   # Keyboard navigation
-│
-├── deployment/                   # Deployment configurations
-│   └── fuel-cell-config.md       # System-specific configs
-│
-├── reports/                      # Generated analysis reports
-│   └── pipeline-report-*.json    # Literature pipeline reports
-│
-├── messai-ai/                    # AI/ML experimentation workspace
-│   └── (experimental features)   # Isolated development area
-│
-├── messai-research/              # Research branch mirror
-│   └── (duplicate structure)     # Branch-specific development
-│
-├── vendor/                       # Third-party dependencies
-│   └── (vendored libraries)      # Local copies of dependencies
-│
-├── packages/                     # Monorepo packages (if applicable)
-│   └── (shared packages)         # Shared code between projects
-│
-├── Configuration Files           # Project configuration
-│   ├── next.config.js            # Next.js configuration
-│   ├── tailwind.config.ts        # Tailwind CSS config
-│   ├── tsconfig.json             # TypeScript config
-│   ├── vitest.config.ts          # Test runner config
-│   ├── docker-compose.yml        # Docker configuration
-│   └── vercel.json               # Deployment config
-│
-└── Root Files                    # Project root files
-    ├── CLAUDE.md                 # This file - AI assistant context
-    ├── README.md                 # Project documentation
-    ├── README.literature.md      # Literature system guide
-    ├── README.monorepo.md        # Monorepo setup guide
-    ├── SECURITY.md               # Security guidelines
-    ├── DEPLOYMENT.md             # Deployment instructions
-    ├── CHANGELOG.md              # Version history
-    ├── LICENSE                   # Project license
-    ├── ZEN_SETUP.md              # Zen browser setup
-    ├── package.json              # Dependencies and scripts
-    ├── middleware.ts             # Next.js middleware
-    ├── mess-parameters-json.json # MESS parameter definitions
-    └── ultrathinkplan.txt        # Development planning
-```
+  - 1500+ MESS Parameters: Comprehensive parameter library with 150 categories
+  - Custom Materials: User-defined electrodes and microbial species
+  - Compatibility Matrix: Material-microbe-configuration-operation interaction predictions
+  - Property Calculations: Auto-derived properties from basic inputs
+  - Validation Rules: Scientific accuracy enforcement
 
-#### Directory Purpose Guide
+2. MESS Model Design Catalog
 
-**Core Application (`app/`)**
-- Contains all Next.js pages and API routes
-- Follows App Router conventions
-- Each subdirectory represents a route or route group
-
-**Components (`components/`)**
-- Reusable React components
-- Organized by feature area or type
-- 3D components have multiple implementations for different use cases
-
-**Business Logic (`lib/`)**
-- Core application logic separated from UI
-- Prediction engines, data processing, utilities
-- Type definitions for TypeScript
-
-**Scripts (`scripts/`)**
-- Automation and maintenance tools
-- Literature system management
-- Database operations and testing
-
-**Database (`prisma/`)**
-- Prisma ORM schemas and migrations
-- Environment-specific configurations
-- Seeding scripts for development
-
-**Testing (`tests/`)**
-- Comprehensive test coverage
-- Organized by test type
-- Includes performance benchmarks
-
-**Documentation (`docs/`)**
-- Technical documentation
-- Architecture decisions
-- Setup and deployment guides
-
-## Development Guidelines
-
-### Code Style
-- Use TypeScript for all new code
-- Follow functional React patterns (hooks)
-- Maintain design consistency
-- Write tests for new features
-- Document scientific assumptions
-- Follow Test Driven Development practices
-
-### Important Commands
-```bash
-npm run dev          # Start dev server on port 3003
-npm test            # Run tests
-npm run lint        # Check code quality
-npm run format      # Format code with Prettier
-npm run db:studio   # Open Prisma Studio
-
-# Literature system management
-npm run literature:enhance-all    # Full enhancement pipeline
-npm run db:integrity             # Check database integrity
-npm run db:validate-links        # Validate external URLs
-npm run test:literature          # Run literature tests
-```
-
-## Scientific Context
-
-### Bioelectrochemical System Designs (13 types)
-- **Laboratory**: Benchtop electrochemical bioreactors, benthic fuel cells, micro lab-on-a-chip cells
-- **Pilot Scale**: 3D printed, benchtop bioreactor 
-- **Industrial**: Wastewater treatment, architectural facade 
-
-### Key Parameters
-- **Temperature**: Optimal 25-35°C
-- **pH**: Optimal ~7.0
-- **Substrate Concentration**: 1-2 g/L typical
-- **Power Output**: 5 mW/m² to 50 W/m² depending on design
-
-### Material Categories
-1. **Traditional**: Carbon cloth, graphite, stainless steel
-2. **Graphene-based**: GO, rGO, aerogel
-3. **Carbon Nanotubes**: SWCNT, MWCNT
-4. **MXenes**: Ti₃C₂Tₓ, V₂CTₓ (cutting-edge 2D materials)
-5. **Upcycled**: Reclaimed electronics with pre-treatments
-
-## AI Prediction Model
-
-The prediction engine (`lib/ai-predictions.ts`) uses:
-- Temperature factor (Arrhenius-based)
-- pH factor (bell curve around 7.0)
-- Substrate factor (Monod kinetics)
-- Design-specific multipliers
-- Random variation for realism
-
-## Literature System Guidelines
-
-### CRITICAL: Data Integrity Rules
-- **NEVER generate fake research papers or fabricated scientific data**
-- **ONLY work with real, verified papers from legitimate sources**
-- **Extrapolation allowed ONLY when explicitly requested and clearly marked**
-- **ALL papers must have verification (DOI, PubMed ID, arXiv ID, or verified PDF)**
-
-### Literature Database Loading Requirements
-Always ensure the literature database loads reliably by:
-
-1. **Error Handling**:
-   - Wrap all literature components with ErrorBoundary
-   - Implement retry logic for failed API calls
-   - Show meaningful error messages to users
-   - Log errors for debugging
-
-2. **Performance Optimization**:
-   - Implement pagination (default: 10-20 papers per page)
-   - Add loading states for all async operations
-   - Cache API responses where appropriate
-   - Use database indexes on frequently queried fields
-
-3. **Fallback Strategies**:
-   - If main API fails, show cached data if available
-   - Provide offline mode with limited functionality
-   - Gracefully degrade features rather than crash
-
-4. **Testing Requirements**:
-   - Test with empty database
-   - Test with large datasets (1000+ papers)
-   - Test network failures and timeouts
-   - Test authentication state changes
-
-### Data Extraction Standards
-When extracting data from papers for predictive models:
-
-1. **Structured Extraction**:
-   - System designs and configurations
-   - Microbial communities and performance metrics
-   - Electroanalytical methods and results
-   - Anode/cathode material performance data
-   - Maintenance and optimization protocols
-   - Operating conditions and their impacts
-
-2. **Quality Assurance**:
-   - Verify units and experimental conditions
-   - Cross-reference multiple papers for validation
-   - Flag contradictory findings for review
-   - Track confidence scores for extracted values
-
-3. **Model Integration**:
-   - New data must pass quality checks before integration
-   - Maintain traceability to source papers
-   - Version control for model parameter updates
-   - Test predictions against literature benchmarks
-
-### Dynamic Knowledge Base
-The literature system should continuously build upon predictive simulation models by:
-
-1. **Comprehensive Data Extraction**:
-   - System designs: geometry, dimensions, flow patterns
-   - Microbial communities: species composition, growth conditions
-   - Electroanalytical methods: voltammetry, impedance, chronoamperometry
-   - Material performance: degradation rates, surface modifications
-   - Maintenance protocols: cleaning, regeneration, troubleshooting
-   - Operating parameters: startup procedures, optimization strategies
-
-2. **Knowledge Graph Construction**:
-   - Link papers to materials, organisms, and performance metrics
-   - Track experimental conditions and outcomes
-   - Build relationships between different system configurations
-   - Identify optimal parameter combinations from literature
-
-3. **Predictive Model Enhancement**:
-   - Use extracted data to validate and refine predictions
-   - Identify parameter ranges from real experiments
-   - Incorporate new materials and methods as discovered
-   - Generate data-driven recommendations for users
-
-## Common Tasks
-
-## Requirements
-1. Always review the requirements we delinated together in 'requirements' directory when implementing
-2. Use ultrathink to ensure there are no conflicts and you are not breaking features
-
-
-### Adding a New System Design
-1. Update `app/page.tsx` with design details
-2. Add 3D model in `components/DesignSpecific3DModels.tsx`
-3. Update prediction multipliers in `lib/ai-predictions.ts`
-
-### Adding Electrode Materials
-1. Update `components/MESSConfigPanel.tsx`
-2. Add material properties and descriptions
-3. Update cost and efficiency ratings
-
-### Modifying Predictions
-1. Adjust factors in `lib/ai-predictions.ts`
-2. Update API route in `app/api/predictions/route.ts`
-3. Add tests for new prediction logic
-
-### Troubleshooting Literature Loading Issues
-1. Check database connection: `npm run db:studio`
-2. Verify API endpoints: `curl http://localhost:3003/api/papers`
-3. Check error logs in browser console
-4. Run integrity check: `npm run db:integrity`
-5. Clear cache and retry
-6. Verify authentication state if papers are missing
-7. Check pagination settings if results are limited
-
-### Working with Demo Mode
-1. **Check current mode**: Look for `getDemoConfig()` usage
-2. **Add demo content**: Place in appropriate demo data files
-3. **Hide authenticated features**: Add `auth-only-nav` class
-4. **External links**: Use production URL from config
-
-### Security Considerations for New Features
-1. **Input Validation**: Always validate and sanitize user inputs
-2. **Output Encoding**: Use React's built-in XSS protection
-3. **Database Queries**: Use Prisma's parameterized queries only
-4. **File Operations**: Validate file types and sizes
-5. **API Routes**: Check authentication and demo mode
-
-## 🔒 Security & Demo Mode Guidelines
-
-### Demo Mode vs Production
-MESSAi operates in two distinct modes with different security requirements:
-
-#### **Demo Mode (Default for Cloned Repos)**
-- **Environment**: Set `DEMO_MODE="true"` and `NEXT_PUBLIC_DEMO_MODE="true"`
-- **Authentication**: Completely disabled - no local auth forms
-- **User Menu**: Shows external links to messai.io for account creation
-- **Navigation**: Hides authenticated-only features (My Dashboard, My Experiments)
-- **Data**: Uses safe, curated demo content only
-- **Purpose**: Showcase platform capabilities without security complexity
-
-#### **Production Mode (messai.io)**
-- **Environment**: Set `DEMO_MODE="false"` and configure full auth
-- **Authentication**: Full NextAuth.js with database sessions
-- **User Menu**: Local login/signup forms
-- **Navigation**: Shows personal features when authenticated
-- **Data**: Real user data with proper protection
-- **Purpose**: Full research platform with user accounts
-
-### Security Best Practices
-
-#### **Environment Variables**
-- NEVER commit `.env.local` or any file with real credentials
-- Use `.env.example` as template with dummy values
-- Production secrets must be set in deployment environment only
-- Always check for accidental credential commits before pushing
-
-#### **Authentication Security**
-- In demo mode: Remove ALL authentication endpoints
-- Use `getDemoConfig()` utility to check mode consistently
-- External links must use `target="_blank" rel="noopener noreferrer"`
-- Production URLs should come from environment variables
-
-#### **API Route Protection**
-```typescript
-// Always check demo mode in API routes
-import { getDemoConfig } from '@/lib/demo-mode'
-
-export async function POST(request: Request) {
-  const demoConfig = getDemoConfig()
+  - Starting with 4, a growing collection of original Multi-scale MESS models in our production pipeline 
+  - Microfluidic algal fuel cell microscope slide chip with magnetic electrodes and hydrogel top layer membrane 
+  - Stacked fuel cell slide pile for series or parellel configurations to increase current and/or voltage 
+  - Benchtop bioelectrochemical reactor for lab experiments and culture cultivation
+  - Industrial scale waste-to-energy system with a focus on brewery 
   
-  if (demoConfig.isDemo) {
-    return NextResponse.json({ error: 'Not available in demo mode' }, { status: 403 })
-  }
-  
-  // Production logic here
-}
+
+3. Research-derived, AI-Enhanced Performance Prediction Engine
+
+  - Performance Predictions: Power output, efficiency, and optimization recommendations
+  - Multi-objective Optimization: Genetic algorithms, particle swarm, gradient descent
+  - Confidence Scoring: Prediction reliability based on training data quality
+  - Parameter Sensitivity Analysis: Understand impact of design choices
+
+
+  4. Interactive 3D Modeling Lab
+
+  - Real-time Rendering: Three.js-powered system visualization
+  - Complete Model Representation: Visual differentiation of electrode materials, chamber configurations, environmental parameters
+  - Biofilm Simulation: Dynamic microbial community visualization
+  - Flow Patterns: Animated substrate and electron flow
+  - Multi-scale Views: From molecular to system-level perspectives
+  - Real-time Cost Analysis: Material costs, efficiency ratings, and ROI calculations
+  - Run time-based experiments on digital models to have foundational knowledge from digital research before expensive and time-consuming real-world system experiements
+
+  5. Experiment Management Platform
+
+  - Complete Lifecycle: Setup → Running → Analysis → Sharing
+  - Real-time Monitoring: Live data collection and visualization
+  - Performance Benchmarking: Compare against predictions and reesarch literature
+  - Collaboration Tools: Public/private sharing, team workspaces
+  - Data Export: CSV, JSON, research-ready formats
+
+6. Publication and Funding Pipeline Platform (future features)
+- Accelerate research publication with templates that integrate your experiment outcomes, background research, and key findings
+- Grant funding matching and application template generation
+
+## 2. User Stories & Requirements
+  1. Research Scientist Persona
+
+  "As a research scientist, I need to..."
+
+  Literature Management
+
+  - Search scientific papers using MES-specific parameters (organism types, electrode materials, power output)
+  - Upload and manage my own research papers with proper metadata
+  - Link papers to experiments for accurate citation tracking
+  - Access cached results for improved performance when offline
+  - Filter searches by date range, journal, and performance metrics
+
+  Model Configuration
+
+  - Configure custom electrode materials beyond predefined options
+  - Select and customize microbial communities with specific properties
+  - Save successful configurations as reusable presets
+  - Share configurations with the research community
+  - Get real-time performance predictions based on my configurations
+
+  Experiment Tracking
+
+  - Track experiments from initial setup through completion
+  - Record time-series measurements (voltage, current, pH, temperature)
+  - Compare actual results with AI predictions
+  - Generate publication-ready reports and visualizations
+  - Collaborate with team members on shared experiments
+
+2. Laboratory Manager Persona
+
+  "As a lab manager, I need to..."
+
+  - Design cost-effective experimental setups within budget constraints
+  - Optimize material selection for performance vs. cost
+  - Track inventory of electrode materials and supplies
+  - Schedule experiments across multiple researchers
+  - Generate compliance reports for safety protocols
+
+3. Graduate Student Persona
+
+  "As a graduate student, I need to..."
+
+  - Learn about different MFC designs through interactive 3D models
+  - Access educational content about electrochemical principles
+  - Practice with guided tutorials and example configurations
+  - Receive compatibility warnings with educational explanations
+  - Track my learning progress through the platform
+
+4. Industry Engineer Persona
+
+  "As an industry engineer, I need to..."
+
+  - Scale laboratory designs to pilot and industrial applications
+  - Perform techno-economic analysis for commercial viability
+  - Integrate with existing wastewater treatment infrastructure
+  - Model long-term performance and maintenance requirements
+  - Generate reports for stakeholder presentations
+
+- **Phases:**   
+Phase 1: 
+- Core platform architecture
+  - Basic 3D visualization
+  - AI prediction engine
+  - Research paper database
+  - User authentication
+
+  Phase 2: Enhancement 
+
+  - Advanced material customization
+  - Preset sharing community
+  - Real-time sensor integration
+  - Mobile application
+  - Enhanced ML models
+
+  Phase 3: Integration 
+
+  - IoT device connectivity
+  - Laboratory equipment APIs
+  - Blockchain research verification
+  - Multi-language support
+  - API marketplace
+
+  Phase 4: Scale
+
+  - Global research consortium
+  - AR/VR visualization
+  - Quantum computing optimization
+  - Automated lab integration
+  - Enterprise features
+
+  Long-term Vision (2026+)
+
+  Research Acceleration
+
+  - AI Research Assistant: Automated literature review and hypothesis generation
+  - Predictive Maintenance: ML-driven system health monitoring
+  - Materials Discovery: AI-guided new material recommendations
+
+  Global Collaboration
+
+  - Research Networks: Connected labs sharing real-time data
+  - Standardization: Industry-standard protocols and benchmarks
+  - Open Science: Reproducible research with versioned experiments
+
+  Sustainability Impact
+
+  - Carbon Tracking: Environmental impact assessment
+  - Circular Economy: Waste-to-energy optimization
+  - Policy Integration: Regulatory compliance automation
+
+
+Success Metrics
+
+  Platform Adoption
+
+  - 500+ active researchers within first year
+  - 50+ universities using for education
+  - 10,000+ experiments tracked
+  - 100+ peer-reviewed papers citing MESSAI
+
+  Scientific Impact
+
+  - 20% improvement in prediction accuracy
+  - 30% reduction in experiment design time
+  - 5x increase in successful configurations
+  - 1000+ new material combinations tested
+
+  Business Metrics
+
+  - 80% user retention rate
+  - 50% conversion to premium features
+  - 90% user satisfaction score
+  - 25% quarterly growth rate
+
+
+
+  Contributing & Community
+
+  Open Source Philosophy
+
+  MESSAI is committed to open science and collaborative development. The core platform is MIT licensed, encouraging:
+  - Community contributions
+  - Fork for specialized applications
+  - Integration with other tools
+  - Transparent development
+
+  Contribution Areas
+
+  - Core Features: Platform enhancements
+  - Scientific Models: Algorithm improvements
+  - Documentation: Tutorials and guides
+  - Translations: Multi-language support
+  - Integrations: Third-party connections
+
+  Community Channels
+
+  - GitHub Discussions for technical topics
+  - Discord for real-time collaboration
+  - Monthly research webinars
+  - Annual user conference
+
+
+- **Key Architecture:** Nx Monorepo [Claude help here]
+- **Development Strategy:** Independent worktrees for each of the core features with sub-agents working within same context but on different, coordinated workstreams [Claude help here]
+
+## 2. Project Structure
+
+  Technology Stack
+
+  - Frontend: Next.js 15, React 18, TypeScript 5 (strict mode), WebSocket for real-time updates
+  - 3D Graphics: Three.js, React Three Fiber, WebGL
+  - Styling: Tailwind CSS, easy custom theme switching
+  - State: Zustand, React Context
+  - Database: PostgreSQL (prod), SQLite (dev), Prisma ORM
+  - Auth: NextAuth.js with OAuth providers
+  - Testing: Vitest, React Testing Library
+  - Deployment: Vercel, Docker support
+
+
+
+**⚠️ CRITICAL: AI agents MUST read the [Project Structure documentation](/docs/ai-context/project-structure.md) before attempting any task to understand the complete technology stack, file tree and project organization.**
+
+[Project Name] follows a [describe architecture pattern]. For the complete tech stack and file tree structure, see [docs/ai-context/project-structure.md](/docs/ai-context/project-structure.md).
+
+## 3. Coding Standards & AI Instructions
+
+### General Instructions
+- Your most important job is to manage your own context. Always read any relevant files BEFORE planning changes.
+- When updating documentation, keep updates concise and on point to prevent bloat.
+- Write code following KISS, YAGNI, and DRY principles.
+- When in doubt follow proven best practices for implementation.
+- Do not commit to git without user approval.
+- Do not run any servers, rather tell the user to run servers for testing.
+- Always consider industry standard libraries/frameworks first over custom implementations.
+- Never mock anything. Never use placeholders. Never omit code.
+- Apply SOLID principles where relevant. Use modern framework features rather than reinventing solutions.
+- Be brutally honest about whether an idea is good or bad.
+- Make side effects explicit and minimal.
+- Design database schema to be evolution-friendly (avoid breaking changes).
+
+
+### File Organization & Modularity
+- Default to creating multiple small, focused files rather than large monolithic ones
+- Each file should have a single responsibility and clear purpose
+- Keep files under 350 lines when possible - split larger files by extracting utilities, constants, types, or logical components into separate modules
+- Separate concerns: utilities, constants, types, components, and business logic into different files
+- Prefer composition over inheritance - use inheritance only for true 'is-a' relationships, favor composition for 'has-a' or behavior mixing
+
+- Follow existing project structure and conventions - place files in appropriate directories. Create new directories and move files if deemed appropriate.
+- Use well defined sub-directories to keep things organized and scalable
+- Structure projects with clear folder hierarchies and consistent naming conventions
+- Import/export properly - design for reusability and maintainability
+
+### Type Hints (REQUIRED)
+- **Always** use type hints for function parameters and return values
+- Use `from typing import` for complex types
+- Prefer `Optional[T]` over `Union[T, None]`
+- Use Pydantic models for data structures
+
+```python
+# Good
+from typing import Optional, List, Dict, Tuple
+
+async def process_audio(
+    audio_data: bytes,
+    session_id: str,
+    language: Optional[str] = None
+) -> Tuple[bytes, Dict[str, Any]]:
+    """Process audio through the pipeline."""
+    pass
 ```
 
-#### **Demo Content Guidelines**
-- Use realistic but fictional data
-- No real researcher names without permission
-- No unpublished research data
-- Performance metrics should be clearly marked as examples
-- Email addresses should use example.com domain
+### Naming Conventions
+- **Classes**: PascalCase (e.g., `VoicePipeline`)
+- **Functions/Methods**: snake_case (e.g., `process_audio`)
+- **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_AUDIO_SIZE`)
+- **Private methods**: Leading underscore (e.g., `_validate_input`)
+- **Pydantic Models**: PascalCase with `Schema` suffix (e.g., `ChatRequestSchema`, `UserSchema`)
 
-### Implementation Checklist
-When implementing features, verify:
-- [ ] Demo mode properly disables authentication
-- [ ] External links to production are clearly marked
-- [ ] No sensitive data in demo content
-- [ ] API routes check demo mode
-- [ ] Navigation respects authentication state
-- [ ] Environment variables are properly separated
 
-## Testing Approach
+### Documentation Requirements
+- Every module needs a docstring
+- Every public function needs a docstring
+- Use Google-style docstrings
+- Include type information in docstrings
 
-- **Unit Tests**: Individual functions and components
-- **Integration Tests**: User workflows
-- **API Tests**: Endpoint validation
-- **Performance Tests**: 3D rendering optimization
-- **Accessibility Tests**: WCAG compliance
-- **Literature Tests**: Loading states, error handling, data integrity
-- **Security Tests**: Demo mode verification, API protection, input validation
+```python
+def calculate_similarity(text1: str, text2: str) -> float:
+    """Calculate semantic similarity between two texts.
 
-### Security Testing
-- **Demo Mode Tests**: Verify auth is properly disabled
-- **API Protection Tests**: Ensure routes check authentication
-- **Input Validation Tests**: Test against malicious inputs
-- **Navigation Tests**: Verify auth-based visibility
-- **External Link Tests**: Check proper attributes
+    Args:
+        text1: First text to compare
+        text2: Second text to compare
 
-## Deployment
+    Returns:
+        Similarity score between 0 and 1
 
-### Security Configuration
-
-#### **Development (Demo Mode)**
-- Local with SQLite
-- Demo mode enabled by default
-- No real authentication required
-- Safe for public repositories
-
-#### **Production (messai.io)**
-- Vercel + PostgreSQL
-- Full authentication enabled
-- Environment variables in Vercel dashboard
-- SSL/TLS required
-- Regular security audits
-
-### Pre-Deployment Checklist
-- [ ] Remove all console.log with sensitive data
-- [ ] Verify demo mode is default in .env.example
-- [ ] Check no credentials in codebase
-- [ ] Validate all API routes have proper protection
-- [ ] Test demo mode functionality
-- [ ] Verify external links work correctly
-
-- **Docker**: Full stack available with docker-compose
-- **CI/CD**: GitHub Actions configured
-
-## Known Considerations
-
-1. **3D Performance**: May need optimization for older devices
-2. **Scientific Accuracy**: All predictions based on published research
-3. **Browser Support**: WebGL required for 3D visualization
-4. **Mobile Experience**: Responsive but optimized for desktop
-5. **Literature Loading**: Large datasets may require pagination optimization
-6. **API Rate Limits**: External APIs (CrossRef, PubMed) have rate limits
-7. **Data Integrity**: Literature system must only contain verified research
-
-## Future Enhancements
-
-- Real-time sensor integration
-- Collaborative experiments
-- Machine learning model improvements
-- Mobile native app
-- Multi-language support
-
-## Important Files to Review
-
-- `app/page.tsx` - Main design catalog
-- `components/MESS3DModel.tsx` - Core 3D visualization
-- `lib/ai-predictions.ts` - Prediction logic
-- `components/algal-fuel-cell/` - Specialized algae simulator
-- `prisma/schema.prisma` - Database structure
-- `app/literature/` - Literature browsing interface
-- `app/api/papers/` - Paper API endpoints
-- `scripts/literature/` - Enhancement pipeline
-- `components/ErrorBoundary.tsx` - Error handling wrapper
-- `scripts/literature/README.md` - Literature system documentation
-
-### Security-Critical Files
-- `lib/demo-mode.ts` - Demo mode configuration
-- `middleware.ts` - Route protection logic
-- `components/ClientLayout.tsx` - Navigation visibility
-- `components/UserMenu.tsx` - Authentication UI
-- `.env.example` - Safe environment template
-- `app/api/*` - All API routes need protection
-
-## Research References
-
-The platform is based on peer-reviewed research:
-- Logan, B.E. (2008). Microbial Fuel Cells (comprehensive MFC reference)
-- Rozendal, R.A. et al. (2008). Hydrogen Production with MECs
-- Wang, H. & Ren, Z.J. (2013). Bioelectrochemical Metal Recovery
-- Anasori, B. et al. (2017). 2D Metal Carbides (MXenes)
-- Rabaey, K. & Rozendal, R.A. (2010). Microbial Electrosynthesis
-
-## Contact
-
-For scientific questions or collaborations, the platform targets:
-- University research labs
-- Environmental engineering departments
-- Wastewater treatment facilities
-- Sustainable architecture firms
-
-## 🤖 AI Assistant Security Guidelines
-
-When working on MESSAi, always:
-
-1. **Assume Demo Mode First**: Default to demo-safe implementations
-2. **Protect Credentials**: Never generate real API keys or passwords
-3. **Check Before Committing**: Verify no sensitive data in changes
-4. **Use Safe Examples**: Demo data should be clearly fictional
-5. **Validate Everything**: Input validation is mandatory
-6. **Document Security**: Note security implications in comments
-7. **Test Both Modes**: Ensure features work in demo and production
-
-### Red Flags to Avoid
-- Hardcoded credentials or API keys
-- Real email addresses in demo data
-- Bypassing authentication checks
-- Direct database queries without Prisma
-- Missing input validation
-- Unprotected API routes
-- Local storage of sensitive data
-
-    - MESS Parameters JSON Schema Compliance
-      - How to use the 500+ parameters from mess-parameters-json.json
-      - Parameter categories (18 major categories, 80 subcategories)
-      - Electrode configuration standards (separate anode/cathode parameters)
-      - Type safety and validation requirements
-
-    2. Conflict Prevention Between System Types
-
-    - MESS vs Fuel Cell Parameter Mapping
-      - How MFCConfig relates to fuel cell parameters
-      - Avoiding parameter collisions between systems
-      - Proper parameter inheritance and overrides
-      - Interface type definitions for different system types
-
-    3. Fuel Cell Systems Standards
-
-    - White Paper Compliance Requirements
-      - 700 bar hydrogen storage systems
-      - Multi-fidelity modeling approach (high/medium/low)
-      - Control system integration (thermal, pressure, humidity, flow)
-      - Gas composition management (N2, O2, H2, H2O)
-      - Performance metrics and safety thresholds
-
-    4. Implementation Guidelines
-
-    - Parameter Validation Rules
-      - Type checking for electrode configurations
-      - Range validation for operating conditions
-      - Cross-system parameter compatibility checks
-      - Error handling for invalid combinations
-
-    5. Code Examples and Best Practices
-
-    - Interface definitions for parameter structures
-    - How to extend existing configs without conflicts
-    - Validation functions for parameter checking
-    - Migration strategies for adding new parameters
-
-    Key Points to Address
-
-    1. Parameter Consistency: Ensure MESS and fuel cell parameters use consistent naming and units
-    2. Type Safety: Leverage TypeScript interfaces to prevent configuration errors  
-    3. Validation: Add runtime checks for parameter ranges and compatibility
-    4. Documentation: Clear examples of proper parameter usage
-    5. Conflict Resolution: Guidelines for handling overlapping parameter spaces
-    6. Future-Proofing: How to add new system types without breaking existing ones
-
-    Integration with Existing CLAUDE.md
-
-    - Will be added as a new major section after "AI Prediction Model"
-    - Cross-references existing sections on system configuration
-    - Builds on the requirements directory structure mentioned
-    - Aligns with scientific accuracy and testing approach guidelines
-
-## 📚 Research System Architecture & Knowledge Extraction
-
-### Overview
-MESSAi uses a sophisticated research collection system to build a queryable knowledge base from scientific papers. This system is developed in the messai-research branch and shared across the platform.
-
-### Branch Structure
-- **messai-research branch**: Primary development of research tools
-- **Main branch**: Integration point for stable research features
-- **messai-ai-clean branch**: ML models trained on research data
-
-### Database Architecture
-The research system uses a dual-database approach:
-
-1. **Research Database (SQLite - research.db)**
-   - Location: `/messai-research/prisma/research.db`
-   - Content: 6,022+ papers with enhanced extraction
-   - Schema: Optimized for knowledge extraction
-   - Purpose: Research and development
-
-2. **Production Database (PostgreSQL)**
-   - Location: Prisma Cloud
-   - Content: 345 verified papers
-   - Schema: Production-ready with user associations
-   - Purpose: Live platform features
-
-### Enhanced Research Paper Schema
-The ResearchPaper model includes comprehensive fields for scientific data extraction:
-
-```typescript
-// Core metadata fields
-{
-  title: string
-  authors: string[]         // JSON array
-  abstract: string
-  doi?: string             // Unique identifiers
-  pubmedId?: string
-  arxivId?: string
-  ieeeId?: string
-  
-  // Performance extraction
-  organismTypes?: string[]  // Microbial species
-  anodeMaterials?: string[] // Electrode materials
-  cathodeMaterials?: string[]
-  powerOutput?: number      // mW/m²
-  efficiency?: number       // percentage
-  systemType?: string       // MFC, MEC, MDC, MES
-  
-  // AI-enhanced fields
-  aiSummary?: string        // Concise summary
-  aiKeyFindings?: string[]  // Key findings
-  aiMethodology?: string    // Methods summary
-  aiImplications?: string   // Research implications
-  aiDataExtraction?: object // Structured data
-  aiInsights?: string       // AI analysis
-  aiConfidence?: number     // 0-1 confidence score
-  
-  // Comprehensive parameters
-  experimentalConditions?: object  // Temperature, pH, duration
-  reactorConfiguration?: object    // Volume, design, dimensions
-  electrodeSpecifications?: object // Surface area, modifications
-  biologicalParameters?: object    // Inoculum, biofilm age
-  performanceMetrics?: object      // Extended metrics
-  operationalParameters?: object   // HRT, OLR, resistance
-  electrochemicalData?: object     // Impedance, voltammetry
-  timeSeriesData?: object          // Performance over time
-  economicMetrics?: object         // Cost analysis
-  
-  // Enhanced categorization
-  microbialCommunity?: object      // Species composition
-  microbialClassification?: object // Taxonomic data
-  systemConfiguration?: object     // Architecture details
-  performanceBenchmarks?: object   // Comparative metrics
-}
+    Raises:
+        ValueError: If either text is empty
+    """
+    pass
 ```
 
-### Knowledge Extraction Pipeline
-```
-Collection → Validation → Extraction → Domain Mapping → Integration
-    ↓            ↓           ↓              ↓              ↓
- 3 APIs      Quality     Patterns      5 Domains      Knowledge
-            Scoring                                     Graph
-```
+### Security First
+- Never trust external inputs - validate everything at the boundaries
+- Keep secrets in environment variables, never in code
+- Log security events (login attempts, auth failures, rate limits, permission denials) but never log sensitive data (audio, conversation content, tokens, personal info)
+- Authenticate users at the API gateway level - never trust client-side tokens
+- Use Row Level Security (RLS) to enforce data isolation between users
+- Design auth to work across all client types consistently
+- Use secure authentication patterns for your platform
+- Validate all authentication tokens server-side before creating sessions
+- Sanitize all user inputs before storing or processing
 
-### Extraction Patterns (messai-research)
-```typescript
-const EXTRACTION_PATTERNS = {
-  powerDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mW\/m[²2]|W\/m[²2])/gi,
-  currentDensity: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mA\/m[²2]|A\/m[²2])/gi,
-  voltage: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*(mV|V)\s+(?:at|@)/gi,
-  efficiency: /(\d+(?:\.\d+)?)\s*(?:±\s*\d+(?:\.\d+)?)?\s*%\s*(?:coulombic|CE|energy)/gi,
-  materials: /(?:anode|cathode).*?(?:carbon|graphite|steel|copper|platinum)/gi,
-  organisms: /(?:Geobacter|Shewanella|Pseudomonas|mixed culture|consortium)/gi
-}
-```
+### Error Handling
+- Use specific exceptions over generic ones
+- Always log errors with context
+- Provide helpful error messages
+- Fail securely - errors shouldn't reveal system internals
 
-### Core Scripts (messai-research branch)
-1. **real-paper-collection.ts**: Multi-source paper collection
-   - CrossRef API: DOI-verified papers
-   - PubMed API: Biomedical literature
-   - arXiv API: Preprints
-   - 19 targeted search queries
-   - Expected yield: ~845 papers per run
+### Observable Systems & Logging Standards
+- Every request needs a correlation ID for debugging
+- Structure logs for machines, not humans - use JSON format with consistent fields (timestamp, level, correlation_id, event, context) for automated analysis
+- Make debugging possible across service boundaries
 
-2. **paper-quality-validator.ts**: Quality scoring (0-100)
-   - Verification score (DOI/PubMed/arXiv presence)
-   - Completeness score (metadata fields)
-   - Relevance score (keyword matching)
-   - Data richness (extracted metrics)
-   - Recency factor (publication date)
-   - Impact assessment (citations if available)
+### State Management
+- Have one source of truth for each piece of state
+- Make state changes explicit and traceable
+- Design for multi-service voice processing - use session IDs for state coordination, avoid storing conversation data in server memory
+- Keep conversation history lightweight (text, not audio)
 
-3. **enhanced-data-extractor.ts**: Pattern-based extraction
-   - Performance metrics extraction
-   - Material classification
-   - Organism identification
-   - System configuration detection
-   - Confidence scoring per extraction
+### API Design Principles
+- RESTful design with consistent URL patterns
+- Use HTTP status codes correctly
+- Version APIs from day one (/v1/, /v2/)
+- Support pagination for list endpoints
+- Use consistent JSON response format:
+  - Success: `{ "data": {...}, "error": null }`
+  - Error: `{ "data": null, "error": {"message": "...", "code": "..."} }`
 
-4. **clean-abstract-html.ts**: Text normalization
-   - JATS XML tag removal
-   - HTML entity decoding
-   - Unicode normalization
 
-### Research Database Statistics
-- **Total Papers**: 6,022 (messai-research branch)
-- **Verified Papers**: 426 with DOI/PubMed/arXiv IDs
-- **Papers with Abstracts**: 5,700+
-- **Performance Data**: 1,200+ papers
-- **Power Output Data**: 850+ papers
-- **Efficiency Data**: 750+ papers
-- **Unique Materials**: 127 identified
-- **Unique Organisms**: 99 identified
+## 4. Multi-Agent Workflows & Context Injection
 
-### Real Papers Filtering
-The system distinguishes between verified research and AI-enhanced content:
+### Automatic Context Injection for Sub-Agents
+When using the Task tool to spawn sub-agents, the core project context (CLAUDE.md, project-structure.md, docs-overview.md) is automatically injected into their prompts via the subagent-context-injector hook. This ensures all sub-agents have immediate access to essential project documentation without the need of manual specification in each Task prompt.
 
-```typescript
-const realSources = [
-  'crossref_api',
-  'crossref_comprehensive',
-  'pubmed_api',
-  'pubmed_comprehensive',
-  'arxiv_api',
-  'local_pdf',
-  'web_search',
-  'comprehensive_search',
-  'advanced_electrode_biofacade_search',
-  'extensive_electrode_biofacade_collection'
-]
 
-// API filtering
-const isRealPaper = (paper) => {
-  return realSources.includes(paper.source) || 
-         paper.doi || 
-         paper.arxivId || 
-         paper.pubmedId
-}
+## 5. MCP Server Integrations
+
+### Gemini Consultation Server
+**When to use:**
+- Complex coding problems requiring deep analysis or multiple approaches
+- Code reviews and architecture discussions
+- Debugging complex issues across multiple files
+- Performance optimization and refactoring guidance
+- Detailed explanations of complex implementations
+- Highly security relevant tasks
+
+**Automatic Context Injection:**
+- The kit's `gemini-context-injector.sh` hook automatically includes two key files for new sessions:
+  - `/docs/ai-context/project-structure.md` - Complete project structure and tech stack
+  - `/MCP-ASSISTANT-RULES.md` - Your project-specific coding standards and guidelines
+- This ensures Gemini always has comprehensive understanding of your technology stack, architecture, and project standards
+
+**Usage patterns:**
+```python
+# New consultation session (project structure auto-attached by hooks)
+mcp__gemini__consult_gemini(
+    specific_question="How should I optimize this voice pipeline?",
+    problem_description="Need to reduce latency in real-time audio processing",
+    code_context="Current pipeline processes audio sequentially...",
+    attached_files=[
+        "src/core/pipelines/voice_pipeline.py"  # Your specific files
+    ],
+    preferred_approach="optimize"
+)
+
+# Follow-up in existing session
+mcp__gemini__consult_gemini(
+    specific_question="What about memory usage?",
+    session_id="session_123",
+    additional_context="Implemented your suggestions, now seeing high memory usage"
+)
 ```
 
-### API Structure
-```typescript
-// Domain-based queries
-GET /api/research/domains/anodes?material=carbon_cloth
-GET /api/research/domains/cathodes?reaction=oxygen_reduction
-GET /api/research/domains/microbes?species=geobacter
-GET /api/research/domains/performance?metric=power_density
+**Key capabilities:**
+- Persistent conversation sessions with context retention
+- File attachment and caching for multi-file analysis
+- Specialized assistance modes (solution, review, debug, optimize, explain)
+- Session management for complex, multi-step problems
 
-// Cross-domain insights
-GET /api/research/insights/materials-performance
-GET /api/research/insights/microbe-compatibility
-GET /api/research/insights/optimal-conditions
+**Important:** Treat Gemini's responses as advisory feedback. Evaluate the suggestions critically, incorporate valuable insights into your solution, then proceed with your implementation.
 
-// Paper filtering
-GET /api/papers?realOnly=true&hasPerformanceData=true
-GET /api/papers?systemType=MFC&minPowerOutput=1000
+### Context7 Documentation Server
+**Repository**: [Context7 MCP Server](https://github.com/upstash/context7)
+
+**When to use:**
+- Working with external libraries/frameworks (React, FastAPI, Next.js, etc.)
+- Need current documentation beyond training cutoff
+- Implementing new integrations or features with third-party tools
+- Troubleshooting library-specific issues
+
+**Usage patterns:**
+```python
+# Resolve library name to Context7 ID
+mcp__context7__resolve_library_id(libraryName="react")
+
+# Fetch focused documentation
+mcp__context7__get_library_docs(
+    context7CompatibleLibraryID="/facebook/react",
+    topic="hooks",
+    tokens=8000
+)
 ```
 
-### Scientific Domains Coverage
-1. **Anode Domain**: 2,100+ papers
-2. **Cathode Domain**: 1,800+ papers
-3. **Microbe Domain**: 1,500+ papers
-4. **Environment Domain**: 2,200+ papers
-5. **Performance Domain**: 1,200+ papers
+**Key capabilities:**
+- Up-to-date library documentation access
+- Topic-focused documentation retrieval
+- Support for specific library versions
+- Integration with current development practices
 
-### Integration Points
-- Research data feeds ML predictions
-- Extracted parameters enhance experiment design
-- Knowledge graphs guide material selection
-- Performance benchmarks validate predictions
-- Cross-reference validation ensures data quality
 
-## 🔄 Multi-Branch Development Workflow
 
-### Active Branches and Their Purposes
-1. **master**: Production-ready integrated features
-2. **messai-research**: Research system development
-3. **messai-ai-clean**: ML/AI experimentation
-4. **private/**: Marketing site (not public)
+## 6. Post-Task Completion Protocol
+After completing any coding task, follow this checklist:
 
-### Research System Workflow
-```
-messai-research (develop) → master (integrate) → all branches (use)
-       ↓                        ↓                      ↓
-  New features            Stable features      Shared knowledge
-```
+### 1. Type Safety & Quality Checks
+Run the appropriate commands based on what was modified:
+- **Python projects**: Run mypy type checking
+- **TypeScript projects**: Run tsc --noEmit
+- **Other languages**: Run appropriate linting/type checking tools
 
-### Database Synchronization Strategy
-1. **Development**: Use messai-research SQLite for rapid iteration
-2. **Integration**: Migrate verified data to PostgreSQL
-3. **Production**: Serve from PostgreSQL with caching
-4. **Backup**: Regular exports of both databases
-
-### Shared Components
-- `/scripts/research/`: Collection and processing scripts
-- `/lib/research/`: Core extraction logic
-- `/app/api/research/`: API endpoints
-- `/app/research/`: UI components
-
-## 🧬 Scientific Domain Data Management
-
-### Domain-Driven Architecture
-All scientific data is organized into interconnected domains that map to real-world research areas:
-
-#### 1. Anode Domain (messai-research enhanced)
-```typescript
-interface AnodeDomain {
-  materials: {
-    carbonBased: ['carbon cloth', 'graphite felt', 'carbon paper']
-    grapheneFamily: ['GO', 'rGO', 'graphene aerogel']
-    nanotubes: ['SWCNT', 'MWCNT', 'CNT arrays']
-    mxenes: ['Ti₃C₂Tₓ', 'V₂CTₓ', 'Mo₂CTₓ']
-    polymers: ['PEDOT', 'polyaniline', 'polypyrrole']
-  }
-  biofilms: {
-    species: string[]
-    thickness: number // μm
-    coverage: number // %
-  }
-  modifications: {
-    chemical: string[]
-    physical: string[]
-    biological: string[]
-  }
-  performance: {
-    currentDensity: number // mA/cm²
-    chargeTransfer: number // Ω
-    biocompatibility: number // 0-10
-  }
-}
-```
-
-#### 2. Cathode Domain
-```typescript
-interface CathodeDomain {
-  materials: {
-    metals: ['platinum', 'copper', 'stainless steel', 'nickel']
-    carbonBased: ['activated carbon', 'carbon cloth', 'graphite']
-    composites: ['Pt/C', 'metal oxides', 'conductive polymers']
-  }
-  catalysts: {
-    precious: ['Pt', 'Pd', 'Ru', 'Ir']
-    nonPrecious: ['Fe-N-C', 'Co-N-C', 'MnO₂']
-    biological: ['laccase', 'bilirubin oxidase']
-  }
-  reactions: {
-    ORR: 'oxygen reduction'
-    HER: 'hydrogen evolution'
-    metalRecovery: string[]
-    CO2reduction: string[]
-  }
-  performance: {
-    overpotential: number // mV
-    exchangeCurrent: number // A/cm²
-    durability: number // hours
-  }
-}
-```
-
-#### 3. Performance Metrics Extracted
-- **From messai-research**: 1,200+ papers with performance data
-- **Power density**: 850+ data points (mW/m²)
-- **Current density**: 750+ data points (mA/cm²)
-- **Efficiency**: 650+ data points (%)
-- **Treatment**: 500+ data points (% removal)
-
-### Data Flow Between Branches
-```
-messai-research → Extraction → Domain Mapping → Shared Database → All Features
-     ↓                ↓             ↓                ↓              ↓
-  Papers         Patterns      Categories        PostgreSQL      UI/API
-```
-
-## 🔗 Cross-Branch Integration Strategy
-
-### Shared Resources Management
-Resources that must be synchronized across branches:
-
-1. **Research Database**
-   - Primary: messai-research (6,022 papers)
-   - Production: master (345 verified papers)
-   - ML Training: messai-ai-clean (uses both)
-
-2. **API Endpoints**
-   - `/api/papers/*`: Basic CRUD (all branches)
-   - `/api/research/*`: Advanced queries (messai-research)
-   - `/api/predictions/*`: ML integration (messai-ai-clean)
-
-3. **Extraction Patterns**
-   - Location: `/lib/research/patterns.ts`
-   - Shared via: Git subtree or symlinks
-   - Updates: Coordinated across branches
-
-### Integration Workflow
-1. **Feature Development**: messai-research branch
-2. **Testing**: Isolated branch testing
-3. **Integration**: Merge to master
-4. **Distribution**: Cherry-pick to other branches
-
-### Avoiding Conflicts
-- Research system owned by messai-research branch
-- Other branches consume via API
-- Database migrations coordinated
-- Shared types in `/types/research.ts`
-
-## 🛠️ Development Guidelines for Multi-Branch Work
-
-### Before Starting Research Work
-1. Check which branch owns the feature:
-   - Research collection: messai-research
-   - ML predictions: messai-ai-clean
-   - Production features: master
-   - Marketing: private/
-
-2. Verify database state:
-   ```bash
-   # Check messai-research database
-   cd messai-research && npx prisma studio
-   
-   # Check main database
-   cd .. && npx prisma studio
-   ```
-
-3. Coordinate with active agents:
-   - Check git status in all worktrees
-   - Review recent commits
-   - Communication via PR descriptions
-
-### Research System Best Practices
-1. **Data Collection**: Only in messai-research branch
-2. **API Development**: Test in branch, deploy to master
-3. **UI Changes**: Develop in master, backport if needed
-4. **Database Changes**: Always migrate both databases
-
-### Shared Configuration
-Create `.env.shared` for common settings:
-```env
-# Shared across all branches
-RESEARCH_API_BASE=/api/research
-PAPERS_PER_PAGE=10
-EXTRACTION_CONFIDENCE_MIN=0.7
-```
-
-## 🏗️ Repository Architecture & Multi-Domain Strategy
-
-### Domain Separation
-- **app.messai.io**: Open-source scientific platform
-- **messai.io**: Commercial marketing site + user platform
-
-### Complete Repository Structure
-```
-/messai/                        # Public GitHub repository
-├── app/                       # Next.js app directory (PUBLIC)
-│   ├── page.tsx              # Landing page
-│   ├── tools/                # Scientific tools
-│   │   ├── bioreactor/      # Bioreactor design
-│   │   └── electroanalytical/ # Analysis tools
-│   ├── research/             # Research papers browser
-│   ├── models/               # MESS models showcase
-│   └── api/                  # Public API routes
-├── components/                # React components (PUBLIC)
-│   ├── 3d/                  # Three.js visualizations
-│   ├── ui/                  # UI components
-│   └── charts/              # Data visualizations
-├── lib/                      # Core libraries (PUBLIC)
-│   ├── domains/             # Scientific domains
-│   ├── ai-predictions.ts    # Basic ML
-│   └── db.ts                # Database utilities
-├── prisma/                   # Database schema
-│   ├── schema.prisma        # Main schema
-│   └── migrations/          # Version history
-├── public/                   # Static assets
-├── scripts/                  # Utility scripts
-│   └── research/            # Paper processing
-├── tests/                    # Test suites
-├── docs/                     # Documentation
-├── shared/                   # Shared between domains
-│   ├── types/               # TypeScript definitions
-│   ├── utils/               # Common utilities
-│   └── constants/           # Shared constants
-├── private/                  # PRIVATE (not on GitHub)
-│   ├── app/                 # Marketing site
-│   ├── auth/                # Authentication
-│   ├── components/          # Private UI
-│   └── package.json         # Separate deps
-├── messai-ai/               # AI worktree (branch: messai-ai-clean)
-│   ├── lib/                 # Advanced ML
-│   ├── components/          # AI visualizations
-│   └── api/                 # ML endpoints
-└── messai-research/         # Research worktree (branch: messai-research)
-    ├── prisma/              # Research database
-    ├── scripts/             # Collection tools
-    └── lib/                 # Extraction logic
-```
-
-### Import Rules
-1. Public → Public: ✅ Allowed
-2. Public → Shared: ✅ Allowed
-3. Private → Public: ✅ Allowed
-4. Private → Shared: ✅ Allowed
-5. Public → Private: ❌ Forbidden
-6. Shared → Private: ❌ Forbidden
-
-## 🧪 Experiment Management System
-
-### Experiment Lifecycle
-MESSAi supports complete experiment tracking from design to analysis:
-
-#### Database Schema
-```typescript
-// Core experiment model (see prisma/schema.prisma)
-model Experiment {
-  id           String            @id @default(cuid())
-  name         String
-  userId       String            // Links to User (private platform only)
-  designId     String            // Links to MFCDesign
-  status       String            @default("SETUP") // SETUP, RUNNING, COMPLETED, FAILED
-  parameters   String            // JSON configuration
-  isPublic     Boolean           @default(false)
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  
-  // Relations
-  design       MFCDesign         @relation(...)
-  measurements Measurement[]      // Time-series data
-  papers       ExperimentPaper[] // Research references
-}
-
-model Measurement {
-  id           String     @id @default(cuid())
-  experimentId String
-  voltage      Float      // V
-  current      Float      // mA
-  power        Float      // mW
-  temperature  Float      // °C
-  ph           Float
-  substrate    Float?     // g/L
-  notes        String?
-  timestamp    DateTime   @default(now())
-}
-```
-
-#### Experiment States
-1. **SETUP**: Configuration and preparation
-   - Select system design
-   - Configure materials
-   - Set operating parameters
-   - Link reference papers
-
-2. **RUNNING**: Active data collection
-   - Real-time measurements
-   - Automated data logging
-   - Alert thresholds
-   - Performance tracking
-
-3. **COMPLETED**: Analysis phase
-   - Performance summaries
-   - Comparison with predictions
-   - Export capabilities
-   - Report generation
-
-4. **FAILED**: Troubleshooting
-   - Failure analysis
-   - Parameter logs
-   - Recommendations
-
-### Data Collection & Analysis
-
-#### Real-time Monitoring
-```typescript
-// Measurement collection API
-POST /api/experiments/{id}/measurements
-{
-  voltage: 0.65,
-  current: 12.5,
-  temperature: 30.2,
-  ph: 7.1,
-  timestamp: "2024-01-08T10:30:00Z"
-}
-```
-
-#### Analysis Features
-- Time-series visualization
-- Performance metrics calculation
-- Comparison with research benchmarks
-- AI-powered optimization suggestions
-- Export to CSV/JSON
-
-### Integration Points
-
-#### 1. Research System
-- Link papers to experiments
-- Compare with published results
-- Extract best practices
-- Validate performance
-
-#### 2. Prediction Engine
-- Pre-experiment predictions
-- Real-time comparison
-- Parameter optimization
-- Anomaly detection
-
-#### 3. 3D Visualization
-- System configuration display
-- Real-time data overlay
-- Performance heatmaps
-- Component highlighting
-
-### Experiment Sharing
-
-#### Public Platform (app.messai.io)
-- Demo experiments only
-- Educational datasets
-- No user accounts required
-- Read-only access
-
-#### Private Platform (messai.io)
-- Personal experiment library
-- Collaboration features
-- Private/public toggle
-- Team workspaces
-
-Remember: MESSAI is open source but we have the secure separation for our marketing site and freemium software platform. 
-
----
-
-*This file helps AI assistants understand the project context, make appropriate decisions, and maintain consistency with the scientific and technical requirements of MESSAi.*
+### 2. Verification
+- Ensure all type checks pass before considering the task complete
+- If type errors are found, fix them before marking the task as done

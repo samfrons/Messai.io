@@ -1,0 +1,28 @@
+{
+  "name": "@messai/ml",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@messai/ml/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsup",
+        "cwd": "packages/@messai/ml"
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "options": {
+        "config": "packages/@messai/ml/vitest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "options": {
+        "lintFilePatterns": ["packages/@messai/ml/**/*.{ts,tsx}"]
+      }
+    }
+  },
+  "tags": ["scope:ml", "type:library"]
+}

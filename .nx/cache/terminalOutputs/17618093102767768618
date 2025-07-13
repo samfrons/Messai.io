@@ -1,0 +1,30 @@
+> next build
+
+ [33m[1m⚠[22m[39m Invalid next.config.js options detected: 
+ [33m[1m⚠[22m[39m     Unrecognized key(s) in object: 'transpilePackages' at "experimental"
+ [33m[1m⚠[22m[39m See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ [33m[1m⚠[22m[39m `transpilePackages` has been moved out of `experimental`. Please update your next.config.js file accordingly.
+  [1m[38;2;173;127;168m ▲ Next.js 14.1.0[39m[22m
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m [31m[1m⨯[22m[39m ESLint: Failed to load plugin '@nx' declared in '../../.eslintrc.json#overrides[1]': Cannot find module '@nx/eslint-plugin' Require stack: - /Users/samfrons/Desktop/clean-messai/__placeholder__.js Referenced from: /Users/samfrons/Desktop/clean-messai/.eslintrc.json
+[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[?25h [37m[1m [22m[39m Linting and checking validity of types     [32m[1m✓[22m[39m Linting and checking validity of types 
+[?25l [37m[1m [22m[39m Collecting page data  [36m.[39m[2K[1G[?25h [37m[1m [22m[39m Collecting page data     [32m[1m✓[22m[39m Collecting page data 
+[?25l [37m[1m [22m[39m Generating static pages (0/5)  [36m[    ][39m[2K[1G[?25h [32m[1m✓[22m[39m Generating static pages (5/5) 
+[?25l [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[?25l [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m.[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m.[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m..[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m..[39m[2K[1G [37m[1m [22m[39m Finalizing page optimization  [36m...[39m[2K[1G [37m[1m [22m[39m Collecting build traces  [36m...[39m[2K[1G[?25h [37m[1m [22m[39m Collecting build traces     [32m[1m✓[22m[39m Collecting build traces 
+[2K[1G[?25h [37m[1m [22m[39m Finalizing page optimization     [32m[1m✓[22m[39m Finalizing page optimization 
+
+[4mRoute (app)[24m                              [4mSize[24m     [4mFirst Load JS[24m
+┌ ○ /                                    138 B          [37m[1m84.3 kB[22m[39m
+├ ○ /_not-found                          883 B            [37m[1m85 kB[22m[39m
+└ ○ /api/health                          0 B                [37m[1m0 B[22m[39m
++ First Load JS shared by all            [37m[1m84.2 kB[22m[39m
+  ├ chunks/665-eb07de0ff85ccb3a.js       28.9 kB
+  ├ chunks/7535d94c-a06e657633cb5ce0.js  53.4 kB
+  └ other shared chunks (total)          1.87 kB
+
+
+○  (Static)  prerendered as static content
+
+[?25h

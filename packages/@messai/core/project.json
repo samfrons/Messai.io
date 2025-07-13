@@ -1,0 +1,41 @@
+{
+  "name": "@messai/core",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@messai/core/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@messai/core",
+        "main": "packages/@messai/core/src/index.ts",
+        "tsConfig": "packages/@messai/core/tsconfig.json",
+        "format": ["esm", "cjs"],
+        "bundle": true,
+        "external": ["zod", "@prisma/client"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/@messai/core/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@messai/core/jest.config.ts"
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p packages/@messai/core/tsconfig.json"
+      }
+    }
+  }
+}

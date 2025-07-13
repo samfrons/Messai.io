@@ -1,0 +1,41 @@
+{
+  "name": "@messai/database",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@messai/database/src",
+  "projectType": "library",
+  "tags": ["scope:shared"],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/@messai/database",
+        "main": "packages/@messai/database/src/index.ts",
+        "tsConfig": "packages/@messai/database/tsconfig.json",
+        "format": ["esm", "cjs"],
+        "bundle": true,
+        "external": ["zod", "@prisma/client"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/@messai/database/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/@messai/database/jest.config.ts"
+      }
+    },
+    "type-check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit -p packages/@messai/database/tsconfig.json"
+      }
+    }
+  }
+}

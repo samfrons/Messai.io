@@ -1,0 +1,23 @@
+
+> @messai/ui@0.1.0 dev /Users/samfrons/Desktop/clean-messai/packages/@messai/ui
+> tsup --watch
+
+[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.0
+[34mCLI[39m Using tsup config: /Users/samfrons/Desktop/clean-messai/packages/@messai/ui/tsup.config.ts
+[34mCLI[39m Running in watch mode
+[34mCLI[39m Target: es2022
+[34mCLI[39m Cleaning output folder
+[34mCJS[39m Build start
+[34mESM[39m Build start
+[32mESM[39m [1mdist/index.mjs     [22m[32m3.98 KB[39m
+[32mESM[39m [1mdist/index.mjs.map [22m[32m7.96 KB[39m
+[32mESM[39m ⚡️ Build success in 62ms
+[32mCJS[39m [1mdist/index.js     [22m[32m4.49 KB[39m
+[32mCJS[39m [1mdist/index.js.map [22m[32m8.04 KB[39m
+[32mCJS[39m ⚡️ Build success in 62ms
+[34mCLI[39m Watching for changes in "."
+[34mCLI[39m Ignoring changes in "**/{.git,node_modules}/**" | "dist"
+[34mDTS[39m Build start
+[32mDTS[39m ⚡️ Build success in 1089ms

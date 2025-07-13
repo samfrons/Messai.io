@@ -1,0 +1,297 @@
+> tsup
+
+[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: ../../../tsconfig.json
+[34mCLI[39m tsup v8.5.0
+[34mCLI[39m Using tsup config: /Users/samfrons/Desktop/clean-messai/packages/@messai/ui/tsup.config.ts
+[34mCLI[39m Target: es2022
+[34mCLI[39m Cleaning output folder
+[34mCJS[39m Build start
+[34mESM[39m Build start
+✘ [ERROR] Expected ">" but found "className"
+
+    src/components/index.ts:14:8:
+      14 │         className={cn(
+         │         ~~~~~~~~~
+         ╵         >
+
+✘ [ERROR] Expected ">" but found "className"
+
+    src/components/index.ts:14:8:
+      14 │         className={cn(
+         │         ~~~~~~~~~
+         ╵         >
+
+[31mESM[39m [31mBuild failed[39m
+[31mError: Build failed with 1 error:
+src/components/index.ts:14:8: ERROR: Expected ">" but found "className"
+    at failureErrorWithLog (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:1465:15)
+    at /Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:924:25
+    at runOnEndCallbacks (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:1305:45)
+    at buildResponseToResult (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:922:7)
+    at /Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:949:16
+    at responseCallbacks.<computed> (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:601:9)
+    at handleIncomingPacket (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:656:12)
+    at Socket.readFromStdout (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:579:7)
+    at Socket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)[39m
+[31mCJS[39m [31mBuild failed[39m
+[34mDTS[39m Build start
+src/components/index.ts(14,9): error TS1005: '>' expected.
+src/components/index.ts(14,18): error TS1005: ')' expected.
+src/components/index.ts(15,11): error TS1003: Identifier expected.
+src/components/index.ts(15,218): error TS1138: Parameter declaration expected.
+src/components/index.ts(17,65): error TS1005: ',' expected.
+src/components/index.ts(18,58): error TS1005: ';' expected.
+src/components/index.ts(19,69): error TS1005: ';' expected.
+src/components/index.ts(20,11): error TS1109: Expression expected.
+src/components/index.ts(27,10): error TS1128: Declaration or statement expected.
+src/components/index.ts(29,10): error TS1128: Declaration or statement expected.
+src/components/index.ts(30,7): error TS1161: Unterminated regular expression literal.
+src/components/index.ts(31,5): error TS1128: Declaration or statement expected.
+src/components/index.ts(32,3): error TS1128: Declaration or statement expected.
+src/components/index.ts(33,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(43,9): error TS1005: '>' expected.
+src/components/index.ts(43,13): error TS1005: ')' expected.
+src/components/index.ts(45,11): error TS1003: Identifier expected.
+src/components/index.ts(45,350): error TS1138: Parameter declaration expected.
+src/components/index.ts(49,10): error TS1128: Declaration or statement expected.
+src/components/index.ts(49,18): error TS1005: ',' expected.
+src/components/index.ts(50,7): error TS1161: Unterminated regular expression literal.
+src/components/index.ts(51,5): error TS1128: Declaration or statement expected.
+src/components/index.ts(52,3): error TS1128: Declaration or statement expected.
+src/components/index.ts(53,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(62,7): error TS1005: '>' expected.
+src/components/index.ts(62,10): error TS1005: ')' expected.
+src/components/index.ts(63,7): error TS1005: ',' expected.
+src/components/index.ts(64,9): error TS1003: Identifier expected.
+src/components/index.ts(64,77): error TS1138: Parameter declaration expected.
+src/components/index.ts(67,7): error TS1005: ',' expected.
+src/components/index.ts(68,6): error TS1109: Expression expected.
+src/components/index.ts(69,3): error TS1109: Expression expected.
+src/components/index.ts(70,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(76,7): error TS1005: '>' expected.
+src/components/index.ts(76,10): error TS1005: ')' expected.
+src/components/index.ts(77,7): error TS1005: ',' expected.
+src/components/index.ts(77,21): error TS1003: Identifier expected.
+src/components/index.ts(77,52): error TS1138: Parameter declaration expected.
+src/components/index.ts(78,7): error TS1005: ',' expected.
+src/components/index.ts(79,6): error TS1109: Expression expected.
+src/components/index.ts(80,3): error TS1109: Expression expected.
+src/components/index.ts(81,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(87,7): error TS1005: '>' expected.
+src/components/index.ts(87,10): error TS1005: ')' expected.
+src/components/index.ts(88,7): error TS1005: ',' expected.
+src/components/index.ts(88,21): error TS1003: Identifier expected.
+src/components/index.ts(88,73): error TS1138: Parameter declaration expected.
+src/components/index.ts(89,7): error TS1005: ',' expected.
+src/components/index.ts(90,6): error TS1109: Expression expected.
+src/components/index.ts(91,3): error TS1109: Expression expected.
+src/components/index.ts(92,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(97,10): error TS1005: '>' expected.
+src/components/index.ts(97,13): error TS1005: ')' expected.
+src/components/index.ts(97,20): error TS1005: ',' expected.
+src/components/index.ts(97,34): error TS1003: Identifier expected.
+src/components/index.ts(97,44): error TS1138: Parameter declaration expected.
+src/components/index.ts(97,58): error TS1005: ',' expected.
+src/components/index.ts(97,70): error TS1109: Expression expected.
+src/components/index.ts(98,3): error TS1109: Expression expected.
+src/components/index.ts(99,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(13,8): error TS2304: Cannot find name 'button'.
+src/components/index.ts(14,19): error TS2367: This comparison appears to be unintentional because the types '{ cn(: any, { "bg-blue-600 text-white hover:bg-blue-700": variant }: { "bg-blue-600 text-white hover:bg-blue-700": any; }): any; }' and 'string' have no overlap.
+src/components/index.ts(14,19): error TS2839: This condition will always return 'false' since JavaScript compares objects by reference, not value.
+src/components/index.ts(14,23): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(17,57): error TS2842: 'variant' is an unused renaming of ''bg-blue-600 text-white hover:bg-blue-700''. Did you intend to use it as a type annotation?
+src/components/index.ts(17,57): error TS7031: Binding element 'variant' implicitly has an 'any' type.
+src/components/index.ts(18,60): error TS2695: Left side of comma operator is unused and has no side effects.
+src/components/index.ts(19,71): error TS2695: Left side of comma operator is unused and has no side effects.
+src/components/index.ts(21,11): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(22,33): error TS2304: Cannot find name 'size'.
+src/components/index.ts(23,31): error TS2304: Cannot find name 'size'.
+src/components/index.ts(24,26): error TS2304: Cannot find name 'size'.
+src/components/index.ts(26,11): error TS2304: Cannot find name 'className'.
+src/components/index.ts(28,9): error TS2304: Cannot find name 'ref'.
+src/components/index.ts(28,14): error TS18004: No value exists in scope for the shorthand property 'ref'. Either declare one or provide an initializer.
+src/components/index.ts(29,13): error TS2304: Cannot find name 'props'.
+src/components/index.ts(42,8): error TS2304: Cannot find name 'input'.
+src/components/index.ts(44,9): error TS2322: Type '{ cn(: any, className: any): any; }' is not assignable to type 'string'.
+src/components/index.ts(44,23): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(46,11): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(48,14): error TS2353: Object literal may only specify known properties, and 'ref' does not exist in type '((instance: HTMLInputElement | null) => void) | MutableRefObject<HTMLInputElement | null>'.
+src/components/index.ts(49,10): error TS2556: A spread argument must either have a tuple type or be passed to a rest parameter.
+src/components/index.ts(49,13): error TS2304: Cannot find name 'props'.
+src/components/index.ts(61,6): error TS2304: Cannot find name 'div'.
+src/components/index.ts(63,7): error TS2304: Cannot find name 'className'.
+src/components/index.ts(63,7): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(63,21): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(65,9): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(67,11): error TS2304: Cannot find name 'props'.
+src/components/index.ts(75,6): error TS2304: Cannot find name 'div'.
+src/components/index.ts(77,7): error TS2304: Cannot find name 'className'.
+src/components/index.ts(77,7): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(77,21): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(77,54): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(78,11): error TS2304: Cannot find name 'props'.
+src/components/index.ts(86,6): error TS2304: Cannot find name 'h3'.
+src/components/index.ts(88,7): error TS2304: Cannot find name 'className'.
+src/components/index.ts(88,7): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(88,21): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(88,75): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(89,11): error TS2304: Cannot find name 'props'.
+src/components/index.ts(97,6): error TS2304: Cannot find name 'div'.
+src/components/index.ts(97,20): error TS2304: Cannot find name 'className'.
+src/components/index.ts(97,20): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(97,34): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(97,46): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(97,62): error TS2304: Cannot find name 'props'.
+
+[31mDTS[39m [31mBuild error[39m
+> tsup
+
+[34mCLI[39m Building entry: src/index.ts
+[34mCLI[39m Using tsconfig: ../../../tsconfig.json
+[34mCLI[39m tsup v8.5.0
+[34mCLI[39m Using tsup config: /Users/samfrons/Desktop/clean-messai/packages/@messai/ui/tsup.config.ts
+[34mCLI[39m Target: es2022
+[34mCLI[39m Cleaning output folder
+[34mCJS[39m Build start
+[34mESM[39m Build start
+✘ [ERROR] Expected ">" but found "className"
+
+    src/components/index.ts:14:8:
+      14 │         className={cn(
+         │         ~~~~~~~~~
+         ╵         >
+
+✘ [ERROR] Expected ">" but found "className"
+
+    src/components/index.ts:14:8:
+      14 │         className={cn(
+         │         ~~~~~~~~~
+         ╵         >
+
+[31mESM[39m [31mBuild failed[39m
+[31mError: Build failed with 1 error:
+src/components/index.ts:14:8: ERROR: Expected ">" but found "className"
+    at failureErrorWithLog (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:1465:15)
+    at /Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:924:25
+    at runOnEndCallbacks (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:1305:45)
+    at buildResponseToResult (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:922:7)
+    at /Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:949:16
+    at responseCallbacks.<computed> (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:601:9)
+    at handleIncomingPacket (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:656:12)
+    at Socket.readFromStdout (/Users/samfrons/Desktop/clean-messai/node_modules/.pnpm/esbuild@0.25.6/node_modules/esbuild/lib/main.js:579:7)
+    at Socket.emit (node:events:518:28)
+    at addChunk (node:internal/streams/readable:561:12)[39m
+[31mCJS[39m [31mBuild failed[39m
+[34mDTS[39m Build start
+src/components/index.ts(14,9): error TS1005: '>' expected.
+src/components/index.ts(14,18): error TS1005: ')' expected.
+src/components/index.ts(15,11): error TS1003: Identifier expected.
+src/components/index.ts(15,218): error TS1138: Parameter declaration expected.
+src/components/index.ts(17,65): error TS1005: ',' expected.
+src/components/index.ts(18,58): error TS1005: ';' expected.
+src/components/index.ts(19,69): error TS1005: ';' expected.
+src/components/index.ts(20,11): error TS1109: Expression expected.
+src/components/index.ts(27,10): error TS1128: Declaration or statement expected.
+src/components/index.ts(29,10): error TS1128: Declaration or statement expected.
+src/components/index.ts(30,7): error TS1161: Unterminated regular expression literal.
+src/components/index.ts(31,5): error TS1128: Declaration or statement expected.
+src/components/index.ts(32,3): error TS1128: Declaration or statement expected.
+src/components/index.ts(33,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(43,9): error TS1005: '>' expected.
+src/components/index.ts(43,13): error TS1005: ')' expected.
+src/components/index.ts(45,11): error TS1003: Identifier expected.
+src/components/index.ts(45,350): error TS1138: Parameter declaration expected.
+src/components/index.ts(49,10): error TS1128: Declaration or statement expected.
+src/components/index.ts(49,18): error TS1005: ',' expected.
+src/components/index.ts(50,7): error TS1161: Unterminated regular expression literal.
+src/components/index.ts(51,5): error TS1128: Declaration or statement expected.
+src/components/index.ts(52,3): error TS1128: Declaration or statement expected.
+src/components/index.ts(53,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(62,7): error TS1005: '>' expected.
+src/components/index.ts(62,10): error TS1005: ')' expected.
+src/components/index.ts(63,7): error TS1005: ',' expected.
+src/components/index.ts(64,9): error TS1003: Identifier expected.
+src/components/index.ts(64,77): error TS1138: Parameter declaration expected.
+src/components/index.ts(67,7): error TS1005: ',' expected.
+src/components/index.ts(68,6): error TS1109: Expression expected.
+src/components/index.ts(69,3): error TS1109: Expression expected.
+src/components/index.ts(70,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(76,7): error TS1005: '>' expected.
+src/components/index.ts(76,10): error TS1005: ')' expected.
+src/components/index.ts(77,7): error TS1005: ',' expected.
+src/components/index.ts(77,21): error TS1003: Identifier expected.
+src/components/index.ts(77,52): error TS1138: Parameter declaration expected.
+src/components/index.ts(78,7): error TS1005: ',' expected.
+src/components/index.ts(79,6): error TS1109: Expression expected.
+src/components/index.ts(80,3): error TS1109: Expression expected.
+src/components/index.ts(81,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(87,7): error TS1005: '>' expected.
+src/components/index.ts(87,10): error TS1005: ')' expected.
+src/components/index.ts(88,7): error TS1005: ',' expected.
+src/components/index.ts(88,21): error TS1003: Identifier expected.
+src/components/index.ts(88,73): error TS1138: Parameter declaration expected.
+src/components/index.ts(89,7): error TS1005: ',' expected.
+src/components/index.ts(90,6): error TS1109: Expression expected.
+src/components/index.ts(91,3): error TS1109: Expression expected.
+src/components/index.ts(92,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(97,10): error TS1005: '>' expected.
+src/components/index.ts(97,13): error TS1005: ')' expected.
+src/components/index.ts(97,20): error TS1005: ',' expected.
+src/components/index.ts(97,34): error TS1003: Identifier expected.
+src/components/index.ts(97,44): error TS1138: Parameter declaration expected.
+src/components/index.ts(97,58): error TS1005: ',' expected.
+src/components/index.ts(97,70): error TS1109: Expression expected.
+src/components/index.ts(98,3): error TS1109: Expression expected.
+src/components/index.ts(99,1): error TS1128: Declaration or statement expected.
+src/components/index.ts(13,8): error TS2304: Cannot find name 'button'.
+src/components/index.ts(14,19): error TS2367: This comparison appears to be unintentional because the types '{ cn(: any, { "bg-blue-600 text-white hover:bg-blue-700": variant }: { "bg-blue-600 text-white hover:bg-blue-700": any; }): any; }' and 'string' have no overlap.
+src/components/index.ts(14,19): error TS2839: This condition will always return 'false' since JavaScript compares objects by reference, not value.
+src/components/index.ts(14,23): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(17,57): error TS2842: 'variant' is an unused renaming of ''bg-blue-600 text-white hover:bg-blue-700''. Did you intend to use it as a type annotation?
+src/components/index.ts(17,57): error TS7031: Binding element 'variant' implicitly has an 'any' type.
+src/components/index.ts(18,60): error TS2695: Left side of comma operator is unused and has no side effects.
+src/components/index.ts(19,71): error TS2695: Left side of comma operator is unused and has no side effects.
+src/components/index.ts(21,11): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(22,33): error TS2304: Cannot find name 'size'.
+src/components/index.ts(23,31): error TS2304: Cannot find name 'size'.
+src/components/index.ts(24,26): error TS2304: Cannot find name 'size'.
+src/components/index.ts(26,11): error TS2304: Cannot find name 'className'.
+src/components/index.ts(28,9): error TS2304: Cannot find name 'ref'.
+src/components/index.ts(28,14): error TS18004: No value exists in scope for the shorthand property 'ref'. Either declare one or provide an initializer.
+src/components/index.ts(29,13): error TS2304: Cannot find name 'props'.
+src/components/index.ts(42,8): error TS2304: Cannot find name 'input'.
+src/components/index.ts(44,9): error TS2322: Type '{ cn(: any, className: any): any; }' is not assignable to type 'string'.
+src/components/index.ts(44,23): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(46,11): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(48,14): error TS2353: Object literal may only specify known properties, and 'ref' does not exist in type '((instance: HTMLInputElement | null) => void) | MutableRefObject<HTMLInputElement | null>'.
+src/components/index.ts(49,10): error TS2556: A spread argument must either have a tuple type or be passed to a rest parameter.
+src/components/index.ts(49,13): error TS2304: Cannot find name 'props'.
+src/components/index.ts(61,6): error TS2304: Cannot find name 'div'.
+src/components/index.ts(63,7): error TS2304: Cannot find name 'className'.
+src/components/index.ts(63,7): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(63,21): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(65,9): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(67,11): error TS2304: Cannot find name 'props'.
+src/components/index.ts(75,6): error TS2304: Cannot find name 'div'.
+src/components/index.ts(77,7): error TS2304: Cannot find name 'className'.
+src/components/index.ts(77,7): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(77,21): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(77,54): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(78,11): error TS2304: Cannot find name 'props'.
+src/components/index.ts(86,6): error TS2304: Cannot find name 'h3'.
+src/components/index.ts(88,7): error TS2304: Cannot find name 'className'.
+src/components/index.ts(88,7): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(88,21): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(88,75): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(89,11): error TS2304: Cannot find name 'props'.
+src/components/index.ts(97,6): error TS2304: Cannot find name 'div'.
+src/components/index.ts(97,20): error TS2304: Cannot find name 'className'.
+src/components/index.ts(97,20): error TS2554: Expected 1 arguments, but got 3.
+src/components/index.ts(97,34): error TS7006: Parameter '(Missing)' implicitly has an 'any' type.
+src/components/index.ts(97,46): error TS7006: Parameter 'className' implicitly has an 'any' type.
+src/components/index.ts(97,62): error TS2304: Cannot find name 'props'.
+
+[31mDTS[39m [31mBuild error[39m
+Warning: command "tsup" exited with non-zero status code

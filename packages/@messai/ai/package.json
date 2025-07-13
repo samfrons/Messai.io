@@ -1,0 +1,27 @@
+{
+  "name": "@messai/ai",
+  "version": "0.1.0",
+  "description": "AI/ML prediction engines and optimization algorithms for MESSAi",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@messai/core": "workspace:*",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "openai": "^5.8.2",
+    "@prisma/client": "^5.0.0"
+  }
+}

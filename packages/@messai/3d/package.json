@@ -1,0 +1,31 @@
+{
+  "name": "@messai/3d",
+  "version": "0.1.0",
+  "description": "3D visualization components and utilities for MESSAi",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@messai/core": "workspace:*",
+    "@messai/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "@types/react": "^18.3.18",
+    "@types/three": "^0.173.0",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "@react-three/drei": "^9.124.1",
+    "@react-three/fiber": "^8.18.0",
+    "react": "^18.3.1",
+    "three": "^0.173.0"
+  }
+}
