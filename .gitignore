@@ -61,6 +61,18 @@ yarn.lock
 *.tmp
 *.temp
 
+# Test coverage
+coverage/
+.nyc_output/
+
+# ESLint cache
+.eslintcache
+
+# Vercel
+.vercel
+
+# Prisma
+prisma/dev.db*
 
 .nx/cache
 .nx/workspace-data

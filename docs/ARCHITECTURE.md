@@ -10,13 +10,13 @@
 
 ## System Architecture
 
-MESSAi follows a modern, component-based architecture built on Next.js 14 with the App Router pattern. The application is designed for scalability, maintainability, and optimal performance.
+MESSAi follows a modern, component-based architecture built on Next.js 15 with the App Router pattern and Nx monorepo management. The application is designed for scalability, maintainability, and optimal performance with comprehensive library support.
 
 ### High-Level Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        Frontend (React)                      │
+│                    Frontend (React 18.3.1)                  │
 │  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐   │
 │  │   LCARS UI  │  │ 3D Rendering │  │ Data Viz Charts │   │
 │  │ Components  │  │  (Three.js)  │  │   (Chart.js)    │   │
@@ -24,17 +24,21 @@ MESSAi follows a modern, component-based architecture built on Next.js 14 with t
 └─────────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────────┐
-│                    Next.js App Router                        │
+│               Next.js 15 App Router + Nx Monorepo            │
 │  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐   │
-│  │    Pages    │  │  API Routes  │  │   Middleware    │   │
+│  │  Pages/App  │  │  API Routes  │  │   Middleware    │   │
+│  │   Router    │  │              │  │                 │   │
 │  └─────────────┘  └──────────────┘  └─────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
                               │
 ┌─────────────────────────────────────────────────────────────┐
-│                    Business Logic Layer                      │
+│              Business Logic Layer (12 Libraries)             │
 │  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐   │
 │  │ AI Predict. │  │  Experiment  │  │    Material     │   │
 │  │   Engine    │  │   Manager    │  │    Database     │   │
+│  │             │  │              │  │                 │   │
+│  │ Optimization│  │ Citation     │  │ Control System  │   │
+│  │ Algorithms  │  │ Verification │  │   Simulation    │   │
 │  └─────────────┘  └──────────────┘  └─────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
                               │
@@ -42,6 +46,7 @@ MESSAi follows a modern, component-based architecture built on Next.js 14 with t
 │                      Data Layer                              │
 │  ┌─────────────┐  ┌──────────────┐  ┌─────────────────┐   │
 │  │ Prisma ORM  │  │  PostgreSQL  │  │   File Store    │   │
+│  │   6.11.1    │  │              │  │                 │   │
 │  └─────────────┘  └──────────────┘  └─────────────────┘   │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -49,9 +54,14 @@ MESSAi follows a modern, component-based architecture built on Next.js 14 with t
 ## Technology Stack
 
 ### Core Framework
-- **Next.js 14.2.5** - React framework with App Router
-- **React 18** - UI library with concurrent features
-- **TypeScript 5** - Type-safe development
+- **Next.js 15** - React framework with App Router (updated 2025-07-13)
+- **React 18.3.1** - UI library with concurrent features
+- **TypeScript 5.8.2** - Type-safe development with strict mode
+
+### Build System & Package Management
+- **Nx 21.2.3** - Monorepo build orchestration and project management
+- **PNPM 8.15.0** - Package manager with workspace support
+- **Vite 6.0.0** - Build tool and development server
 
 ### UI & Styling
 - **Tailwind CSS 3.3** - Utility-first CSS with custom LCARS theme
@@ -72,14 +82,16 @@ MESSAi follows a modern, component-based architecture built on Next.js 14 with t
 - **React Context** - Component-level state
 
 ### Database & ORM
-- **Prisma 5.6** - Type-safe ORM
+- **Prisma 6.11.1** - Type-safe ORM (updated)
 - **PostgreSQL** - Primary database (production)
 - **SQLite** - Development database
 
-### Testing
-- **Vitest 3.2** - Unit testing framework
-- **React Testing Library 16.3** - Component testing
-- **MSW 2.10** - API mocking
+### Testing (Vitest Only - Jest Removed)
+- **Vitest 3.0.0** - Unit testing framework (Jest completely removed)
+- **@vitest/ui 3.0.0** - Testing UI interface
+- **@vitest/coverage-v8 3.0.5** - Coverage reporting
+- **React Testing Library 16.1.0** - Component testing
+- **Playwright 1.40.0** - End-to-end testing
 
 ## Core Components
 
@@ -146,15 +158,28 @@ Core components:
 3. Real-time monitoring and updates
 4. Data export capabilities
 
-### 5. Material Database
-Defined in `components/MFCConfigPanel.tsx`
+### 5. Comprehensive Library System (12 Libraries)
+**Location**: `apps/web/src/lib/`
 
-**Structure:**
-- 27 materials across 5 categories
-- Cost per unit area
-- Efficiency ratings
-- Conductivity classifications
-- Pre-treatment options
+**Core Libraries:**
+- `demo-mode.ts` - Demo utilities and state management
+- `db.ts` - Database connection and utilities
+- `database-utils.ts` - Advanced database operations
+
+**Scientific Computing:**
+- `fuel-cell-predictions.ts` - AI-powered performance prediction
+- `parameters-data.ts` - 1500+ MESS parameters library
+- `unified-systems-catalog.ts` - 13 MFC design catalog
+- `control-system-simulation.ts` - PID controllers and simulation
+- `fuel-cell-optimization.ts` - Genetic algorithms and optimization
+
+**Research & Academic:**
+- `citation-verifier.ts` - DOI validation and CrossRef integration
+- `zen-browser.ts` - Web scraping and data extraction
+
+**Authentication & Types:**
+- `auth/auth-options.ts` - NextAuth.js with Google/GitHub OAuth
+- `types/fuel-cell-types.ts` - Comprehensive TypeScript definitions
 
 ## Data Flow
 
@@ -237,8 +262,9 @@ interface MFCStore {
 ### Production Setup
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Vercel    │────►│  Next.js App │────►│ PostgreSQL  │
-│   CDN       │     │   (Docker)   │     │  Database   │
+│   Vercel    │────►│  Next.js 15  │────►│ PostgreSQL  │
+│   CDN       │     │ + Nx Monorepo │     │  Database   │
+│             │     │   (Docker)   │     │             │
 └─────────────┘     └──────────────┘     └─────────────┘
 ```
 
@@ -247,6 +273,28 @@ interface MFCStore {
 - Database connection pooling
 - Static asset CDN distribution
 - API rate limiting ready
+
+## Recent Architecture Improvements (2025-07-13)
+
+### Build System Modernization
+- ✅ **Complete Jest Removal**: Migrated to Vitest exclusively for all testing
+- ✅ **Nx Monorepo Integration**: Full monorepo orchestration with PNPM workspaces
+- ✅ **Next.js 15 Upgrade**: Latest framework version with optimized transpilation
+- ✅ **TypeScript Path Mapping**: Comprehensive module resolution for all @/ imports
+- ✅ **ESLint Simplification**: Streamlined configuration for monorepo compatibility
+
+### Library System Implementation
+- ✅ **12 Comprehensive Libraries**: Full-featured implementations covering all platform needs
+- ✅ **Type Safety**: Complete TypeScript definitions for fuel cell systems
+- ✅ **Scientific Computing**: AI predictions, optimization algorithms, control systems
+- ✅ **Research Integration**: Citation verification, web scraping, academic tools
+- ✅ **Database Utilities**: Advanced query builders and connection management
+
+### Configuration Standardization
+- ✅ **Port Configuration**: Standardized on port 3001 for development
+- ✅ **Environment Management**: Secure environment variable handling with validation
+- ✅ **Authentication Setup**: NextAuth.js with Google/GitHub OAuth integration
+- ✅ **Testing Infrastructure**: Vitest + Playwright for comprehensive test coverage
 
 ## Future Architecture Enhancements
 

@@ -240,28 +240,64 @@ Success Metrics
 - **Key Architecture:** Nx Monorepo [Claude help here]
 - **Development Strategy:** Independent worktrees for each of the core features with sub-agents working within same context but on different, coordinated workstreams [Claude help here]
 
-## 2. Project Structure
+## 2. Project Structure & Technology Stack
 
-  Technology Stack
+### Current Technology Stack (Updated 2025)
 
-  - Frontend: Next.js 15, React 18, TypeScript 5 (strict mode), WebSocket for real-time updates
-  - 3D Graphics: Three.js, React Three Fiber, WebGL
-  - Styling: Tailwind CSS, easy custom theme switching
-  - State: Zustand, React Context
-  - Database: PostgreSQL (prod), SQLite (dev), Prisma ORM
-  - Auth: NextAuth.js with OAuth providers
-  - Testing: Vitest, React Testing Library
-  - Deployment: Vercel, Docker support
+**Frontend & UI:**
+- **Next.js 15** with App Router for production builds
+- **React 18** with TypeScript 5 (strict mode)
+- **Three.js & React Three Fiber** for 3D visualization
+- **Tailwind CSS** with custom theme switching
+- **Framer Motion** for animations
+
+**Development & Build:**
+- **Nx Monorepo** for build orchestration and project management
+- **PNPM 8+** as package manager (workspaces configured)
+- **Vitest** for unit and integration testing (Jest fully removed)
+- **Playwright** for end-to-end testing
+- **TypeScript 5** with strict mode and comprehensive path mapping
+
+**State Management & Data:**
+- **Zustand** for client-side state management
+- **React Context** for component-level state
+- **PostgreSQL** (production) / **SQLite** (development)
+- **Prisma ORM** with type-safe database access
+
+**Authentication & Security:**
+- **NextAuth.js** with OAuth providers (Google, GitHub)
+- **Enhanced security middleware** with CSP headers
+- **Environment validation** with Zod schemas
+
+**Deployment & Infrastructure:**
+- **Vercel** primary deployment platform
+- **Docker** support for self-hosting
+- **Custom port configuration**: Dev server on port 3001 (not 3000)
 
 
 
 
-## Development Commands
+## Development Configuration & Commands
 
 ### Port Configuration
 This project is configured to run on non-default ports to allow multiple Nx repos to run simultaneously:
 - **Next.js Dev Server**: Port 3001 (default: 3000)
 - **Nx Graph Visualization**: Port 4213 (default: 4211)
+
+### Testing Framework Migration
+**IMPORTANT**: This project uses Vitest exclusively. All Jest references have been completely removed.
+- ✅ Removed Jest dependencies from package.json
+- ✅ Updated all project.json test commands to use Vitest
+- ✅ Fixed test setup to use @testing-library/jest-dom/vitest
+- ✅ All tests now run through Vitest with proper module resolution
+
+### Module Resolution & TypeScript Paths
+The project now has comprehensive path mapping configured in apps/web/tsconfig.json:
+- `@/*` → `./src/*` (local app paths)
+- `@/components/*` → `../../components/*` (shared components)
+- `@/lib/*` → `./src/lib/*` (app-specific libraries)
+- `@messai/ui` → Shared UI package
+- `@messai/core` → Core business logic package
 
 ### Essential Commands
 ```bash
@@ -277,8 +313,14 @@ pnpm build
 # Run linting across all packages
 pnpm lint
 
-# Run tests across all packages
+# Run tests across all packages (uses Vitest)
 pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run tests with coverage
+pnpm test:coverage
 
 # Type checking across all packages
 pnpm type-check
@@ -298,6 +340,30 @@ pnpm db:push
 # Open Prisma Studio (database GUI)
 pnpm db:studio
 ```
+
+### Configuration Status
+The following configuration issues have been resolved:
+- ✅ ESLint configuration simplified for monorepo compatibility
+- ✅ Next.js 15 transpilePackages moved out of experimental section
+- ✅ TypeScript path mappings fixed for all @/ imports
+- ✅ 12 comprehensive library files created for missing modules
+- ✅ Vitest setup optimized with proper test configuration
+- ✅ Build process now succeeds without errors
+
+### Created Library Files
+The following libraries were created to resolve module resolution issues:
+1. **apps/web/src/lib/demo-mode.ts** - Demo mode utilities and state management
+2. **apps/web/src/lib/auth/auth-options.ts** - NextAuth.js configuration with Google/GitHub OAuth
+3. **apps/web/src/lib/fuel-cell-predictions.ts** - AI-powered performance prediction engine
+4. **apps/web/src/lib/parameters-data.ts** - Comprehensive MESS parameters library (1500+ params)
+5. **apps/web/src/lib/unified-systems-catalog.ts** - Systems catalog with 13 MFC designs
+6. **apps/web/src/lib/types/fuel-cell-types.ts** - TypeScript definitions for fuel cell systems
+7. **apps/web/src/lib/control-system-simulation.ts** - Control system simulation and PID controllers
+8. **apps/web/src/lib/fuel-cell-optimization.ts** - Genetic algorithms and optimization functions
+9. **apps/web/src/lib/db.ts** - Database connection utilities and helpers
+10. **apps/web/src/lib/citation-verifier.ts** - Citation verification and academic reference system
+11. **apps/web/src/lib/zen-browser.ts** - Web scraping integration and data extraction
+12. **apps/web/src/lib/database-utils.ts** - Advanced database utilities and query builders
 
 ## Project Architecture
 

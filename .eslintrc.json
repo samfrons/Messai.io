@@ -1,7 +1,12 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": ["node_modules/", "dist/", ".next/", "build/", "coverage/", ".nx/cache/"],
   "plugins": ["@nx"],
+  "env": {
+    "node": true,
+    "browser": true,
+    "es2022": true
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -40,12 +45,24 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "rules": {
+        "prefer-const": "error",
+        "no-var": "error"
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "rules": {
+        "prefer-const": "error",
+        "no-var": "error"
+      }
+    },
+    {
+      "files": ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"],
+      "env": {
+        "node": true
+      }
     }
   ]
 }

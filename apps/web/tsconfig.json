@@ -19,7 +19,16 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["../../components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/hooks/*": ["../../hooks/*"],
+      "@/app/*": ["./app/*"],
+      "@/reference/*": ["../../reference/*"],
+      "@messai/ui": ["../../packages/@messai/ui/src/index.ts"],
+      "@messai/ui/*": ["../../packages/@messai/ui/src/*"],
+      "@messai/core": ["../../packages/@messai/core/src/index.ts"],
+      "@messai/core/*": ["../../packages/@messai/core/src/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

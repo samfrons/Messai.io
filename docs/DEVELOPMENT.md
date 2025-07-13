@@ -16,8 +16,8 @@ This guide provides detailed instructions for setting up and developing the MESS
 ## Prerequisites
 
 ### Required Software
-- **Node.js** 18.0.0 or higher
-- **npm** 9.0.0 or higher
+- **Node.js** 18.0.0 or higher (.nvmrc specifies exact version)
+- **PNPM** 8.15.0 or higher (specified in package.json)
 - **Git** 2.30.0 or higher
 - **Code Editor** (VS Code recommended)
 
@@ -46,7 +46,12 @@ cd messai-mvp
 
 ### 2. Install Dependencies
 ```bash
-npm install
+# Use PNPM (preferred package manager)
+pnpm install
+
+# Alternative: if you don't have PNPM
+npm install -g pnpm
+pnpm install
 ```
 
 ### 3. Environment Configuration
@@ -73,10 +78,14 @@ npx prisma db seed
 
 ### 5. Start Development Server
 ```bash
-npm run dev
+# Start all development servers using Nx
+pnpm dev
+
+# Or start just the web app
+pnpm --filter web dev
 ```
 
-Visit `http://localhost:3003` to see the application.
+Visit `http://localhost:3001` to see the application.
 
 ## Development Workflow
 
@@ -163,27 +172,33 @@ Organized by test type:
 
 ### Development
 ```bash
-npm run dev          # Start dev server on port 3003
-npm run build        # Build for production
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript compiler check
+pnpm dev             # Start dev server on port 3001 (Nx orchestrated)
+pnpm build           # Build all packages and apps
+pnpm start           # Start production server  
+pnpm lint            # Run ESLint across all packages
+pnpm type-check      # Run TypeScript compiler check
+pnpm clean           # Clean build artifacts
 ```
 
-### Testing
+### Testing (Vitest)
 ```bash
-npm test             # Run all tests
-npm run test:watch   # Run tests in watch mode
-npm run test:coverage # Generate coverage report
-npm run test:ui      # Open Vitest UI
+pnpm test            # Run all tests (uses Vitest exclusively)
+pnpm test:watch      # Run tests in watch mode
+pnpm test:coverage   # Generate coverage report
+pnpm test:ci         # Run tests in CI mode with coverage
+pnpm test:e2e        # Run Playwright E2E tests
+pnpm test:e2e:ui     # Run E2E tests with UI
 ```
 
-### Database
+### Database (via Nx)
 ```bash
-npx prisma studio    # Open Prisma Studio GUI
+pnpm db:studio       # Open Prisma Studio GUI
+pnpm db:generate     # Generate Prisma client
+pnpm db:push         # Push schema changes (dev only)
+
+# Direct Prisma commands (if needed)
 npx prisma migrate dev # Create migration
-npx prisma db push   # Push schema changes (dev only)
-npx prisma generate  # Regenerate client
+npx prisma db seed   # Seed the database
 ```
 
 ## Debugging
@@ -210,7 +225,7 @@ Create `.vscode/launch.json`:
       "type": "chrome",
       "request": "launch",
       "name": "Next.js: debug client-side",
-      "url": "http://localhost:3003",
+      "url": "http://localhost:3001",
       "webRoot": "${workspaceFolder}"
     }
   ]
@@ -228,17 +243,20 @@ Create `.vscode/launch.json`:
 
 ```bash
 # Check TypeScript errors
-npm run type-check
-
-# Analyze bundle size
-npm run analyze
+pnpm type-check
 
 # Check for unused dependencies
 npx depcheck
 
 # Update dependencies safely
 npx npm-check-updates -u
-npm install
+pnpm install
+
+# View Nx project graph
+pnpm graph
+
+# Clean and rebuild everything
+pnpm clean && pnpm build
 ```
 
 ## Development Tools
@@ -252,8 +270,11 @@ npx prisma studio
 ### API Testing
 Use Thunder Client, Postman, or cURL:
 ```bash
+# Test health check API
+curl http://localhost:3001/api/health
+
 # Test prediction API
-curl -X POST http://localhost:3003/api/predictions \
+curl -X POST http://localhost:3001/api/predictions \
   -H "Content-Type: application/json" \
   -d '{
     "temperature": 28.5,
@@ -264,9 +285,14 @@ curl -X POST http://localhost:3003/api/predictions \
 ```
 
 ### Component Development
-Use Storybook (if configured):
+Use Vitest UI for component testing:
 ```bash
-npm run storybook
+pnpm test:watch  # Interactive test runner
+```
+
+Or start Storybook (if configured):
+```bash
+pnpm storybook
 ```
 
 ## Common Tasks
@@ -381,8 +407,8 @@ npx prisma migrate reset
 
 #### Port Already in Use
 ```bash
-# Find process using port 3003
-lsof -i :3003
+# Find process using port 3001
+lsof -i :3001
 # Kill the process
 kill -9 <PID>
 ```
@@ -391,7 +417,10 @@ kill -9 <PID>
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules .next
-npm install
+pnpm install
+
+# Clear Nx cache
+pnpm nx reset
 ```
 
 #### TypeScript Errors

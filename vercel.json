@@ -1,7 +1,7 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next",
-  "installCommand": "npm install",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install",
   "framework": "nextjs",
   "functions": {
     "app/api/**/*.ts": {
@@ -30,7 +30,7 @@
   "redirects": [
     {
       "source": "/github",
-      "destination": "https://github.com/your-org/messai-mvp",
+      "destination": "https://github.com/messai-engineering/messai",
       "permanent": false
     }
   ],
