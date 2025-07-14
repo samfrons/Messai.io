@@ -217,12 +217,36 @@ export default function MESSModels() {
           </div>
         </motion.div>
 
-        {/* Call to Action */}
+        {/* 3D Showcase CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16 text-center"
+        >
+          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white">
+            <h3 className="text-2xl font-serif font-bold mb-4">
+              🚀 New: Interactive 3D Model Showcase
+            </h3>
+            <p className="mb-6 max-w-2xl mx-auto opacity-90">
+              Explore our bioelectrochemical systems in stunning 3D. Rotate, zoom, and visualize 
+              biofilm growth, flow patterns, and system components in real-time.
+            </p>
+            <Link
+              href="/models/3d-showcase"
+              className="inline-block px-8 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+            >
+              View 3D Showcase
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.0 }}
+          className="mt-8 text-center"
         >
           <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-xl p-8">
             <h3 className="text-2xl font-serif font-bold mb-4 text-gray-900 dark:text-white">
