@@ -3,9 +3,13 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Scene from '@/components/3d/core/Scene'
-import BioreactorModel from '@/components/3d/bioreactor/BioreactorModel'
-import BiofilmSimulation from '@/components/3d/biofilm/BiofilmSimulation'
+import dynamic from 'next/dynamic'
+
+const Scene = dynamic(() => import('@/components/3d/core/Scene'), { ssr: false })
+const BioreactorModel = dynamic(() => import('@/components/3d/bioreactor/BioreactorModel'), { ssr: false })
+const BiofilmSimulation = dynamic(() => import('@/components/3d/biofilm/BiofilmSimulation'), { ssr: false })
+
+// Materials hook - import directly since it's a hook
 import { useMaterials } from '@/components/3d/core/Materials'
 
 const showcaseModels = [

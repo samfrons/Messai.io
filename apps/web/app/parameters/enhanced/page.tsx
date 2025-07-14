@@ -383,16 +383,11 @@ export default function EnhancedParametersPage() {
                           </div>
                         )}
                         
-                        {param.tags.length > 0 && (
+                        {param.category && (
                           <div className="mt-2 flex flex-wrap gap-1">
-                            {param.tags.slice(0, 3).map(tag => (
-                              <span
-                                key={tag}
-                                className="px-2 py-1 text-xs bg-gray-100 text-gray-600 rounded"
-                              >
-                                {tag}
-                              </span>
-                            ))}
+                            <span className="px-2 py-1 text-xs bg-blue-100 text-blue-600 rounded">
+                              {param.category}
+                            </span>
                           </div>
                         )}
                       </div>

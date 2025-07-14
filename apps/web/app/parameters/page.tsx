@@ -268,16 +268,11 @@ export default function ParametersPage() {
                             </div>
                           )}
                           
-                          {param.tags.length > 0 && (
+                          {param.category && (
                             <div className="flex flex-wrap gap-1">
-                              {param.tags.map(tag => (
-                                <span
-                                  key={tag}
-                                  className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded"
-                                >
-                                  {tag}
-                                </span>
-                              ))}
+                              <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded">
+                                {param.category}
+                              </span>
                             </div>
                           )}
                         </div>
