@@ -5,42 +5,50 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 5%;
+    --foreground: 150 20% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 5%;
-    --primary: 142 71% 25%;
+    --card-foreground: 150 20% 12%;
+    --primary: 150 35% 20%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 142 60% 15%;
+    --secondary: 150 40% 15%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 142 71% 20%;
+    --muted: 150 10% 96%;
+    --muted-foreground: 150 8% 45%;
+    --accent: 150 30% 25%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 142 71% 25%;
+    --border: 150 8% 88%;
+    --input: 150 8% 88%;
+    --ring: 150 35% 20%;
+    --caladan-dark: 150 45% 8%;
+    --caladan-medium: 150 35% 20%;
+    --caladan-light: 150 25% 30%;
+    --caladan-accent: 150 60% 35%;
   }
 
   .dark {
-    --background: 0 0% 5%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
-    --primary: 142 71% 35%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 142 60% 25%;
+    --background: 150 45% 8%;
+    --foreground: 150 10% 92%;
+    --card: 150 40% 10%;
+    --card-foreground: 150 10% 92%;
+    --primary: 150 60% 35%;
+    --primary-foreground: 150 45% 8%;
+    --secondary: 150 50% 25%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 142 71% 30%;
+    --muted: 150 20% 15%;
+    --muted-foreground: 150 10% 65%;
+    --accent: 150 55% 30%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 142 71% 35%;
+    --border: 150 25% 20%;
+    --input: 150 25% 20%;
+    --ring: 150 60% 35%;
+    --caladan-dark: 150 50% 5%;
+    --caladan-medium: 150 45% 15%;
+    --caladan-light: 150 35% 25%;
+    --caladan-accent: 150 65% 40%;
   }
 
   * {
@@ -331,17 +339,80 @@
     display: none;
   }
 
+  /* Caladan Bio inspired styles */
+  .caladan-bg-dark {
+    background-color: hsl(var(--caladan-dark));
+  }
+
+  .caladan-bg-medium {
+    background-color: hsl(var(--caladan-medium));
+  }
+
+  .caladan-bg-light {
+    background-color: hsl(var(--caladan-light));
+  }
+
+  .caladan-text-accent {
+    color: hsl(var(--caladan-accent));
+  }
+
+  .caladan-border {
+    border-color: hsl(var(--caladan-medium) / 0.3);
+  }
+
+  .caladan-card {
+    @apply rounded-xl border caladan-border shadow-lg backdrop-blur-sm;
+    background: linear-gradient(145deg, 
+      hsl(var(--card) / 0.95), 
+      hsl(var(--card) / 0.85)
+    );
+  }
+
+  .caladan-button {
+    @apply px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300;
+    background: linear-gradient(135deg, 
+      hsl(var(--caladan-medium)), 
+      hsl(var(--caladan-light))
+    );
+    color: hsl(var(--primary-foreground));
+    border: 1px solid hsl(var(--caladan-accent) / 0.3);
+  }
+
+  .caladan-button:hover {
+    background: linear-gradient(135deg, 
+      hsl(var(--caladan-light)), 
+      hsl(var(--caladan-accent))
+    );
+    box-shadow: 0 8px 25px hsl(var(--caladan-medium) / 0.3);
+    transform: translateY(-2px);
+  }
+
+  .caladan-icon-bg {
+    @apply rounded-lg p-3 backdrop-blur-sm;
+    background: linear-gradient(135deg, 
+      hsl(var(--caladan-accent) / 0.1), 
+      hsl(var(--caladan-medium) / 0.1)
+    );
+    border: 1px solid hsl(var(--caladan-accent) / 0.2);
+  }
+
   /* Glow effects */
   .glow-sm {
-    box-shadow: 0 0 20px rgb(var(--primary) / 0.2);
+    box-shadow: 0 0 20px hsl(var(--caladan-accent) / 0.2);
   }
 
   .glow-md {
-    box-shadow: 0 0 40px rgb(var(--primary) / 0.3);
+    box-shadow: 0 0 40px hsl(var(--caladan-accent) / 0.3);
   }
 
   .glow-lg {
-    box-shadow: 0 0 60px rgb(var(--primary) / 0.4);
+    box-shadow: 0 0 60px hsl(var(--caladan-accent) / 0.4);
+  }
+
+  .glow-caladan {
+    box-shadow: 
+      0 0 30px hsl(var(--caladan-accent) / 0.2),
+      0 0 60px hsl(var(--caladan-medium) / 0.1);
   }
 
   /* Subtle shadows */
