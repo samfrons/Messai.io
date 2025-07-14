@@ -3,7 +3,7 @@
 import { useRef, useMemo } from 'react'
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { Sphere, Box } from '@react-three/drei'
+import { Sphere, Box, Text } from '@react-three/drei'
 import { animated, useSpring } from '@react-spring/three'
 import { animateBiofilmGrowth } from '../utils/animations'
 

@@ -2,7 +2,6 @@
 
 import { useMemo } from 'react'
 import * as THREE from 'three'
-import { useTexture } from '@react-three/drei'
 
 export type MaterialType = 
   | 'carbonCloth'

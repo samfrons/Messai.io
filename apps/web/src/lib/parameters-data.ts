@@ -223,3 +223,49 @@ export const validateParameterValue = (parameter: Parameter, value: any): boolea
       return false
   }
 }
+
+// Additional utility functions for the UI
+export const getParameterStatistics = () => {
+  const allParams = getAllParameters()
+  return {
+    total: allParams.length,
+    byCategory: parameterCategories.map(cat => ({
+      category: cat.name,
+      count: cat.parameters.length
+    })),
+    byType: {
+      number: allParams.filter(p => p.type === 'number').length,
+      select: allParams.filter(p => p.type === 'select').length,
+      boolean: allParams.filter(p => p.type === 'boolean').length,
+      string: allParams.filter(p => p.type === 'string').length
+    }
+  }
+}
+
+export const searchParameters = (query: string): Parameter[] => {
+  const lowercaseQuery = query.toLowerCase()
+  return getAllParameters().filter(param => 
+    param.name.toLowerCase().includes(lowercaseQuery) ||
+    param.description.toLowerCase().includes(lowercaseQuery)
+  )
+}
+
+export const exportParametersAsJSON = (): string => {
+  return JSON.stringify(parameterCategories, null, 2)
+}
+
+export const exportParametersAsCSV = (): string => {
+  const headers = ['Category', 'Name', 'Description', 'Unit', 'Type', 'Min', 'Max', 'Default']
+  const rows = getAllParameters().map(param => [
+    param.category,
+    param.name,
+    param.description,
+    param.unit,
+    param.type,
+    param.min?.toString() || '',
+    param.max?.toString() || '',
+    param.default?.toString() || ''
+  ])
+  
+  return [headers, ...rows].map(row => row.join(',')).join('\n')
+}

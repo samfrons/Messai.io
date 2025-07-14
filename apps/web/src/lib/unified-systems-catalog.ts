@@ -245,3 +245,59 @@ export const searchSystems = (query: string): SystemType[] => {
     system.applications.some(app => app.toLowerCase().includes(lowercaseQuery))
   )
 }
+
+// Additional utility functions for the UI
+export const getHighPerformanceSystems = (): SystemType[] => {
+  return unifiedSystemsCatalog
+    .filter(system => system.specifications.powerDensity.max > 100)
+    .sort((a, b) => b.specifications.powerDensity.max - a.specifications.powerDensity.max)
+}
+
+export const sortByPowerOutput = (systems: SystemType[]): SystemType[] => {
+  return [...systems].sort((a, b) => b.specifications.powerDensity.max - a.specifications.powerDensity.max)
+}
+
+export const sortByCost = (systems: SystemType[]): SystemType[] => {
+  // Simplified cost sorting based on estimated complexity
+  const getCostScore = (system: SystemType) => {
+    if (system.category === 'SOFC') return 5
+    if (system.category === 'PEM') return 4
+    if (system.category === 'PAFC') return 3
+    if (system.category === 'MEC') return 2
+    return 1 // MFC, MDC
+  }
+  return [...systems].sort((a, b) => getCostScore(a) - getCostScore(b))
+}
+
+export const sortByPopularity = (systems: SystemType[]): SystemType[] => {
+  // Simplified popularity based on applications count
+  return [...systems].sort((a, b) => b.applications.length - a.applications.length)
+}
+
+export const getSystemsByScale = (scale: 'laboratory' | 'pilot' | 'industrial'): SystemType[] => {
+  return unifiedSystemsCatalog.filter(system => {
+    if (!system.modelData) return false
+    const volume = system.modelData.volume.value
+    if (scale === 'laboratory') return volume < 5000 // < 5L
+    if (scale === 'pilot') return volume >= 5000 && volume < 100000 // 5L - 100L
+    return volume >= 100000 // > 100L
+  })
+}
+
+export const getRelatedSystems = (systemId: string): SystemType[] => {
+  const system = getSystemById(systemId)
+  if (!system) return []
+  
+  return unifiedSystemsCatalog
+    .filter(s => s.id !== systemId && s.category === system.category)
+    .slice(0, 3)
+}
+
+export const getDesignTypeFor3D = (systemId: string): string => {
+  const system = getSystemById(systemId)
+  if (!system || !system.modelData) return 'basic'
+  
+  if (system.modelData.chambers > 2) return 'multi-chamber'
+  if (system.modelData.chambers === 2) return 'dual-chamber'
+  return 'single-chamber'
+}

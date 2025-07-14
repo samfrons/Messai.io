@@ -38,7 +38,9 @@ export default function Scene({
         <Suspense fallback={null}>
           <Lighting />
           {controls && <Controls />}
-          {environment && <Environment preset="laboratory" />}
+          {environment && (
+            <color attach="background" args={['#f0f8ff']} />
+          )}
           {shadows && (
             <ContactShadows
               position={[0, -0.01, 0]}

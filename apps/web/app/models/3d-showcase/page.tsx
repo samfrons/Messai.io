@@ -24,7 +24,7 @@ const showcaseModels = [
     description: 'Hydrogen production system with proton exchange membrane',
     systemType: 'MEC' as const,
     scale: 'pilot' as const,
-    anode: 'graphiteFelt',
+    anode: 'carbonFelt',
     cathode: 'platinum',
   },
   {
@@ -33,7 +33,7 @@ const showcaseModels = [
     description: 'Desalination cell with anion and cation exchange membranes',
     systemType: 'MDC' as const,
     scale: 'laboratory' as const,
-    anode: 'carbonNanotube',
+    anode: 'grapheneOxide',
     cathode: 'carbonCloth',
   },
   {
@@ -42,7 +42,7 @@ const showcaseModels = [
     description: 'Microbial electrosynthesis for CO₂ reduction',
     systemType: 'MES' as const,
     scale: 'laboratory' as const,
-    anode: 'mxeneTi3C2Tx',
+    anode: 'mxene',
     cathode: 'copper',
   },
 ]
