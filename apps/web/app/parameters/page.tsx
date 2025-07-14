@@ -122,31 +122,31 @@ export default function ParametersPage() {
           {/* Description */}
           <p className="text-gray-600 dark:text-gray-400 mb-4">
             Comprehensive reference for all parameters used in Microbial Electrochemical Systems. 
-            Browse 1,500+ parameters across 15 major categories with detailed descriptions, units, and typical ranges.
+            Browse {stats.total}+ parameters across {parameterCategories.length} major categories with detailed descriptions, units, and typical ranges.
           </p>
           
           {/* Stats Banner */}
           <div className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div>
-                <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">1,500+</div>
+                <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">{stats.total}</div>
                 <div className="text-sm text-blue-600 dark:text-blue-400">Total Parameters</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">15</div>
+                <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">{parameterCategories.length}</div>
                 <div className="text-sm text-purple-600 dark:text-purple-400">Major Categories</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-700 dark:text-green-300">150+</div>
-                <div className="text-sm text-green-600 dark:text-green-400">Subcategories</div>
+                <div className="text-2xl font-bold text-green-700 dark:text-green-300">{stats.withRanges}</div>
+                <div className="text-sm text-green-600 dark:text-green-400">With Ranges</div>
               </div>
               <div>
                 <div className="text-2xl font-bold text-orange-700 dark:text-orange-300">{stats.withUnits}</div>
                 <div className="text-sm text-orange-600 dark:text-orange-400">With Units</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-700 dark:text-red-300">{stats.withRanges}</div>
-                <div className="text-sm text-red-600 dark:text-red-400">With Ranges</div>
+                <div className="text-2xl font-bold text-red-700 dark:text-red-300">{stats.byType.number}</div>
+                <div className="text-sm text-red-600 dark:text-red-400">Numeric Params</div>
               </div>
             </div>
           </div>
@@ -230,11 +230,21 @@ export default function ParametersPage() {
                           <h4 className="font-medium text-gray-900 dark:text-gray-100">
                             {param.name}
                           </h4>
-                          {param.unit && (
-                            <span className="text-sm text-gray-500 dark:text-gray-400">
-                              [{param.unit}]
-                            </span>
-                          )}
+                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                            {param.unit && (
+                              <span>[{param.unit}]</span>
+                            )}
+                            {param.range && (param.range.min !== undefined || param.range.max !== undefined) && (
+                              <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
+                                {param.range.min !== undefined && param.range.max !== undefined 
+                                  ? `${param.range.min}-${param.range.max}`
+                                  : param.range.min !== undefined 
+                                  ? `≥${param.range.min}`
+                                  : `≤${param.range.max}`
+                                }
+                              </span>
+                            )}
+                          </div>
                         </div>
                         <svg 
                           className={`w-5 h-5 text-gray-400 transition-transform ${
@@ -257,24 +267,42 @@ export default function ParametersPage() {
                       {expandedParams.has(param.id) && (
                         <div className="mt-4 space-y-2">
                           {param.range && (
-                            <div className="text-sm">
-                              <span className="font-medium text-gray-700 dark:text-gray-300">Range: </span>
-                              <span className="text-gray-600 dark:text-gray-400">
-                                {param.range.min !== undefined && `${param.range.min} - `}
-                                {param.range.max !== undefined && param.range.max}
-                                {param.range.typical !== undefined && ` (typical: ${param.range.typical})`}
-                                {param.unit && ` ${param.unit}`}
-                              </span>
+                            <div className="text-sm space-y-1">
+                              <div>
+                                <span className="font-medium text-gray-700 dark:text-gray-300">Range: </span>
+                                <span className="text-gray-600 dark:text-gray-400">
+                                  {param.range.min !== undefined && param.range.max !== undefined 
+                                    ? `${param.range.min} - ${param.range.max}`
+                                    : param.range.min !== undefined 
+                                    ? `≥ ${param.range.min}`
+                                    : param.range.max !== undefined 
+                                    ? `≤ ${param.range.max}`
+                                    : 'No range specified'
+                                  }
+                                  {param.unit && ` ${param.unit}`}
+                                </span>
+                              </div>
+                              {param.range.typical !== undefined && (
+                                <div>
+                                  <span className="font-medium text-gray-700 dark:text-gray-300">Typical: </span>
+                                  <span className="text-blue-600 dark:text-blue-400 font-medium">
+                                    {param.range.typical} {param.unit}
+                                  </span>
+                                </div>
+                              )}
                             </div>
                           )}
                           
-                          {param.category && (
-                            <div className="flex flex-wrap gap-1">
-                              <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded">
-                                {param.category}
+                          <div className="flex flex-wrap gap-1">
+                            <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded">
+                              {param.category}
+                            </span>
+                            {param.subcategory && (
+                              <span className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded">
+                                {param.subcategory.replace(/-/g, ' ')}
                               </span>
-                            </div>
-                          )}
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>

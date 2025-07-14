@@ -222,3 +222,82 @@ model ExperimentPaper {
   @@index([experimentId])
   @@index([paperId])
 }
+
+// Knowledge Graph Models
+
+model KnowledgeNode {
+  id          String                @id @default(cuid())
+  type        String                // 'paper', 'author', 'topic', 'institution', 'method', 'material'
+  entityId    String?               // Reference to actual entity (e.g., paperId, authorId)
+  name        String
+  properties  String?               // JSON with type-specific properties
+  embedding   Float[]               // Vector embedding for semantic similarity
+  importance  Float?                // Node importance score (0-1)
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+  
+  // Edges where this node is the source
+  outgoingEdges KnowledgeEdge[]     @relation("SourceNode")
+  // Edges where this node is the target
+  incomingEdges KnowledgeEdge[]     @relation("TargetNode")
+  
+  @@unique([type, entityId])
+  @@index([type])
+  @@index([name])
+  @@index([importance])
+}
+
+model KnowledgeEdge {
+  id             String         @id @default(cuid())
+  sourceId       String
+  targetId       String
+  edgeType       String         // 'cites', 'cited_by', 'co_author', 'similar_topic', 'uses_method', 'same_institution'
+  weight         Float          @default(1.0) // Edge weight/strength (0-1)
+  properties     String?        // JSON with edge-specific properties
+  confidence     Float?         // Confidence score for inferred edges (0-1)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  
+  source         KnowledgeNode  @relation("SourceNode", fields: [sourceId], references: [id], onDelete: Cascade)
+  target         KnowledgeNode  @relation("TargetNode", fields: [targetId], references: [id], onDelete: Cascade)
+  
+  @@unique([sourceId, targetId, edgeType])
+  @@index([sourceId])
+  @@index([targetId])
+  @@index([edgeType])
+  @@index([weight])
+}
+
+model ResearchCluster {
+  id             String         @id @default(cuid())
+  name           String
+  description    String?
+  centerNodeId   String?        // Most important node in cluster
+  memberNodes    String         // JSON array of node IDs
+  keywords       String         // JSON array of cluster keywords
+  avgImportance  Float?         // Average importance of nodes in cluster
+  coherence      Float?         // Cluster coherence score (0-1)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  
+  @@index([avgImportance])
+  @@index([coherence])
+}
+
+model ResearchTrend {
+  id             String         @id @default(cuid())
+  topic          String
+  timeRange      String         // e.g., "2020-2024"
+  trendScore     Float          // Trend strength (0-1)
+  growthRate     Float?         // Percentage growth rate
+  paperCount     Int            // Number of papers in this trend
+  keyAuthors     String         // JSON array of influential author IDs
+  keyPapers      String         // JSON array of influential paper IDs
+  predictions    String?        // JSON with trend predictions
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  
+  @@index([topic])
+  @@index([trendScore])
+  @@index([timeRange])
+}

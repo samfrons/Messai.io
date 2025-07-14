@@ -8,21 +8,6 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
-// Dynamic import to avoid SSR issues with Three.js
-const MFCDashboard3D = dynamic(
-  () => import('@/components/MFCDashboard3D'),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="flex items-center justify-center h-full">
-        <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2 text-lcars-cyan" />
-          <p className="text-lcars-gray">Loading 3D Visualization...</p>
-        </div>
-      </div>
-    )
-  }
-)
 
 interface Experiment {
   id: string
@@ -318,12 +303,15 @@ function DashboardContent() {
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 min-h-0">
-                  <MFCDashboard3D 
-                    experiments={experiments}
-                    selectedExperiment={selectedExperiment}
-                    onExperimentSelect={setSelectedExperiment}
-                  />
+                <div className="flex-1 min-h-0 flex items-center justify-center bg-gray-50">
+                  <div className="text-center">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Eye className="w-8 h-8 text-blue-600" />
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">3D Visualization</h3>
+                    <p className="text-gray-600 mb-4">Interactive experiment monitoring</p>
+                    <div className="text-sm text-gray-500">Coming soon...</div>
+                  </div>
                 </div>
                 {selectedExperiment && (
                   <div className="p-3 lg:p-4 border-t border-gray-200 bg-blue-50 flex-shrink-0">
