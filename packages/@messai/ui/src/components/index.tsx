@@ -3,7 +3,7 @@ import { cn } from '../theme'
 
 // Basic Button component
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
 }
 
@@ -12,16 +12,17 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={cn(
-          'inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+          'inline-flex items-center justify-center rounded-full font-medium uppercase tracking-wider transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
           {
-            'bg-blue-600 text-white hover:bg-blue-700': variant === 'primary',
-            'bg-gray-200 text-gray-900 hover:bg-gray-300': variant === 'secondary',
-            'border border-gray-300 bg-transparent hover:bg-gray-50': variant === 'outline',
+            'bg-green-600 text-white hover:bg-green-700': variant === 'primary',
+            'bg-green-800 text-white hover:bg-green-900': variant === 'secondary',
+            'border border-gray-700 bg-transparent hover:bg-gray-800 hover:text-white': variant === 'outline',
+            'bg-transparent hover:bg-gray-800 hover:text-white': variant === 'ghost',
           },
           {
-            'h-8 px-3 text-sm': size === 'sm',
-            'h-10 px-4 py-2': size === 'md',
-            'h-11 px-8': size === 'lg',
+            'h-8 px-4 text-xs': size === 'sm',
+            'h-10 px-5 py-2.5 text-sm': size === 'md',
+            'h-12 px-8 text-base': size === 'lg',
           },
           className
         )}
@@ -42,7 +43,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          'flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+          'flex h-10 w-full rounded-lg border border-gray-700 bg-transparent px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-600 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900 disabled:cursor-not-allowed disabled:opacity-50',
           className
         )}
         ref={ref}
@@ -61,7 +62,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        'rounded-lg border border-gray-200 bg-white text-gray-950 shadow-sm',
+        'rounded-lg border border-gray-800 bg-gray-900 text-gray-100 shadow-sm transition-all duration-200 hover:shadow-lg hover:border-green-600/20',
         className
       )}
       {...props}
@@ -85,7 +86,7 @@ export const CardTitle = React.forwardRef<HTMLParagraphElement, React.HTMLAttrib
   ({ className, ...props }, ref) => (
     <h3
       ref={ref}
-      className={cn('text-2xl font-semibold leading-none tracking-tight', className)}
+      className={cn('text-2xl font-light tracking-tight', className)}
       {...props}
     />
   )
