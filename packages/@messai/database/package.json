@@ -3,22 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
     "./client": "./src/client.ts"
   },
   "scripts": {
+    "build": "tsup",
     "generate": "prisma generate",
     "push": "prisma db push",
     "studio": "prisma studio",
     "seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.7.1",
+    "@prisma/client": "^6.11.1",
     "@prisma/extension-accelerate": "^1.0.0"
   },
   "devDependencies": {
-    "prisma": "^5.7.1",
+    "prisma": "^6.11.1",
+    "tsup": "^8.0.0",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   }

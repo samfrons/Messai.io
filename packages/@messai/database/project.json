@@ -1,0 +1,38 @@
+{
+  "name": "@messai/database",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/@messai/database/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsup",
+        "cwd": "packages/@messai/database"
+      },
+      "dependsOn": ["generate"]
+    },
+    "generate": {
+      "executor": "nx:run-commands", 
+      "options": {
+        "command": "prisma generate",
+        "cwd": "packages/@messai/database"
+      }
+    },
+    "push": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma db push",
+        "cwd": "packages/@messai/database"
+      }
+    },
+    "studio": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "prisma studio",
+        "cwd": "packages/@messai/database"
+      }
+    }
+  },
+  "tags": ["database"]
+}
