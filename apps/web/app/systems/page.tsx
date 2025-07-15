@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { 
@@ -18,7 +18,7 @@ import {
 import UnifiedSystemCard from '../../components/UnifiedSystemCard'
 import Enhanced3DSystemPanel from '../../components/Enhanced3DSystemPanel'
 
-export default function SystemsPage() {
+function SystemsContent() {
   const searchParams = useSearchParams()
   const [selectedSystem, setSelectedSystem] = useState<UnifiedMESSSystem | null>(null)
   const [panelOpen, setPanelOpen] = useState(false)
@@ -372,5 +372,31 @@ export default function SystemsPage() {
       </div>
 
     </div>
+  )
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="animate-pulse">
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-4"></div>
+          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-96 mb-8"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="h-64 bg-gray-200 dark:bg-gray-700 rounded-lg"></div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default function SystemsPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <SystemsContent />
+    </Suspense>
   )
 }
