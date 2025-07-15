@@ -1,0 +1,28 @@
+{
+  "id": "color-scheme-typography",
+  "started": "2025-07-15T03:40:00Z",
+  "lastUpdated": "2025-07-15T03:40:00Z",
+  "status": "active",
+  "phase": "complete",
+  "progress": {
+    "discovery": { "answered": 5, "total": 5 },
+    "detail": { "answered": 5, "total": 5 }
+  },
+  "contextFiles": [
+    "/apps/web/app/globals.css",
+    "/apps/web/app/layout.tsx", 
+    "/apps/web/components/Navigation.tsx",
+    "/apps/web/components/ConditionalLayout.tsx",
+    "/apps/web/components/ui/CaladanIcons.tsx",
+    "/apps/web/components/ui/ParameterCard.tsx",
+    "/apps/web/app/page.tsx",
+    "/apps/web/app/parameters/enhanced/page.tsx"
+  ],
+  "relatedFeatures": [
+    "Caladan Bio design system",
+    "Dark/light theme toggle", 
+    "Custom SVG icon library",
+    "Parameter visualization cards",
+    "Navigation layout system"
+  ]
+}

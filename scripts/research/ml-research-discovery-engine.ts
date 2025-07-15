@@ -473,7 +473,7 @@ async function runMLDiscoveryEngine() {
       ...analysis
     }
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/ml-discovery-engine-report.json', JSON.stringify(report, null, 2))
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/ml-discovery-engine-report.json', JSON.stringify(report, null, 2))
     
     console.log('\n💾 ML Discovery Engine report saved to: ml-discovery-engine-report.json')
     

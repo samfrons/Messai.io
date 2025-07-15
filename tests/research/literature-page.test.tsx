@@ -32,20 +32,20 @@ const mockPapers = [
   },
   {
     id: '2',
-    title: 'AI Generated Paper',
-    authors: '["AI Author"]',
-    abstract: 'This is an AI-generated paper.',
+    title: 'PubMed Research Paper',
+    authors: '["Academic Author"]',
+    abstract: 'This is a peer-reviewed research paper.',
     systemType: 'MEC',
     powerOutput: 15000,
-    source: 'ai_smart_literature',
+    source: 'pubmed_api',
     _count: { experiments: 0 },
-    user: { id: '2', name: 'AI User', email: 'ai@example.com' }
+    user: { id: '2', name: 'Academic User', email: 'academic@example.com' }
   }
 ]
 
 const mockStats = {
   totalPapers: 4380,
-  aiEnhanced: 3850,
+  aiProcessed: 3850,
   uniqueMaterials: 127,
   uniqueOrganisms: 45,
   withPowerOutput: 4200,
@@ -60,8 +60,8 @@ const mockStats = {
     { type: 'MES', count: 400 }
   ],
   sources: [
-    { source: 'crossref_api', count: 426 },
-    { source: 'ai_smart_literature', count: 3850 }
+    { source: 'crossref_api', count: 2426 },
+    { source: 'pubmed_api', count: 1954 }
   ]
 }
 

@@ -259,7 +259,7 @@ ${topPapers.map((p, i) => `${i+1}. **${p.title.substring(0, 80)}...**
 `
 
   // Save report
-  await fs.writeFile('/Users/samfrons/Desktop/Messai/quality-validation-report.md', report)
+  await fs.writeFile('/Users/samfrons/Desktop/clean-messai/quality-validation-report.md', report)
   console.log('✅ Quality validation report saved to quality-validation-report.md')
   
   return metrics

@@ -87,13 +87,13 @@ function DashboardContent() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'running':
-        return 'bg-green-100 text-green-800'
+        return 'bg-black/5 text-black'
       case 'completed':
-        return 'bg-blue-100 text-blue-800'
+        return 'bg-black/10 text-black'
       case 'setup':
-        return 'bg-yellow-100 text-yellow-800'
+        return 'bg-black/5 text-black opacity-60'
       default:
-        return 'bg-gray-100 text-gray-800'
+        return 'bg-black/5 text-black opacity-60'
     }
   }
 
@@ -109,16 +109,16 @@ function DashboardContent() {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-300 rounded mb-6 w-1/3"></div>
+          <div className="h-8 bg-gray-300 mb-6 w-1/3"></div>
           <div className="space-y-4">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-white rounded-lg border border-gray-200 p-6">
-                <div className="h-6 bg-gray-300 rounded mb-4 w-1/2"></div>
+              <div key={i} className="bg-white border border-gray-200 p-6">
+                <div className="h-6 bg-gray-300 mb-4 w-1/2"></div>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="h-4 bg-gray-300 rounded"></div>
-                  <div className="h-4 bg-gray-300 rounded"></div>
-                  <div className="h-4 bg-gray-300 rounded"></div>
-                  <div className="h-4 bg-gray-300 rounded"></div>
+                  <div className="h-4 bg-gray-300"></div>
+                  <div className="h-4 bg-gray-300"></div>
+                  <div className="h-4 bg-gray-300"></div>
+                  <div className="h-4 bg-gray-300"></div>
                 </div>
               </div>
             ))}
@@ -129,20 +129,20 @@ function DashboardContent() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col bg-cream">
       {/* Unauthenticated user notice */}
       {!isAuthenticated && status !== 'loading' && (
-        <div className="bg-blue-50 border-b border-blue-200 px-6 py-3">
+        <div className="bg-white border-b border-gray-200 px-6 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <Lightbulb className="h-5 w-5 text-blue-600" />
-              <p className="text-sm text-blue-800">
+              <Lightbulb className="h-5 w-5 text-black" />
+              <p className="text-sm text-black">
                 <strong>Welcome to MESSAi Dashboard!</strong> You&apos;re viewing our public demo. Sign in to create and manage your own experiments.
               </p>
             </div>
             <Link
               href="/auth/login"
-              className="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1"
+              className="text-sm text-black hover:opacity-60 font-medium flex items-center gap-1 transition-opacity"
             >
               Sign In
               <ArrowRight className="h-4 w-4" />
@@ -153,10 +153,10 @@ function DashboardContent() {
       
       {/* Onboarding completion message */}
       {justCompletedOnboarding && (
-        <div className="bg-green-50 border-b border-green-200 px-6 py-3">
+        <div className="bg-white border-b border-gray-200 px-6 py-3">
           <div className="flex items-center gap-3">
-            <CheckCircle className="h-5 w-5 text-green-600" />
-            <p className="text-sm text-green-800">
+            <CheckCircle className="h-5 w-5 text-black" />
+            <p className="text-sm text-black">
               <strong>Profile setup complete!</strong> Welcome to MESSAi. You&apos;re all set to start your research.
             </p>
           </div>
@@ -165,16 +165,16 @@ function DashboardContent() {
       
       {/* Onboarding incomplete banner - only show for authenticated users */}
       {isAuthenticated && onboardingStatus && !onboardingStatus.completedOnboarding && !justCompletedOnboarding && (
-        <div className="bg-amber-50 border-b border-amber-200 px-6 py-3 flex items-center justify-between">
+        <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Sparkles className="h-5 w-5 text-amber-600" />
-            <p className="text-sm text-amber-800">
+            <Sparkles className="h-5 w-5 text-black" />
+            <p className="text-sm text-black">
               <strong>Complete your profile setup</strong> to unlock personalized recommendations and features.
             </p>
           </div>
           <Link
             href="/onboarding"
-            className="text-sm text-amber-600 hover:text-amber-700 font-medium flex items-center gap-1"
+            className="text-sm text-black hover:opacity-60 font-medium flex items-center gap-1 transition-opacity"
           >
             Continue Setup
             <Sparkles className="h-4 w-4" />
@@ -184,16 +184,16 @@ function DashboardContent() {
       
       {/* Email verification banner - only show for authenticated users */}
       {isAuthenticated && (isUnverified || needsVerification) && (
-        <div className="bg-yellow-50 border-b border-yellow-200 px-6 py-3 flex items-center justify-between">
+        <div className="bg-white border-b border-gray-200 px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <AlertCircle className="h-5 w-5 text-yellow-600" />
-            <p className="text-sm text-yellow-800">
+            <AlertCircle className="h-5 w-5 text-black" />
+            <p className="text-sm text-black">
               <strong>Email verification required.</strong> Please verify your email to access all features.
             </p>
           </div>
           <Link
             href="/auth/verify-request"
-            className="text-sm text-yellow-600 hover:text-yellow-700 font-medium flex items-center gap-1"
+            className="text-sm text-black hover:opacity-60 font-medium flex items-center gap-1 transition-opacity"
           >
             <Mail className="h-4 w-4" />
             Resend verification
@@ -203,12 +203,12 @@ function DashboardContent() {
       
       {/* Success message for just verified users - only show for authenticated users */}
       {isAuthenticated && justVerified && (
-        <div className="bg-green-50 border-b border-green-200 px-6 py-3">
+        <div className="bg-white border-b border-gray-200 px-6 py-3">
           <div className="flex items-center gap-3">
-            <svg className="h-5 w-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="h-5 w-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p className="text-sm text-green-800">
+            <p className="text-sm text-black">
               <strong>Email verified successfully!</strong> You now have full access to all MESSAi features.
             </p>
           </div>
@@ -216,21 +216,21 @@ function DashboardContent() {
       )}
       
       {/* Compact header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4 flex-shrink-0">
+      <div className="bg-cream border-b border-gray-200 px-6 py-4 flex-shrink-0">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Experiment Dashboard</h1>
-            <p className="text-sm text-gray-600">Monitor and manage your MFC experiments</p>
+            <h1 className="text-xl font-serif text-black">Experiment Dashboard</h1>
+            <p className="text-sm text-black opacity-60">Monitor and manage your MFC experiments</p>
           </div>
           <div className="flex items-center gap-3">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setView3D(!view3D)}
-              className={`flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-all ${
+              className={`flex items-center gap-2 px-3 py-2 text-sm transition-all ${
                 view3D 
-                  ? 'bg-blue-500 text-white shadow-lg' 
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-black text-white' 
+                  : 'bg-white border border-gray-200 text-black hover:bg-gray-50'
               }`}
             >
               <Eye className="h-4 w-4" />
@@ -239,7 +239,7 @@ function DashboardContent() {
             {isAuthenticated ? (
               <a
                 href="/"
-                className="bg-blue-600 text-white px-3 py-2 text-sm rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2"
+                className="bg-black text-white px-3 py-2 text-sm hover:opacity-80 transition-opacity flex items-center gap-2"
               >
                 <Settings className="h-4 w-4" />
                 New Experiment
@@ -247,7 +247,7 @@ function DashboardContent() {
             ) : (
               <Link
                 href="/auth/login"
-                className="bg-blue-600 text-white px-3 py-2 text-sm rounded-md hover:bg-blue-700 transition-colors"
+                className="bg-black text-white px-3 py-2 text-sm hover:opacity-80 transition-opacity"
               >
                 Sign in to Create
               </Link>
@@ -266,18 +266,18 @@ function DashboardContent() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center"
             >
-              <div className="text-gray-500 text-lg mb-4">No experiments yet</div>
+              <div className="text-black opacity-60 text-lg mb-4">No experiments yet</div>
               {isAuthenticated ? (
                 <a
                   href="/"
-                  className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
+                  className="btn-primary inline-block"
                 >
                   Create Your First Experiment
                 </a>
               ) : (
                 <Link
                   href="/auth/login"
-                  className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors inline-block"
+                  className="btn-primary inline-block"
                 >
                   Sign in to Get Started
                 </Link>
@@ -288,52 +288,52 @@ function DashboardContent() {
           <div className="h-full flex flex-col lg:flex-row">
             {/* Left: 3D Visualization */}
             {view3D && (
-              <div className="w-full lg:w-3/5 bg-white border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col min-h-[400px] lg:min-h-0">
+              <div className="w-full lg:w-3/5 bg-cream border-b lg:border-b-0 lg:border-r border-gray-200 flex flex-col min-h-[400px] lg:min-h-0">
                 <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h2 className="text-base lg:text-lg font-semibold text-gray-900">3D Experiment Overview</h2>
-                      <p className="text-xs lg:text-sm text-gray-600">Interactive visualization</p>
+                      <h2 className="text-base lg:text-lg font-serif text-black">3D Experiment Overview</h2>
+                      <p className="text-xs lg:text-sm text-black opacity-60">Interactive visualization</p>
                     </div>
                     <div className="flex items-center gap-2">
-                      <TrendingUp className="h-4 w-4 text-green-500" />
-                      <span className="text-xs lg:text-sm text-gray-600">
+                      <TrendingUp className="h-4 w-4 text-black" />
+                      <span className="text-xs lg:text-sm text-black opacity-60">
                         {experiments.filter(e => e.status === 'running').length} active
                       </span>
                     </div>
                   </div>
                 </div>
-                <div className="flex-1 min-h-0 flex items-center justify-center bg-gray-50">
+                <div className="flex-1 min-h-0 flex items-center justify-center bg-white">
                   <div className="text-center">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Eye className="w-8 h-8 text-blue-600" />
+                    <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Eye className="w-8 h-8 text-black" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">3D Visualization</h3>
-                    <p className="text-gray-600 mb-4">Interactive experiment monitoring</p>
-                    <div className="text-sm text-gray-500">Coming soon...</div>
+                    <h3 className="text-lg font-serif text-black mb-2">3D Visualization</h3>
+                    <p className="text-black opacity-60 mb-4">Interactive experiment monitoring</p>
+                    <div className="text-sm text-black opacity-60">Coming soon...</div>
                   </div>
                 </div>
                 {selectedExperiment && (
-                  <div className="p-3 lg:p-4 border-t border-gray-200 bg-blue-50 flex-shrink-0">
+                  <div className="p-3 lg:p-4 border-t border-gray-200 bg-black/5 flex-shrink-0">
                     {(() => {
                       const selected = experiments.find(e => e.id === selectedExperiment)
                       return selected ? (
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                           <div>
-                            <h3 className="font-semibold text-blue-900 text-sm">{selected.name}</h3>
-                            <p className="text-blue-700 text-xs">{selected.designName}</p>
+                            <h3 className="font-semibold text-black text-sm">{selected.name}</h3>
+                            <p className="text-black opacity-60 text-xs">{selected.designName}</p>
                           </div>
                           {isAuthenticated ? (
                             <button
                               onClick={() => window.location.href = `/experiment/${selected.id}`}
-                              className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm"
+                              className="bg-black text-white px-3 py-2 hover:opacity-80 transition-opacity text-xs sm:text-sm"
                             >
                               View Details
                             </button>
                           ) : (
                             <Link
                               href="/auth/login"
-                              className="bg-blue-600 text-white px-3 py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm inline-block"
+                              className="bg-black text-white px-3 py-2 hover:opacity-80 transition-opacity text-xs sm:text-sm inline-block"
                             >
                               Sign in to View
                             </Link>
@@ -347,11 +347,11 @@ function DashboardContent() {
             )}
             
             {/* Right: Experiment List */}
-            <div className={`${view3D ? 'w-full lg:w-2/5' : 'w-full'} bg-white flex flex-col min-h-0`}>
+            <div className={`${view3D ? 'w-full lg:w-2/5' : 'w-full'} bg-cream flex flex-col min-h-0`}>
               <div className="p-3 lg:p-4 border-b border-gray-200 flex-shrink-0">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-base lg:text-lg font-semibold text-gray-900">Experiments</h2>
-                  <span className="text-xs lg:text-sm text-gray-600">{experiments.length} total</span>
+                  <h2 className="text-base lg:text-lg font-serif text-black">Experiments</h2>
+                  <span className="text-xs lg:text-sm text-black opacity-60">{experiments.length} total</span>
                 </div>
               </div>
               <div className="flex-1 overflow-y-auto p-2 lg:p-4 space-y-2 lg:space-y-3">
@@ -361,10 +361,10 @@ function DashboardContent() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className={`border rounded-lg p-3 lg:p-4 hover:shadow-md transition-all cursor-pointer ${
+                    className={`border p-3 lg:p-4 transition-all cursor-pointer ${
                       selectedExperiment === experiment.id 
-                        ? 'border-blue-300 shadow-md bg-blue-50' 
-                        : 'border-gray-200 bg-white'
+                        ? 'border-black/20 bg-black/5' 
+                        : 'border-gray-200 bg-white hover:border-black/20'
                     }`}
                     onClick={() => {
                       setSelectedExperiment(experiment.id)
@@ -376,13 +376,13 @@ function DashboardContent() {
                   >
                     <div className="flex items-start justify-between mb-2 lg:mb-3">
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-gray-900 text-xs lg:text-sm mb-1 truncate">
+                        <h3 className="font-semibold text-black text-xs lg:text-sm mb-1 truncate">
                           {experiment.name}
                         </h3>
-                        <p className="text-xs text-gray-600 truncate">{experiment.designName}</p>
+                        <p className="text-xs text-black opacity-60 truncate">{experiment.designName}</p>
                       </div>
                       <div className="text-right ml-2 lg:ml-3 flex-shrink-0">
-                        <div className="text-sm lg:text-lg font-bold text-blue-600">
+                        <div className="text-sm lg:text-lg font-bold text-black">
                           {experiment.lastPower.toFixed(1)} mW
                         </div>
                         <span className={`px-1 lg:px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(experiment.status)}`}>
@@ -393,19 +393,19 @@ function DashboardContent() {
 
                     <div className="grid grid-cols-2 gap-2 lg:gap-3 text-xs">
                       <div>
-                        <span className="text-gray-600">Started:</span>
+                        <span className="text-black opacity-60">Started:</span>
                         <div className="font-medium truncate">{formatDate(experiment.createdAt)}</div>
                       </div>
                       <div>
-                        <span className="text-gray-600">Temperature:</span>
+                        <span className="text-black opacity-60">Temperature:</span>
                         <div className="font-medium">{experiment.parameters.temperature}°C</div>
                       </div>
                       <div>
-                        <span className="text-gray-600">pH Level:</span>
+                        <span className="text-black opacity-60">pH Level:</span>
                         <div className="font-medium">{experiment.parameters.ph}</div>
                       </div>
                       <div>
-                        <span className="text-gray-600">Substrate:</span>
+                        <span className="text-black opacity-60">Substrate:</span>
                         <div className="font-medium">{experiment.parameters.substrateConcentration} g/L</div>
                       </div>
                     </div>
@@ -423,10 +423,10 @@ function DashboardContent() {
 export default function DashboardPage() {
   return (
     <Suspense fallback={
-      <div className="h-screen flex items-center justify-center bg-gray-50">
+      <div className="h-screen flex items-center justify-center bg-cream">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-blue-500 mx-auto" />
-          <p className="mt-2 text-gray-600">Loading dashboard...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-black mx-auto" />
+          <p className="mt-2 text-black opacity-60">Loading dashboard...</p>
         </div>
       </div>
     }>

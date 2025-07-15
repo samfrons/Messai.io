@@ -11,8 +11,8 @@ const BioreactorModel = dynamic(
   { 
     ssr: false,
     loading: () => (
-      <div className="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg flex items-center justify-center">
-        <div className="text-center text-gray-500 dark:text-gray-400">
+      <div className="aspect-square bg-white border border-gray-200 flex items-center justify-center">
+        <div className="text-center text-black opacity-60">
           <div className="text-4xl mb-4">⚡</div>
           <p className="font-serif">Loading 3D Model...</p>
         </div>
@@ -32,9 +32,9 @@ export default function BioreactorTool() {
     cost: 1250
   })
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-cream">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-green-600 text-white py-16">
+      <div className="bg-cream py-16 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -42,10 +42,10 @@ export default function BioreactorTool() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
+            <h1 className="text-4xl md:text-6xl font-serif text-black mb-6">
               Bioreactor Design Tool
             </h1>
-            <p className="text-xl md:text-2xl font-serif opacity-90 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl font-serif text-black opacity-60 max-w-3xl mx-auto">
               Design next-generation bioelectrochemical systems with advanced modeling and optimization
             </p>
           </motion.div>
@@ -60,21 +60,21 @@ export default function BioreactorTool() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8"
+            className="bg-white border border-gray-200 p-8"
           >
-            <h2 className="text-2xl font-serif font-bold mb-6 text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-serif text-black mb-6">
               Design Configuration
             </h2>
             
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   System Type
                 </label>
                 <select 
                   value={systemType}
                   onChange={(e) => setSystemType(e.target.value as any)}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full p-3 border border-gray-200 bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
                 >
                   <option value="MFC">Microbial Fuel Cell (MFC)</option>
                   <option value="MEC">Microbial Electrolysis Cell (MEC)</option>
@@ -84,13 +84,13 @@ export default function BioreactorTool() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   Scale
                 </label>
                 <select 
                   value={scale}
                   onChange={(e) => setScale(e.target.value as any)}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full p-3 border border-gray-200 bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
                 >
                   <option value="laboratory">Laboratory (mL - L)</option>
                   <option value="pilot">Pilot Scale (10L - 1000L)</option>
@@ -99,13 +99,13 @@ export default function BioreactorTool() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   Anode Material
                 </label>
                 <select 
                   value={anodeMaterial}
                   onChange={(e) => setAnodeMaterial(e.target.value)}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full p-3 border border-gray-200 bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
                 >
                   <option value="carbonCloth">Carbon Cloth</option>
                   <option value="graphiteFelt">Graphite Felt</option>
@@ -115,13 +115,13 @@ export default function BioreactorTool() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label className="block text-sm font-medium text-black mb-2">
                   Cathode Material
                 </label>
                 <select 
                   value={cathodeMaterial}
                   onChange={(e) => setCathodeMaterial(e.target.value)}
-                  className="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="w-full p-3 border border-gray-200 bg-white text-black focus:outline-none focus:ring-2 focus:ring-black"
                 >
                   <option value="copper">Copper (Cost-effective)</option>
                   <option value="platinum">Platinum</option>
@@ -146,7 +146,7 @@ export default function BioreactorTool() {
                   
                   setPerformanceData({ powerOutput, efficiency, cost })
                 }}
-                className="w-full py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg hover:from-blue-600 hover:to-green-600 transition-all duration-300 font-semibold"
+                className="w-full py-3 bg-black text-white hover:opacity-80 transition-opacity font-semibold"
               >
                 Calculate Performance
               </button>
@@ -158,13 +158,13 @@ export default function BioreactorTool() {
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-gray-50 dark:bg-gray-800 rounded-xl p-8"
+            className="bg-white border border-gray-200 p-8"
           >
-            <h2 className="text-2xl font-serif font-bold mb-6 text-gray-900 dark:text-white">
+            <h2 className="text-2xl font-serif text-black mb-6">
               3D Preview
             </h2>
             
-            <div className="aspect-square bg-gray-900 rounded-lg overflow-hidden">
+            <div className="aspect-square bg-gray-50 border border-gray-200 overflow-hidden">
               <BioreactorModel
                 systemType={systemType}
                 scale={scale}
@@ -176,16 +176,16 @@ export default function BioreactorTool() {
 
             <div className="mt-6 space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Expected Power Output:</span>
-                <span className="font-semibold text-gray-900 dark:text-white">{performanceData.powerOutput} mW/m²</span>
+                <span className="text-sm text-black opacity-60">Expected Power Output:</span>
+                <span className="font-semibold text-black">{performanceData.powerOutput} mW/m²</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Efficiency:</span>
-                <span className="font-semibold text-gray-900 dark:text-white">{performanceData.efficiency}%</span>
+                <span className="text-sm text-black opacity-60">Efficiency:</span>
+                <span className="font-semibold text-black">{performanceData.efficiency}%</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-sm text-gray-600 dark:text-gray-400">Cost Estimate:</span>
-                <span className="font-semibold text-gray-900 dark:text-white">${performanceData.cost.toLocaleString()}</span>
+                <span className="text-sm text-black opacity-60">Cost Estimate:</span>
+                <span className="font-semibold text-black">${performanceData.cost.toLocaleString()}</span>
               </div>
             </div>
           </motion.div>
@@ -198,33 +198,33 @@ export default function BioreactorTool() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-16"
         >
-          <h2 className="text-3xl font-serif font-bold text-center mb-12 text-gray-900 dark:text-white">
+          <h2 className="heading-2 text-black text-center mb-12">
             Advanced Design Features
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">⚗️</span>
               </div>
-              <h3 className="text-xl font-serif font-semibold mb-2 text-gray-900 dark:text-white">Multi-Fidelity Modeling</h3>
-              <p className="text-gray-600 dark:text-gray-400">High, medium, and low fidelity models for different design stages</p>
+              <h3 className="text-xl font-serif text-black mb-2">Multi-Fidelity Modeling</h3>
+              <p className="text-base text-black opacity-60">High, medium, and low fidelity models for different design stages</p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">🔧</span>
               </div>
-              <h3 className="text-xl font-serif font-semibold mb-2 text-gray-900 dark:text-white">Real-time Optimization</h3>
-              <p className="text-gray-600 dark:text-gray-400">AI-powered parameter optimization for maximum performance</p>
+              <h3 className="text-xl font-serif text-black mb-2">Real-time Optimization</h3>
+              <p className="text-base text-black opacity-60">AI-powered parameter optimization for maximum performance</p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-2xl">📊</span>
               </div>
-              <h3 className="text-xl font-serif font-semibold mb-2 text-gray-900 dark:text-white">Performance Prediction</h3>
-              <p className="text-gray-600 dark:text-gray-400">Science-based predictions for power output and efficiency</p>
+              <h3 className="text-xl font-serif text-black mb-2">Performance Prediction</h3>
+              <p className="text-base text-black opacity-60">Science-based predictions for power output and efficiency</p>
             </div>
           </div>
         </motion.div>
@@ -238,13 +238,13 @@ export default function BioreactorTool() {
         >
           <Link
             href="/"
-            className="px-6 py-3 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+            className="px-6 py-3 border border-gray-200 text-black hover:bg-black/5 transition-colors"
           >
             ← Back to Home
           </Link>
           <Link
             href="/tools/electroanalytical"
-            className="px-6 py-3 bg-gradient-to-r from-blue-500 to-green-500 text-white rounded-lg hover:from-blue-600 hover:to-green-600 transition-all duration-300"
+            className="btn-primary"
           >
             Electroanalytical Tools →
           </Link>

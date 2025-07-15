@@ -94,13 +94,13 @@ const mockAIPaper = {
   powerOutput: null,
   efficiency: null,
   systemType: 'BES',
-  source: 'ai_smart_literature',
+  source: 'arxiv_api',
   isPublic: true,
   createdAt: '2024-01-10T08:15:00.000Z',
   user: {
-    id: 'ai-user',
-    name: 'AI Assistant',
-    email: 'ai@messai.io'
+    id: 'research-user',
+    name: 'Research Assistant',
+    email: 'research@messai.io'
   },
   experiments: [],
   _count: {

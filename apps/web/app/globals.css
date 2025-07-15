@@ -4,51 +4,47 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 150 20% 12%;
+    /* messai.ai inspired colors */
+    --cream: 40 30% 95%;
+    --background: var(--cream);
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 150 20% 12%;
-    --primary: 150 35% 20%;
+    --card-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 150 40% 15%;
+    --secondary: 0 0% 30%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 150 10% 96%;
-    --muted-foreground: 150 8% 45%;
-    --accent: 150 30% 25%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 0%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 150 8% 88%;
-    --input: 150 8% 88%;
-    --ring: 150 35% 20%;
-    --caladan-dark: 150 45% 8%;
-    --caladan-medium: 150 35% 20%;
-    --caladan-light: 150 25% 30%;
-    --caladan-accent: 150 60% 35%;
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 20%;
   }
 
   .dark {
-    --background: 150 45% 8%;
-    --foreground: 150 10% 92%;
-    --card: 150 40% 10%;
-    --card-foreground: 150 10% 92%;
-    --primary: 150 60% 35%;
-    --primary-foreground: 150 45% 8%;
-    --secondary: 150 50% 25%;
-    --secondary-foreground: 0 0% 100%;
-    --muted: 150 20% 15%;
-    --muted-foreground: 150 10% 65%;
-    --accent: 150 55% 30%;
-    --accent-foreground: 0 0% 100%;
+    /* Dark mode - inverted cream theme */
+    --cream: 0 0% 10%;
+    --background: var(--cream);
+    --foreground: 0 0% 95%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 95%;
+    --primary: 0 0% 95%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 70%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 10%;
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
-    --border: 150 25% 20%;
-    --input: 150 25% 20%;
-    --ring: 150 60% 35%;
-    --caladan-dark: 150 50% 5%;
-    --caladan-medium: 150 45% 15%;
-    --caladan-light: 150 35% 25%;
-    --caladan-accent: 150 65% 40%;
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
+    --ring: 0 0% 60%;
   }
 
   * {
@@ -103,14 +99,23 @@
 }
 
 @layer components {
-  /* Container */
+  /* Container - messai.ai style */
   .container {
     @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
   }
 
-  /* Button base styles - Caladan Bio inspired */
+  /* messai.ai grid system */
+  .container-grid {
+    @apply container mx-auto px-4;
+  }
+
+  .grid-12 {
+    @apply grid grid-cols-12 gap-4;
+  }
+
+  /* Button base styles - messai.ai minimalist */
   .btn {
-    @apply inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium uppercase tracking-wider rounded-full transition-all duration-200 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50;
   }
   
   .btn:focus-visible {
@@ -125,7 +130,7 @@
   }
   
   .btn-primary:hover {
-    background-color: hsl(var(--primary) / 0.9);
+    opacity: 0.8;
   }
 
   .btn-outline {
@@ -135,8 +140,8 @@
   }
   
   .btn-outline:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
 
   .btn-ghost {
@@ -145,23 +150,22 @@
   }
   
   .btn-ghost:hover {
-    background-color: hsl(var(--accent));
-    color: hsl(var(--accent-foreground));
+    opacity: 0.6;
   }
 
-  /* Card styles */
+  /* Card styles - messai.ai minimal */
   .card {
-    @apply rounded-lg border shadow-sm;
+    @apply rounded border;
     background-color: hsl(var(--card));
     color: hsl(var(--card-foreground));
   }
 
   .card-hover {
-    @apply card transition-all duration-200 hover:shadow-lg;
+    @apply card transition-all duration-200;
   }
   
   .card-hover:hover {
-    border-color: hsl(var(--primary) / 0.2);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   /* Form inputs */
@@ -214,31 +218,80 @@
     background-image: linear-gradient(to bottom right, hsl(var(--primary) / 0.05), transparent, hsl(var(--secondary) / 0.05));
   }
 
-  /* Text styles */
+  /* Text styles - messai.ai typography */
   .heading-1 {
     @apply text-4xl font-light tracking-tight md:text-5xl lg:text-6xl;
+    font-family: var(--font-crimson), serif;
   }
 
   .heading-2 {
     @apply text-3xl font-light tracking-tight md:text-4xl;
+    font-family: var(--font-crimson), serif;
   }
 
   .heading-3 {
     @apply text-2xl font-light tracking-tight md:text-3xl;
+    font-family: var(--font-crimson), serif;
   }
 
   .body-large {
     @apply text-lg leading-relaxed;
-    color: hsl(var(--muted-foreground));
   }
 
-  /* Geometric patterns */
-  .geometric-bg {
-    background-image: 
-      radial-gradient(circle at 1px 1px, rgb(var(--primary) / 0.1) 1px, transparent 1px);
-    background-size: 40px 40px;
+  /* messai.ai specific classes */
+  .nav-link {
+    @apply text-sm transition-opacity hover:opacity-60;
+  }
+
+  .opacity-60 {
+    opacity: 0.6;
   }
 }
+
+  /* Text color utilities for proper contrast */
+  .text-muted-foreground {
+    color: hsl(var(--foreground) / 0.8);
+  }
+  
+  /* Override for better contrast on light backgrounds */
+  :root .text-muted-foreground {
+    color: hsl(var(--foreground) / 0.7);
+  }
+  
+  .dark .text-muted-foreground {
+    color: hsl(var(--foreground) / 0.8);
+  }
+
+  /* Ensure white text on dark backgrounds */
+  .text-white {
+    color: rgb(255 255 255) !important;
+  }
+
+  /* Ensure dark text on light backgrounds */
+  .text-dark {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  }
+  
+  /* Utility classes for sections with specific backgrounds */
+  .bg-card .heading-1,
+  .bg-card .heading-2,
+  .bg-card .heading-3,
+  .bg-card .body-large {
+    color: hsl(var(--card-foreground));
+  }
+  
+  /* Dark sections need light text */
+  .bg-gradient-primary .heading-1,
+  .bg-gradient-primary .heading-2,
+  .bg-gradient-primary .heading-3,
+  .bg-gradient-primary .body-large,
+  .bg-gradient-primary p {
+    color: rgb(255 255 255);
+  }
 
 @layer utilities {
   /* Animations */
@@ -339,81 +392,6 @@
     display: none;
   }
 
-  /* Caladan Bio inspired styles */
-  .caladan-bg-dark {
-    background-color: hsl(var(--caladan-dark));
-  }
-
-  .caladan-bg-medium {
-    background-color: hsl(var(--caladan-medium));
-  }
-
-  .caladan-bg-light {
-    background-color: hsl(var(--caladan-light));
-  }
-
-  .caladan-text-accent {
-    color: hsl(var(--caladan-accent));
-  }
-
-  .caladan-border {
-    border-color: hsl(var(--caladan-medium) / 0.3);
-  }
-
-  .caladan-card {
-    @apply rounded-xl border caladan-border shadow-lg backdrop-blur-sm;
-    background: linear-gradient(145deg, 
-      hsl(var(--card) / 0.95), 
-      hsl(var(--card) / 0.85)
-    );
-  }
-
-  .caladan-button {
-    @apply px-6 py-3 rounded-lg font-medium text-sm transition-all duration-300;
-    background: linear-gradient(135deg, 
-      hsl(var(--caladan-medium)), 
-      hsl(var(--caladan-light))
-    );
-    color: hsl(var(--primary-foreground));
-    border: 1px solid hsl(var(--caladan-accent) / 0.3);
-  }
-
-  .caladan-button:hover {
-    background: linear-gradient(135deg, 
-      hsl(var(--caladan-light)), 
-      hsl(var(--caladan-accent))
-    );
-    box-shadow: 0 8px 25px hsl(var(--caladan-medium) / 0.3);
-    transform: translateY(-2px);
-  }
-
-  .caladan-icon-bg {
-    @apply rounded-lg p-3 backdrop-blur-sm;
-    background: linear-gradient(135deg, 
-      hsl(var(--caladan-accent) / 0.1), 
-      hsl(var(--caladan-medium) / 0.1)
-    );
-    border: 1px solid hsl(var(--caladan-accent) / 0.2);
-  }
-
-  /* Glow effects */
-  .glow-sm {
-    box-shadow: 0 0 20px hsl(var(--caladan-accent) / 0.2);
-  }
-
-  .glow-md {
-    box-shadow: 0 0 40px hsl(var(--caladan-accent) / 0.3);
-  }
-
-  .glow-lg {
-    box-shadow: 0 0 60px hsl(var(--caladan-accent) / 0.4);
-  }
-
-  .glow-caladan {
-    box-shadow: 
-      0 0 30px hsl(var(--caladan-accent) / 0.2),
-      0 0 60px hsl(var(--caladan-medium) / 0.1);
-  }
 
   /* Subtle shadows */
   .shadow-subtle {
@@ -424,5 +402,38 @@
     box-shadow: 
       0 0 20px rgb(var(--primary) / 0.1),
       0 1px 3px 0 rgb(0 0 0 / 0.1);
+  }
+
+  /* messai.ai page styles */
+  .bg-cream {
+    background-color: hsl(var(--cream));
+  }
+
+  .text-black {
+    color: hsl(var(--foreground));
+  }
+
+  .font-serif {
+    font-family: var(--font-crimson), serif;
+  }
+
+  .text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .text-xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }

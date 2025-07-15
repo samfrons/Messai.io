@@ -10,23 +10,23 @@ The MESSAi Reference System provides comprehensive documentation, validation, an
 
 ```bash
 # Get all parameter categories
-curl http://localhost:3005/api/reference/parameters
+curl http://localhost:3001/api/reference/parameters
 
 # Get specific parameter info
-curl http://localhost:3005/api/reference/parameters?name=power_density
+curl http://localhost:3001/api/reference/parameters?name=power_density
 
 # Validate a parameter value
-curl -X POST http://localhost:3005/api/reference/parameters \
+curl -X POST http://localhost:3001/api/reference/parameters \
   -H "Content-Type: application/json" \
   -d '{"parameterName": "power_density", "value": 50, "unit": "W/m³"}'
 
 # Check material compatibility
-curl -X POST http://localhost:3005/api/reference/materials \
+curl -X POST http://localhost:3001/api/reference/materials \
   -H "Content-Type: application/json" \
   -d '{"anodeMaterial": "carbon_cloth", "cathodeMaterial": "platinum"}'
 
 # Get performance prediction
-curl -X POST http://localhost:3005/api/reference/predict \
+curl -X POST http://localhost:3001/api/reference/predict \
   -H "Content-Type: application/json" \
   -d '{"configuration": {"systemType": "MFC", "anodeMaterial": "carbon_cloth", "cathodeMaterial": "platinum", "temperature": 30, "ph": 7.0}}'
 ```
@@ -35,16 +35,16 @@ curl -X POST http://localhost:3005/api/reference/predict \
 
 ```bash
 # Get documentation index
-curl http://localhost:3005/api/reference/documentation
+curl http://localhost:3001/api/reference/documentation
 
 # Get parameter documentation
-curl http://localhost:3005/api/reference/documentation?category=electrical&parameter=power-density
+curl http://localhost:3001/api/reference/documentation?category=electrical&parameter=power-density
 
 # Get material documentation
-curl http://localhost:3005/api/reference/documentation?material=carbon-cloth-anode
+curl http://localhost:3001/api/reference/documentation?material=carbon-cloth-anode
 
 # Search documentation
-curl -X POST http://localhost:3005/api/reference/documentation \
+curl -X POST http://localhost:3001/api/reference/documentation \
   -H "Content-Type: application/json" \
   -d '{"query": "biofilm conductivity", "categories": ["biological"]}'
 ```

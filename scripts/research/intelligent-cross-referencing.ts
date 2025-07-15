@@ -184,7 +184,7 @@ class IntelligentCrossReferenceEngine {
 
     // Source credibility
     if (paper.source === 'local_pdf') impact += 0.5 // Original research
-    if (paper.source === 'ai_smart_literature') impact += 0.3 // AI-generated insights
+    if (paper.source === 'crossref_api' || paper.source === 'pubmed_api') impact += 0.8 // Verified academic sources
 
     return impact
   }
@@ -495,11 +495,23 @@ class IntelligentCrossReferenceEngine {
     // Define breakthrough criteria
     if (paper.powerOutput && paper.powerOutput > 50000) return true
     if (paper.efficiency && paper.efficiency > 95) return true
-    if (paper.source === 'ai_smart_literature') return true
     
     const breakthroughKeywords = ['breakthrough', 'record', 'unprecedented', 'revolutionary']
     if (paper.title && breakthroughKeywords.some(kw => paper.title.toLowerCase().includes(kw))) {
       return true
+    }
+
+    // Check for novel materials or approaches
+    if (paper.anodeMaterials) {
+      try {
+        const materials = JSON.parse(paper.anodeMaterials)
+        const novelMaterials = ['quantum', 'MXene', 'synthetic', 'engineered', 'biomimetic']
+        if (materials.some((m: string) => novelMaterials.some(nm => m.toLowerCase().includes(nm)))) {
+          return true
+        }
+      } catch (e) {
+        // Handle non-JSON materials
+      }
     }
 
     return false
@@ -649,7 +661,7 @@ async function runIntelligentCrossReferencing() {
       ...system
     }
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/cross-reference-system.json', JSON.stringify(report, null, 2))
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/cross-reference-system.json', JSON.stringify(report, null, 2))
     
     console.log('\n💾 Cross-reference system saved to: cross-reference-system.json')
     

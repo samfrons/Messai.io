@@ -147,7 +147,7 @@ messai-mvp/
 ### Key Directories Explained
 
 #### `/app`
-Next.js 14 App Router structure. Each folder represents a route.
+Next.js 15 App Router structure. Each folder represents a route.
 
 #### `/components`
 Reusable React components. Follow the pattern:

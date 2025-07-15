@@ -467,7 +467,7 @@ class SemanticKnowledgeGraph {
       }
     }
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/knowledge-graph.json', JSON.stringify(graphData, null, 2))
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/knowledge-graph.json', JSON.stringify(graphData, null, 2))
     return graphData
   }
 }

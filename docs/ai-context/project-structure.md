@@ -1,37 +1,39 @@
 # MESSAi Project Structure
 
 ## Current Repository State
-- **Location**: /Users/samfrons/Desktop/Messai
+- **Location**: /Users/samfrons/Desktop/clean-messai
 - **Current Branch**: master
-- **Active Worktrees**: 4 (master, messai-home, messai-lab, messai-research)
+- **Active Worktrees**: None (single repository)
 - **Uncommitted Changes**: 204 files
 - **Repository Size**: ~178MB
 
 ## Directory Structure
 
 ```
-/Users/samfrons/Desktop/Messai/
-├── app/                          # Next.js 14 App Router
-│   ├── api/                      # API endpoints
-│   │   ├── auth/                 # Authentication (NextAuth.js)
-│   │   ├── papers/               # Research paper APIs
-│   │   ├── research/             # Research system APIs
-│   │   └── production-router/    # Production routing
-│   ├── globals.css               # Global styles
-│   ├── layout.tsx                # Root layout
-│   ├── page.tsx                  # Landing page
-│   └── research/                 # Research pages
-│       ├── page.tsx              # Research browser
-│       └── [id]/                 # Paper details
-├── components/                   # React components
-│   ├── 3d/                       # Three.js components
-│   ├── ui/                       # UI components
-│   ├── Layout.tsx                # Layout components
-│   └── *.tsx                     # Feature components
-├── lib/                          # Core libraries
-│   ├── database-utils.ts         # Database utilities
-│   ├── db.ts                     # Prisma client
-│   └── *.ts                      # Utility functions
+/Users/samfrons/Desktop/clean-messai/
+├── apps/web/                     # Next.js 15 App Router
+│   ├── app/                      # Next.js app directory
+│   │   ├── api/                  # API endpoints
+│   │   │   ├── auth/             # Authentication (NextAuth.js)
+│   │   │   ├── papers/           # Research paper APIs
+│   │   │   └── research/         # Research system APIs
+│   │   ├── globals.css           # Global styles
+│   │   ├── layout.tsx            # Root layout
+│   │   ├── page.tsx              # Landing page
+│   │   ├── research/             # Research pages
+│   │   ├── dashboard/            # Dashboard pages
+│   │   ├── models/               # Model pages
+│   │   ├── parameters/           # Parameter pages
+│   │   ├── systems/              # Systems pages
+│   │   └── tools/                # Tools pages
+│   ├── components/               # React components
+│   │   ├── 3d/                   # Three.js components
+│   │   ├── ui/                   # UI components
+│   │   └── Navigation.tsx        # Navigation component
+│   ├── src/lib/                  # Core libraries
+│   │   ├── db.ts                 # Database utilities
+│   │   ├── parameters-data.ts    # Parameters data
+│   │   └── *.ts                  # Utility functions
 ├── packages/                     # Monorepo packages
 │   ├── @messai/core/             # Core business logic
 │   │   ├── package.json
@@ -101,15 +103,18 @@
 - `app/page.tsx`: Landing page
 - `lib/database-utils.ts`: Database helpers
 
-## Worktree Locations
+## Project Architecture
 
 ```
-/Users/samfrons/Desktop/
-├── Messai/                      # Main repository (master)
-├── messai-home/                 # Marketing site
-├── messai-lab/                  # Laboratory tools
-├── messai-research/             # Research system
-└── clean-messai/                # Clean architecture (planned)
+/Users/samfrons/Desktop/clean-messai/
+├── apps/web/                    # Main Next.js application
+├── packages/@messai/            # Shared packages
+├── requirements/                # Requirements documentation
+├── reference/                   # Reference materials
+├── parameters/                  # Parameter data
+├── docs/                        # Documentation
+├── tests/                       # Test suites
+└── scripts/                     # Utility scripts
 ```
 
 ## Package Structure

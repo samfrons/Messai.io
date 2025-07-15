@@ -171,7 +171,7 @@ async function runCrossReferencing() {
       ]
     };
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/cross-reference-system.json', JSON.stringify(report, null, 2));
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/cross-reference-system.json', JSON.stringify(report, null, 2));
     console.log('\n💾 Cross-reference system saved to: cross-reference-system.json');
     
     return report;

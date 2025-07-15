@@ -11,7 +11,7 @@ export async function GET() {
       withPowerOutput,
       withEfficiency,
       papers2024,
-      aiEnhanced
+      aiProcessed
     ] = await Promise.all([
       prisma.researchPaper.count(),
       prisma.researchPaper.count({
@@ -30,7 +30,7 @@ export async function GET() {
       }),
       prisma.researchPaper.count({
         where: {
-          source: 'ai_smart_literature'
+          aiProcessingDate: { not: null }
         }
       })
     ])
@@ -147,7 +147,7 @@ export async function GET() {
     
     const stats = {
       totalPapers,
-      aiEnhanced,
+      aiProcessed,
       uniqueMaterials: estimatedMaterials,
       uniqueOrganisms: estimatedOrganisms,
       withPowerOutput,
@@ -167,7 +167,7 @@ export async function GET() {
     
     console.log('Stats compilation completed:', {
       totalPapers,
-      aiEnhanced,
+      aiProcessed,
       uniqueMaterials: estimatedMaterials,
       uniqueOrganisms: estimatedOrganisms,
       withPowerOutput,

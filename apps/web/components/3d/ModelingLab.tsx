@@ -3,7 +3,10 @@
 import { useState, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { Button } from '@messai/ui'
-import { Play, Pause, RotateCcw, Eye, EyeOff } from 'lucide-react'
+import { Play, Pause, RotateCcw, Eye, EyeOff, Settings } from 'lucide-react'
+import LeftPanel from './controls/LeftPanel'
+import AdvancedControls from './controls/AdvancedControls'
+import PerformanceDashboard from './controls/PerformanceDashboard'
 
 // Dynamic imports to avoid SSR issues
 const Scene = dynamic(() => import('./core/Scene'), { ssr: false })
@@ -52,133 +55,105 @@ export default function ModelingLab() {
   const [isPlaying, setIsPlaying] = useState(true)
   const [showBiofilm, setShowBiofilm] = useState(false)
   const [viewMode, setViewMode] = useState<'model' | 'biofilm'>('model')
+  const [parameters, setParameters] = useState({
+    temperature: 25,
+    pH: 7.0,
+    flowRate: 1.0,
+    voltage: 0.5,
+    current: 0.25,
+    conductivity: 1000,
+    biomass: 0.7
+  })
+  const [performanceData, setPerformanceData] = useState({
+    powerOutput: 45.2,
+    efficiency: 42.8,
+    cost: 125.50,
+    voltage: 0.5,
+    current: 0.25,
+    temperature: 25,
+    pH: 7.0,
+    timestamp: Date.now()
+  })
+  const [leftPanelCollapsed, setLeftPanelCollapsed] = useState(false)
+  const [rightPanelCollapsed, setRightPanelCollapsed] = useState(false)
+
+  const handleParameterChange = (param: string, value: number) => {
+    setParameters(prev => ({ ...prev, [param]: value }))
+  }
+
+  const handlePerformanceUpdate = (data: { powerOutput: number; efficiency: number; cost: number }) => {
+    setPerformanceData(prev => ({ ...prev, ...data }))
+  }
+
+  const handleExportData = () => {
+    const data = {
+      model: selectedModel,
+      parameters,
+      performanceData,
+      timestamp: new Date().toISOString()
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `messai-model-${selectedModel.id}-${Date.now()}.json`
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  const handleImportData = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = '.json'
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0]
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          try {
+            const data = JSON.parse(e.target?.result as string)
+            if (data.model) setSelectedModel(data.model)
+            if (data.parameters) setParameters(data.parameters)
+            if (data.performanceData) setPerformanceData(data.performanceData)
+          } catch (error) {
+            console.error('Error importing data:', error)
+          }
+        }
+        reader.readAsText(file)
+      }
+    }
+    input.click()
+  }
+
+  const handleSaveConfiguration = () => {
+    // This would typically save to a backend
+    console.log('Saving configuration:', { selectedModel, parameters, performanceData })
+  }
+
+  const handleResetView = () => {
+    // This would reset the 3D camera view
+    console.log('Resetting view')
+  }
 
   return (
     <div className="flex h-full">
-      {/* Control Panel */}
-      <div className="w-80 bg-white border-r border-gray-200 p-6 overflow-y-auto">
-        <div className="space-y-6">
-          {/* Model Selection */}
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-3">Model Presets</h3>
-            <div className="space-y-2">
-              {modelPresets.map((preset) => (
-                <button
-                  key={preset.id}
-                  onClick={() => setSelectedModel(preset)}
-                  className={`w-full text-left p-3 rounded-lg transition-all ${
-                    selectedModel.id === preset.id
-                      ? 'bg-blue-50 border-2 border-blue-500'
-                      : 'bg-gray-50 border-2 border-transparent hover:border-gray-300'
-                  }`}
-                >
-                  <div className="font-medium text-gray-900">{preset.name}</div>
-                  <div className="text-sm text-gray-600">
-                    {preset.type === 'microfluidic' 
-                      ? preset.description 
-                      : `${preset.systemType} • ${preset.scale}`
-                    }
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* View Controls */}
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-3">View Mode</h3>
-            <div className="space-y-2">
-              <Button
-                variant={viewMode === 'model' ? 'default' : 'outline'}
-                size="sm"
-                className="w-full"
-                onClick={() => setViewMode('model')}
-              >
-                System Model
-              </Button>
-              <Button
-                variant={viewMode === 'biofilm' ? 'default' : 'outline'}
-                size="sm"
-                className="w-full"
-                onClick={() => setViewMode('biofilm')}
-              >
-                Biofilm Growth
-              </Button>
-            </div>
-          </div>
-
-          {/* Animation Controls */}
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-3">Controls</h3>
-            <div className="space-y-2">
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full"
-                onClick={() => setIsPlaying(!isPlaying)}
-              >
-                {isPlaying ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />}
-                {isPlaying ? 'Pause' : 'Play'}
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full"
-                onClick={() => setShowBiofilm(!showBiofilm)}
-              >
-                {showBiofilm ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
-                {showBiofilm ? 'Hide' : 'Show'} Biofilm
-              </Button>
-            </div>
-          </div>
-
-          {/* Model Info */}
-          <div className="p-4 bg-blue-50 rounded-lg">
-            <h4 className="font-medium text-blue-900 mb-2">Current Model</h4>
-            <div className="space-y-1 text-sm">
-              {selectedModel.type === 'microfluidic' ? (
-                <>
-                  <div>
-                    <span className="text-blue-700">Type:</span>{' '}
-                    <span className="font-medium">Microfluidic</span>
-                  </div>
-                  <div>
-                    <span className="text-blue-700">Culture:</span>{' '}
-                    <span className="font-medium">Algae Bioreactor</span>
-                  </div>
-                  <div>
-                    <span className="text-blue-700">Flow:</span>{' '}
-                    <span className="font-medium">Co-laminar</span>
-                  </div>
-                  <div>
-                    <span className="text-blue-700">Material:</span>{' '}
-                    <span className="font-medium">PDMS/Glass</span>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div>
-                    <span className="text-blue-700">Type:</span>{' '}
-                    <span className="font-medium">{selectedModel.systemType}</span>
-                  </div>
-                  <div>
-                    <span className="text-blue-700">Scale:</span>{' '}
-                    <span className="font-medium capitalize">{selectedModel.scale}</span>
-                  </div>
-                  <div>
-                    <span className="text-blue-700">Anode:</span>{' '}
-                    <span className="font-medium">{selectedModel.anode}</span>
-                  </div>
-                  <div>
-                    <span className="text-blue-700">Cathode:</span>{' '}
-                    <span className="font-medium">{selectedModel.cathode}</span>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Left Panel */}
+      <LeftPanel
+        isCollapsed={leftPanelCollapsed}
+        onCollapseToggle={() => setLeftPanelCollapsed(!leftPanelCollapsed)}
+        modelPresets={modelPresets}
+        selectedModel={selectedModel}
+        setSelectedModel={setSelectedModel}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        showBiofilm={showBiofilm}
+        setShowBiofilm={setShowBiofilm}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+        parameters={parameters}
+        handleParameterChange={handleParameterChange}
+        performanceData={performanceData}
+      />
 
       {/* 3D Viewer */}
       <div className="flex-1 relative">
@@ -208,6 +183,7 @@ export default function ModelingLab() {
                 scale={selectedModel.scale}
                 anodeMaterial={selectedModel.anode}
                 cathodeMaterial={selectedModel.cathode}
+                onPerformanceUpdate={handlePerformanceUpdate}
               />
             )}
             
@@ -224,13 +200,35 @@ export default function ModelingLab() {
         </Suspense>
         
         {/* Overlay UI */}
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 left-4">
           <div className="bg-white bg-opacity-90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
             <div className="text-sm text-gray-600">
               View: <span className="font-medium capitalize">{viewMode}</span>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Right Panel */}
+      <div className="flex flex-col">
+        <AdvancedControls
+          isCollapsed={rightPanelCollapsed}
+          onCollapseToggle={() => setRightPanelCollapsed(!rightPanelCollapsed)}
+          selectedModel={selectedModel}
+          onExportData={handleExportData}
+          onImportData={handleImportData}
+          onSaveConfiguration={handleSaveConfiguration}
+          onResetView={handleResetView}
+        />
+        
+        {!rightPanelCollapsed && (
+          <div className="w-80 bg-white border-l border-gray-200 border-t p-4 overflow-y-auto">
+            <PerformanceDashboard
+              performanceData={performanceData}
+              systemType={selectedModel.systemType}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

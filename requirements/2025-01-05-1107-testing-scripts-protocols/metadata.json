@@ -9,12 +9,12 @@
     "detail": { "answered": 5, "total": 5 }
   },
   "contextFiles": [
-    "/Users/samfrons/Desktop/Messai/messai-mvp/vitest.config.ts",
-    "/Users/samfrons/Desktop/Messai/messai-mvp/tests/setup.ts",
-    "/Users/samfrons/Desktop/Messai/messai-mvp/tests/mocks/server.ts",
-    "/Users/samfrons/Desktop/Messai/messai-mvp/scripts/test-all.js",
-    "/Users/samfrons/Desktop/Messai/messai-mvp/package.json",
-    "/Users/samfrons/Desktop/Messai/messai-mvp/docs/TESTING.md"
+    "/Users/samfrons/Desktop/clean-messai/vitest.config.ts",
+    "/Users/samfrons/Desktop/clean-messai/tests/setup.ts",
+    "/Users/samfrons/Desktop/clean-messai/tests/mocks/server.ts",
+    "/Users/samfrons/Desktop/clean-messai/scripts/test-all.js",
+    "/Users/samfrons/Desktop/clean-messai/package.json",
+    "/Users/samfrons/Desktop/clean-messai/docs/TESTING.md"
   ],
   "relatedFeatures": [
     "3D WebGL Rendering System",

@@ -78,8 +78,8 @@ MESSAi (Microbial Electrochemical Systems AI Platform) is a sophisticated web pl
 ## Technology Stack
 
 ### Frontend
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript 5.x
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript 5.8.2
 - **Styling**: Tailwind CSS 3.x
 - **State**: Zustand for client state
 - **3D Graphics**: Three.js + React Three Fiber

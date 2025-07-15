@@ -187,7 +187,7 @@ async function importPapersToDatabase(jsonFilePath: string, userId: string) {
 // Main execution
 async function main() {
   const args = process.argv.slice(2)
-  const jsonFilePath = args[0] || '/Users/samfrons/Desktop/Messai/literature/extracted-paper-data.json'
+  const jsonFilePath = args[0] || '/Users/samfrons/Desktop/clean-messai/literature/extracted-paper-data.json'
   const userId = args[1]
   
   if (!userId) {

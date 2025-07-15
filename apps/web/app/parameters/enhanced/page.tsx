@@ -185,7 +185,7 @@ export default function EnhancedParametersPage() {
   }
   
   return (
-    <div className="min-h-screen caladan-bg-dark">
+    <div className="min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <motion.div 
@@ -197,27 +197,27 @@ export default function EnhancedParametersPage() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <div className="flex items-center gap-4 mb-2">
-                <Link href="/features/parameters" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/features/parameters" className="text-black opacity-60 hover:opacity-100 transition-opacity">
                   <ArrowLeft className="w-5 h-5" />
                 </Link>
-                <h1 className="text-3xl md:text-4xl font-light text-white">
+                <h1 className="text-3xl md:text-4xl font-serif text-black">
                   Enhanced MESS Parameter Database
                 </h1>
               </div>
-              <p className="text-gray-300 text-lg">
+              <p className="text-black opacity-60 text-lg">
                 Advanced parameter management with material compatibility analysis and comparison tools
               </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setCompareMode(!compareMode)}
-                className={`caladan-button ${compareMode ? 'glow-caladan' : ''}`}
+                className={`px-4 py-2 bg-black text-white hover:opacity-80 transition-opacity font-medium ${compareMode ? 'opacity-90' : ''}`}
               >
                 <BarChart3 className="w-4 h-4 mr-2" />
                 {compareMode ? 'Exit Compare' : 'Compare Mode'}
               </button>
               <Link href="/parameters">
-                <button className="px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 border border-white/20 text-white hover:bg-white/10">
+                <button className="px-4 py-2 font-medium text-sm transition-all duration-300 border border-gray-200 text-black hover:bg-black/5">
                   Classic View
                 </button>
               </Link>
@@ -226,32 +226,32 @@ export default function EnhancedParametersPage() {
           
           {/* Stats with Caladan Bio styling */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="caladan-card">
-              <div className="text-sm text-gray-400 uppercase tracking-wide">Database Coverage</div>
-              <div className="text-2xl font-bold caladan-text-accent">1,500+</div>
-              <div className="mt-3 bg-gray-700 rounded-full h-2">
-                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '85%' }}></div>
+            <div className="bg-white border border-gray-200 p-4">
+              <div className="text-sm text-black opacity-60 uppercase tracking-wide">Database Coverage</div>
+              <div className="text-2xl font-bold text-black">1,500+</div>
+              <div className="mt-3 bg-gray-200 rounded-full h-2">
+                <div className="bg-black h-2 rounded-full" style={{ width: '85%' }}></div>
               </div>
             </div>
-            <div className="caladan-card">
-              <div className="text-sm text-gray-400 uppercase tracking-wide">Validated Parameters</div>
-              <div className="text-2xl font-bold caladan-text-accent">{stats.withRanges}</div>
-              <div className="mt-3 bg-gray-700 rounded-full h-2">
-                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '72%' }}></div>
+            <div className="bg-white border border-gray-200 p-4">
+              <div className="text-sm text-black opacity-60 uppercase tracking-wide">Validated Parameters</div>
+              <div className="text-2xl font-bold text-black">{stats.withRanges}</div>
+              <div className="mt-3 bg-gray-200 rounded-full h-2">
+                <div className="bg-black h-2 rounded-full" style={{ width: '72%' }}></div>
               </div>
             </div>
-            <div className="caladan-card">
-              <div className="text-sm text-gray-400 uppercase tracking-wide">Material Combinations</div>
-              <div className="text-2xl font-bold caladan-text-accent">450+</div>
-              <div className="mt-3 bg-gray-700 rounded-full h-2">
-                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '60%' }}></div>
+            <div className="bg-white border border-gray-200 p-4">
+              <div className="text-sm text-black opacity-60 uppercase tracking-wide">Material Combinations</div>
+              <div className="text-2xl font-bold text-black">450+</div>
+              <div className="mt-3 bg-gray-200 rounded-full h-2">
+                <div className="bg-black h-2 rounded-full" style={{ width: '60%' }}></div>
               </div>
             </div>
-            <div className="caladan-card">
-              <div className="text-sm text-gray-400 uppercase tracking-wide">AI Predictions</div>
-              <div className="text-2xl font-bold caladan-text-accent">280</div>
-              <div className="mt-3 bg-gray-700 rounded-full h-2">
-                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '45%' }}></div>
+            <div className="bg-white border border-gray-200 p-4">
+              <div className="text-sm text-black opacity-60 uppercase tracking-wide">AI Predictions</div>
+              <div className="text-2xl font-bold text-black">280</div>
+              <div className="mt-3 bg-gray-200 rounded-full h-2">
+                <div className="bg-black h-2 rounded-full" style={{ width: '45%' }}></div>
               </div>
             </div>
           </div>
@@ -259,14 +259,14 @@ export default function EnhancedParametersPage() {
         
         {/* View Mode Tabs with Caladan Bio styling */}
         <div className="mb-8">
-          <div className="border-b border-gray-600">
+          <div className="border-b border-gray-200">
             <nav className="-mb-px flex space-x-8">
               <button
                 onClick={() => setViewMode('grid')}
                 className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   viewMode === 'grid'
-                    ? 'border-green-400 caladan-text-accent'
-                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-500'
+                    ? 'border-black text-black'
+                    : 'border-transparent text-black opacity-60 hover:opacity-100 hover:border-gray-300'
                 }`}
               >
                 Parameter Grid
@@ -275,8 +275,8 @@ export default function EnhancedParametersPage() {
                 onClick={() => setViewMode('table')}
                 className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   viewMode === 'table'
-                    ? 'border-green-400 caladan-text-accent'
-                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-500'
+                    ? 'border-black text-black'
+                    : 'border-transparent text-black opacity-60 hover:opacity-100 hover:border-gray-300'
                 }`}
               >
                 Table View
@@ -285,8 +285,8 @@ export default function EnhancedParametersPage() {
                 onClick={() => setViewMode('compatibility')}
                 className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   viewMode === 'compatibility'
-                    ? 'border-green-400 caladan-text-accent'
-                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-500'
+                    ? 'border-black text-black'
+                    : 'border-transparent text-black opacity-60 hover:opacity-100 hover:border-gray-300'
                 }`}
               >
                 Compatibility Matrix
@@ -304,7 +304,7 @@ export default function EnhancedParametersPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search parameters..."
-                className="w-full px-4 py-3 pl-12 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-green-400 text-white placeholder-gray-400"
+                className="w-full px-4 py-3 pl-12 bg-white border border-gray-200 focus:ring-2 focus:ring-black focus:border-black text-black placeholder-gray-400"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
@@ -315,8 +315,8 @@ export default function EnhancedParametersPage() {
                 onClick={() => setSelectedCategory('all')}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   selectedCategory === 'all'
-                    ? 'caladan-button'
-                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border border-gray-200 hover:bg-black/5'
                 }`}
               >
                 All Categories
@@ -327,10 +327,10 @@ export default function EnhancedParametersPage() {
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 font-medium transition-all ${
+                    className={`px-4 py-2 text-sm flex items-center gap-2 font-medium transition-all ${
                       selectedCategory === category.id
-                        ? 'caladan-button glow-sm'
-                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                        ? 'bg-black text-white'
+                        : 'bg-white text-black border border-gray-200 hover:bg-black/5'
                     }`}
                   >
                     <IconComponent size={16} />
@@ -349,15 +349,15 @@ export default function EnhancedParametersPage() {
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="caladan-card border-green-400/30 bg-green-900/20 p-6"
+                className="bg-white border-2 border-green-600 p-6"
               >
                 <div className="flex items-center justify-between">
-                  <p className="text-green-200">
+                  <p className="text-green-700 font-medium">
                     {compareParams.size} parameters selected for comparison
                   </p>
                   <button
                     onClick={() => {/* Implement comparison view */}}
-                    className="caladan-button"
+                    className="px-4 py-2 bg-green-600 text-white hover:bg-green-700 transition-colors font-medium"
                   >
                     <BarChart3 className="w-4 h-4 mr-2" />
                     View Comparison
@@ -377,11 +377,11 @@ export default function EnhancedParametersPage() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="caladan-card p-6"
+                  className="bg-white border border-gray-200 p-6"
                 >
-                  <h3 className="text-xl font-light text-white mb-6 flex items-center gap-3">
-                    <div className="caladan-icon-bg">
-                      <IconComponent size={24} className="caladan-text-accent" />
+                  <h3 className="text-xl font-serif text-black mb-6 flex items-center gap-3">
+                    <div className="w-10 h-10 bg-black/10 rounded flex items-center justify-center">
+                      <IconComponent size={24} className="text-black" />
                     </div>
                     {category?.name} / {subcategory.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                   </h3>
@@ -401,7 +401,7 @@ export default function EnhancedParametersPage() {
                             icon={iconKey}
                             className={`${
                               compareParams.has(param.id)
-                                ? 'border-green-400 bg-green-900/20 glow-sm'
+                                ? 'border-green-600 bg-green-50'
                                 : ''
                             }`}
                           />
@@ -411,7 +411,7 @@ export default function EnhancedParametersPage() {
                                 type="checkbox"
                                 checked={compareParams.has(param.id)}
                                 onChange={() => toggleCompareParam(param.id)}
-                                className="w-4 h-4 text-green-600 bg-gray-800 border-gray-600 rounded focus:ring-green-500"
+                                className="w-4 h-4 text-green-600 bg-white border-gray-300 rounded focus:ring-green-500"
                               />
                             </div>
                           )}
@@ -426,24 +426,24 @@ export default function EnhancedParametersPage() {
         )}
         
         {viewMode === 'table' && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-white border border-gray-200">
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                       Parameter
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                       Category
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                       Unit
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                       Range
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                       Description
                     </th>
                   </tr>
@@ -451,7 +451,7 @@ export default function EnhancedParametersPage() {
                 <tbody className="bg-white divide-y divide-gray-200">
                   {filteredParameters.map(param => (
                     <tr key={param.id} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-black">
                         {param.name}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -477,20 +477,20 @@ export default function EnhancedParametersPage() {
         {viewMode === 'compatibility' && (
           <div className="space-y-6">
             {/* Material Selection */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-white border border-gray-200 p-6">
+              <h3 className="text-lg font-serif text-black mb-4">
                 Select Materials & Organisms
               </h3>
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     Anode Material
                   </label>
                   <select
                     value={selectedMaterials.anode}
                     onChange={(e) => setSelectedMaterials({ ...selectedMaterials, anode: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">Select anode...</option>
                     {materialOptions.anode.map(material => (
@@ -500,13 +500,13 @@ export default function EnhancedParametersPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     Cathode Material
                   </label>
                   <select
                     value={selectedMaterials.cathode}
                     onChange={(e) => setSelectedMaterials({ ...selectedMaterials, cathode: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">Select cathode...</option>
                     {materialOptions.cathode.map(material => (
@@ -516,13 +516,13 @@ export default function EnhancedParametersPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     Organism/Culture
                   </label>
                   <select
                     value={selectedMaterials.organism}
                     onChange={(e) => setSelectedMaterials({ ...selectedMaterials, organism: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">Select organism...</option>
                     {materialOptions.organism.map(organism => (
@@ -532,13 +532,13 @@ export default function EnhancedParametersPage() {
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-black mb-2">
                     Membrane (Optional)
                   </label>
                   <select
                     value={selectedMaterials.membrane}
                     onChange={(e) => setSelectedMaterials({ ...selectedMaterials, membrane: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-black"
                   >
                     <option value="">Select membrane...</option>
                     {materialOptions.membrane.map(membrane => (
@@ -551,8 +551,8 @@ export default function EnhancedParametersPage() {
             
             {/* Compatibility Results */}
             {currentCompatibility && (
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <div className="bg-white border border-gray-200 p-6">
+                <h3 className="text-lg font-serif text-black mb-4">
                   Compatibility Analysis
                 </h3>
                 
@@ -589,7 +589,7 @@ export default function EnhancedParametersPage() {
                     </div>
                     
                     <div className="mt-4">
-                      <div className="text-sm text-gray-600">Confidence Level</div>
+                      <div className="text-sm text-black opacity-60">Confidence Level</div>
                       <div className="mt-1 bg-gray-200 rounded-full h-2">
                         <div 
                           className="bg-blue-600 h-2 rounded-full" 
@@ -602,14 +602,14 @@ export default function EnhancedParametersPage() {
                   {/* Notes and Warnings */}
                   <div className="col-span-2 space-y-4">
                     <div>
-                      <h4 className="font-medium text-gray-900 mb-2">Analysis Notes</h4>
+                      <h4 className="font-medium text-black mb-2">Analysis Notes</h4>
                       <ul className="space-y-1">
                         {currentCompatibility.notes.map((note, index) => (
                           <li key={index} className="flex items-start">
                             <svg className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                             </svg>
-                            <span className="text-sm text-gray-600">{note}</span>
+                            <span className="text-sm text-black opacity-60">{note}</span>
                           </li>
                         ))}
                       </ul>
@@ -617,14 +617,14 @@ export default function EnhancedParametersPage() {
                     
                     {currentCompatibility.warnings && currentCompatibility.warnings.length > 0 && (
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-2">Warnings</h4>
+                        <h4 className="font-medium text-black mb-2">Warnings</h4>
                         <ul className="space-y-1">
                           {currentCompatibility.warnings.map((warning, index) => (
                             <li key={index} className="flex items-start">
                               <svg className="w-5 h-5 text-yellow-500 mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                               </svg>
-                              <span className="text-sm text-gray-600">{warning}</span>
+                              <span className="text-sm text-black opacity-60">{warning}</span>
                             </li>
                           ))}
                         </ul>
@@ -632,10 +632,10 @@ export default function EnhancedParametersPage() {
                     )}
                     
                     <div className="pt-4">
-                      <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                      <button className="px-4 py-2 bg-black text-white hover:opacity-80 transition-opacity">
                         Find Research Papers
                       </button>
-                      <button className="ml-3 px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+                      <button className="ml-3 px-4 py-2 border border-gray-200 text-black hover:bg-black/5 transition-colors">
                         Save Combination
                       </button>
                     </div>
@@ -645,8 +645,8 @@ export default function EnhancedParametersPage() {
             )}
             
             {/* Known Combinations Table */}
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+            <div className="bg-white border border-gray-200 p-6">
+              <h3 className="text-lg font-serif text-black mb-4">
                 Validated Material Combinations
               </h3>
               
@@ -654,19 +654,19 @@ export default function EnhancedParametersPage() {
                 <table className="min-w-full divide-y divide-gray-200">
                   <thead className="bg-gray-50">
                     <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                         Anode
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                         Cathode
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                         Organism
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                         Score
                       </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-black opacity-60 uppercase tracking-wider">
                         References
                       </th>
                     </tr>
@@ -674,18 +674,18 @@ export default function EnhancedParametersPage() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {compatibilityData.map((combo, index) => (
                       <tr key={index} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-black">
                           {combo.anode}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-black">
                           {combo.cathode}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-black">
                           {combo.organism}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
-                            <div className="text-sm font-medium text-gray-900">
+                            <div className="text-sm font-medium text-black">
                               {combo.compatibility.score}%
                             </div>
                             <div className="ml-2 w-16 bg-gray-200 rounded-full h-2">
@@ -699,8 +699,8 @@ export default function EnhancedParametersPage() {
                             </div>
                           </div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600">
-                          <button className="hover:underline">View Papers</button>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm">
+                          <button className="text-black hover:opacity-60 transition-opacity underline">View Papers</button>
                         </td>
                       </tr>
                     ))}

@@ -364,7 +364,7 @@ async function saveComprehensiveReport() {
       ...analysis
     }
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/comprehensive-analysis-report.json', JSON.stringify(reportData, null, 2))
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/comprehensive-analysis-report.json', JSON.stringify(reportData, null, 2))
     
     // Create markdown summary
     const markdownReport = `# MESSAi Comprehensive Literature Analysis
@@ -423,7 +423,7 @@ All data has been validated for:
 This comprehensive database represents one of the most extensive collections of bioelectrochemical systems research, enabling advanced AI-powered insights and pattern discovery.
 `
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/comprehensive-analysis-summary.md', markdownReport)
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/comprehensive-analysis-summary.md', markdownReport)
     
     console.log('\n💾 Reports saved:')
     console.log('  - comprehensive-analysis-report.json (detailed data)')

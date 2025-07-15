@@ -80,9 +80,9 @@ describe('/api/papers API Route', () => {
         },
         {
           id: '2',
-          title: 'AI Paper',
-          source: 'ai_smart_literature',
-          user: { id: '2', name: 'AI', email: 'ai@example.com' },
+          title: 'CrossRef Paper',
+          source: 'crossref_api',
+          user: { id: '2', name: 'Researcher', email: 'researcher@example.com' },
           _count: { experiments: 0 }
         }
       ]

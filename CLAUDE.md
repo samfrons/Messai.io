@@ -394,7 +394,7 @@ Shared UI components and design system:
 - Location: `packages/@messai/ui/`
 
 ### Technology Stack
-- **Frontend**: Next.js 14 with App Router
+- **Frontend**: Next.js 15 with App Router
 - **Language**: TypeScript with strict mode
 - **Styling**: Tailwind CSS
 - **Package Manager**: PNPM 8+

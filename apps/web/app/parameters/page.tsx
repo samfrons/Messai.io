@@ -102,39 +102,39 @@ export default function ParametersPage() {
   }
   
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+            <h1 className="text-3xl font-serif text-black">
               MESS Parameter Library
             </h1>
             <div className="flex gap-4">
               <Link
                 href="/systems"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-4 py-2 bg-black text-white hover:opacity-80 transition-opacity"
               >
                 Browse Systems
               </Link>
               <div className="relative">
                 <button
                   onClick={() => setShowExportMenu(!showExportMenu)}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-colors"
+                  className="px-4 py-2 bg-white border border-gray-200 text-black hover:bg-black/5 transition-colors"
                 >
                   Export
                 </button>
                 {showExportMenu && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700">
+                  <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg border border-gray-200">
                     <button
                       onClick={() => handleExport('json')}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-t-lg"
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-50"
                     >
                       Export as JSON
                     </button>
                     <button
                       onClick={() => handleExport('csv')}
-                      className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-b-lg"
+                      className="block w-full text-left px-4 py-2 hover:bg-gray-50"
                     >
                       Export as CSV
                     </button>
@@ -145,33 +145,33 @@ export default function ParametersPage() {
           </div>
           
           {/* Description */}
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="text-black opacity-60 mb-4">
             Comprehensive reference for all parameters used in Microbial Electrochemical Systems. 
             Browse {stats.total}+ parameters across {parameterCategories.length} major categories with detailed descriptions, units, and typical ranges.
           </p>
           
           {/* Stats Banner */}
-          <div className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+          <div className="bg-white p-6 border border-gray-200">
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <div>
-                <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">{stats.total}</div>
-                <div className="text-sm text-blue-600 dark:text-blue-400">Total Parameters</div>
+                <div className="text-2xl font-bold text-black">{stats.total}</div>
+                <div className="text-sm text-black opacity-60">Total Parameters</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-purple-700 dark:text-purple-300">{parameterCategories.length}</div>
-                <div className="text-sm text-purple-600 dark:text-purple-400">Major Categories</div>
+                <div className="text-2xl font-bold text-black">{parameterCategories.length}</div>
+                <div className="text-sm text-black opacity-60">Major Categories</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-green-700 dark:text-green-300">{stats.withRanges}</div>
-                <div className="text-sm text-green-600 dark:text-green-400">With Ranges</div>
+                <div className="text-2xl font-bold text-black">{stats.withRanges}</div>
+                <div className="text-sm text-black opacity-60">With Ranges</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-orange-700 dark:text-orange-300">{stats.withUnits}</div>
-                <div className="text-sm text-orange-600 dark:text-orange-400">With Units</div>
+                <div className="text-2xl font-bold text-black">{stats.withUnits}</div>
+                <div className="text-sm text-black opacity-60">With Units</div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-red-700 dark:text-red-300">{stats.byType.number}</div>
-                <div className="text-sm text-red-600 dark:text-red-400">Numeric Params</div>
+                <div className="text-2xl font-bold text-black">{stats.byType.number}</div>
+                <div className="text-sm text-black opacity-60">Numeric Params</div>
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@ export default function ParametersPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search parameters by name, description, unit, or tag..."
-              className="w-full px-4 py-3 pl-10 text-gray-900 dark:text-gray-100 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-3 pl-10 text-black bg-white border border-gray-200 focus:outline-none focus:ring-2 focus:ring-black"
             />
             <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -198,10 +198,10 @@ export default function ParametersPage() {
           <div className="flex gap-2 min-w-max pb-2">
             <button
               onClick={() => setSelectedCategory('all')}
-              className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+              className={`px-4 py-2 font-medium transition-colors ${
                 selectedCategory === 'all'
-                  ? 'bg-blue-600 text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                  ? 'bg-black text-white'
+                  : 'bg-white text-black border border-gray-200 hover:bg-gray-50'
               }`}
             >
               All Categories
@@ -210,10 +210,10 @@ export default function ParametersPage() {
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center gap-2 ${
+                className={`px-4 py-2 font-medium transition-colors flex items-center gap-2 ${
                   selectedCategory === category.id
-                    ? `bg-${category.color}-600 text-white`
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border border-gray-200 hover:bg-gray-50'
                 }`}
               >
                 <span className="text-lg">{category.icon}</span>
@@ -224,7 +224,7 @@ export default function ParametersPage() {
         </div>
         
         {/* Results Count */}
-        <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+        <div className="mb-4 text-sm text-black opacity-60">
           Showing {filteredParameters.length} parameters
           {searchQuery && ` matching "${searchQuery}"`}
           {selectedCategory !== 'all' && ` in ${parameterCategories.find(c => c.id === selectedCategory)?.name}`}
@@ -249,21 +249,21 @@ export default function ParametersPage() {
               }, {} as Record<string, Parameter[]>)
               
               return (
-                <div key={category.id} className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg">
+                <div key={category.id} className="bg-white border border-gray-200 overflow-hidden">
                   {/* Category Header */}
                   <button
                     onClick={() => toggleCategory(category.id)}
-                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                   >
                     <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white" dangerouslySetInnerHTML={{ __html: category.icon }} />
+                      <div className="w-8 h-8 flex items-center justify-center bg-black/10 rounded text-black" dangerouslySetInnerHTML={{ __html: category.icon }} />
                       <div>
-                        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">{category.name}</h2>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">{categoryParams.length} parameters</p>
+                        <h2 className="text-xl font-serif text-black">{category.name}</h2>
+                        <p className="text-sm text-black opacity-60">{categoryParams.length} parameters</p>
                       </div>
                     </div>
                     <svg 
-                      className={`w-6 h-6 text-slate-400 transition-transform duration-200 ${
+                      className={`w-6 h-6 text-black opacity-40 transition-transform duration-200 ${
                         expandedCategories.has(category.id) ? 'rotate-180' : ''
                       }`} 
                       fill="none" 
@@ -276,25 +276,25 @@ export default function ParametersPage() {
                   
                   {/* Category Content */}
                   {expandedCategories.has(category.id) && (
-                    <div className="border-t border-slate-200 dark:border-slate-700">
+                    <div className="border-t border-gray-200">
                       {Object.entries(subcategoryGroups).map(([subcategoryKey, params]) => {
                         const subcategoryFullKey = `${category.id}-${subcategoryKey}`
                         
                         return (
-                          <div key={subcategoryKey} className="border-b border-slate-100 dark:border-slate-700/50 last:border-b-0">
+                          <div key={subcategoryKey} className="border-b border-gray-100 last:border-b-0">
                             {/* Subcategory Header */}
                             <button
                               onClick={() => toggleSubcategory(subcategoryFullKey)}
-                              className="w-full px-8 py-4 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors"
+                              className="w-full px-8 py-4 flex items-center justify-between text-left hover:bg-gray-50 transition-colors"
                             >
                               <div>
-                                <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+                                <h3 className="text-lg font-semibold text-black">
                                   {subcategoryKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                                 </h3>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">{params.length} parameters</p>
+                                <p className="text-sm text-black opacity-60">{params.length} parameters</p>
                               </div>
                               <svg 
-                                className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${
+                                className={`w-5 h-5 text-black opacity-40 transition-transform duration-200 ${
                                   expandedSubcategories.has(subcategoryFullKey) ? 'rotate-180' : ''
                                 }`} 
                                 fill="none" 
@@ -426,10 +426,10 @@ export default function ParametersPage() {
                 <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg">
                   <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
                     <div className="flex items-center gap-4">
-                      <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white" dangerouslySetInnerHTML={{ __html: category.icon }} />
+                      <div className="w-8 h-8 flex items-center justify-center bg-black/10 rounded text-black" dangerouslySetInnerHTML={{ __html: category.icon }} />
                       <div>
-                        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">{category.name}</h2>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">{categoryParams.length} parameters</p>
+                        <h2 className="text-xl font-serif text-black">{category.name}</h2>
+                        <p className="text-sm text-black opacity-60">{categoryParams.length} parameters</p>
                       </div>
                     </div>
                   </div>

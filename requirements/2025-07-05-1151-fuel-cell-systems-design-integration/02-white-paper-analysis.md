@@ -3,7 +3,7 @@
 ## Source Document Analysis
 
 **Document**: "Designing Fuel Cell Systems Using System-Level Design" - MathWorks White Paper
-**Location**: `/Users/samfrons/Desktop/Messai/literature/designing-fuel-cell-systems-using-system-level-design-white-paper.pdf`
+**Location**: `/Users/samfrons/Desktop/clean-messai/literature/designing-fuel-cell-systems-using-system-level-design-white-paper.pdf`
 **Date Analyzed**: 2025-07-05
 
 ## Executive Summary

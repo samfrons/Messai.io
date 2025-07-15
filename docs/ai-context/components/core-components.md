@@ -14,7 +14,7 @@ The clean-messai branch contains the minimal, essential components that form the
 ### Component Organization
 ```
 clean-messai/
-├── app/                     # Next.js 14 App Router (minimal)
+├── app/                     # Next.js 15 App Router (minimal)
 │   ├── api/                 # Core API endpoints only
 │   │   ├── health/          # System health check
 │   │   └── auth/            # Authentication stubs

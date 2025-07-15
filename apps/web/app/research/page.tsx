@@ -51,7 +51,7 @@ interface PaginationInfo {
 
 interface ResearchStats {
   totalPapers: number
-  aiEnhanced: number
+  aiProcessed: number
   uniqueMaterials: number
   uniqueOrganisms: number
   withPowerOutput: number
@@ -100,6 +100,7 @@ export default function ResearchPage() {
       const params = new URLSearchParams({
         page: pagination.page.toString(),
         limit: pagination.limit.toString(),
+        requireMicrobial: 'false', // Show all papers by default
         ...(searchTerm && { search: searchTerm }),
         ...(showRealPapersOnly && { realOnly: 'true' })
       })
@@ -263,11 +264,11 @@ export default function ResearchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-cream">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Research Database</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-serif text-black">Research Database</h1>
+          <p className="mt-2 text-black opacity-60">
             Browse and search scientific papers on microbial electrochemical systems
           </p>
         </div>
@@ -281,11 +282,11 @@ export default function ResearchPage() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search papers by title, authors, materials, organisms..."
-                  className="w-full pl-10 pr-20 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
+                  className="w-full pl-10 pr-20 py-3 border border-gray-200 focus:ring-2 focus:ring-black focus:border-transparent text-sm"
                 />
                 <button
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1.5 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 px-4 py-1.5 bg-black text-white hover:opacity-80 transition-opacity text-sm font-medium"
                 >
                   Search
                 </button>
@@ -295,7 +296,7 @@ export default function ResearchPage() {
             <div className="flex gap-2">
               <button
                 onClick={() => setShowRealPapersOnly(!showRealPapersOnly)}
-                className={`px-4 py-3 ${showRealPapersOnly ? 'bg-green-600 hover:bg-green-700' : 'bg-gray-600 hover:bg-gray-700'} text-white rounded-lg transition-colors text-sm font-medium`}
+                className={`px-4 py-3 ${showRealPapersOnly ? 'bg-black' : 'bg-white border border-gray-200'} ${showRealPapersOnly ? 'text-white' : 'text-black'} hover:opacity-80 transition-opacity text-sm font-medium`}
               >
                 {showRealPapersOnly ? 'Real Papers' : 'All Papers'}
               </button>
@@ -306,52 +307,52 @@ export default function ResearchPage() {
         {loading ? (
           <div className="space-y-4">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="bg-white p-6 rounded-lg shadow animate-pulse">
-                <div className="h-6 bg-gray-200 rounded w-3/4 mb-2"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded w-full"></div>
+              <div key={i} className="bg-white p-6 border border-gray-200 animate-pulse">
+                <div className="h-6 bg-gray-200 w-3/4 mb-2"></div>
+                <div className="h-4 bg-gray-200 w-1/2 mb-4"></div>
+                <div className="h-4 bg-gray-200 w-full"></div>
               </div>
             ))}
           </div>
         ) : papers.length === 0 ? (
-          <div className="bg-white p-8 rounded-lg shadow text-center">
-            <p className="text-gray-500">No papers found. Try adjusting your search.</p>
+          <div className="bg-white p-8 border border-gray-200 text-center">
+            <p className="text-black opacity-60">No papers found. Try adjusting your search.</p>
           </div>
         ) : (
           <div className="space-y-6">
             {papers.map((paper) => (
               <div
                 key={paper.id}
-                className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg hover:border-blue-300 transition-all duration-200 cursor-pointer group overflow-hidden"
+                className="bg-white border border-gray-200 hover:border-black/20 transition-all duration-200 cursor-pointer group overflow-hidden"
                 onClick={() => router.push(`/research/${paper.id}`)}
               >
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 group-hover:text-blue-700 transition-colors mb-2">
+                  <h3 className="text-xl font-serif text-black mb-2">
                     {paper.title}
                   </h3>
-                  <p className="text-gray-600 mb-3 font-medium">
+                  <p className="text-black opacity-60 mb-3 font-medium">
                     {formatAuthors(paper.authors)}
                   </p>
                   
                   {/* AI Summary Section */}
                   {paper.aiSummary && (
-                    <div className="mb-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                    <div className="mb-4 p-3 bg-black/5 border border-gray-200">
                       <div className="flex items-start gap-2">
-                        <span className="text-blue-600 font-semibold text-sm">🤖 AI Summary:</span>
-                        <p className="text-sm text-blue-800 leading-relaxed flex-1">
+                        <span className="text-black font-semibold text-sm">🤖 AI Summary:</span>
+                        <p className="text-sm text-black leading-relaxed flex-1">
                           {paper.aiSummary}
                         </p>
                       </div>
                       {paper.aiConfidence && (
                         <div className="mt-2 flex items-center gap-2">
-                          <span className="text-xs text-blue-600">Confidence:</span>
-                          <div className="flex-1 bg-blue-100 rounded-full h-2 max-w-[100px]">
+                          <span className="text-xs text-black opacity-60">Confidence:</span>
+                          <div className="flex-1 bg-black/10 rounded-full h-2 max-w-[100px]">
                             <div 
-                              className="bg-blue-600 h-2 rounded-full"
+                              className="bg-black h-2 rounded-full"
                               style={{ width: `${paper.aiConfidence * 100}%` }}
                             />
                           </div>
-                          <span className="text-xs text-blue-600">{(paper.aiConfidence * 100).toFixed(0)}%</span>
+                          <span className="text-xs text-black">{(paper.aiConfidence * 100).toFixed(0)}%</span>
                         </div>
                       )}
                     </div>
@@ -359,15 +360,15 @@ export default function ResearchPage() {
                   
                   {/* Original Abstract - shown when no AI summary */}
                   {!paper.aiSummary && paper.abstract && (
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-2 mb-4">
+                    <p className="text-black opacity-60 text-sm leading-relaxed line-clamp-2 mb-4">
                       {paper.abstract}
                     </p>
                   )}
                   
                   {/* AI Insights if available */}
                   {paper.aiInsights && (
-                    <div className="mb-4 p-2 bg-purple-50 rounded border border-purple-200">
-                      <p className="text-xs text-purple-700">
+                    <div className="mb-4 p-2 bg-black/5 border border-gray-200">
+                      <p className="text-xs text-black">
                         <span className="font-semibold">💡 Insight:</span> {paper.aiInsights}
                       </p>
                     </div>
@@ -375,41 +376,41 @@ export default function ResearchPage() {
 
                   {/* Enhanced Data Section */}
                   {(paper.hasPerformanceData || formatMaterials(paper.anodeMaterials, 'anode') || formatOrganisms(paper.organismTypes)) && (
-                    <div className="mb-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <div className="mb-4 p-3 bg-white border border-gray-200">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                         {/* Performance Data */}
                         {paper.powerOutput && (
                           <div className="flex items-center gap-2">
-                            <span className="text-gray-600">⚡ Power:</span>
-                            <span className="font-medium text-gray-900">{paper.powerOutput} mW/m²</span>
+                            <span className="text-black opacity-60">⚡ Power:</span>
+                            <span className="font-medium text-black">{paper.powerOutput} mW/m²</span>
                           </div>
                         )}
                         {paper.efficiency && (
                           <div className="flex items-center gap-2">
-                            <span className="text-gray-600">📊 Efficiency:</span>
-                            <span className="font-medium text-gray-900">{paper.efficiency}%</span>
+                            <span className="text-black opacity-60">📊 Efficiency:</span>
+                            <span className="font-medium text-black">{paper.efficiency}%</span>
                           </div>
                         )}
                         {paper.systemType && (
                           <div className="flex items-center gap-2">
-                            <span className="text-gray-600">🔧 System:</span>
-                            <span className="font-medium text-gray-900">{paper.systemType}</span>
+                            <span className="text-black opacity-60">🔧 System:</span>
+                            <span className="font-medium text-black">{paper.systemType}</span>
                           </div>
                         )}
                         
                         {/* Materials */}
                         {formatMaterials(paper.anodeMaterials, 'anode') && (
                           <div className="flex items-start gap-2">
-                            <span className="text-gray-600">🔋 Anode:</span>
-                            <span className="font-medium text-gray-900 text-xs leading-relaxed">
+                            <span className="text-black opacity-60">🔋 Anode:</span>
+                            <span className="font-medium text-black text-xs leading-relaxed">
                               {formatMaterials(paper.anodeMaterials, 'anode')}
                             </span>
                           </div>
                         )}
                         {formatMaterials(paper.cathodeMaterials, 'cathode') && (
                           <div className="flex items-start gap-2">
-                            <span className="text-gray-600">⚡ Cathode:</span>
-                            <span className="font-medium text-gray-900 text-xs leading-relaxed">
+                            <span className="text-black opacity-60">⚡ Cathode:</span>
+                            <span className="font-medium text-black text-xs leading-relaxed">
                               {formatMaterials(paper.cathodeMaterials, 'cathode')}
                             </span>
                           </div>
@@ -418,8 +419,8 @@ export default function ResearchPage() {
                         {/* Organisms */}
                         {formatOrganisms(paper.organismTypes) && (
                           <div className="flex items-start gap-2 md:col-span-2">
-                            <span className="text-gray-600">🦠 Organisms:</span>
-                            <span className="font-medium text-gray-900 text-xs leading-relaxed">
+                            <span className="text-black opacity-60">🦠 Organisms:</span>
+                            <span className="font-medium text-black text-xs leading-relaxed">
                               {formatOrganisms(paper.organismTypes)}
                             </span>
                           </div>
@@ -430,12 +431,12 @@ export default function ResearchPage() {
 
                   <div className="flex items-center gap-4 text-sm flex-wrap">
                     {isRealPaper(paper) && (
-                      <span className="px-2 py-1 bg-green-100 text-green-800 text-xs font-medium rounded-full">
+                      <span className="px-2 py-1 bg-black/10 text-black text-xs font-medium">
                         {getPaperSourceLabel(paper)}
                       </span>
                     )}
                     {paper.isAiProcessed && (
-                      <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full flex items-center gap-1">
+                      <span className="px-2 py-1 bg-black/10 text-black text-xs font-medium flex items-center gap-1">
                         <span>🤖</span> {paper.processingMethod || 'AI Enhanced'}
                         {paper.confidenceScore && (
                           <span className="ml-1">({Math.round(paper.confidenceScore * 100)}%)</span>
@@ -443,11 +444,11 @@ export default function ResearchPage() {
                       </span>
                     )}
                     {paper.hasPerformanceData && (
-                      <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+                      <span className="px-2 py-1 bg-black/5 text-black text-xs font-medium">
                         📊 Performance Data
                       </span>
                     )}
-                    <span className="text-gray-600">
+                    <span className="text-black opacity-60">
                       Source: {paper.source || 'Unknown'}
                     </span>
                   </div>
@@ -462,19 +463,19 @@ export default function ResearchPage() {
             <button
               onClick={() => setPagination(prev => ({ ...prev, page: prev.page - 1 }))}
               disabled={pagination.page === 1}
-              className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 border border-gray-200 hover:bg-black/5 text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               Previous
             </button>
             
-            <span className="px-4 py-2">
+            <span className="px-4 py-2 text-black">
               Page {pagination.page} of {pagination.totalPages}
             </span>
             
             <button
               onClick={() => setPagination(prev => ({ ...prev, page: prev.page + 1 }))}
               disabled={pagination.page === pagination.totalPages}
-              className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-4 py-2 border border-gray-200 hover:bg-black/5 text-black disabled:opacity-50 disabled:cursor-not-allowed transition-all"
             >
               Next
             </button>

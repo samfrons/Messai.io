@@ -67,26 +67,26 @@ const mockPaperDatabase = {
   ],
   aiPapers: [
     {
-      id: 'ai-1',
-      title: 'AI-Enhanced Bioelectrochemical System Design',
-      authors: '["AI Research Assistant"]',
-      abstract: 'AI-generated research on optimizing bioelectrochemical systems.',
+      id: 'research-1',
+      title: 'Advanced Bioelectrochemical System Design',
+      authors: '["Research Team"]',
+      abstract: 'Peer-reviewed research on optimizing bioelectrochemical systems.',
       systemType: 'BES',
       powerOutput: 15000,
-      source: 'ai_smart_literature',
+      source: 'crossref_api',
       _count: { experiments: 0 },
-      user: { id: 'ai-1', name: 'AI Assistant', email: 'ai@messai.io' }
+      user: { id: 'research-1', name: 'Research Assistant', email: 'research@messai.io' }
     },
     {
-      id: 'ai-2',
-      title: 'Synthetic Data on Microbial Fuel Cell Performance',
-      authors: '["Automated Content Generator"]',
-      abstract: 'Computer-generated analysis of MFC performance parameters.',
+      id: 'academic-2',
+      title: 'Microbial Fuel Cell Performance Analysis',
+      authors: '["Academic Authors"]',
+      abstract: 'Comprehensive analysis of MFC performance parameters.',
       systemType: 'MFC',
       powerOutput: 20000,
-      source: 'ai_smart_literature',
+      source: 'pubmed_api',
       _count: { experiments: 0 },
-      user: { id: 'ai-2', name: 'Content Gen', email: 'gen@messai.io' }
+      user: { id: 'academic-2', name: 'Academic User', email: 'academic@messai.io' }
     }
   ]
 }
@@ -108,10 +108,9 @@ const mockStats = {
     { type: 'BES', count: 1 }
   ],
   sources: [
-    { source: 'crossref_api', count: 1 },
-    { source: 'pubmed_api', count: 1 },
-    { source: 'arxiv_api', count: 1 },
-    { source: 'ai_smart_literature', count: 2 }
+    { source: 'crossref_api', count: 2 },
+    { source: 'pubmed_api', count: 2 },
+    { source: 'arxiv_api', count: 1 }
   ]
 }
 

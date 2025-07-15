@@ -83,7 +83,7 @@ const UnifiedParametersSchema = z.object({
 
 // Read existing parameter sources
 function readParameterSources() {
-  const basePath = '/Users/samfrons/Desktop/Messai'
+  const basePath = '/Users/samfrons/Desktop/clean-messai'
   
   // Read markdown library
   const libraryMd = fs.readFileSync(path.join(basePath, 'MESS_PARAMETER_LIBRARY.md'), 'utf-8')
@@ -455,7 +455,7 @@ async function unifyParameters() {
     console.log('✓ Validated unified structure')
     
     // Write unified file
-    const outputPath = '/Users/samfrons/Desktop/Messai/parameters/MESS_PARAMETERS_UNIFIED.json'
+    const outputPath = '/Users/samfrons/Desktop/clean-messai/parameters/MESS_PARAMETERS_UNIFIED.json'
     fs.writeFileSync(outputPath, JSON.stringify(validated, null, 2))
     console.log(`✓ Written unified parameters to ${outputPath}`)
     

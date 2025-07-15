@@ -48,7 +48,7 @@ if (require.main === module) {
   setupTestUser().then(userId => {
     if (userId) {
       console.log(`\nYou can now run the import script with user ID: ${userId}`)
-      console.log(`npx tsx scripts/literature/import-papers-to-db.ts /Users/samfrons/Desktop/Messai/literature/extracted-paper-data.json ${userId}`)
+      console.log(`npx tsx scripts/literature/import-papers-to-db.ts /Users/samfrons/Desktop/clean-messai/literature/extracted-paper-data.json ${userId}`)
     }
   })
 }

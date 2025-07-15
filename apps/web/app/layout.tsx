@@ -40,7 +40,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${playfairDisplay.variable} ${crimsonText.variable}`}>
-      <body className="min-h-screen bg-white dark:bg-gray-900 antialiased">
+      <body className="min-h-screen antialiased bg-cream text-black">
         <ConditionalLayout>
           {children}
         </ConditionalLayout>

@@ -5,13 +5,13 @@
 ### ✅ **Strong Foundation Identified**
 
 **1. Test Framework Configuration**
-- **Vitest Setup**: `/Users/samfrons/Desktop/Messai/messai-mvp/vitest.config.ts` - Well-configured with proper aliases, coverage reporting, and JSDOM environment
-- **Test Setup**: `/Users/samfrons/Desktop/Messai/messai-mvp/tests/setup.ts` - Comprehensive WebGL mocks, MSW server setup, and browser API mocks
-- **Package Scripts**: `/Users/samfrons/Desktop/Messai/messai-mvp/package.json` - Rich test command suite including critical path testing (`test:critical`)
+- **Vitest Setup**: `/Users/samfrons/Desktop/clean-messai/vitest.config.ts` - Well-configured with proper aliases, coverage reporting, and JSDOM environment
+- **Test Setup**: `/Users/samfrons/Desktop/clean-messai/tests/setup.ts` - Comprehensive WebGL mocks, MSW server setup, and browser API mocks
+- **Package Scripts**: `/Users/samfrons/Desktop/clean-messai/package.json` - Rich test command suite including critical path testing (`test:critical`)
 
 **2. Advanced Testing Features Already Present**
-- **MSW Mock Server**: `/Users/samfrons/Desktop/Messai/messai-mvp/tests/mocks/server.ts` - Sophisticated API mocking with realistic data generation
-- **Comprehensive Test Runner**: `/Users/samfrons/Desktop/Messai/messai-mvp/scripts/test-all.js` - Detailed test orchestration with reporting and critical failure detection
+- **MSW Mock Server**: `/Users/samfrons/Desktop/clean-messai/tests/mocks/server.ts` - Sophisticated API mocking with realistic data generation
+- **Comprehensive Test Runner**: `/Users/samfrons/Desktop/clean-messai/scripts/test-all.js` - Detailed test orchestration with reporting and critical failure detection
 - **3D Testing Infrastructure**: Proper WebGL context mocking, ResizeObserver mocks, and Three.js testing setup
 
 **3. Test Coverage Categories**
@@ -179,7 +179,7 @@ Based on Three.js WebGL requirements:
 - **Vitest**: Modern, fast test runner ✅
 - **Testing Library**: Component testing ✅  
 - **MSW**: API mocking ✅
-- **Jest-Axe**: Accessibility testing ✅
+- **Vitest-Axe**: Accessibility testing ✅
 
 ### **Additional Tools Needed**
 - **Playwright**: Cross-browser and visual regression testing

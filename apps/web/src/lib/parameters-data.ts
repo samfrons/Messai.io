@@ -28,15 +28,15 @@ export interface Parameter {
 
 // Environmental Parameters
 const environmentalParameters: Parameter[] = [
-  // Atmospheric Conditions
+  // Atmospheric Ambient Conditions
   {
     id: 'ambient_temperature',
     name: 'Ambient Temperature',
-    description: 'Ambient air temperature around the system',
+    description: 'Ambient air temperature',
     unit: '°C',
     type: 'number',
     category: 'environmental',
-    subcategory: 'atmospheric-conditions',
+    subcategory: 'atmospheric-ambient-conditions',
     range: { min: -50, max: 60, typical: 25 },
     default: 25
   },
@@ -47,2002 +47,7331 @@ const environmentalParameters: Parameter[] = [
     unit: '°C',
     type: 'number',
     category: 'environmental',
-    subcategory: 'atmospheric-conditions',
+    subcategory: 'atmospheric-ambient-conditions',
     range: { min: 4, max: 80, typical: 30 },
     default: 30
   },
   {
+    id: 'temperature_gradient',
+    name: 'Temperature Gradient',
+    description: 'Spatial temperature variation',
+    unit: '°C/cm',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 10, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'temperature_fluctuation',
+    name: 'Temperature Fluctuation',
+    description: 'Temporal temperature variation',
+    unit: '°C',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 20, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'diurnal_temperature_range',
+    name: 'Diurnal Temperature Range',
+    description: 'Day-night temperature difference',
+    unit: '°C',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 30, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'temperature_ramp_rate',
+    name: 'Temperature Ramp Rate',
+    description: 'Rate of temperature change',
+    unit: '°C/min',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0.1, max: 10, typical: 0.5 },
+    default: 0.5
+  },
+  {
     id: 'relative_humidity',
     name: 'Relative Humidity',
-    description: 'Relative humidity of the environment',
+    description: 'Relative humidity of air',
     unit: '%',
     type: 'number',
     category: 'environmental',
-    subcategory: 'atmospheric-conditions',
-    range: { min: 10, max: 100, typical: 65 },
-    default: 65
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'absolute_humidity',
+    name: 'Absolute Humidity',
+    description: 'Water vapor content in air',
+    unit: 'g/m³',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 50, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'dew_point',
+    name: 'Dew Point',
+    description: 'Dew point temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: -50, max: 50, typical: 15 },
+    default: 15
+  },
+  {
+    id: 'wet_bulb_temperature',
+    name: 'Wet Bulb Temperature',
+    description: 'Wet bulb temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: -20, max: 50, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'vapor_pressure',
+    name: 'Vapor Pressure',
+    description: 'Water vapor partial pressure',
+    unit: 'kPa',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 10, typical: 2.34 },
+    default: 2.34
   },
   {
     id: 'atmospheric_pressure',
     name: 'Atmospheric Pressure',
-    description: 'Atmospheric pressure at operating location',
+    description: 'Ambient atmospheric pressure',
     unit: 'kPa',
     type: 'number',
     category: 'environmental',
-    subcategory: 'atmospheric-conditions',
-    range: { min: 80, max: 110, typical: 101.3 },
-    default: 101.3
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 50, max: 110, typical: 101.325 },
+    default: 101.325
   },
   {
-    id: 'temperature_gradient',
-    name: 'Temperature Gradient',
-    description: 'Temperature variation across reactor volume',
-    unit: '°C/cm',
+    id: 'gauge_pressure',
+    name: 'Gauge Pressure',
+    description: 'Pressure relative to atmospheric',
+    unit: 'kPa',
     type: 'number',
     category: 'environmental',
-    subcategory: 'atmospheric-conditions',
-    range: { min: 0, max: 5, typical: 0.1 },
-    default: 0.1
-  },
-  {
-    id: 'thermal_conductivity',
-    name: 'Thermal Conductivity',
-    description: 'Heat transfer coefficient of reactor materials',
-    unit: 'W/m·K',
-    type: 'number',
-    category: 'environmental',
-    subcategory: 'atmospheric-conditions',
-    range: { min: 0.1, max: 400, typical: 1.5 },
-    default: 1.5
-  },
-  // Light Conditions
-  {
-    id: 'light_intensity',
-    name: 'Light Intensity',
-    description: 'Illumination intensity for photosynthetic processes',
-    unit: 'μmol/m²·s',
-    type: 'number',
-    category: 'environmental',
-    subcategory: 'light-conditions',
-    range: { min: 0, max: 2000, typical: 100 },
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: -100, max: 1000, typical: 0 },
     default: 0
   },
   {
-    id: 'photoperiod',
-    name: 'Photoperiod',
-    description: 'Duration of light exposure per day',
-    unit: 'hours',
+    id: 'absolute_pressure',
+    name: 'Absolute Pressure',
+    description: 'Total absolute pressure',
+    unit: 'kPa',
     type: 'number',
     category: 'environmental',
-    subcategory: 'light-conditions',
-    range: { min: 0, max: 24, typical: 12 },
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 1100, typical: 101.325 },
+    default: 101.325
+  },
+  {
+    id: 'hydrostatic_pressure',
+    name: 'Hydrostatic Pressure',
+    description: 'Pressure from liquid column',
+    unit: 'bar',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 1000, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'partial_pressure_o2',
+    name: 'Partial Pressure O2',
+    description: 'Oxygen partial pressure',
+    unit: 'kPa',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 21.2 },
+    default: 21.2
+  },
+  {
+    id: 'partial_pressure_co2',
+    name: 'Partial Pressure CO2',
+    description: 'Carbon dioxide partial pressure',
+    unit: 'kPa',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 0.04 },
+    default: 0.04
+  },
+  {
+    id: 'partial_pressure_h2',
+    name: 'Partial Pressure H2',
+    description: 'Hydrogen partial pressure',
+    unit: 'kPa',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 0 },
     default: 0
   },
   {
-    id: 'light_wavelength',
-    name: 'Light Wavelength',
-    description: 'Dominant wavelength of illumination',
-    unit: 'nm',
+    id: 'partial_pressure_ch4',
+    name: 'Partial Pressure CH4',
+    description: 'Methane partial pressure',
+    unit: 'kPa',
     type: 'number',
     category: 'environmental',
-    subcategory: 'light-conditions',
-    range: { min: 400, max: 700, typical: 550 },
-    default: 550
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 0 },
+    default: 0
   },
-  // Vibration & Noise
   {
-    id: 'vibration_frequency',
-    name: 'Vibration Frequency',
-    description: 'Mechanical vibration frequency affecting system',
-    unit: 'Hz',
+    id: 'partial_pressure_n2',
+    name: 'Partial Pressure N2',
+    description: 'Nitrogen partial pressure',
+    unit: 'kPa',
     type: 'number',
     category: 'environmental',
-    subcategory: 'mechanical-conditions',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 79.1 },
+    default: 79.1
+  },
+  {
+    id: 'oxygen_concentration',
+    name: 'Oxygen Concentration',
+    description: 'O₂ concentration in gas phase',
+    unit: '%',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 20.95 },
+    default: 20.95
+  },
+  {
+    id: 'carbon_dioxide_concentration',
+    name: 'Carbon Dioxide Concentration',
+    description: 'CO₂ concentration',
+    unit: 'ppm',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 50000, typical: 415 },
+    default: 415
+  },
+  {
+    id: 'nitrogen_concentration',
+    name: 'Nitrogen Concentration',
+    description: 'N₂ concentration',
+    unit: '%',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 100, typical: 78.08 },
+    default: 78.08
+  },
+  {
+    id: 'trace_gas_h2s',
+    name: 'Trace Gas H2S',
+    description: 'Hydrogen sulfide concentration',
+    unit: 'ppm',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
     range: { min: 0, max: 1000, typical: 0 },
     default: 0
   },
   {
-    id: 'noise_level',
-    name: 'Noise Level',
-    description: 'Ambient noise level in operating environment',
-    unit: 'dB',
-    type: 'number',
-    category: 'environmental',
-    subcategory: 'mechanical-conditions',
-    range: { min: 20, max: 120, typical: 45 },
-    default: 45
-  },
-  // Air Quality
-  {
-    id: 'oxygen_concentration',
-    name: 'Ambient Oxygen Concentration',
-    description: 'Oxygen concentration in surrounding air',
-    unit: '%',
-    type: 'number',
-    category: 'environmental',
-    subcategory: 'air-quality',
-    range: { min: 15, max: 25, typical: 21 },
-    default: 21
-  },
-  {
-    id: 'co2_concentration',
-    name: 'Ambient CO₂ Concentration',
-    description: 'Carbon dioxide concentration in air',
+    id: 'trace_gas_nh3',
+    name: 'Trace Gas NH3',
+    description: 'Ammonia concentration',
     unit: 'ppm',
     type: 'number',
     category: 'environmental',
-    subcategory: 'air-quality',
-    range: { min: 300, max: 5000, typical: 400 },
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'trace_gas_voc',
+    name: 'Trace Gas VOC',
+    description: 'Volatile organic compounds',
+    unit: 'ppm',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'atmospheric-ambient-conditions',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+
+  // Light Radiation Parameters
+  {
+    id: 'photosynthetic_active_radiation',
+    name: 'Photosynthetic Active Radiation',
+    description: 'PAR for photosynthetic organisms',
+    unit: 'μmol/m²/s',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 2000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'total_solar_irradiance',
+    name: 'Total Solar Irradiance',
+    description: 'Total solar radiation',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 1400, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'light_intensity_lux',
+    name: 'Light Intensity Lux',
+    description: 'Illuminance in lux',
+    unit: 'lux',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 100000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'photon_flux_density',
+    name: 'Photon Flux Density',
+    description: 'Photon flux density',
+    unit: 'μmol/m²/s',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 3000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'uv_a_intensity',
+    name: 'Uv A Intensity',
+    description: 'UV-A (315-400 nm) intensity',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 100, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'uv_b_intensity',
+    name: 'Uv B Intensity',
+    description: 'UV-B (280-315 nm) intensity',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 10, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'uv_c_intensity',
+    name: 'Uv C Intensity',
+    description: 'UV-C (100-280 nm) intensity',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 5, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'blue_light_ratio',
+    name: 'Blue Light Ratio',
+    description: 'Blue light (400-500 nm) percentage',
+    unit: '%',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'green_light_ratio',
+    name: 'Green Light Ratio',
+    description: 'Green light (500-600 nm) percentage',
+    unit: '%',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 100, typical: 35 },
+    default: 35
+  },
+  {
+    id: 'red_light_ratio',
+    name: 'Red Light Ratio',
+    description: 'Red light (600-700 nm) percentage',
+    unit: '%',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 100, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'far_red_light_ratio',
+    name: 'Far Red Light Ratio',
+    description: 'Far-red light (700-800 nm) percentage',
+    unit: '%',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 100, typical: 15 },
+    default: 15
+  },
+  {
+    id: 'infrared_intensity',
+    name: 'Infrared Intensity',
+    description: 'IR radiation (>800 nm)',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'light_duration',
+    name: 'Light Duration',
+    description: 'Hours of light per day',
+    unit: 'h',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 24, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'dark_duration',
+    name: 'Dark Duration',
+    description: 'Hours of darkness per day',
+    unit: 'h',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 24, typical: 24 },
+    default: 24
+  },
+  {
+    id: 'light_cycle_type',
+    name: 'Light Cycle Type',
+    description: 'Type of light cycle',
+    unit: '-',
+    type: 'select',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    default: 'continuous'
+  },
+  {
+    id: 'dawn_duration',
+    name: 'Dawn Duration',
+    description: 'Sunrise simulation duration',
+    unit: 'min',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 120, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'dusk_duration',
+    name: 'Dusk Duration',
+    description: 'Sunset simulation duration',
+    unit: 'min',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'light-radiation-parameters',
+    range: { min: 0, max: 120, typical: 0 },
+    default: 0
+  },
+
+  // Physical Environmental Factors
+  {
+    id: 'vibration_frequency',
+    name: 'Vibration Frequency',
+    description: 'Vibration frequency',
+    unit: 'Hz',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'vibration_amplitude',
+    name: 'Vibration Amplitude',
+    description: 'Vibration amplitude',
+    unit: 'mm',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 10, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'vibration_acceleration',
+    name: 'Vibration Acceleration',
+    description: 'Vibration acceleration',
+    unit: 'g',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 10, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'mechanical_shock',
+    name: 'Mechanical Shock',
+    description: 'Mechanical shock magnitude',
+    unit: 'g',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 100, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'shear_stress',
+    name: 'Shear Stress',
+    description: 'Fluid shear stress',
+    unit: 'Pa',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'sound_frequency',
+    name: 'Sound Frequency',
+    description: 'Audible sound frequency',
+    unit: 'Hz',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 20, max: 20000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'sound_intensity',
+    name: 'Sound Intensity',
+    description: 'Sound pressure level',
+    unit: 'dB',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 140, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'ultrasound_frequency',
+    name: 'Ultrasound Frequency',
+    description: 'Ultrasonic frequency',
+    unit: 'kHz',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 20, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'ultrasound_power',
+    name: 'Ultrasound Power',
+    description: 'Ultrasonic power density',
+    unit: 'W/cm²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 10, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'ultrasound_duration',
+    name: 'Ultrasound Duration',
+    description: 'Ultrasound exposure time',
+    unit: 'min',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 60, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'magnetic_field_strength',
+    name: 'Magnetic Field Strength',
+    description: 'Magnetic field strength',
+    unit: 'mT',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 0.05 },
+    default: 0.05
+  },
+  {
+    id: 'magnetic_field_frequency',
+    name: 'Magnetic Field Frequency',
+    description: 'AC magnetic field frequency',
+    unit: 'Hz',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'electric_field_strength',
+    name: 'Electric Field Strength',
+    description: 'Electric field strength',
+    unit: 'V/m',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 10000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'electromagnetic_frequency',
+    name: 'Electromagnetic Frequency',
+    description: 'EM radiation frequency',
+    unit: 'MHz',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 3000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'electromagnetic_power',
+    name: 'Electromagnetic Power',
+    description: 'EM power density',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'gravitational_acceleration',
+    name: 'Gravitational Acceleration',
+    description: 'Gravitational acceleration',
+    unit: 'g',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'centrifugal_acceleration',
+    name: 'Centrifugal Acceleration',
+    description: 'Centrifugal force',
+    unit: 'g',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'microgravity_level',
+    name: 'Microgravity Level',
+    description: 'Microgravity conditions',
+    unit: 'μg',
+    type: 'number',
+    category: 'environmental',
+    subcategory: 'physical-environmental-factors',
+    range: { min: 0, max: 1000, typical: 1000000 },
+    default: 1000000
+  }
+]
+
+// Cell-level Parameters
+const cellLevelParameters: Parameter[] = [
+  // Cell Geometry Dimensions
+  {
+    id: 'slide_length',
+    name: 'Slide Length',
+    description: 'Microscope slide length',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 50, max: 100, typical: 75 },
+    default: 75
+  },
+  {
+    id: 'slide_width',
+    name: 'Slide Width',
+    description: 'Microscope slide width',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 20, max: 30, typical: 25 },
+    default: 25
+  },
+  {
+    id: 'slide_thickness',
+    name: 'Slide Thickness',
+    description: 'Slide material thickness',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 1, max: 5, typical: 3 },
+    default: 3
+  },
+  {
+    id: 'chamber_volume',
+    name: 'Chamber Volume',
+    description: 'Working chamber volume',
+    unit: 'μL',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 100, max: 1000, typical: 500 },
+    default: 500
+  },
+  {
+    id: 'channel_width',
+    name: 'Channel Width',
+    description: 'Microfluidic channel width',
+    unit: 'μm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 50, max: 1000, typical: 200 },
+    default: 200
+  },
+  {
+    id: 'channel_depth',
+    name: 'Channel Depth',
+    description: 'Microfluidic channel depth',
+    unit: 'μm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 20, max: 500, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'electrode_spacing_micro',
+    name: 'Electrode Spacing Micro',
+    description: 'Micro-electrode separation',
+    unit: 'μm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 100, max: 5000, typical: 1000 },
+    default: 1000
+  },
+  {
+    id: 'cell_type',
+    name: 'Cell Type',
+    description: 'Cell geometry type',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    default: 'cylindrical'
+  },
+  {
+    id: 'cell_volume',
+    name: 'Cell Volume',
+    description: 'Total cell volume',
+    unit: 'mL',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 10, max: 5000, typical: 250 },
+    default: 250
+  },
+  {
+    id: 'working_volume',
+    name: 'Working Volume',
+    description: 'Active/working volume',
+    unit: 'mL',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 5, max: 4500, typical: 200 },
+    default: 200
+  },
+  {
+    id: 'headspace_volume',
+    name: 'Headspace Volume',
+    description: 'Gas headspace volume',
+    unit: 'mL',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 0, max: 500, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'cell_diameter',
+    name: 'Cell Diameter',
+    description: 'Cell diameter (cylindrical)',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 10, max: 500, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'cell_height',
+    name: 'Cell Height',
+    description: 'Cell height',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 10, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'cell_length',
+    name: 'Cell Length',
+    description: 'Cell length (rectangular)',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 10, max: 1000, typical: 150 },
+    default: 150
+  },
+  {
+    id: 'cell_width',
+    name: 'Cell Width',
+    description: 'Cell width (rectangular)',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 10, max: 500, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'cell_material',
+    name: 'Cell Material',
+    description: 'Cell housing material',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    default: 'acrylic'
+  },
+  {
+    id: 'wall_thickness',
+    name: 'Wall Thickness',
+    description: 'Cell wall thickness',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 2, max: 20, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'transparency',
+    name: 'Transparency',
+    description: 'Material transparency',
+    unit: '%',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 0, max: 100, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'chemical_resistance',
+    name: 'Chemical Resistance',
+    description: 'Chemical resistance rating',
+    unit: '-',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 1, max: 10, typical: 8 },
+    default: 8
+  },
+  {
+    id: 'temperature_limit',
+    name: 'Temperature Limit',
+    description: 'Maximum temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 20, max: 200, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'pressure_rating',
+    name: 'Pressure Rating',
+    description: 'Maximum pressure rating',
+    unit: 'bar',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-geometry-dimensions',
+    range: { min: 1, max: 50, typical: 5 },
+    default: 5
+  },
+
+  // Cell Electrode Configuration
+  {
+    id: 'anode_area_cell',
+    name: 'Anode Area Cell',
+    description: 'Anode surface area in cell',
+    unit: 'cm²',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'cathode_area_cell',
+    name: 'Cathode Area Cell',
+    description: 'Cathode surface area in cell',
+    unit: 'cm²',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'electrode_thickness_cell',
+    name: 'Electrode Thickness Cell',
+    description: 'Electrode material thickness',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    range: { min: 0.1, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'electrode_spacing_cell',
+    name: 'Electrode Spacing Cell',
+    description: 'Anode-cathode separation',
+    unit: 'mm',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    range: { min: 1, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'electrode_arrangement_cell',
+    name: 'Electrode Arrangement Cell',
+    description: 'Electrode configuration',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    default: 'parallel'
+  },
+  {
+    id: 'current_collector_type',
+    name: 'Current Collector Type',
+    description: 'Current collector material',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    default: 'titanium'
+  },
+  {
+    id: 'wire_gauge',
+    name: 'Wire Gauge',
+    description: 'Connection wire gauge',
+    unit: 'AWG',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    range: { min: 10, max: 30, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'contact_resistance',
+    name: 'Contact Resistance',
+    description: 'Electrical contact resistance',
+    unit: 'mΩ',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    range: { min: 0.1, max: 100, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'terminal_type',
+    name: 'Terminal Type',
+    description: 'Electrical terminal type',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-electrode-configuration',
+    default: 'screw'
+  },
+
+  // Cell Performance Metrics
+  {
+    id: 'open_circuit_voltage_cell',
+    name: 'Open Circuit Voltage Cell',
+    description: 'Cell OCV',
+    unit: 'V',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-performance-metrics',
+    range: { min: 0, max: 2, typical: 0.8 },
+    default: 0.8
+  },
+  {
+    id: 'operating_voltage_cell',
+    name: 'Operating Voltage Cell',
+    description: 'Cell voltage under load',
+    unit: 'V',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-performance-metrics',
+    range: { min: 0, max: 1.5, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: 'current_density_cell',
+    name: 'Current Density Cell',
+    description: 'Current per electrode area',
+    unit: 'A/m²',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-performance-metrics',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'power_density_cell',
+    name: 'Power Density Cell',
+    description: 'Power per cell volume',
+    unit: 'W/m³',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-performance-metrics',
+    range: { min: 0, max: 1000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'internal_resistance_cell',
+    name: 'Internal Resistance Cell',
+    description: 'Cell internal resistance',
+    unit: 'Ω',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-performance-metrics',
+    range: { min: 0.1, max: 1000, typical: 50 },
+    default: 50
+  },
+
+  // Cell Specific Operational Parameters
+  {
+    id: 'flow_mode_cell',
+    name: 'Flow Mode Cell',
+    description: 'Cell operation mode',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-specific-operational-parameters',
+    default: 'batch'
+  },
+  {
+    id: 'flow_rate_cell',
+    name: 'Flow Rate Cell',
+    description: 'Flow rate through cell',
+    unit: 'mL/min',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-specific-operational-parameters',
+    range: { min: 0, max: 100, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'residence_time_cell',
+    name: 'Residence Time Cell',
+    description: 'Hydraulic residence time',
+    unit: 'h',
+    type: 'number',
+    category: 'cell-level',
+    subcategory: 'cell-specific-operational-parameters',
+    range: { min: 0.1, max: 100, typical: 24 },
+    default: 24
+  },
+  {
+    id: 'mixing_mode_cell',
+    name: 'Mixing Mode Cell',
+    description: 'Mixing method in cell',
+    unit: '-',
+    type: 'select',
+    category: 'cell-level',
+    subcategory: 'cell-specific-operational-parameters',
+    default: 'none'
+  }
+]
+
+// Reactor-level Parameters
+const reactorLevelParameters: Parameter[] = [
+  // Multi Cell Stack Configuration
+  {
+    id: 'cells_per_stack',
+    name: 'Cells Per Stack',
+    description: 'Number of cells in stack',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 2, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'stack_arrangement',
+    name: 'Stack Arrangement',
+    description: 'Electrical connection',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    default: 'series'
+  },
+  {
+    id: 'stack_height',
+    name: 'Stack Height',
+    description: 'Total stack height',
+    unit: 'mm',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 50, max: 2000, typical: 500 },
+    default: 500
+  },
+  {
+    id: 'stack_footprint',
+    name: 'Stack Footprint',
+    description: 'Stack base area',
+    unit: 'cm²',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 100, max: 10000, typical: 400 },
     default: 400
   },
   {
-    id: 'air_flow_rate',
-    name: 'Air Flow Rate',
-    description: 'Ventilation air flow rate around system',
-    unit: 'm³/h',
+    id: 'inter_cell_spacing',
+    name: 'Inter Cell Spacing',
+    description: 'Space between cells',
+    unit: 'mm',
     type: 'number',
-    category: 'environmental',
-    subcategory: 'air-quality',
-    range: { min: 0, max: 1000, typical: 50 },
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 1, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'stack_compression',
+    name: 'Stack Compression',
+    description: 'Stack compression force',
+    unit: 'N/cm²',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'stack_voltage',
+    name: 'Stack Voltage',
+    description: 'Total stack voltage',
+    unit: 'V',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 0, max: 100, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'stack_current',
+    name: 'Stack Current',
+    description: 'Total stack current',
+    unit: 'A',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 0, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'stack_power',
+    name: 'Stack Power',
+    description: 'Total stack power output',
+    unit: 'W',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 0, max: 10000, typical: 50 },
     default: 50
+  },
+  {
+    id: 'voltage_balancing',
+    name: 'Voltage Balancing',
+    description: 'Active voltage balancing',
+    unit: '-',
+    type: 'boolean',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    default: false
+  },
+  {
+    id: 'current_sharing',
+    name: 'Current Sharing',
+    description: 'Current distribution uniformity',
+    unit: '%',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'multi-cell-stack-configuration',
+    range: { min: 80, max: 100, typical: 95 },
+    default: 95
+  },
+
+  // Reactor System Components
+  {
+    id: 'manifold_type',
+    name: 'Manifold Type',
+    description: 'Flow manifold design',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    default: 'parallel'
+  },
+  {
+    id: 'inlet_diameter',
+    name: 'Inlet Diameter',
+    description: 'Main inlet pipe diameter',
+    unit: 'mm',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    range: { min: 5, max: 100, typical: 25 },
+    default: 25
+  },
+  {
+    id: 'distribution_channels',
+    name: 'Distribution Channels',
+    description: 'Number of distribution channels',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    range: { min: 1, max: 50, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'flow_uniformity',
+    name: 'Flow Uniformity',
+    description: 'Flow distribution uniformity',
+    unit: '%',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    range: { min: 50, max: 100, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'pressure_drop_manifold',
+    name: 'Pressure Drop Manifold',
+    description: 'Manifold pressure drop',
+    unit: 'kPa',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    range: { min: 0, max: 100, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'reactor_volume_total',
+    name: 'Reactor Volume Total',
+    description: 'Total reactor volume',
+    unit: 'L',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    range: { min: 1, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'reactor_material',
+    name: 'Reactor Material',
+    description: 'Reactor construction material',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    default: 'SS316'
+  },
+  {
+    id: 'reactor_shape',
+    name: 'Reactor Shape',
+    description: 'Reactor geometry',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    default: 'cylindrical'
+  },
+  {
+    id: 'aspect_ratio',
+    name: 'Aspect Ratio',
+    description: 'Height to diameter ratio',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    range: { min: 0.5, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'baffles_present',
+    name: 'Baffles Present',
+    description: 'Internal baffles present',
+    unit: '-',
+    type: 'boolean',
+    category: 'reactor-level',
+    subcategory: 'reactor-system-components',
+    default: false
+  },
+
+  // Reactor Control Systems
+  {
+    id: 'temperature_control_type',
+    name: 'Temperature Control Type',
+    description: 'Temperature control method',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    default: 'jacket'
+  },
+  {
+    id: 'heating_capacity',
+    name: 'Heating Capacity',
+    description: 'Heating system capacity',
+    unit: 'kW',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 0, max: 100, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'cooling_capacity',
+    name: 'Cooling Capacity',
+    description: 'Cooling system capacity',
+    unit: 'kW',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'temperature_setpoint',
+    name: 'Temperature Setpoint',
+    description: 'Target temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 4, max: 80, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'temperature_deadband',
+    name: 'Temperature Deadband',
+    description: 'Control deadband',
+    unit: '°C',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 0.1, max: 5, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'temperature_ramp_rate_max',
+    name: 'Temperature Ramp Rate Max',
+    description: 'Maximum temperature change rate',
+    unit: '°C/min',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 0.1, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'ph_control_type',
+    name: 'Ph Control Type',
+    description: 'pH control method',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    default: 'buffer'
+  },
+  {
+    id: 'ph_setpoint',
+    name: 'Ph Setpoint',
+    description: 'Target pH',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 2, max: 12, typical: 7 },
+    default: 7
+  },
+  {
+    id: 'ph_deadband',
+    name: 'Ph Deadband',
+    description: 'pH control deadband',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 0.05, max: 1, typical: 0.2 },
+    default: 0.2
+  },
+  {
+    id: 'acid_type',
+    name: 'Acid Type',
+    description: 'Acid for pH control',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    default: 'HCl'
+  },
+  {
+    id: 'base_type',
+    name: 'Base Type',
+    description: 'Base for pH control',
+    unit: '-',
+    type: 'select',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    default: 'NaOH'
+  },
+  {
+    id: 'buffer_capacity',
+    name: 'Buffer Capacity',
+    description: 'Buffer capacity',
+    unit: 'mmol/L/pH',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'reactor-control-systems',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+
+  // Industrial Scale Parameters
+  {
+    id: 'scale_factor',
+    name: 'Scale Factor',
+    description: 'Scale-up from lab',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'industrial-scale-parameters',
+    range: { min: 1, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'reynolds_number',
+    name: 'Reynolds Number',
+    description: 'Flow regime indicator',
+    unit: '-',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'industrial-scale-parameters',
+    range: { min: 1, max: 100000, typical: 2000 },
+    default: 2000
+  },
+  {
+    id: 'mixing_time',
+    name: 'Mixing Time',
+    description: 'Time for complete mixing',
+    unit: 's',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'industrial-scale-parameters',
+    range: { min: 1, max: 3600, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'dead_zone_fraction',
+    name: 'Dead Zone Fraction',
+    description: 'Fraction of dead volume',
+    unit: '%',
+    type: 'number',
+    category: 'reactor-level',
+    subcategory: 'industrial-scale-parameters',
+    range: { min: 0, max: 50, typical: 5 },
+    default: 5
   }
 ]
 
 // Biological Parameters
 const biologicalParameters: Parameter[] = [
-  // Biofilm Properties
+  // Microorganism Database
   {
-    id: 'biofilm_thickness',
-    name: 'Biofilm Thickness',
-    description: 'Thickness of the microbial biofilm on the electrode surface',
-    unit: 'μm',
-    type: 'number',
+    id: 'geobacter_sulfurreducens',
+    name: 'Geobacter Sulfurreducens',
+    description: 'Metal-reducing bacterium',
+    unit: '-',
+    type: 'object',
     category: 'biological',
-    subcategory: 'biofilm-properties',
-    range: { min: 1, max: 500, typical: 50 },
-    default: 50
+    subcategory: 'microorganism-database',
   },
   {
-    id: 'biofilm_density',
-    name: 'Biofilm Density',
-    description: 'Cell density within the biofilm matrix',
-    unit: 'cells/cm³',
+    id: '_optimal_temperature',
+    name: '├─ Optimal Temperature',
+    description: 'Optimal growth temperature',
+    unit: '°C',
     type: 'number',
     category: 'biological',
-    subcategory: 'biofilm-properties',
-    range: { min: 1e8, max: 1e12, typical: 1e10 },
-    default: 1e10
+    subcategory: 'microorganism-database',
+    range: { min: 25, max: 35, typical: 30 },
+    default: 30
   },
   {
-    id: 'biofilm_conductivity',
-    name: 'Biofilm Conductivity',
-    description: 'Electrical conductivity of biofilm matrix',
-    unit: 'S/m',
+    id: '_optimal_ph',
+    name: '├─ Optimal Ph',
+    description: 'Optimal pH',
+    unit: '-',
     type: 'number',
     category: 'biological',
-    subcategory: 'biofilm-properties',
-    range: { min: 1e-6, max: 1e-3, typical: 1e-4 },
-    default: 1e-4
+    subcategory: 'microorganism-database',
+    range: { min: 6.5, max: 7.5, typical: 7 },
+    default: 7
   },
   {
-    id: 'biofilm_porosity',
-    name: 'Biofilm Porosity',
-    description: 'Fraction of void space in biofilm structure',
-    unit: '',
+    id: '_electrogenicity',
+    name: '├─ Electrogenicity',
+    description: 'Electroactive capability',
+    unit: '-',
     type: 'number',
     category: 'biological',
-    subcategory: 'biofilm-properties',
-    range: { min: 0.1, max: 0.9, typical: 0.7 },
-    default: 0.7
+    subcategory: 'microorganism-database',
+    range: { min: 1, max: 10, typical: 9 },
+    default: 9
   },
   {
-    id: 'biofilm_roughness',
-    name: 'Biofilm Surface Roughness',
-    description: 'Surface roughness coefficient of biofilm',
-    unit: 'μm',
+    id: '_growth_rate',
+    name: '├─ Growth Rate',
+    description: 'Maximum growth rate',
+    unit: '1/h',
     type: 'number',
     category: 'biological',
-    subcategory: 'biofilm-properties',
-    range: { min: 0.1, max: 50, typical: 5 },
-    default: 5
+    subcategory: 'microorganism-database',
+    range: { min: 0.01, max: 0.5, typical: 0.2 },
+    default: 0.2
   },
   {
-    id: 'biofilm_adhesion_strength',
-    name: 'Biofilm Adhesion Strength',
-    description: 'Force required to detach biofilm from electrode',
-    unit: 'N/m²',
-    type: 'number',
+    id: '_biofilm_forming',
+    name: '├─ Biofilm Forming',
+    description: 'Biofilm formation ability',
+    unit: '-',
+    type: 'boolean',
     category: 'biological',
-    subcategory: 'biofilm-properties',
-    range: { min: 10, max: 10000, typical: 1000 },
-    default: 1000
+    subcategory: 'microorganism-database',
+    default: true
   },
-  // Microbial Selection
   {
-    id: 'microbial_species',
-    name: 'Microbial Species',
-    description: 'Primary microbial species in the fuel cell',
-    unit: '',
+    id: '_oxygen_tolerance',
+    name: '├─ Oxygen Tolerance',
+    description: 'O₂ tolerance',
+    unit: '-',
     type: 'select',
     category: 'biological',
-    subcategory: 'microbial-selection',
-    options: [
-      'Geobacter sulfurreducens',
-      'Shewanella oneidensis',
-      'Pseudomonas aeruginosa',
-      'Escherichia coli',
-      'Clostridium acetobutylicum',
-      'Saccharomyces cerevisiae',
-      'Desulfovibrio vulgaris',
-      'Rhodoferax ferrireducens',
-      'Mixed consortium',
-      'Anaerobic sludge',
-      'Marine sediment',
-      'Activated sludge'
-    ],
-    default: 'Geobacter sulfurreducens'
+    subcategory: 'microorganism-database',
+    default: 'strict_anaerobe'
   },
   {
-    id: 'inoculum_concentration',
-    name: 'Inoculum Concentration',
-    description: 'Initial microbial concentration for startup',
-    unit: 'cells/mL',
-    type: 'number',
+    id: 'shewanella_oneidensis',
+    name: 'Shewanella Oneidensis',
+    description: 'Versatile electroactive bacterium',
+    unit: '-',
+    type: 'object',
     category: 'biological',
-    subcategory: 'microbial-selection',
-    range: { min: 1e4, max: 1e9, typical: 1e6 },
-    default: 1e6
+    subcategory: 'microorganism-database',
   },
   {
-    id: 'microbial_diversity',
-    name: 'Microbial Diversity Index',
-    description: 'Shannon diversity index of microbial community',
-    unit: '',
+    id: '_optimal_temperature',
+    name: '├─ Optimal Temperature',
+    description: 'Optimal growth temperature',
+    unit: '°C',
     type: 'number',
     category: 'biological',
-    subcategory: 'microbial-selection',
-    range: { min: 0, max: 5, typical: 2.5 },
+    subcategory: 'microorganism-database',
+    range: { min: 20, max: 30, typical: 25 },
+    default: 25
+  },
+  {
+    id: '_optimal_ph',
+    name: '├─ Optimal Ph',
+    description: 'Optimal pH',
+    unit: '-',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 6.5, max: 8, typical: 7.5 },
+    default: 7.5
+  },
+  {
+    id: '_electrogenicity',
+    name: '├─ Electrogenicity',
+    description: 'Electroactive capability',
+    unit: '-',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 1, max: 10, typical: 8 },
+    default: 8
+  },
+  {
+    id: '_growth_rate',
+    name: '├─ Growth Rate',
+    description: 'Maximum growth rate',
+    unit: '1/h',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 0.1, max: 1, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: '_electron_shuttles',
+    name: '├─ Electron Shuttles',
+    description: 'Produces electron mediators',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'pseudomonas_aeruginosa',
+    name: 'Pseudomonas Aeruginosa',
+    description: 'Biofilm-forming bacterium',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_optimal_temperature',
+    name: '├─ Optimal Temperature',
+    description: 'Optimal growth temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 30, max: 40, typical: 37 },
+    default: 37
+  },
+  {
+    id: '_optimal_ph',
+    name: '├─ Optimal Ph',
+    description: 'Optimal pH',
+    unit: '-',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 6.5, max: 8, typical: 7 },
+    default: 7
+  },
+  {
+    id: '_electrogenicity',
+    name: '├─ Electrogenicity',
+    description: 'Electroactive capability',
+    unit: '-',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 1, max: 10, typical: 6 },
+    default: 6
+  },
+  {
+    id: '_phenazine_production',
+    name: '├─ Phenazine Production',
+    description: 'Produces phenazine mediators',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'rhodoferax_ferrireducens',
+    name: 'Rhodoferax Ferrireducens',
+    description: 'Psychrotolerant electroactive',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_optimal_temperature',
+    name: '├─ Optimal Temperature',
+    description: 'Optimal growth temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 20, max: 30, typical: 25 },
+    default: 25
+  },
+  {
+    id: '_cold_tolerance',
+    name: '├─ Cold Tolerance',
+    description: 'Minimum growth temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 2, max: 10, typical: 4 },
+    default: 4
+  },
+  {
+    id: 'desulfovibrio_desulfuricans',
+    name: 'Desulfovibrio Desulfuricans',
+    description: 'Sulfate-reducing bacterium',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_sulfate_reduction',
+    name: '├─ Sulfate Reduction',
+    description: 'Sulfate reduction capability',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: '_h2_production',
+    name: '├─ H2 Production',
+    description: 'Hydrogen production',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'clostridium_butyricum',
+    name: 'Clostridium Butyricum',
+    description: 'Fermentative bacterium',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_fermentation_products',
+    name: '├─ Fermentation Products',
+    description: 'Fermentation end products',
+    unit: '-',
+    type: 'array',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: '[butyrate, H2]'
+  },
+  {
+    id: 'ochrobactrum_anthropi',
+    name: 'Ochrobactrum Anthropi',
+    description: 'Heavy metal tolerant',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_metal_tolerance',
+    name: '├─ Metal Tolerance',
+    description: 'Tolerant to metals',
+    unit: '-',
+    type: 'array',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: '[Cr, Cu, Cd]'
+  },
+  {
+    id: 'klebsiella_pneumoniae',
+    name: 'Klebsiella Pneumoniae',
+    description: 'Facultative anaerobe',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_nitrogen_fixation',
+    name: '├─ Nitrogen Fixation',
+    description: 'N₂ fixation capability',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: false
+  },
+  {
+    id: 'enterobacter_aerogenes',
+    name: 'Enterobacter Aerogenes',
+    description: 'H₂ producer',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_h2_yield',
+    name: '├─ H2 Yield',
+    description: 'H₂ yield from glucose',
+    unit: 'mol/mol',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 1, max: 4, typical: 2.5 },
     default: 2.5
   },
   {
-    id: 'dominant_species_fraction',
-    name: 'Dominant Species Fraction',
-    description: 'Fraction of dominant microbial species',
-    unit: '%',
-    type: 'number',
+    id: 'methanobrevibacter_smithii',
+    name: 'Methanobrevibacter Smithii',
+    description: 'Hydrogenotrophic methanogen',
+    unit: '-',
+    type: 'object',
     category: 'biological',
-    subcategory: 'microbial-selection',
-    range: { min: 10, max: 95, typical: 60 },
-    default: 60
-  },
-  // Substrate Parameters
-  {
-    id: 'substrate_concentration',
-    name: 'Substrate Concentration',
-    description: 'Concentration of organic substrate in the feed',
-    unit: 'mg/L',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'substrate-parameters',
-    range: { min: 100, max: 10000, typical: 1000 },
-    default: 1000
+    subcategory: 'microorganism-database',
   },
   {
-    id: 'cod_concentration',
-    name: 'COD Concentration',
-    description: 'Chemical oxygen demand of the substrate',
-    unit: 'mg/L',
+    id: '_ch4_production_rate',
+    name: '├─ Ch4 Production Rate',
+    description: 'Methane production rate',
+    unit: 'mmol/L/d',
     type: 'number',
     category: 'biological',
-    subcategory: 'substrate-parameters',
-    range: { min: 200, max: 50000, typical: 2000 },
-    default: 2000
-  },
-  {
-    id: 'bod_concentration',
-    name: 'BOD Concentration',
-    description: 'Biological oxygen demand of substrate',
-    unit: 'mg/L',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'substrate-parameters',
-    range: { min: 100, max: 25000, typical: 1200 },
-    default: 1200
-  },
-  {
-    id: 'substrate_type',
-    name: 'Substrate Type',
-    description: 'Type of organic substrate used',
-    unit: '',
-    type: 'select',
-    category: 'biological',
-    subcategory: 'substrate-parameters',
-    options: [
-      'Acetate',
-      'Glucose',
-      'Lactate',
-      'Propionate',
-      'Butyrate',
-      'Ethanol',
-      'Methanol',
-      'Glycerol',
-      'Wastewater',
-      'Food waste',
-      'Agricultural waste',
-      'Municipal sludge'
-    ],
-    default: 'Acetate'
-  },
-  {
-    id: 'substrate_loading_rate',
-    name: 'Substrate Loading Rate',
-    description: 'Rate of substrate addition to reactor',
-    unit: 'kg COD/m³·d',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'substrate-parameters',
-    range: { min: 0.1, max: 20, typical: 2 },
-    default: 2
-  },
-  {
-    id: 'c_n_ratio',
-    name: 'C/N Ratio',
-    description: 'Carbon to nitrogen ratio in substrate',
-    unit: '',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'substrate-parameters',
-    range: { min: 5, max: 50, typical: 20 },
-    default: 20
-  },
-  // Kinetics
-  {
-    id: 'growth_rate',
-    name: 'Microbial Growth Rate',
-    description: 'Specific growth rate of microorganisms',
-    unit: 'h⁻¹',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'kinetics',
-    range: { min: 0.001, max: 0.5, typical: 0.1 },
-    default: 0.1
-  },
-  {
-    id: 'substrate_utilization_rate',
-    name: 'Substrate Utilization Rate',
-    description: 'Rate of substrate consumption by microbes',
-    unit: 'mg/L·h',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'kinetics',
-    range: { min: 1, max: 1000, typical: 50 },
-    default: 50
-  },
-  {
-    id: 'electron_transfer_rate',
-    name: 'Electron Transfer Rate',
-    description: 'Rate of electron transfer to electrode',
-    unit: 'μA/cm²',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'kinetics',
-    range: { min: 0.1, max: 100, typical: 10 },
+    subcategory: 'microorganism-database',
+    range: { min: 0, max: 50, typical: 10 },
     default: 10
   },
   {
-    id: 'doubling_time',
-    name: 'Cell Doubling Time',
-    description: 'Time required for cell population to double',
-    unit: 'hours',
+    id: '_h2_threshold',
+    name: '├─ H2 Threshold',
+    description: 'H₂ threshold for growth',
+    unit: 'Pa',
     type: 'number',
     category: 'biological',
-    subcategory: 'kinetics',
-    range: { min: 1, max: 100, typical: 12 },
-    default: 12
-  },
-  {
-    id: 'yield_coefficient',
-    name: 'Biomass Yield Coefficient',
-    description: 'Biomass produced per unit substrate consumed',
-    unit: 'g cells/g substrate',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'kinetics',
-    range: { min: 0.1, max: 1.0, typical: 0.5 },
-    default: 0.5
-  },
-  // Metabolic Parameters
-  {
-    id: 'metabolic_rate',
-    name: 'Metabolic Rate',
-    description: 'Overall metabolic activity of microorganisms',
-    unit: 'μmol O₂/mg·h',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'metabolic-parameters',
-    range: { min: 0.1, max: 50, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'respiration_rate',
-    name: 'Cellular Respiration Rate',
-    description: 'Rate of cellular respiration',
-    unit: 'mg O₂/L·h',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'metabolic-parameters',
-    range: { min: 1, max: 100, typical: 20 },
-    default: 20
-  },
-  {
-    id: 'atp_concentration',
-    name: 'ATP Concentration',
-    description: 'Intracellular ATP concentration',
-    unit: 'μM',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'metabolic-parameters',
-    range: { min: 1, max: 10, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'enzyme_activity',
-    name: 'Enzyme Activity',
-    description: 'Activity of key metabolic enzymes',
-    unit: 'U/mg protein',
-    type: 'number',
-    category: 'biological',
-    subcategory: 'metabolic-parameters',
-    range: { min: 0.1, max: 100, typical: 10 },
-    default: 10
-  }
-]
-
-// Electrical Parameters
-const electricalParameters: Parameter[] = [
-  // Output Performance
-  {
-    id: 'cell_voltage',
-    name: 'Cell Voltage',
-    description: 'Operating voltage of the fuel cell',
-    unit: 'V',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.1, max: 1.2, typical: 0.6 },
-    default: 0.6
-  },
-  {
-    id: 'open_circuit_voltage',
-    name: 'Open Circuit Voltage',
-    description: 'Voltage when no current is flowing',
-    unit: 'V',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.2, max: 1.1, typical: 0.8 },
-    default: 0.8
-  },
-  {
-    id: 'current_density',
-    name: 'Current Density',
-    description: 'Current per unit electrode area',
-    unit: 'mA/cm²',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.1, max: 50, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'power_density',
-    name: 'Power Density',
-    description: 'Power output per unit volume or area',
-    unit: 'mW/cm²',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.01, max: 30, typical: 3 },
-    default: 3
-  },
-  {
-    id: 'maximum_power_density',
-    name: 'Maximum Power Density',
-    description: 'Peak power density achievable by the system',
-    unit: 'mW/cm²',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.1, max: 100, typical: 10 },
-    default: 10
-  },
-  {
-    id: 'peak_current',
-    name: 'Peak Current',
-    description: 'Maximum current output of the system',
-    unit: 'mA',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.1, max: 1000, typical: 50 },
-    default: 50
-  },
-  {
-    id: 'voltage_stability',
-    name: 'Voltage Stability',
-    description: 'Standard deviation of voltage over time',
-    unit: 'mV',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
+    subcategory: 'microorganism-database',
     range: { min: 1, max: 100, typical: 10 },
     default: 10
   },
   {
-    id: 'energy_density',
-    name: 'Energy Density',
-    description: 'Energy storage capacity per unit volume',
-    unit: 'Wh/L',
+    id: 'methanosarcina_acetivorans',
+    name: 'Methanosarcina Acetivorans',
+    description: 'Acetoclastic methanogen',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_substrate_range',
+    name: '├─ Substrate Range',
+    description: 'Substrate utilization',
+    unit: '-',
+    type: 'array',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: '[acetate, methanol, CO]'
+  },
+  {
+    id: 'methanobacterium_formicicum',
+    name: 'Methanobacterium Formicicum',
+    description: 'Formate-utilizing methanogen',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: 'methanococcus_maripaludis',
+    name: 'Methanococcus Maripaludis',
+    description: 'Marine methanogen',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_salt_requirement',
+    name: '├─ Salt Requirement',
+    description: 'NaCl requirement',
+    unit: 'g/L',
     type: 'number',
-    category: 'electrical',
-    subcategory: 'output-performance',
-    range: { min: 0.1, max: 50, typical: 5 },
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 10, max: 40, typical: 25 },
+    default: 25
+  },
+  {
+    id: 'chlorella_vulgaris',
+    name: 'Chlorella Vulgaris',
+    description: 'Green microalga',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_photosynthetic_efficiency',
+    name: '├─ Photosynthetic Efficiency',
+    description: 'Light to biomass efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 1, max: 10, typical: 5 },
     default: 5
   },
-  // Impedance
   {
-    id: 'internal_resistance',
-    name: 'Internal Resistance',
-    description: 'Internal resistance of the fuel cell',
-    unit: 'Ω',
+    id: '_co2_fixation_rate',
+    name: '├─ Co2 Fixation Rate',
+    description: 'CO₂ fixation rate',
+    unit: 'g/L/d',
     type: 'number',
-    category: 'electrical',
-    subcategory: 'impedance',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 0.1, max: 2, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: '_light_saturation',
+    name: '├─ Light Saturation',
+    description: 'Light saturation point',
+    unit: 'μmol/m²/s',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 100, max: 1000, typical: 400 },
+    default: 400
+  },
+  {
+    id: 'spirulina_platensis',
+    name: 'Spirulina Platensis',
+    description: 'Cyanobacterium',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_protein_content',
+    name: '├─ Protein Content',
+    description: 'Protein content of biomass',
+    unit: '%',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 50, max: 70, typical: 60 },
+    default: 60
+  },
+  {
+    id: '_phycocyanin_production',
+    name: '├─ Phycocyanin Production',
+    description: 'Produces phycocyanin',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'scenedesmus_obliquus',
+    name: 'Scenedesmus Obliquus',
+    description: 'Robust green alga',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_lipid_content',
+    name: '├─ Lipid Content',
+    description: 'Lipid content for biodiesel',
+    unit: '%',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 10, max: 40, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'dunaliella_salina',
+    name: 'Dunaliella Salina',
+    description: 'Halophilic alga',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_salt_tolerance',
+    name: '├─ Salt Tolerance',
+    description: 'NaCl tolerance',
+    unit: 'g/L',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 50, max: 300, typical: 150 },
+    default: 150
+  },
+  {
+    id: '_beta_carotene',
+    name: '├─ Beta Carotene',
+    description: 'β-carotene production',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'chlamydomonas_reinhardtii',
+    name: 'Chlamydomonas Reinhardtii',
+    description: 'Model green alga',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_h2_production',
+    name: '├─ H2 Production',
+    description: 'Biophotolytic H₂ production',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'rhodobacter_sphaeroides',
+    name: 'Rhodobacter Sphaeroides',
+    description: 'Purple non-sulfur bacterium',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_photoheterotrophic',
+    name: '├─ Photoheterotrophic',
+    description: 'Photoheterotrophic growth',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: '_h2_production_light',
+    name: '├─ H2 Production Light',
+    description: 'H₂ production under light',
+    unit: 'mmol/L/h',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 0, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'rhodopseudomonas_palustris',
+    name: 'Rhodopseudomonas Palustris',
+    description: 'Metabolically versatile',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_nitrogen_fixation',
+    name: '├─ Nitrogen Fixation',
+    description: 'N₂ fixation capability',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: '_aromatic_degradation',
+    name: '├─ Aromatic Degradation',
+    description: 'Degrades aromatics',
+    unit: '-',
+    type: 'boolean',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: true
+  },
+  {
+    id: 'e_coli_engineered',
+    name: 'E Coli Engineered',
+    description: 'Engineered E. coli strains',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_modification_type',
+    name: '├─ Modification Type',
+    description: 'Genetic modification',
+    unit: '-',
+    type: 'select',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: 'overexpression'
+  },
+  {
+    id: '_target_product',
+    name: '├─ Target Product',
+    description: 'Target output',
+    unit: '-',
+    type: 'select',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: 'electricity'
+  },
+  {
+    id: '_plasmid_stability',
+    name: '├─ Plasmid Stability',
+    description: 'Plasmid retention',
+    unit: '%',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    range: { min: 50, max: 100, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'synthetic_consortium',
+    name: 'Synthetic Consortium',
+    description: 'Designed microbial community',
+    unit: '-',
+    type: 'object',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+  },
+  {
+    id: '_member_species',
+    name: '├─ Member Species',
+    description: 'Consortium members',
+    unit: '-',
+    type: 'array',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: '[]'
+  },
+  {
+    id: '_interaction_type',
+    name: '├─ Interaction Type',
+    description: 'Species interactions',
+    unit: '-',
+    type: 'select',
+    category: 'biological',
+    subcategory: 'microorganism-database',
+    default: 'syntrophic'
+  },
+
+  // Biofilm Parameters
+  {
+    id: 'biofilm_thickness',
+    name: 'Biofilm Thickness',
+    description: 'Average biofilm thickness',
+    unit: 'μm',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
     range: { min: 1, max: 1000, typical: 100 },
     default: 100
   },
   {
-    id: 'charge_transfer_resistance',
-    name: 'Charge Transfer Resistance',
-    description: 'Resistance to electron transfer at electrode interface',
-    unit: 'Ω·cm²',
+    id: 'biofilm_density',
+    name: 'Biofilm Density',
+    description: 'Biofilm dry density',
+    unit: 'g/L',
     type: 'number',
-    category: 'electrical',
-    subcategory: 'impedance',
-    range: { min: 0.1, max: 100, typical: 10 },
-    default: 10
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 10, max: 200, typical: 50 },
+    default: 50
   },
   {
-    id: 'ohmic_resistance',
-    name: 'Ohmic Resistance',
-    description: 'Resistance due to electrolyte and electrode materials',
-    unit: 'Ω·cm²',
+    id: 'biofilm_porosity',
+    name: 'Biofilm Porosity',
+    description: 'Void fraction in biofilm',
+    unit: '%',
     type: 'number',
-    category: 'electrical',
-    subcategory: 'impedance',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 50, max: 95, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'biofilm_coverage',
+    name: 'Biofilm Coverage',
+    description: 'Electrode surface coverage',
+    unit: '%',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 0, max: 100, typical: 70 },
+    default: 70
+  },
+  {
+    id: 'biofilm_roughness',
+    name: 'Biofilm Roughness',
+    description: 'Surface roughness',
+    unit: 'μm',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'biofilm_conductivity',
+    name: 'Biofilm Conductivity',
+    description: 'Electrical conductivity',
+    unit: 'S/m',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 0.001, max: 1, typical: 0.01 },
+    default: 0.01
+  },
+  {
+    id: 'electron_transfer_rate',
+    name: 'Electron Transfer Rate',
+    description: 'Direct electron transfer rate',
+    unit: 'A/m²',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 0, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'mediator_concentration',
+    name: 'Mediator Concentration',
+    description: 'Electron mediator concentration',
+    unit: 'mM',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 0, max: 10, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'metabolic_activity',
+    name: 'Metabolic Activity',
+    description: 'Active biomass fraction',
+    unit: '%',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'biofilm-parameters',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  },
+
+  // Microbial Kinetics
+  {
+    id: 'maximum_growth_rate',
+    name: 'Maximum Growth Rate',
+    description: 'μmax',
+    unit: '1/h',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.01, max: 2, typical: 0.2 },
+    default: 0.2
+  },
+  {
+    id: 'half_saturation_constant',
+    name: 'Half Saturation Constant',
+    description: 'Ks for substrate',
+    unit: 'g/L',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.001, max: 10, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'yield_coefficient',
+    name: 'Yield Coefficient',
+    description: 'Biomass yield',
+    unit: 'g/g',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.1, max: 0.8, typical: 0.4 },
+    default: 0.4
+  },
+  {
+    id: 'decay_rate',
+    name: 'Decay Rate',
+    description: 'Endogenous decay',
+    unit: '1/h',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.001, max: 0.1, typical: 0.01 },
+    default: 0.01
+  },
+  {
+    id: 'maintenance_coefficient',
+    name: 'Maintenance Coefficient',
+    description: 'Maintenance energy',
+    unit: '1/h',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.001, max: 0.1, typical: 0.02 },
+    default: 0.02
+  },
+  {
+    id: 'substrate_uptake_rate',
+    name: 'Substrate Uptake Rate',
+    description: 'Specific uptake rate',
+    unit: 'g/g/h',
+    type: 'number',
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
     range: { min: 0.01, max: 10, typical: 1 },
     default: 1
   },
   {
-    id: 'diffusion_resistance',
-    name: 'Diffusion Resistance',
-    description: 'Mass transport resistance in biofilm',
-    unit: 'Ω·cm²',
+    id: 'substrate_affinity',
+    name: 'Substrate Affinity',
+    description: 'Substrate affinity',
+    unit: 'L/g/h',
     type: 'number',
-    category: 'electrical',
-    subcategory: 'impedance',
-    range: { min: 0.1, max: 50, typical: 5 },
-    default: 5
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
   },
   {
-    id: 'capacitance',
-    name: 'Double Layer Capacitance',
-    description: 'Electrochemical double layer capacitance',
-    unit: 'μF/cm²',
+    id: 'inhibition_constant',
+    name: 'Inhibition Constant',
+    description: 'Substrate inhibition',
+    unit: 'g/L',
     type: 'number',
-    category: 'electrical',
-    subcategory: 'impedance',
-    range: { min: 1, max: 1000, typical: 100 },
-    default: 100
-  },
-  {
-    id: 'impedance_magnitude',
-    name: 'Impedance Magnitude',
-    description: 'Total impedance magnitude at 1 Hz',
-    unit: 'Ω',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'impedance',
-    range: { min: 1, max: 10000, typical: 500 },
-    default: 500
-  },
-  // Efficiency
-  {
-    id: 'coulombic_efficiency',
-    name: 'Coulombic Efficiency',
-    description: 'Efficiency of electron capture from substrate',
-    unit: '%',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'efficiency',
-    range: { min: 5, max: 95, typical: 60 },
-    default: 60
-  },
-  {
-    id: 'energy_efficiency',
-    name: 'Energy Efficiency',
-    description: 'Overall energy conversion efficiency',
-    unit: '%',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'efficiency',
-    range: { min: 1, max: 50, typical: 15 },
-    default: 15
-  },
-  {
-    id: 'voltage_efficiency',
-    name: 'Voltage Efficiency',
-    description: 'Ratio of operating to theoretical voltage',
-    unit: '%',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'efficiency',
-    range: { min: 10, max: 90, typical: 50 },
-    default: 50
-  },
-  {
-    id: 'faradaic_efficiency',
-    name: 'Faradaic Efficiency',
-    description: 'Efficiency of electrochemical reactions',
-    unit: '%',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'efficiency',
-    range: { min: 20, max: 99, typical: 80 },
-    default: 80
-  },
-  {
-    id: 'power_efficiency',
-    name: 'Power Efficiency',
-    description: 'Electrical power output efficiency',
-    unit: '%',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'efficiency',
-    range: { min: 5, max: 70, typical: 25 },
-    default: 25
-  },
-  // Electrochemical Properties
-  {
-    id: 'redox_potential',
-    name: 'Redox Potential',
-    description: 'Standard reduction potential of electrode reactions',
-    unit: 'V vs SHE',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'electrochemical-properties',
-    range: { min: -1.0, max: 1.0, typical: 0.2 },
-    default: 0.2
-  },
-  {
-    id: 'exchange_current_density',
-    name: 'Exchange Current Density',
-    description: 'Current density at equilibrium potential',
-    unit: 'A/cm²',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'electrochemical-properties',
-    range: { min: 1e-8, max: 1e-3, typical: 1e-5 },
-    default: 1e-5
-  },
-  {
-    id: 'tafel_slope',
-    name: 'Tafel Slope',
-    description: 'Slope of Tafel plot for electrode kinetics',
-    unit: 'mV/decade',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'electrochemical-properties',
-    range: { min: 30, max: 200, typical: 120 },
-    default: 120
-  },
-  {
-    id: 'overpotential',
-    name: 'Overpotential',
-    description: 'Voltage loss due to kinetic limitations',
-    unit: 'mV',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'electrochemical-properties',
-    range: { min: 10, max: 500, typical: 100 },
-    default: 100
-  },
-  {
-    id: 'limiting_current',
-    name: 'Limiting Current',
-    description: 'Maximum current limited by mass transport',
-    unit: 'mA/cm²',
-    type: 'number',
-    category: 'electrical',
-    subcategory: 'electrochemical-properties',
-    range: { min: 1, max: 100, typical: 20 },
-    default: 20
+    category: 'biological',
+    subcategory: 'microbial-kinetics',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
   }
 ]
 
 // Material Parameters
 const materialParameters: Parameter[] = [
-  // Electrode Materials
+  // Anode Materials
   {
-    id: 'anode_material',
-    name: 'Anode Material',
-    description: 'Material composition of the anode electrode',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    options: [
-      'Carbon cloth',
-      'Carbon felt',
-      'Carbon paper',
-      'Carbon fiber',
-      'Graphite rod',
-      'Graphite plate',
-      'Graphite foam',
-      'Carbon brush',
-      'Carbon nanotubes',
-      'Graphene oxide',
-      'Stainless steel mesh',
-      'Stainless steel 316L',
-      'Titanium mesh',
-      'Titanium plate',
-      'Nickel foam',
-      'Copper mesh',
-      'Gold electrode',
-      'Platinum electrode'
-    ],
-    default: 'Carbon cloth'
+    id: 'carbon_cloth',
+    name: 'Carbon Cloth',
+    description: 'Woven carbon fabric',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
   },
   {
-    id: 'cathode_material',
-    name: 'Cathode Material',
-    description: 'Material composition of the cathode electrode',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    options: [
-      'Carbon cloth with Pt',
-      'Carbon cloth with Pt/C',
-      'Carbon cloth plain',
-      'Air cathode with Pt',
-      'Air cathode Pt-free',
-      'Graphite plate',
-      'Graphite rod',
-      'Carbon felt',
-      'Stainless steel',
-      'Activated carbon',
-      'Manganese dioxide',
-      'Iron-based catalyst',
-      'Cobalt-based catalyst'
-    ],
-    default: 'Carbon cloth with Pt'
-  },
-  {
-    id: 'catalyst_loading',
-    name: 'Catalyst Loading',
-    description: 'Amount of catalyst per unit electrode area',
-    unit: 'mg/cm²',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    range: { min: 0, max: 10, typical: 0.5 },
-    default: 0.5
-  },
-  {
-    id: 'surface_roughness',
-    name: 'Electrode Surface Roughness',
-    description: 'Surface roughness factor of electrode material',
-    unit: '',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    range: { min: 1, max: 1000, typical: 10 },
-    default: 10
-  },
-  {
-    id: 'porosity',
-    name: 'Electrode Porosity',
-    description: 'Void fraction in electrode material',
-    unit: '%',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    range: { min: 10, max: 95, typical: 70 },
-    default: 70
-  },
-  {
-    id: 'pore_size',
-    name: 'Average Pore Size',
-    description: 'Mean pore diameter in electrode material',
-    unit: 'μm',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    range: { min: 0.1, max: 100, typical: 10 },
-    default: 10
-  },
-  {
-    id: 'electrical_conductivity',
-    name: 'Material Electrical Conductivity',
-    description: 'Electrical conductivity of electrode material',
+    id: '_conductivity',
+    name: '├─ Conductivity',
+    description: 'Electrical conductivity',
     unit: 'S/m',
     type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-materials',
-    range: { min: 1, max: 1e7, typical: 1e4 },
-    default: 1e4
-  },
-  // Electrode Geometry
-  {
-    id: 'electrode_surface_area',
-    name: 'Electrode Surface Area',
-    description: 'Total surface area of the electrode',
-    unit: 'cm²',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-geometry',
-    range: { min: 1, max: 1000, typical: 25 },
-    default: 25
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 100, max: 10000, typical: 1000 },
+    default: 1000
   },
   {
-    id: 'electrode_spacing',
-    name: 'Electrode Spacing',
-    description: 'Distance between anode and cathode',
-    unit: 'cm',
+    id: '_surface_area',
+    name: '├─ Surface Area',
+    description: 'Specific surface area',
+    unit: 'm²/g',
     type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-geometry',
-    range: { min: 0.5, max: 50, typical: 2 },
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0.1, max: 10, typical: 2 },
     default: 2
   },
   {
-    id: 'electrode_thickness',
-    name: 'Electrode Thickness',
-    description: 'Thickness of the electrode material',
-    unit: 'mm',
+    id: '_cost',
+    name: '├─ Cost',
+    description: 'Material cost',
+    unit: '$/m²',
     type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-geometry',
-    range: { min: 0.1, max: 10, typical: 1 },
-    default: 1
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 10, max: 200, typical: 50 },
+    default: 50
   },
   {
-    id: 'electrode_diameter',
-    name: 'Electrode Diameter',
-    description: 'Diameter for cylindrical electrodes',
-    unit: 'cm',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-geometry',
-    range: { min: 0.1, max: 20, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'electrode_configuration',
-    name: 'Electrode Configuration',
-    description: 'Physical arrangement of electrodes',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'electrode-geometry',
-    options: [
-      'Parallel plates',
-      'Concentric cylinders',
-      'Rod in tube',
-      'Brush electrode',
-      'Mesh configuration',
-      'Spiral wound',
-      'Stacked plates'
-    ],
-    default: 'Parallel plates'
-  },
-  {
-    id: 'specific_surface_area',
-    name: 'Specific Surface Area',
-    description: 'Surface area per unit mass of electrode',
-    unit: 'm²/g',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'electrode-geometry',
-    range: { min: 1, max: 3000, typical: 100 },
-    default: 100
-  },
-  // Membrane & Separator
-  {
-    id: 'membrane_type',
-    name: 'Membrane Type',
-    description: 'Type of proton exchange membrane',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'membrane-separator',
-    options: [
-      'Nafion 117',
-      'Nafion 115',
-      'Nafion 212',
-      'PEM generic',
-      'Ceramic membrane',
-      'Ultrafiltration membrane',
-      'Microfiltration membrane',
-      'Cation exchange membrane',
-      'Anion exchange membrane',
-      'Bipolar membrane',
-      'Salt bridge',
-      'Glass frit',
-      'None (single chamber)'
-    ],
-    default: 'Nafion 117'
-  },
-  {
-    id: 'membrane_thickness',
-    name: 'Membrane Thickness',
-    description: 'Thickness of the separator membrane',
-    unit: 'μm',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'membrane-separator',
-    range: { min: 50, max: 500, typical: 183 },
-    default: 183
-  },
-  {
-    id: 'membrane_conductivity',
-    name: 'Membrane Proton Conductivity',
-    description: 'Proton conductivity of membrane material',
-    unit: 'S/cm',
-    type: 'number',
-    category: 'materials',
-    subcategory: 'membrane-separator',
-    range: { min: 1e-4, max: 1e-1, typical: 1e-2 },
-    default: 1e-2
-  },
-  {
-    id: 'membrane_water_uptake',
-    name: 'Membrane Water Uptake',
-    description: 'Water absorption capacity of membrane',
+    id: '_porosity',
+    name: '├─ Porosity',
+    description: 'Material porosity',
     unit: '%',
     type: 'number',
-    category: 'materials',
-    subcategory: 'membrane-separator',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 50, max: 90, typical: 70 },
+    default: 70
+  },
+  {
+    id: '_thickness',
+    name: '├─ Thickness',
+    description: 'Material thickness',
+    unit: 'mm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0.1, max: 5, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: 'carbon_felt',
+    name: 'Carbon Felt',
+    description: 'Non-woven carbon material',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_fiber_diameter',
+    name: '├─ Fiber Diameter',
+    description: 'Carbon fiber diameter',
+    unit: 'μm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
     range: { min: 5, max: 50, typical: 20 },
     default: 20
   },
   {
-    id: 'membrane_selectivity',
-    name: 'Membrane Ion Selectivity',
-    description: 'Selectivity for target ions',
-    unit: '',
+    id: '_compression_ratio',
+    name: '├─ Compression Ratio',
+    description: 'Compression from original',
+    unit: '%',
     type: 'number',
-    category: 'materials',
-    subcategory: 'membrane-separator',
-    range: { min: 1, max: 1000, typical: 100 },
-    default: 100
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0, max: 80, typical: 20 },
+    default: 20
   },
   {
-    id: 'membrane_pore_size',
-    name: 'Membrane Pore Size',
-    description: 'Average pore diameter in membrane',
+    id: 'graphite_brush',
+    name: 'Graphite Brush',
+    description: 'Graphite fiber brush',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_fiber_count',
+    name: '├─ Fiber Count',
+    description: 'Number of fibers',
+    unit: '-',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 1000, max: 100000, typical: 10000 },
+    default: 10000
+  },
+  {
+    id: '_brush_diameter',
+    name: '├─ Brush Diameter',
+    description: 'Brush diameter',
+    unit: 'mm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 10, max: 100, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'carbon_paper',
+    name: 'Carbon Paper',
+    description: 'Thin carbon sheet',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_tensile_strength',
+    name: '├─ Tensile Strength',
+    description: 'Mechanical strength',
+    unit: 'MPa',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 10, max: 200, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'activated_carbon',
+    name: 'Activated Carbon',
+    description: 'High surface area carbon',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_bet_surface_area',
+    name: '├─ Bet Surface Area',
+    description: 'BET surface area',
+    unit: 'm²/g',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 500, max: 3000, typical: 1000 },
+    default: 1000
+  },
+  {
+    id: '_pore_size',
+    name: '├─ Pore Size',
+    description: 'Average pore size',
     unit: 'nm',
     type: 'number',
-    category: 'materials',
-    subcategory: 'membrane-separator',
-    range: { min: 0.1, max: 1000, typical: 10 },
-    default: 10
-  },
-  // Structural Materials
-  {
-    id: 'reactor_material',
-    name: 'Reactor Housing Material',
-    description: 'Material of reactor container/housing',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'structural-materials',
-    options: [
-      'Polycarbonate',
-      'Acrylic (PMMA)',
-      'Polypropylene',
-      'PTFE',
-      'PVC',
-      'Glass',
-      'Stainless steel',
-      'Aluminum',
-      'Ceramic',
-      'PEEK'
-    ],
-    default: 'Polycarbonate'
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0.5, max: 50, typical: 2 },
+    default: 2
   },
   {
-    id: 'gasket_material',
-    name: 'Gasket Material',
-    description: 'Sealing material for reactor joints',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'structural-materials',
-    options: [
-      'Silicone rubber',
-      'Viton (FKM)',
-      'EPDM rubber',
-      'NBR rubber',
-      'PTFE',
-      'Cork',
-      'Paper gasket'
-    ],
-    default: 'Silicone rubber'
+    id: 'graphene_oxide',
+    name: 'Graphene Oxide',
+    description: 'GO sheets',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
   },
   {
-    id: 'connector_material',
-    name: 'Electrical Connector Material',
-    description: 'Material for electrical connections',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'structural-materials',
-    options: [
-      'Copper wire',
-      'Silver wire',
-      'Gold wire',
-      'Titanium wire',
-      'Stainless steel wire',
-      'Carbon fiber',
-      'Conductive epoxy'
-    ],
-    default: 'Copper wire'
-  },
-  {
-    id: 'surface_treatment',
-    name: 'Electrode Surface Treatment',
-    description: 'Chemical or physical surface modification',
-    unit: '',
-    type: 'select',
-    category: 'materials',
-    subcategory: 'surface-properties',
-    options: [
-      'None',
-      'Acid treatment',
-      'Heat treatment',
-      'Plasma treatment',
-      'Chemical etching',
-      'Electrochemical activation',
-      'Ammonia treatment',
-      'Polymer coating'
-    ],
-    default: 'None'
-  },
-  {
-    id: 'surface_energy',
-    name: 'Surface Energy',
-    description: 'Surface energy of electrode material',
-    unit: 'mJ/m²',
+    id: '_reduction_degree',
+    name: '├─ Reduction Degree',
+    description: 'Degree of reduction',
+    unit: '%',
     type: 'number',
-    category: 'materials',
-    subcategory: 'surface-properties',
-    range: { min: 10, max: 500, typical: 100 },
-    default: 100
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
   },
   {
-    id: 'contact_angle',
-    name: 'Water Contact Angle',
-    description: 'Hydrophobicity of electrode surface',
-    unit: 'degrees',
+    id: '_sheet_size',
+    name: '├─ Sheet Size',
+    description: 'Lateral sheet size',
+    unit: 'μm',
     type: 'number',
-    category: 'materials',
-    subcategory: 'surface-properties',
-    range: { min: 0, max: 180, typical: 90 },
-    default: 90
-  }
-]
-
-// Chemical Parameters
-const chemicalParameters: Parameter[] = [
-  // Electrolyte Composition
-  {
-    id: 'ph_level',
-    name: 'pH Level',
-    description: 'pH of the electrolyte solution',
-    unit: '',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    range: { min: 4, max: 10, typical: 7 },
-    default: 7
-  },
-  {
-    id: 'conductivity',
-    name: 'Electrolyte Conductivity',
-    description: 'Electrical conductivity of the electrolyte',
-    unit: 'mS/cm',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
+    category: 'material',
+    subcategory: 'anode-materials',
     range: { min: 0.1, max: 100, typical: 10 },
     default: 10
   },
   {
-    id: 'buffer_concentration',
-    name: 'Buffer Concentration',
-    description: 'Concentration of pH buffer in solution',
-    unit: 'mM',
+    id: '_layer_number',
+    name: '├─ Layer Number',
+    description: 'Number of layers',
+    unit: '-',
     type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    range: { min: 1, max: 200, typical: 50 },
-    default: 50
-  },
-  {
-    id: 'salt_concentration',
-    name: 'Salt Concentration',
-    description: 'Ionic strength of the electrolyte',
-    unit: 'g/L',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    range: { min: 0.1, max: 50, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'buffer_type',
-    name: 'Buffer Type',
-    description: 'Type of pH buffer system used',
-    unit: '',
-    type: 'select',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    options: [
-      'Phosphate buffer',
-      'Tris buffer',
-      'HEPES buffer',
-      'Carbonate buffer',
-      'Acetate buffer',
-      'Citrate buffer',
-      'No buffer'
-    ],
-    default: 'Phosphate buffer'
-  },
-  {
-    id: 'ionic_strength',
-    name: 'Ionic Strength',
-    description: 'Total ionic strength of electrolyte',
-    unit: 'M',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    range: { min: 0.001, max: 5, typical: 0.1 },
-    default: 0.1
-  },
-  {
-    id: 'dissolved_oxygen',
-    name: 'Dissolved Oxygen',
-    description: 'Concentration of dissolved oxygen in electrolyte',
-    unit: 'mg/L',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    range: { min: 0, max: 15, typical: 8 },
-    default: 8
-  },
-  {
-    id: 'total_dissolved_solids',
-    name: 'Total Dissolved Solids',
-    description: 'Total concentration of dissolved substances',
-    unit: 'mg/L',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'electrolyte-composition',
-    range: { min: 100, max: 50000, typical: 5000 },
-    default: 5000
-  },
-  // Ion Concentrations
-  {
-    id: 'sodium_concentration',
-    name: 'Sodium Ion Concentration',
-    description: 'Concentration of Na+ ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 1000, typical: 100 },
-    default: 100
-  },
-  {
-    id: 'potassium_concentration',
-    name: 'Potassium Ion Concentration',
-    description: 'Concentration of K+ ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 200, typical: 10 },
-    default: 10
-  },
-  {
-    id: 'chloride_concentration',
-    name: 'Chloride Ion Concentration',
-    description: 'Concentration of Cl- ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 1000, typical: 100 },
-    default: 100
-  },
-  {
-    id: 'phosphate_concentration',
-    name: 'Phosphate Ion Concentration',
-    description: 'Concentration of PO4³⁻ ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 100, typical: 10 },
-    default: 10
-  },
-  {
-    id: 'sulfate_concentration',
-    name: 'Sulfate Ion Concentration',
-    description: 'Concentration of SO4²⁻ ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 100, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'calcium_concentration',
-    name: 'Calcium Ion Concentration',
-    description: 'Concentration of Ca²⁺ ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 50, typical: 2 },
-    default: 2
-  },
-  {
-    id: 'magnesium_concentration',
-    name: 'Magnesium Ion Concentration',
-    description: 'Concentration of Mg²⁺ ions in solution',
-    unit: 'mM',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'ion-concentrations',
-    range: { min: 0, max: 30, typical: 1 },
-    default: 1
-  },
-  // Chemical Properties
-  {
-    id: 'oxidation_reduction_potential',
-    name: 'Oxidation-Reduction Potential',
-    description: 'ORP of the electrolyte solution',
-    unit: 'mV vs SHE',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'chemical-properties',
-    range: { min: -500, max: 500, typical: 0 },
-    default: 0
-  },
-  {
-    id: 'chemical_stability',
-    name: 'Chemical Stability',
-    description: 'Stability of electrolyte composition over time',
-    unit: 'days',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'chemical-properties',
-    range: { min: 1, max: 365, typical: 30 },
-    default: 30
-  },
-  {
-    id: 'corrosivity',
-    name: 'Corrosivity Index',
-    description: 'Corrosive potential of electrolyte',
-    unit: '',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'chemical-properties',
-    range: { min: 0, max: 10, typical: 3 },
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 1, max: 10, typical: 3 },
     default: 3
   },
   {
-    id: 'viscosity',
-    name: 'Dynamic Viscosity',
-    description: 'Viscosity of the electrolyte solution',
-    unit: 'cP',
-    type: 'number',
-    category: 'chemical',
-    subcategory: 'chemical-properties',
-    range: { min: 0.5, max: 10, typical: 1 },
-    default: 1
+    id: 'carbon_nanotubes',
+    name: 'Carbon Nanotubes',
+    description: 'CNT materials',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
   },
   {
-    id: 'surface_tension',
-    name: 'Surface Tension',
-    description: 'Surface tension of electrolyte solution',
-    unit: 'mN/m',
+    id: '_cnt_type',
+    name: '├─ Cnt Type',
+    description: 'CNT type',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'anode-materials',
+    default: 'MWCNT'
+  },
+  {
+    id: '_cnt_diameter',
+    name: '├─ Cnt Diameter',
+    description: 'Tube diameter',
+    unit: 'nm',
     type: 'number',
-    category: 'chemical',
-    subcategory: 'chemical-properties',
-    range: { min: 20, max: 80, typical: 72 },
-    default: 72
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 1, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: '_cnt_length',
+    name: '├─ Cnt Length',
+    description: 'Tube length',
+    unit: 'μm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0.1, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: '_functionalization',
+    name: '├─ Functionalization',
+    description: 'Surface groups',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'anode-materials',
+    default: 'none'
+  },
+  {
+    id: 'ti3c2tx_mxene',
+    name: 'Ti3c2tx Mxene',
+    description: 'Titanium carbide MXene',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_termination_groups',
+    name: '├─ Termination Groups',
+    description: 'Surface terminations',
+    unit: '-',
+    type: 'array',
+    category: 'material',
+    subcategory: 'anode-materials',
+    default: '[O, OH, F]'
+  },
+  {
+    id: '_conductivity',
+    name: '├─ Conductivity',
+    description: 'Electrical conductivity',
+    unit: 'S/m',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 1000, max: 20000, typical: 10000 },
+    default: 10000
+  },
+  {
+    id: '_hydrophilicity',
+    name: '├─ Hydrophilicity',
+    description: 'Water contact angle',
+    unit: '°',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0, max: 90, typical: 30 },
+    default: 30
+  },
+  {
+    id: '_stability_ph_range',
+    name: '├─ Stability Ph Range',
+    description: 'Stable pH range',
+    unit: '-',
+    type: 'array',
+    category: 'material',
+    subcategory: 'anode-materials',
+    default: '[3, 9]'
+  },
+  {
+    id: 'v2ctx_mxene',
+    name: 'V2ctx Mxene',
+    description: 'Vanadium carbide MXene',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: 'nb2ctx_mxene',
+    name: 'Nb2ctx Mxene',
+    description: 'Niobium carbide MXene',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: 'ammonia_treatment',
+    name: 'Ammonia Treatment',
+    description: 'NH₃ plasma treatment',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_treatment_time',
+    name: '├─ Treatment Time',
+    description: 'Treatment duration',
+    unit: 'min',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 1, max: 60, typical: 10 },
+    default: 10
+  },
+  {
+    id: '_treatment_temperature',
+    name: '├─ Treatment Temperature',
+    description: 'Treatment temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 20, max: 200, typical: 100 },
+    default: 100
+  },
+  {
+    id: '_nitrogen_content',
+    name: '├─ Nitrogen Content',
+    description: 'N doping level',
+    unit: 'at%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0, max: 20, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'polymer_coating',
+    name: 'Polymer Coating',
+    description: 'Conductive polymer',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'anode-materials',
+  },
+  {
+    id: '_polymer_type',
+    name: '├─ Polymer Type',
+    description: 'Polymer type',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'anode-materials',
+    default: 'PANI'
+  },
+  {
+    id: '_coating_thickness',
+    name: '├─ Coating Thickness',
+    description: 'Coating thickness',
+    unit: 'μm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: '_doping_level',
+    name: '├─ Doping Level',
+    description: 'Doping percentage',
+    unit: '%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'anode-materials',
+    range: { min: 10, max: 50, typical: 30 },
+    default: 30
+  },
+
+  // Cathode Materials
+  {
+    id: 'platinum_cathode',
+    name: 'Platinum Cathode',
+    description: 'Pt catalyst',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_pt_loading',
+    name: '├─ Pt Loading',
+    description: 'Pt loading',
+    unit: 'mg/cm²',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 0.01, max: 5, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: '_particle_size',
+    name: '├─ Particle Size',
+    description: 'Pt particle size',
+    unit: 'nm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 1, max: 100, typical: 5 },
+    default: 5
+  },
+  {
+    id: '_support_material',
+    name: '├─ Support Material',
+    description: 'Catalyst support',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'carbon_black'
+  },
+  {
+    id: 'stainless_steel',
+    name: 'Stainless Steel',
+    description: 'SS cathode',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_alloy_grade',
+    name: '├─ Alloy Grade',
+    description: 'Stainless steel grade',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'SS316'
+  },
+  {
+    id: '_surface_treatment',
+    name: '├─ Surface Treatment',
+    description: 'Surface condition',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'passivated'
+  },
+  {
+    id: 'nickel_foam',
+    name: 'Nickel Foam',
+    description: 'Ni foam cathode',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_pore_density',
+    name: '├─ Pore Density',
+    description: 'Pores per inch',
+    unit: 'ppi',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 10, max: 110, typical: 60 },
+    default: 60
+  },
+  {
+    id: '_porosity',
+    name: '├─ Porosity',
+    description: 'Foam porosity',
+    unit: '%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 80, max: 98, typical: 95 },
+    default: 95
+  },
+  {
+    id: 'copper_cathode',
+    name: 'Copper Cathode',
+    description: 'Cu-based cathode',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_copper_form',
+    name: '├─ Copper Form',
+    description: 'Physical form',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'mesh'
+  },
+  {
+    id: '_oxide_state',
+    name: '├─ Oxide State',
+    description: 'Oxidation state',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'Cu'
+  },
+  {
+    id: '_surface_area_enhancement',
+    name: '├─ Surface Area Enhancement',
+    description: 'Surface area factor',
+    unit: '-',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'manganese_oxide',
+    name: 'Manganese Oxide',
+    description: 'MnO₂ catalyst',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_crystal_structure',
+    name: '├─ Crystal Structure',
+    description: 'Crystal phase',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'β'
+  },
+  {
+    id: '_particle_morphology',
+    name: '├─ Particle Morphology',
+    description: 'Morphology',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'nanoparticle'
+  },
+  {
+    id: 'iron_oxide',
+    name: 'Iron Oxide',
+    description: 'Fe-based catalyst',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_iron_phase',
+    name: '├─ Iron Phase',
+    description: 'Iron oxide phase',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'Fe3O4'
+  },
+  {
+    id: '_doping_element',
+    name: '├─ Doping Element',
+    description: 'Dopant element',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'none'
+  },
+  {
+    id: 'cobalt_oxide',
+    name: 'Cobalt Oxide',
+    description: 'Co-based catalyst',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_cobalt_phase',
+    name: '├─ Cobalt Phase',
+    description: 'Cobalt oxide phase',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'Co3O4'
+  },
+  {
+    id: 'gas_diffusion_layer',
+    name: 'Gas Diffusion Layer',
+    description: 'GDL properties',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_gdl_material',
+    name: '├─ Gdl Material',
+    description: 'GDL substrate',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: 'carbon_paper'
+  },
+  {
+    id: '_gdl_thickness',
+    name: '├─ Gdl Thickness',
+    description: 'GDL thickness',
+    unit: 'μm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 100, max: 1000, typical: 300 },
+    default: 300
+  },
+  {
+    id: '_ptfe_loading',
+    name: '├─ Ptfe Loading',
+    description: 'PTFE content',
+    unit: 'wt%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 0, max: 60, typical: 30 },
+    default: 30
+  },
+  {
+    id: '_microporous_layer',
+    name: '├─ Microporous Layer',
+    description: 'MPL present',
+    unit: '-',
+    type: 'boolean',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    default: true
+  },
+  {
+    id: 'catalyst_layer',
+    name: 'Catalyst Layer',
+    description: 'Catalyst layer',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'cathode-materials',
+  },
+  {
+    id: '_catalyst_loading',
+    name: '├─ Catalyst Loading',
+    description: 'Total catalyst loading',
+    unit: 'mg/cm²',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 0.1, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: '_ionomer_content',
+    name: '├─ Ionomer Content',
+    description: 'Ionomer in catalyst layer',
+    unit: 'wt%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'cathode-materials',
+    range: { min: 0, max: 50, typical: 20 },
+    default: 20
+  },
+
+  // Membraneseparator Materials
+  {
+    id: 'proton_exchange_membrane',
+    name: 'Proton Exchange Membrane',
+    description: 'PEM properties',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+  },
+  {
+    id: '_membrane_type',
+    name: '├─ Membrane Type',
+    description: 'Membrane brand',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    default: 'Nafion'
+  },
+  {
+    id: '_thickness',
+    name: '├─ Thickness',
+    description: 'Membrane thickness',
+    unit: 'μm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 25, max: 250, typical: 100 },
+    default: 100
+  },
+  {
+    id: '_conductivity',
+    name: '├─ Conductivity',
+    description: 'Proton conductivity',
+    unit: 'S/cm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 0.001, max: 0.2, typical: 0.08 },
+    default: 0.08
+  },
+  {
+    id: '_water_uptake',
+    name: '├─ Water Uptake',
+    description: 'Water absorption',
+    unit: '%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 5, max: 50, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'anion_exchange_membrane',
+    name: 'Anion Exchange Membrane',
+    description: 'AEM properties',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+  },
+  {
+    id: '_functional_groups',
+    name: '├─ Functional Groups',
+    description: 'Functional groups',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    default: 'quaternary_ammonium'
+  },
+  {
+    id: '_ion_exchange_capacity',
+    name: '├─ Ion Exchange Capacity',
+    description: 'IEC',
+    unit: 'meq/g',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 0.5, max: 3, typical: 1.5 },
+    default: 1.5
+  },
+  {
+    id: 'bipolar_membrane',
+    name: 'Bipolar Membrane',
+    description: 'BPM properties',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+  },
+  {
+    id: '_water_splitting_voltage',
+    name: '├─ Water Splitting Voltage',
+    description: 'Water dissociation voltage',
+    unit: 'V',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 0.8, max: 2, typical: 1.2 },
+    default: 1.2
+  },
+  {
+    id: 'ceramic_separator',
+    name: 'Ceramic Separator',
+    description: 'Ceramic membrane',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+  },
+  {
+    id: '_pore_size',
+    name: '├─ Pore Size',
+    description: 'Average pore size',
+    unit: 'μm',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 0.01, max: 10, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: '_porosity',
+    name: '├─ Porosity',
+    description: 'Membrane porosity',
+    unit: '%',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 20, max: 80, typical: 40 },
+    default: 40
+  },
+  {
+    id: '_material_type',
+    name: '├─ Material Type',
+    description: 'Ceramic material',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    default: 'alumina'
+  },
+  {
+    id: 'polymer_separator',
+    name: 'Polymer Separator',
+    description: 'Polymer membrane',
+    unit: '-',
+    type: 'object',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+  },
+  {
+    id: '_polymer_type',
+    name: '├─ Polymer Type',
+    description: 'Polymer material',
+    unit: '-',
+    type: 'select',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    default: 'PVDF'
+  },
+  {
+    id: '_hydrophobicity',
+    name: '├─ Hydrophobicity',
+    description: 'Water contact angle',
+    unit: '°',
+    type: 'number',
+    category: 'material',
+    subcategory: 'membraneseparator-materials',
+    range: { min: 0, max: 180, typical: 120 },
+    default: 120
   }
 ]
 
 // Operational Parameters
 const operationalParameters: Parameter[] = [
-  // Flow Conditions
+  // Process Control Parameters
   {
-    id: 'flow_rate',
-    name: 'Flow Rate',
-    description: 'Flow rate of the electrolyte',
-    unit: 'mL/min',
+    id: 'flow_control_mode',
+    name: 'Flow Control Mode',
+    description: 'Control strategy',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    default: 'PID'
+  },
+  {
+    id: 'flow_setpoint',
+    name: 'Flow Setpoint',
+    description: 'Target flow rate',
+    unit: 'L/h',
     type: 'number',
     category: 'operational',
-    subcategory: 'flow-conditions',
-    range: { min: 0.1, max: 100, typical: 5 },
+    subcategory: 'process-control-parameters',
+    range: { min: 0, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'flow_control_valve',
+    name: 'Flow Control Valve',
+    description: 'Valve type',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    default: 'globe'
+  },
+  {
+    id: 'pump_type',
+    name: 'Pump Type',
+    description: 'Pump type',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    default: 'peristaltic'
+  },
+  {
+    id: 'pump_capacity',
+    name: 'Pump Capacity',
+    description: 'Maximum pump flow',
+    unit: 'L/h',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    range: { min: 0, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'flow_measurement',
+    name: 'Flow Measurement',
+    description: 'Flow sensor type',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    default: 'magnetic'
+  },
+  {
+    id: 'mixing_type',
+    name: 'Mixing Type',
+    description: 'Mixing method',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    default: 'mechanical'
+  },
+  {
+    id: 'mixer_speed',
+    name: 'Mixer Speed',
+    description: 'Mixer rotation speed',
+    unit: 'rpm',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    range: { min: 0, max: 2000, typical: 200 },
+    default: 200
+  },
+  {
+    id: 'mixer_power',
+    name: 'Mixer Power',
+    description: 'Mixing power input',
+    unit: 'W/m³',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    range: { min: 0, max: 1000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'mixing_time',
+    name: 'Mixing Time',
+    description: 'Time for complete mixing',
+    unit: 's',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    range: { min: 1, max: 3600, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'reynolds_number_mixing',
+    name: 'Reynolds Number Mixing',
+    description: 'Mixing Reynolds number',
+    unit: '-',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'process-control-parameters',
+    range: { min: 1, max: 100000, typical: 10000 },
+    default: 10000
+  },
+
+  // Operating Modes
+  {
+    id: 'batch_volume',
+    name: 'Batch Volume',
+    description: 'Batch size',
+    unit: 'L',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 0.1, max: 10000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'batch_duration',
+    name: 'Batch Duration',
+    description: 'Batch cycle time',
+    unit: 'h',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 1, max: 1000, typical: 24 },
+    default: 24
+  },
+  {
+    id: 'fill_time',
+    name: 'Fill Time',
+    description: 'Time to fill reactor',
+    unit: 'min',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 1, max: 60, typical: 5 },
     default: 5
+  },
+  {
+    id: 'drain_time',
+    name: 'Drain Time',
+    description: 'Time to empty reactor',
+    unit: 'min',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 1, max: 60, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'idle_time',
+    name: 'Idle Time',
+    description: 'Time between batches',
+    unit: 'min',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 0, max: 1440, typical: 30 },
+    default: 30
   },
   {
     id: 'hydraulic_retention_time',
     name: 'Hydraulic Retention Time',
-    description: 'Average time fluid spends in the reactor',
-    unit: 'hours',
+    description: 'HRT',
+    unit: 'h',
     type: 'number',
     category: 'operational',
-    subcategory: 'flow-conditions',
-    range: { min: 0.5, max: 168, typical: 24 },
+    subcategory: 'operating-modes',
+    range: { min: 0.1, max: 1000, typical: 24 },
     default: 24
   },
   {
-    id: 'flow_velocity',
-    name: 'Flow Velocity',
-    description: 'Linear velocity of fluid through reactor',
-    unit: 'cm/s',
+    id: 'dilution_rate',
+    name: 'Dilution Rate',
+    description: 'D = 1/HRT',
+    unit: '1/h',
     type: 'number',
     category: 'operational',
-    subcategory: 'flow-conditions',
-    range: { min: 0.01, max: 10, typical: 0.1 },
-    default: 0.1
+    subcategory: 'operating-modes',
+    range: { min: 0.001, max: 10, typical: 0.042 },
+    default: 0.042
   },
   {
-    id: 'reynolds_number',
-    name: 'Reynolds Number',
-    description: 'Dimensionless flow regime indicator',
-    unit: '',
+    id: 'recycle_ratio',
+    name: 'Recycle Ratio',
+    description: 'Recycle flow/feed flow',
+    unit: '-',
     type: 'number',
     category: 'operational',
-    subcategory: 'flow-conditions',
-    range: { min: 1, max: 10000, typical: 100 },
-    default: 100
-  },
-  {
-    id: 'mixing_intensity',
-    name: 'Mixing Intensity',
-    description: 'Degree of mixing in reactor',
-    unit: 'rpm',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'flow-conditions',
-    range: { min: 0, max: 500, typical: 100 },
+    subcategory: 'operating-modes',
+    range: { min: 0, max: 10, typical: 0 },
     default: 0
   },
   {
-    id: 'recirculation_ratio',
-    name: 'Recirculation Ratio',
-    description: 'Ratio of recirculated to fresh feed',
-    unit: '',
+    id: 'steady_state_criteria',
+    name: 'Steady State Criteria',
+    description: 'Variation for steady state',
+    unit: '%',
     type: 'number',
     category: 'operational',
-    subcategory: 'flow-conditions',
-    range: { min: 0, max: 10, typical: 1 },
-    default: 0
-  },
-  // Circuit Conditions
-  {
-    id: 'external_load',
-    name: 'External Load',
-    description: 'External resistance connected to the circuit',
-    unit: 'Ω',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'circuit-conditions',
-    range: { min: 10, max: 10000, typical: 1000 },
-    default: 1000
-  },
-  {
-    id: 'circuit_configuration',
-    name: 'Circuit Configuration',
-    description: 'Electrical circuit arrangement',
-    unit: '',
-    type: 'select',
-    category: 'operational',
-    subcategory: 'circuit-conditions',
-    options: [
-      'Single cell',
-      'Series connection',
-      'Parallel connection',
-      'Series-parallel hybrid',
-      'Switched array'
-    ],
-    default: 'Single cell'
-  },
-  {
-    id: 'load_variation',
-    name: 'Load Variation Pattern',
-    description: 'Pattern of external load changes',
-    unit: '',
-    type: 'select',
-    category: 'operational',
-    subcategory: 'circuit-conditions',
-    options: [
-      'Constant load',
-      'Stepped load',
-      'Ramped load',
-      'Cyclic load',
-      'Random load'
-    ],
-    default: 'Constant load'
-  },
-  {
-    id: 'switching_frequency',
-    name: 'Load Switching Frequency',
-    description: 'Frequency of load changes',
-    unit: 'Hz',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'circuit-conditions',
-    range: { min: 0, max: 1000, typical: 0 },
-    default: 0
-  },
-  // Control Parameters
-  {
-    id: 'operation_mode',
-    name: 'Operation Mode',
-    description: 'Mode of fuel cell operation',
-    unit: '',
-    type: 'select',
-    category: 'operational',
-    subcategory: 'control-parameters',
-    options: [
-      'Batch',
-      'Continuous',
-      'Fed-batch',
-      'Recirculation',
-      'Semi-continuous',
-      'Sequencing batch'
-    ],
-    default: 'Continuous'
-  },
-  {
-    id: 'control_strategy',
-    name: 'Control Strategy',
-    description: 'Method of system control',
-    unit: '',
-    type: 'select',
-    category: 'operational',
-    subcategory: 'control-parameters',
-    options: [
-      'Manual control',
-      'Feedback control',
-      'Feedforward control',
-      'PID control',
-      'Adaptive control',
-      'Model predictive control'
-    ],
-    default: 'Manual control'
-  },
-  {
-    id: 'sampling_frequency',
-    name: 'Data Sampling Frequency',
-    description: 'Frequency of data collection',
-    unit: 'Hz',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'control-parameters',
-    range: { min: 0.001, max: 100, typical: 0.1 },
-    default: 0.1
-  },
-  {
-    id: 'startup_time',
-    name: 'System Startup Time',
-    description: 'Time required for system initialization',
-    unit: 'hours',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'control-parameters',
-    range: { min: 1, max: 720, typical: 48 },
-    default: 48
-  },
-  {
-    id: 'shutdown_procedure',
-    name: 'Shutdown Procedure',
-    description: 'Method for system shutdown',
-    unit: '',
-    type: 'select',
-    category: 'operational',
-    subcategory: 'control-parameters',
-    options: [
-      'Immediate stop',
-      'Gradual reduction',
-      'Feed depletion',
-      'Controlled drainage',
-      'Emergency stop'
-    ],
-    default: 'Gradual reduction'
-  },
-  // Maintenance Parameters
-  {
-    id: 'cleaning_frequency',
-    name: 'Cleaning Frequency',
-    description: 'How often system is cleaned',
-    unit: 'days',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'maintenance-parameters',
-    range: { min: 1, max: 365, typical: 30 },
-    default: 30
-  },
-  {
-    id: 'electrode_replacement_interval',
-    name: 'Electrode Replacement Interval',
-    description: 'Time between electrode replacements',
-    unit: 'months',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'maintenance-parameters',
-    range: { min: 1, max: 60, typical: 12 },
-    default: 12
-  },
-  {
-    id: 'membrane_replacement_interval',
-    name: 'Membrane Replacement Interval',
-    description: 'Time between membrane replacements',
-    unit: 'months',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'maintenance-parameters',
-    range: { min: 3, max: 120, typical: 24 },
-    default: 24
-  },
-  {
-    id: 'calibration_frequency',
-    name: 'Sensor Calibration Frequency',
-    description: 'How often sensors are calibrated',
-    unit: 'days',
-    type: 'number',
-    category: 'operational',
-    subcategory: 'maintenance-parameters',
-    range: { min: 1, max: 90, typical: 7 },
-    default: 7
-  }
-]
-
-// Physical Parameters
-const physicalParameters: Parameter[] = [
-  // Reactor Geometry
-  {
-    id: 'reactor_volume',
-    name: 'Reactor Volume',
-    description: 'Total internal volume of the reactor',
-    unit: 'mL',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 1, max: 10000, typical: 100 },
-    default: 100
-  },
-  {
-    id: 'chamber_configuration',
-    name: 'Chamber Configuration',
-    description: 'Number and arrangement of reactor chambers',
-    unit: '',
-    type: 'select',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    options: [
-      'Single chamber',
-      'Dual chamber',
-      'Triple chamber',
-      'Multi-chamber',
-      'Stacked configuration',
-      'Tubular reactor',
-      'Upflow reactor'
-    ],
-    default: 'Dual chamber'
-  },
-  {
-    id: 'aspect_ratio',
-    name: 'Aspect Ratio',
-    description: 'Length to diameter ratio of the reactor',
-    unit: '',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 0.5, max: 10, typical: 2 },
-    default: 2
-  },
-  {
-    id: 'reactor_length',
-    name: 'Reactor Length',
-    description: 'Internal length dimension of reactor',
-    unit: 'cm',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 1, max: 100, typical: 10 },
-    default: 10
-  },
-  {
-    id: 'reactor_width',
-    name: 'Reactor Width',
-    description: 'Internal width dimension of reactor',
-    unit: 'cm',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 1, max: 50, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'reactor_height',
-    name: 'Reactor Height',
-    description: 'Internal height dimension of reactor',
-    unit: 'cm',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 1, max: 50, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'wall_thickness',
-    name: 'Reactor Wall Thickness',
-    description: 'Thickness of reactor walls',
-    unit: 'mm',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 1, max: 50, typical: 5 },
-    default: 5
-  },
-  {
-    id: 'surface_area_to_volume',
-    name: 'Surface Area to Volume Ratio',
-    description: 'Ratio of reactor surface area to volume',
-    unit: 'cm⁻¹',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'reactor-geometry',
-    range: { min: 0.1, max: 10, typical: 2 },
-    default: 2
-  },
-  // Thermal Properties
-  {
-    id: 'thermal_mass',
-    name: 'Thermal Mass',
-    description: 'Heat capacity of reactor system',
-    unit: 'J/K',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'thermal-properties',
-    range: { min: 100, max: 10000, typical: 1000 },
-    default: 1000
-  },
-  {
-    id: 'insulation_factor',
-    name: 'Thermal Insulation Factor',
-    description: 'Heat retention capability',
-    unit: '',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'thermal-properties',
+    subcategory: 'operating-modes',
     range: { min: 0.1, max: 10, typical: 1 },
     default: 1
   },
   {
-    id: 'heat_transfer_coefficient',
-    name: 'Heat Transfer Coefficient',
-    description: 'Overall heat transfer coefficient',
-    unit: 'W/m²·K',
+    id: 'startup_time',
+    name: 'Startup Time',
+    description: 'Time to reach steady state',
+    unit: 'h',
     type: 'number',
-    category: 'physical',
-    subcategory: 'thermal-properties',
-    range: { min: 1, max: 1000, typical: 100 },
-    default: 100
-  },
-  // Mechanical Properties
-  {
-    id: 'system_weight',
-    name: 'Total System Weight',
-    description: 'Total weight of reactor system',
-    unit: 'kg',
-    type: 'number',
-    category: 'physical',
-    subcategory: 'mechanical-properties',
-    range: { min: 0.1, max: 1000, typical: 10 },
-    default: 10
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 1, max: 1000, typical: 72 },
+    default: 72
   },
   {
-    id: 'pressure_rating',
-    name: 'Maximum Pressure Rating',
-    description: 'Maximum allowable operating pressure',
-    unit: 'bar',
+    id: 'initial_volume',
+    name: 'Initial Volume',
+    description: 'Starting volume',
+    unit: 'L',
     type: 'number',
-    category: 'physical',
-    subcategory: 'mechanical-properties',
-    range: { min: 1, max: 100, typical: 5 },
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 0.1, max: 1000, typical: 5 },
     default: 5
   },
   {
-    id: 'structural_integrity',
-    name: 'Structural Integrity Factor',
-    description: 'Mechanical stability rating',
-    unit: '',
+    id: 'final_volume',
+    name: 'Final Volume',
+    description: 'Final volume',
+    unit: 'L',
     type: 'number',
-    category: 'physical',
-    subcategory: 'mechanical-properties',
-    range: { min: 1, max: 10, typical: 8 },
-    default: 8
-  }
-]
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 0.2, max: 10000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'feeding_strategy',
+    name: 'Feeding Strategy',
+    description: 'Feed profile',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    default: 'exponential'
+  },
+  {
+    id: 'feed_rate',
+    name: 'Feed Rate',
+    description: 'Feeding rate',
+    unit: 'L/h',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    range: { min: 0.01, max: 100, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: 'feed_trigger',
+    name: 'Feed Trigger',
+    description: 'Feed control trigger',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'operating-modes',
+    default: 'time'
+  },
 
-// Performance Monitoring Parameters
-const monitoringParameters: Parameter[] = [
-  // Real-time Monitoring
+  // Startup Shutdown
   {
-    id: 'voltage_monitoring_interval',
-    name: 'Voltage Monitoring Interval',
-    description: 'Frequency of voltage measurements',
-    unit: 'seconds',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'real-time-monitoring',
-    range: { min: 1, max: 3600, typical: 60 },
-    default: 60
+    id: 'startup_mode',
+    name: 'Startup Mode',
+    description: 'Startup type',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    default: 'cold'
   },
   {
-    id: 'current_monitoring_interval',
-    name: 'Current Monitoring Interval',
-    description: 'Frequency of current measurements',
-    unit: 'seconds',
+    id: 'inoculum_volume',
+    name: 'Inoculum Volume',
+    description: 'Inoculum percentage',
+    unit: '%',
     type: 'number',
-    category: 'monitoring',
-    subcategory: 'real-time-monitoring',
-    range: { min: 1, max: 3600, typical: 60 },
-    default: 60
-  },
-  {
-    id: 'temperature_monitoring_interval',
-    name: 'Temperature Monitoring Interval',
-    description: 'Frequency of temperature measurements',
-    unit: 'seconds',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'real-time-monitoring',
-    range: { min: 10, max: 3600, typical: 300 },
-    default: 300
-  },
-  {
-    id: 'ph_monitoring_interval',
-    name: 'pH Monitoring Interval',
-    description: 'Frequency of pH measurements',
-    unit: 'minutes',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'real-time-monitoring',
-    range: { min: 1, max: 1440, typical: 60 },
-    default: 60
-  },
-  // Data Logging
-  {
-    id: 'data_storage_capacity',
-    name: 'Data Storage Capacity',
-    description: 'Amount of data that can be stored',
-    unit: 'MB',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'data-logging',
-    range: { min: 1, max: 10000, typical: 1000 },
-    default: 1000
-  },
-  {
-    id: 'data_backup_frequency',
-    name: 'Data Backup Frequency',
-    description: 'How often data is backed up',
-    unit: 'hours',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'data-logging',
-    range: { min: 1, max: 168, typical: 24 },
-    default: 24
-  },
-  {
-    id: 'alarm_threshold_voltage',
-    name: 'Voltage Alarm Threshold',
-    description: 'Voltage level that triggers alarm',
-    unit: 'V',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'alarm-settings',
-    range: { min: 0.1, max: 1.5, typical: 0.3 },
-    default: 0.3
-  },
-  {
-    id: 'alarm_threshold_temperature',
-    name: 'Temperature Alarm Threshold',
-    description: 'Temperature that triggers alarm',
-    unit: '°C',
-    type: 'number',
-    category: 'monitoring',
-    subcategory: 'alarm-settings',
-    range: { min: 40, max: 100, typical: 60 },
-    default: 60
-  }
-]
-
-// Safety Parameters
-const safetyParameters: Parameter[] = [
-  // Safety Limits
-  {
-    id: 'maximum_operating_temperature',
-    name: 'Maximum Operating Temperature',
-    description: 'Safety limit for operating temperature',
-    unit: '°C',
-    type: 'number',
-    category: 'safety',
-    subcategory: 'safety-limits',
-    range: { min: 40, max: 120, typical: 80 },
-    default: 80
-  },
-  {
-    id: 'maximum_operating_pressure',
-    name: 'Maximum Operating Pressure',
-    description: 'Safety limit for operating pressure',
-    unit: 'bar',
-    type: 'number',
-    category: 'safety',
-    subcategory: 'safety-limits',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
     range: { min: 1, max: 50, typical: 10 },
     default: 10
   },
   {
-    id: 'gas_detection_threshold',
-    name: 'Gas Detection Threshold',
-    description: 'Concentration threshold for gas detection',
-    unit: 'ppm',
+    id: 'inoculum_source',
+    name: 'Inoculum Source',
+    description: 'Inoculum type',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    default: 'enriched'
+  },
+  {
+    id: 'acclimation_time',
+    name: 'Acclimation Time',
+    description: 'Microbial adaptation time',
+    unit: 'd',
     type: 'number',
-    category: 'safety',
-    subcategory: 'safety-limits',
-    range: { min: 1, max: 10000, typical: 100 },
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    range: { min: 1, max: 60, typical: 7 },
+    default: 7
+  },
+  {
+    id: 'initial_substrate_conc',
+    name: 'Initial Substrate Conc',
+    description: 'Starting substrate level',
+    unit: 'g/L',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    range: { min: 0.1, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'shutdown_mode',
+    name: 'Shutdown Mode',
+    description: 'Shutdown type',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    default: 'normal'
+  },
+  {
+    id: 'preservation_method',
+    name: 'Preservation Method',
+    description: 'Biomass preservation',
+    unit: '-',
+    type: 'select',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    default: 'continuous_feed'
+  },
+  {
+    id: 'flush_cycles',
+    name: 'Flush Cycles',
+    description: 'System flush cycles',
+    unit: '-',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    range: { min: 0, max: 10, typical: 3 },
+    default: 3
+  },
+  {
+    id: 'storage_temperature',
+    name: 'Storage Temperature',
+    description: 'Storage temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'operational',
+    subcategory: 'startup-shutdown',
+    range: { min: -80, max: 40, typical: 4 },
+    default: 4
+  }
+]
+
+// Performance-metrics Parameters
+const performanceMetricsParameters: Parameter[] = [
+  // Electrical Performance
+  {
+    id: 'power_density_volumetric',
+    name: 'Power Density Volumetric',
+    description: 'Power per reactor volume',
+    unit: 'W/m³',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 1000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'power_density_areal',
+    name: 'Power Density Areal',
+    description: 'Power per electrode area',
+    unit: 'W/m²',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'power_density_normalized',
+    name: 'Power Density Normalized',
+    description: 'Power per kg catalyst',
+    unit: 'W/kg',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 500, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'maximum_power_point',
+    name: 'Maximum Power Point',
+    description: 'Peak power output',
+    unit: 'W',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 10000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'power_stability',
+    name: 'Power Stability',
+    description: 'Power degradation rate',
+    unit: '%/d',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: -10, max: 0, typical: -0.5 },
+    default: -0.5
+  },
+  {
+    id: 'open_circuit_voltage',
+    name: 'Open Circuit Voltage',
+    description: 'OCV',
+    unit: 'V',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 2, typical: 0.8 },
+    default: 0.8
+  },
+  {
+    id: 'operating_voltage',
+    name: 'Operating Voltage',
+    description: 'Voltage under load',
+    unit: 'V',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 1.5, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: 'current_density_max',
+    name: 'Current Density Max',
+    description: 'Maximum current density',
+    unit: 'A/m²',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'short_circuit_current',
+    name: 'Short Circuit Current',
+    description: 'Short circuit current',
+    unit: 'A',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'fill_factor',
+    name: 'Fill Factor',
+    description: '(P_max)/(I_sc × V_oc)',
+    unit: '-',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 1, typical: 0.7 },
+    default: 0.7
+  },
+  {
+    id: 'coulombic_efficiency',
+    name: 'Coulombic Efficiency',
+    description: 'Electron recovery efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 70 },
+    default: 70
+  },
+  {
+    id: 'voltage_efficiency',
+    name: 'Voltage Efficiency',
+    description: 'Voltage utilization',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'energy_efficiency',
+    name: 'Energy Efficiency',
+    description: 'Overall energy efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 40 },
+    default: 40
+  },
+  {
+    id: 'exergy_efficiency',
+    name: 'Exergy Efficiency',
+    description: 'Thermodynamic efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'electrical-performance',
+    range: { min: 0, max: 100, typical: 30 },
+    default: 30
+  },
+
+  // Chemical Production Metrics
+  {
+    id: 'h2_production_rate',
+    name: 'H2 Production Rate',
+    description: 'H₂ production rate',
+    unit: 'L/m²/d',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'h2_yield',
+    name: 'H2 Yield',
+    description: 'Moles H₂ per mole substrate',
+    unit: 'mol/mol',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 4, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'h2_purity',
+    name: 'H2 Purity',
+    description: 'Hydrogen gas purity',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 100, typical: 95 },
+    default: 95
+  },
+  {
+    id: 'specific_h2_production',
+    name: 'Specific H2 Production',
+    description: 'H₂ per kg substrate',
+    unit: 'm³/kg',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'ch4_production_rate',
+    name: 'Ch4 Production Rate',
+    description: 'CH₄ production rate',
+    unit: 'L/m²/d',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'ch4_content_biogas',
+    name: 'Ch4 Content Biogas',
+    description: 'CH₄ in biogas',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 100, typical: 65 },
+    default: 65
+  },
+  {
+    id: 'biogas_yield',
+    name: 'Biogas Yield',
+    description: 'Biogas per g substrate',
+    unit: 'L/g',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 1, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: 'product_concentration',
+    name: 'Product Concentration',
+    description: 'Product concentration',
+    unit: 'g/L',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'product_selectivity',
+    name: 'Product Selectivity',
+    description: 'Target product selectivity',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'production_rate',
+    name: 'Production Rate',
+    description: 'Volumetric productivity',
+    unit: 'g/L/h',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'conversion_efficiency',
+    name: 'Conversion Efficiency',
+    description: 'Substrate to product',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'chemical-production-metrics',
+    range: { min: 0, max: 100, typical: 50 },
+    default: 50
+  },
+
+  // Treatment Performance
+  {
+    id: 'cod_removal',
+    name: 'Cod Removal',
+    description: 'Chemical oxygen demand removal',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'bod_removal',
+    name: 'Bod Removal',
+    description: 'Biological oxygen demand removal',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 85 },
+    default: 85
+  },
+  {
+    id: 'toc_removal',
+    name: 'Toc Removal',
+    description: 'Total organic carbon removal',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 75 },
+    default: 75
+  },
+  {
+    id: 'specific_removal_rate',
+    name: 'Specific Removal Rate',
+    description: 'Removal per electrode area',
+    unit: 'g/m²/d',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'nitrogen_removal',
+    name: 'Nitrogen Removal',
+    description: 'Total nitrogen removal',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 70 },
+    default: 70
+  },
+  {
+    id: 'phosphorus_recovery',
+    name: 'Phosphorus Recovery',
+    description: 'Phosphorus recovery',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'ammonia_recovery',
+    name: 'Ammonia Recovery',
+    description: 'Ammonia recovery efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'nutrient_recovery_form',
+    name: 'Nutrient Recovery Form',
+    description: 'Recovery product form',
+    unit: '-',
+    type: 'select',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    default: 'struvite'
+  },
+  {
+    id: 'metal_removal_efficiency',
+    name: 'Metal Removal Efficiency',
+    description: 'Metal removal percentage',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'metal_recovery_purity',
+    name: 'Metal Recovery Purity',
+    description: 'Recovered metal purity',
+    unit: '%',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 100, typical: 95 },
+    default: 95
+  },
+  {
+    id: 'metal_deposition_rate',
+    name: 'Metal Deposition Rate',
+    description: 'Metal deposition rate',
+    unit: 'mg/cm²/h',
+    type: 'number',
+    category: 'performance-metrics',
+    subcategory: 'treatment-performance',
+    range: { min: 0, max: 10, typical: 1 },
+    default: 1
+  }
+]
+
+// Economic-sustainability Parameters
+const economicSustainabilityParameters: Parameter[] = [
+  // Capital Cost Parameters
+  {
+    id: 'total_capital_cost',
+    name: 'Total Capital Cost',
+    description: 'Total CAPEX',
+    unit: '$',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 100, max: 10000000, typical: 10000 },
+    default: 10000
+  },
+  {
+    id: 'specific_capital_cost',
+    name: 'Specific Capital Cost',
+    description: 'Cost per kW capacity',
+    unit: '$/kW',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 100, max: 10000, typical: 1000 },
+    default: 1000
+  },
+  {
+    id: 'reactor_cost',
+    name: 'Reactor Cost',
+    description: 'Reactor vessel cost',
+    unit: '$',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 50, max: 1000000, typical: 5000 },
+    default: 5000
+  },
+  {
+    id: 'electrode_cost',
+    name: 'Electrode Cost',
+    description: 'Electrode material cost',
+    unit: '$/m²',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 10, max: 1000, typical: 100 },
     default: 100
+  },
+  {
+    id: 'membrane_cost',
+    name: 'Membrane Cost',
+    description: 'Separator cost',
+    unit: '$/m²',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 10, max: 500, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'control_system_cost',
+    name: 'Control System Cost',
+    description: 'Automation cost',
+    unit: '$',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 100, max: 100000, typical: 5000 },
+    default: 5000
+  },
+  {
+    id: 'installation_factor',
+    name: 'Installation Factor',
+    description: 'Installation cost multiplier',
+    unit: '-',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 1.2, max: 3, typical: 1.5 },
+    default: 1.5
+  },
+  {
+    id: 'civil_works_cost',
+    name: 'Civil Works Cost',
+    description: 'Site preparation cost',
+    unit: '$',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 0, max: 1000000, typical: 10000 },
+    default: 10000
+  },
+  {
+    id: 'commissioning_cost',
+    name: 'Commissioning Cost',
+    description: 'Startup and testing cost',
+    unit: '$',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'capital-cost-parameters',
+    range: { min: 0, max: 100000, typical: 5000 },
+    default: 5000
+  },
+
+  // Operating Cost Parameters
+  {
+    id: 'substrate_cost',
+    name: 'Substrate Cost',
+    description: 'Feedstock cost (negative if waste)',
+    unit: '$/kg',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: -0.1, max: 10, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'chemical_cost',
+    name: 'Chemical Cost',
+    description: 'Chemical consumption cost',
+    unit: '$/m³',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'energy_cost',
+    name: 'Energy Cost',
+    description: 'Electricity cost',
+    unit: '$/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 0, max: 0.5, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'water_cost',
+    name: 'Water Cost',
+    description: 'Process water cost',
+    unit: '$/m³',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 0, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'disposal_cost',
+    name: 'Disposal Cost',
+    description: 'Waste disposal cost',
+    unit: '$/kg',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 0, max: 1, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'labor_cost',
+    name: 'Labor Cost',
+    description: 'Annual labor cost',
+    unit: '$/year',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 0, max: 1000000, typical: 50000 },
+    default: 50000
+  },
+  {
+    id: 'maintenance_cost',
+    name: 'Maintenance Cost',
+    description: '% of CAPEX for maintenance',
+    unit: '%/year',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 1, max: 10, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'insurance_cost',
+    name: 'Insurance Cost',
+    description: '% of CAPEX for insurance',
+    unit: '%/year',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 0.5, max: 5, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'overhead_cost',
+    name: 'Overhead Cost',
+    description: 'Administrative overhead',
+    unit: '%/year',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'operating-cost-parameters',
+    range: { min: 5, max: 20, typical: 10 },
+    default: 10
+  },
+
+  // Economic Performance Indicators
+  {
+    id: 'payback_period',
+    name: 'Payback Period',
+    description: 'Simple payback time',
+    unit: 'years',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0.5, max: 20, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'net_present_value',
+    name: 'Net Present Value',
+    description: 'NPV at discount rate',
+    unit: '$',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: -1000000, max: 10000000, typical: 100000 },
+    default: 100000
+  },
+  {
+    id: 'internal_rate_return',
+    name: 'Internal Rate Return',
+    description: 'IRR',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: -20, max: 50, typical: 15 },
+    default: 15
+  },
+  {
+    id: 'levelized_cost_energy',
+    name: 'Levelized Cost Energy',
+    description: 'LCOE',
+    unit: '$/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0.01, max: 10, typical: 0.2 },
+    default: 0.2
+  },
+  {
+    id: 'discount_rate',
+    name: 'Discount Rate',
+    description: 'Financial discount rate',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0, max: 20, typical: 8 },
+    default: 8
+  },
+  {
+    id: 'electricity_revenue',
+    name: 'Electricity Revenue',
+    description: 'Electricity sale price',
+    unit: '$/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0, max: 0.5, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'hydrogen_revenue',
+    name: 'Hydrogen Revenue',
+    description: 'H₂ sale price',
+    unit: '$/kg',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'treatment_revenue',
+    name: 'Treatment Revenue',
+    description: 'Wastewater treatment fee',
+    unit: '$/m³',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'carbon_credit_revenue',
+    name: 'Carbon Credit Revenue',
+    description: 'Carbon credit value',
+    unit: '$/tCO₂',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'byproduct_revenue',
+    name: 'Byproduct Revenue',
+    description: 'Chemical product value',
+    unit: '$/kg',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'economic-performance-indicators',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+
+  // Life Cycle Assessment Parameters
+  {
+    id: 'carbon_footprint',
+    name: 'Carbon Footprint',
+    description: 'GHG emissions',
+    unit: 'kg CO₂-eq/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 1, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'water_footprint',
+    name: 'Water Footprint',
+    description: 'Water consumption',
+    unit: 'L/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'land_footprint',
+    name: 'Land Footprint',
+    description: 'Land use impact',
+    unit: 'm²·year/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 1, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'acidification_potential',
+    name: 'Acidification Potential',
+    description: 'Acidification impact',
+    unit: 'g SO₂-eq/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'eutrophication_potential',
+    name: 'Eutrophication Potential',
+    description: 'Eutrophication impact',
+    unit: 'g PO₄-eq/kWh',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 5, typical: 0.5 },
+    default: 0.5
+  },
+  {
+    id: 'material_circularity',
+    name: 'Material Circularity',
+    description: 'Recycled content',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 100, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'waste_diversion_rate',
+    name: 'Waste Diversion Rate',
+    description: 'Waste diverted from landfill',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'renewable_energy_fraction',
+    name: 'Renewable Energy Fraction',
+    description: 'Renewable energy use',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 100, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'water_reuse_rate',
+    name: 'Water Reuse Rate',
+    description: 'Water recycling rate',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'life-cycle-assessment-parameters',
+    range: { min: 0, max: 100, typical: 50 },
+    default: 50
+  },
+
+  // Social Impact Parameters
+  {
+    id: 'jobs_created',
+    name: 'Jobs Created',
+    description: 'Employment generation',
+    unit: 'jobs/MW',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 0, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'local_content',
+    name: 'Local Content',
+    description: 'Local sourcing percentage',
+    unit: '%',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 0, max: 100, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'community_acceptance',
+    name: 'Community Acceptance',
+    description: 'Community support score',
+    unit: '-',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 1, max: 10, typical: 7 },
+    default: 7
+  },
+  {
+    id: 'training_hours',
+    name: 'Training Hours',
+    description: 'Worker training provided',
+    unit: 'h/year',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 0, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'safety_incidents',
+    name: 'Safety Incidents',
+    description: 'Annual safety incidents',
+    unit: '/year',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 0, max: 10, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'noise_level',
+    name: 'Noise Level',
+    description: 'Operational noise level',
+    unit: 'dB',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 0, max: 100, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'odor_units',
+    name: 'Odor Units',
+    description: 'Odor emission level',
+    unit: 'OU/m³',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 0, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'visual_impact',
+    name: 'Visual Impact',
+    description: 'Visual impact score',
+    unit: '-',
+    type: 'number',
+    category: 'economic-sustainability',
+    subcategory: 'social-impact-parameters',
+    range: { min: 1, max: 10, typical: 3 },
+    default: 3
+  }
+]
+
+// Safety-regulatory Parameters
+const safetyRegulatoryParameters: Parameter[] = [
+  // Safety Parameters
+  {
+    id: 'flammability_rating',
+    name: 'Flammability Rating',
+    description: 'NFPA flammability',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 4, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'toxicity_rating',
+    name: 'Toxicity Rating',
+    description: 'NFPA health hazard',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 4, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'reactivity_rating',
+    name: 'Reactivity Rating',
+    description: 'NFPA reactivity',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 4, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'corrosivity_class',
+    name: 'Corrosivity Class',
+    description: 'Corrosion hazard',
+    unit: '-',
+    type: 'select',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    default: 'mild'
+  },
+  {
+    id: 'explosion_limit_lower',
+    name: 'Explosion Limit Lower',
+    description: 'LEL for H₂',
+    unit: '%',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 20, typical: 4 },
+    default: 4
+  },
+  {
+    id: 'explosion_limit_upper',
+    name: 'Explosion Limit Upper',
+    description: 'UEL for H₂',
+    unit: '%',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 100, typical: 75 },
+    default: 75
+  },
+  {
+    id: 'max_operating_pressure',
+    name: 'Max Operating Pressure',
+    description: 'Maximum safe pressure',
+    unit: 'bar',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 1, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'max_operating_temperature',
+    name: 'Max Operating Temperature',
+    description: 'Maximum safe temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 20, max: 150, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'min_operating_ph',
+    name: 'Min Operating Ph',
+    description: 'Minimum safe pH',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 7, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'max_operating_ph',
+    name: 'Max Operating Ph',
+    description: 'Maximum safe pH',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 7, max: 14, typical: 12 },
+    default: 12
   },
   {
     id: 'emergency_shutdown_time',
     name: 'Emergency Shutdown Time',
-    description: 'Time to complete emergency shutdown',
-    unit: 'seconds',
+    description: 'ESD response time',
+    unit: 's',
     type: 'number',
-    category: 'safety',
-    subcategory: 'emergency-procedures',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
     range: { min: 1, max: 300, typical: 30 },
     default: 30
   },
   {
-    id: 'safety_interlock_status',
-    name: 'Safety Interlock Status',
-    description: 'Status of safety interlock systems',
-    unit: '',
+    id: 'biosafety_level',
+    name: 'Biosafety Level',
+    description: 'Biosafety classification',
+    unit: '-',
     type: 'select',
-    category: 'safety',
-    subcategory: 'safety-systems',
-    options: [
-      'Active',
-      'Inactive',
-      'Bypass mode',
-      'Maintenance mode'
-    ],
-    default: 'Active'
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    default: 'BSL-1'
+  },
+  {
+    id: 'pathogen_reduction',
+    name: 'Pathogen Reduction',
+    description: 'Log reduction of pathogens',
+    unit: 'log',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    range: { min: 0, max: 6, typical: 3 },
+    default: 3
+  },
+  {
+    id: 'antibiotic_resistance_risk',
+    name: 'Antibiotic Resistance Risk',
+    description: 'ARG risk level',
+    unit: '-',
+    type: 'select',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    default: 'low'
+  },
+  {
+    id: 'bioaerosol_control',
+    name: 'Bioaerosol Control',
+    description: 'Aerosol containment',
+    unit: '-',
+    type: 'boolean',
+    category: 'safety-regulatory',
+    subcategory: 'safety-parameters',
+    default: true
+  },
+
+  // Regulatory Compliance
+  {
+    id: 'co2_emission_limit',
+    name: 'Co2 Emission Limit',
+    description: 'CO₂ emission standard',
+    unit: 'kg/MWh',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 1000, typical: 400 },
+    default: 400
+  },
+  {
+    id: 'voc_emission_limit',
+    name: 'Voc Emission Limit',
+    description: 'VOC emission limit',
+    unit: 'mg/m³',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'particulate_limit',
+    name: 'Particulate Limit',
+    description: 'PM emission limit',
+    unit: 'mg/m³',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 50, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'noise_limit_day',
+    name: 'Noise Limit Day',
+    description: 'Daytime noise limit',
+    unit: 'dB',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 40, max: 80, typical: 65 },
+    default: 65
+  },
+  {
+    id: 'noise_limit_night',
+    name: 'Noise Limit Night',
+    description: 'Nighttime noise limit',
+    unit: 'dB',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 30, max: 70, typical: 55 },
+    default: 55
+  },
+  {
+    id: 'effluent_cod_limit',
+    name: 'Effluent Cod Limit',
+    description: 'COD discharge limit',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 500, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'effluent_bod_limit',
+    name: 'Effluent Bod Limit',
+    description: 'BOD discharge limit',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 200, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'effluent_tss_limit',
+    name: 'Effluent Tss Limit',
+    description: 'TSS discharge limit',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 100, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'effluent_tn_limit',
+    name: 'Effluent Tn Limit',
+    description: 'Total N limit',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 50, typical: 15 },
+    default: 15
+  },
+  {
+    id: 'effluent_tp_limit',
+    name: 'Effluent Tp Limit',
+    description: 'Total P limit',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 0, max: 10, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'monitoring_frequency',
+    name: 'Monitoring Frequency',
+    description: 'Sampling frequency',
+    unit: '-',
+    type: 'select',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    default: 'weekly'
+  },
+  {
+    id: 'compliance_reporting',
+    name: 'Compliance Reporting',
+    description: 'Reporting period',
+    unit: '-',
+    type: 'select',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    default: 'quarterly'
+  },
+  {
+    id: 'audit_frequency',
+    name: 'Audit Frequency',
+    description: 'Compliance audits',
+    unit: '/year',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    range: { min: 1, max: 12, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'certification_required',
+    name: 'Certification Required',
+    description: 'Required certifications',
+    unit: '-',
+    type: 'array',
+    category: 'safety-regulatory',
+    subcategory: 'regulatory-compliance',
+    default: '[ISO14001, ISO45001]'
+  },
+
+  // Risk Assessment Parameters
+  {
+    id: 'hazard_severity',
+    name: 'Hazard Severity',
+    description: 'Consequence severity',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 1, max: 5, typical: 3 },
+    default: 3
+  },
+  {
+    id: 'hazard_probability',
+    name: 'Hazard Probability',
+    description: 'Occurrence probability',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 1, max: 5, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'risk_score',
+    name: 'Risk Score',
+    description: 'Risk matrix score',
+    unit: '-',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 1, max: 25, typical: 6 },
+    default: 6
+  },
+  {
+    id: 'control_effectiveness',
+    name: 'Control Effectiveness',
+    description: 'Risk control efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'alarm_types',
+    name: 'Alarm Types',
+    description: 'Alarm systems',
+    unit: '-',
+    type: 'array',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    default: '[gas, fire, pressure]'
+  },
+  {
+    id: 'response_time',
+    name: 'Response Time',
+    description: 'Emergency response time',
+    unit: 'min',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 1, max: 60, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'evacuation_time',
+    name: 'Evacuation Time',
+    description: 'Site evacuation time',
+    unit: 'min',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 1, max: 30, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'containment_volume',
+    name: 'Containment Volume',
+    description: 'Spill containment capacity',
+    unit: 'm³',
+    type: 'number',
+    category: 'safety-regulatory',
+    subcategory: 'risk-assessment-parameters',
+    range: { min: 0, max: 1000, typical: 110 },
+    default: 110
+  }
+]
+
+// Monitoring-control Parameters
+const monitoringControlParameters: Parameter[] = [
+  // Sensor Specifications
+  {
+    id: 'temperature_sensor_type',
+    name: 'Temperature Sensor Type',
+    description: 'Temperature sensor',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'RTD'
+  },
+  {
+    id: 'temperature_accuracy',
+    name: 'Temperature Accuracy',
+    description: 'Temperature accuracy',
+    unit: '°C',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 0.01, max: 1, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'pressure_sensor_type',
+    name: 'Pressure Sensor Type',
+    description: 'Pressure sensor',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'piezoresistive'
+  },
+  {
+    id: 'pressure_accuracy',
+    name: 'Pressure Accuracy',
+    description: 'Pressure accuracy',
+    unit: '%',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 0.1, max: 5, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'flow_sensor_accuracy',
+    name: 'Flow Sensor Accuracy',
+    description: 'Flow measurement accuracy',
+    unit: '%',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 0.5, max: 5, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'level_sensor_type',
+    name: 'Level Sensor Type',
+    description: 'Level sensor',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'ultrasonic'
+  },
+  {
+    id: 'ph_sensor_type',
+    name: 'Ph Sensor Type',
+    description: 'pH sensor type',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'glass'
+  },
+  {
+    id: 'ph_accuracy',
+    name: 'Ph Accuracy',
+    description: 'pH accuracy',
+    unit: 'pH',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 0.01, max: 0.1, typical: 0.02 },
+    default: 0.02
+  },
+  {
+    id: 'do_sensor_type',
+    name: 'Do Sensor Type',
+    description: 'DO sensor type',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'optical'
+  },
+  {
+    id: 'do_response_time',
+    name: 'Do Response Time',
+    description: 'DO response time',
+    unit: 's',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 1, max: 60, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'orp_range',
+    name: 'Orp Range',
+    description: 'ORP measurement range',
+    unit: 'mV',
+    type: 'array',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: '[-500, 500]'
+  },
+  {
+    id: 'conductivity_range',
+    name: 'Conductivity Range',
+    description: 'Conductivity range',
+    unit: 'mS/cm',
+    type: 'array',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: '[0, 100]'
+  },
+  {
+    id: 'h2_sensor_type',
+    name: 'H2 Sensor Type',
+    description: 'H₂ sensor',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'electrochemical'
+  },
+  {
+    id: 'h2_detection_limit',
+    name: 'H2 Detection Limit',
+    description: 'H₂ detection limit',
+    unit: 'ppm',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'ch4_sensor_type',
+    name: 'Ch4 Sensor Type',
+    description: 'CH₄ sensor',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'infrared'
+  },
+  {
+    id: 'co2_sensor_type',
+    name: 'Co2 Sensor Type',
+    description: 'CO₂ sensor',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    default: 'NDIR'
+  },
+  {
+    id: 'gas_sensor_response',
+    name: 'Gas Sensor Response',
+    description: 'Gas sensor response time',
+    unit: 's',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'sensor-specifications',
+    range: { min: 1, max: 60, typical: 10 },
+    default: 10
+  },
+
+  // Data Acquisition
+  {
+    id: 'sampling_rate',
+    name: 'Sampling Rate',
+    description: 'Data sampling frequency',
+    unit: 'Hz',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    range: { min: 0.1, max: 10000, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'resolution',
+    name: 'Resolution',
+    description: 'ADC resolution',
+    unit: 'bit',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    range: { min: 8, max: 24, typical: 16 },
+    default: 16
+  },
+  {
+    id: 'channel_count',
+    name: 'Channel Count',
+    description: 'Number of input channels',
+    unit: '-',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    range: { min: 1, max: 128, typical: 16 },
+    default: 16
+  },
+  {
+    id: 'data_logger_type',
+    name: 'Data Logger Type',
+    description: 'DAQ system type',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    default: 'PC-based'
+  },
+  {
+    id: 'communication_protocol',
+    name: 'Communication Protocol',
+    description: 'Communication type',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    default: 'Modbus'
+  },
+  {
+    id: 'filter_type',
+    name: 'Filter Type',
+    description: 'Signal filtering',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    default: 'moving_average'
+  },
+  {
+    id: 'filter_window',
+    name: 'Filter Window',
+    description: 'Filter window size',
+    unit: 'samples',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    range: { min: 1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'outlier_detection',
+    name: 'Outlier Detection',
+    description: 'Outlier method',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    default: 'zscore'
+  },
+  {
+    id: 'data_validation',
+    name: 'Data Validation',
+    description: 'Automatic validation',
+    unit: '-',
+    type: 'boolean',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    default: true
+  },
+  {
+    id: 'missing_data_handling',
+    name: 'Missing Data Handling',
+    description: 'Missing data method',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'data-acquisition',
+    default: 'interpolate'
+  },
+
+  // Control Algorithms
+  {
+    id: 'proportional_gain',
+    name: 'Proportional Gain',
+    description: 'Kp value',
+    unit: '-',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 0, max: 100, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'integral_time',
+    name: 'Integral Time',
+    description: 'Ti value',
+    unit: 's',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 0, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'derivative_time',
+    name: 'Derivative Time',
+    description: 'Td value',
+    unit: 's',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 0, max: 100, typical: 0 },
+    default: 0
+  },
+  {
+    id: 'control_interval',
+    name: 'Control Interval',
+    description: 'Control update period',
+    unit: 's',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 0.1, max: 100, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'anti_windup',
+    name: 'Anti Windup',
+    description: 'Integral anti-windup',
+    unit: '-',
+    type: 'boolean',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    default: true
+  },
+  {
+    id: 'control_strategy',
+    name: 'Control Strategy',
+    description: 'Control algorithm',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    default: 'PID'
+  },
+  {
+    id: 'prediction_horizon',
+    name: 'Prediction Horizon',
+    description: 'MPC prediction horizon',
+    unit: 'steps',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'control_horizon',
+    name: 'Control Horizon',
+    description: 'MPC control horizon',
+    unit: 'steps',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 1, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'model_update_frequency',
+    name: 'Model Update Frequency',
+    description: 'Model adaptation rate',
+    unit: 'h',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'control-algorithms',
+    range: { min: 0.1, max: 168, typical: 24 },
+    default: 24
+  },
+
+  // Automation Scada
+  {
+    id: 'automation_level',
+    name: 'Automation Level',
+    description: 'Automation degree',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    default: 'semi-auto'
+  },
+  {
+    id: 'plc_scan_time',
+    name: 'Plc Scan Time',
+    description: 'PLC cycle time',
+    unit: 'ms',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    range: { min: 10, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'hmi_update_rate',
+    name: 'Hmi Update Rate',
+    description: 'Display refresh rate',
+    unit: 's',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    range: { min: 0.1, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'alarm_priority_levels',
+    name: 'Alarm Priority Levels',
+    description: 'Alarm categories',
+    unit: '-',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    range: { min: 1, max: 5, typical: 3 },
+    default: 3
+  },
+  {
+    id: 'historian_retention',
+    name: 'Historian Retention',
+    description: 'Data retention period',
+    unit: 'days',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    range: { min: 30, max: 3650, typical: 365 },
+    default: 365
+  },
+  {
+    id: 'remote_access',
+    name: 'Remote Access',
+    description: 'Remote access enabled',
+    unit: '-',
+    type: 'boolean',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    default: true
+  },
+  {
+    id: 'telemetry_protocol',
+    name: 'Telemetry Protocol',
+    description: 'Data transmission protocol',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    default: 'MQTT'
+  },
+  {
+    id: 'update_frequency',
+    name: 'Update Frequency',
+    description: 'Remote update interval',
+    unit: 'min',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    range: { min: 1, max: 1440, typical: 15 },
+    default: 15
+  },
+  {
+    id: 'bandwidth_requirement',
+    name: 'Bandwidth Requirement',
+    description: 'Network bandwidth needed',
+    unit: 'kbps',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    range: { min: 10, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'cybersecurity_level',
+    name: 'Cybersecurity Level',
+    description: 'Security measures',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'automation-scada',
+    default: 'standard'
+  },
+
+  // Aiml Integration
+  {
+    id: 'ml_model_type',
+    name: 'Ml Model Type',
+    description: 'ML algorithm type',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    default: 'regression'
+  },
+  {
+    id: 'training_data_size',
+    name: 'Training Data Size',
+    description: 'Training dataset size',
+    unit: 'samples',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    range: { min: 100, max: 1000000, typical: 10000 },
+    default: 10000
+  },
+  {
+    id: 'model_update_trigger',
+    name: 'Model Update Trigger',
+    description: 'Update trigger',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    default: 'performance'
+  },
+  {
+    id: 'prediction_confidence',
+    name: 'Prediction Confidence',
+    description: 'Confidence threshold',
+    unit: '%',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    range: { min: 0, max: 100, typical: 95 },
+    default: 95
+  },
+  {
+    id: 'feature_count',
+    name: 'Feature Count',
+    description: 'Number of input features',
+    unit: '-',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    range: { min: 1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'optimization_objective',
+    name: 'Optimization Objective',
+    description: 'Optimization goal',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    default: 'multi'
+  },
+  {
+    id: 'optimization_algorithm',
+    name: 'Optimization Algorithm',
+    description: 'Optimization method',
+    unit: '-',
+    type: 'select',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    default: 'genetic'
+  },
+  {
+    id: 'convergence_criteria',
+    name: 'Convergence Criteria',
+    description: 'Convergence tolerance',
+    unit: '%',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    range: { min: 0.01, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'optimization_frequency',
+    name: 'Optimization Frequency',
+    description: 'Optimization interval',
+    unit: 'h',
+    type: 'number',
+    category: 'monitoring-control',
+    subcategory: 'aiml-integration',
+    range: { min: 1, max: 168, typical: 24 },
+    default: 24
+  }
+]
+
+// Application-specific Parameters
+const applicationSpecificParameters: Parameter[] = [
+  // Wastewater Treatment Applications
+  {
+    id: 'wastewater_type',
+    name: 'Wastewater Type',
+    description: 'WW source',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    default: 'domestic'
+  },
+  {
+    id: 'influent_cod',
+    name: 'Influent Cod',
+    description: 'Influent COD',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 100, max: 10000, typical: 500 },
+    default: 500
+  },
+  {
+    id: 'influent_bod',
+    name: 'Influent Bod',
+    description: 'Influent BOD',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 50, max: 5000, typical: 250 },
+    default: 250
+  },
+  {
+    id: 'influent_tss',
+    name: 'Influent Tss',
+    description: 'Total suspended solids',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 50, max: 1000, typical: 200 },
+    default: 200
+  },
+  {
+    id: 'influent_tn',
+    name: 'Influent Tn',
+    description: 'Total nitrogen',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 10, max: 200, typical: 40 },
+    default: 40
+  },
+  {
+    id: 'influent_tp',
+    name: 'Influent Tp',
+    description: 'Total phosphorus',
+    unit: 'mg/L',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 1, max: 50, typical: 8 },
+    default: 8
+  },
+  {
+    id: 'influent_temperature',
+    name: 'Influent Temperature',
+    description: 'WW temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 5, max: 40, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'influent_ph',
+    name: 'Influent Ph',
+    description: 'WW pH',
+    unit: '-',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 4, max: 10, typical: 7 },
+    default: 7
+  },
+  {
+    id: 'hydraulic_loading',
+    name: 'Hydraulic Loading',
+    description: 'Surface loading rate',
+    unit: 'm³/m²/d',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 0.1, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'organic_loading',
+    name: 'Organic Loading',
+    description: 'Volumetric loading',
+    unit: 'kg COD/m³/d',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 0.1, max: 20, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'sludge_production',
+    name: 'Sludge Production',
+    description: 'Sludge yield',
+    unit: 'kg/kg COD',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 0, max: 0.5, typical: 0.1 },
+    default: 0.1
+  },
+  {
+    id: 'biogas_production',
+    name: 'Biogas Production',
+    description: 'Biogas from WW',
+    unit: 'L/g COD',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 0, max: 0.5, typical: 0.2 },
+    default: 0.2
+  },
+  {
+    id: 'pathogen_removal',
+    name: 'Pathogen Removal',
+    description: 'Pathogen reduction',
+    unit: 'log',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'wastewater-treatment-applications',
+    range: { min: 0, max: 6, typical: 3 },
+    default: 3
+  },
+
+  // Biosensor Applications
+  {
+    id: 'target_analyte',
+    name: 'Target Analyte',
+    description: 'Detection target',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    default: 'BOD'
+  },
+  {
+    id: 'detection_limit',
+    name: 'Detection Limit',
+    description: 'Lower detection limit',
+    unit: 'μg/L',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    range: { min: 0.001, max: 1000, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'detection_range',
+    name: 'Detection Range',
+    description: 'Measurement range',
+    unit: '-',
+    type: 'array',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    default: '[1, 1000]'
+  },
+  {
+    id: 'response_time',
+    name: 'Response Time',
+    description: 'Sensor response time',
+    unit: 's',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    range: { min: 1, max: 3600, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'selectivity',
+    name: 'Selectivity',
+    description: 'Analyte selectivity',
+    unit: '-',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    range: { min: 1, max: 10, typical: 8 },
+    default: 8
+  },
+  {
+    id: 'stability',
+    name: 'Stability',
+    description: 'Sensor lifetime',
+    unit: 'days',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    range: { min: 1, max: 365, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'measurement_mode',
+    name: 'Measurement Mode',
+    description: 'Operating mode',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    default: 'continuous'
+  },
+  {
+    id: 'calibration_frequency',
+    name: 'Calibration Frequency',
+    description: 'Calibration interval',
+    unit: 'days',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    range: { min: 1, max: 90, typical: 7 },
+    default: 7
+  },
+  {
+    id: 'regeneration_method',
+    name: 'Regeneration Method',
+    description: 'Sensor regeneration',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    default: 'electrochemical'
+  },
+  {
+    id: 'signal_type',
+    name: 'Signal Type',
+    description: 'Output signal',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'biosensor-applications',
+    default: 'current'
+  },
+
+  // Space Applications
+  {
+    id: 'gravity_level',
+    name: 'Gravity Level',
+    description: 'Gravity acceleration',
+    unit: 'g',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    range: { min: 0, max: 1, typical: 0.000001 },
+    default: 0.000001
+  },
+  {
+    id: 'bubble_management',
+    name: 'Bubble Management',
+    description: 'Gas-liquid separation',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    default: 'capillary'
+  },
+  {
+    id: 'fluid_containment',
+    name: 'Fluid Containment',
+    description: 'Liquid containment',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    default: 'membrane'
+  },
+  {
+    id: 'orientation_independence',
+    name: 'Orientation Independence',
+    description: 'Works in any orientation',
+    unit: '-',
+    type: 'boolean',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    default: true
+  },
+  {
+    id: 'radiation_tolerance',
+    name: 'Radiation Tolerance',
+    description: 'Radiation dose tolerance',
+    unit: 'Gy',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    range: { min: 0, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'vacuum_compatibility',
+    name: 'Vacuum Compatibility',
+    description: 'Vacuum operation',
+    unit: '-',
+    type: 'boolean',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    default: false
+  },
+  {
+    id: 'launch_survival_g',
+    name: 'Launch Survival G',
+    description: 'Launch acceleration tolerance',
+    unit: 'g',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    range: { min: 0, max: 20, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'thermal_cycling',
+    name: 'Thermal Cycling',
+    description: 'Thermal cycle tolerance',
+    unit: 'cycles',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'space-applications',
+    range: { min: 0, max: 10000, typical: 1000 },
+    default: 1000
+  },
+
+  // Agricultural Integration
+  {
+    id: 'nutrient_release_n',
+    name: 'Nutrient Release N',
+    description: 'Nitrogen release rate',
+    unit: 'mg/L/d',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'nutrient_release_p',
+    name: 'Nutrient Release P',
+    description: 'Phosphorus release rate',
+    unit: 'mg/L/d',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'nutrient_release_k',
+    name: 'Nutrient Release K',
+    description: 'Potassium release rate',
+    unit: 'mg/L/d',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'ec_adjustment',
+    name: 'Ec Adjustment',
+    description: 'Electrical conductivity',
+    unit: 'mS/cm',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 5, typical: 2 },
+    default: 2
+  },
+  {
+    id: 'ph_buffering',
+    name: 'Ph Buffering',
+    description: 'pH stabilization',
+    unit: '-',
+    type: 'boolean',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    default: true
+  },
+  {
+    id: 'soil_compatibility',
+    name: 'Soil Compatibility',
+    description: 'Compatible soil types',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    default: 'all'
+  },
+  {
+    id: 'root_zone_placement',
+    name: 'Root Zone Placement',
+    description: 'Depth of placement',
+    unit: 'cm',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 100, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'water_retention',
+    name: 'Water Retention',
+    description: 'Water holding improvement',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 50, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'cation_exchange',
+    name: 'Cation Exchange',
+    description: 'CEC enhancement',
+    unit: 'meq/100g',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'agricultural-integration',
+    range: { min: 0, max: 50, typical: 10 },
+    default: 10
+  },
+
+  // Medical Device Applications
+  {
+    id: 'biocompatibility_iso',
+    name: 'Biocompatibility Iso',
+    description: 'ISO standard met',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 10993, max: 5, typical: 5499 },
+    default: '10993-5'
+  },
+  {
+    id: 'device_volume',
+    name: 'Device Volume',
+    description: 'Implant volume',
+    unit: 'mm³',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 1, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'power_requirement',
+    name: 'Power Requirement',
+    description: 'Power needed',
+    unit: 'μW',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 1, max: 1000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'lifetime_target',
+    name: 'Lifetime Target',
+    description: 'Device lifetime',
+    unit: 'years',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 1, max: 20, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'sterilization_method',
+    name: 'Sterilization Method',
+    description: 'Sterilization type',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    default: 'gamma'
+  },
+  {
+    id: 'skin_contact_area',
+    name: 'Skin Contact Area',
+    description: 'Contact area',
+    unit: 'cm²',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'flexibility',
+    name: 'Flexibility',
+    description: 'Device flexibility',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 0, max: 100, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'moisture_resistance',
+    name: 'Moisture Resistance',
+    description: 'Ingress protection',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    default: 'IP65'
+  },
+  {
+    id: 'wireless_range',
+    name: 'Wireless Range',
+    description: 'Communication range',
+    unit: 'm',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'medical-device-applications',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
+  },
+
+  // Desalination Applications
+  {
+    id: 'salt_removal',
+    name: 'Salt Removal',
+    description: 'Desalination efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'desalination-applications',
+    range: { min: 0, max: 99, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'water_recovery',
+    name: 'Water Recovery',
+    description: 'Fresh water recovery',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'desalination-applications',
+    range: { min: 10, max: 90, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'energy_per_volume',
+    name: 'Energy Per Volume',
+    description: 'Energy per m³ water',
+    unit: 'kWh/m³',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'desalination-applications',
+    range: { min: 0, max: 5, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'membrane_pairs',
+    name: 'Membrane Pairs',
+    description: 'Ion exchange membrane pairs',
+    unit: '-',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'desalination-applications',
+    range: { min: 1, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'current_efficiency',
+    name: 'Current Efficiency',
+    description: 'Current utilization',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'desalination-applications',
+    range: { min: 50, max: 100, typical: 80 },
+    default: 80
+  },
+
+  // Carbon Capture Applications
+  {
+    id: 'co2_capture_rate',
+    name: 'Co2 Capture Rate',
+    description: 'CO₂ capture rate',
+    unit: 'g/m²/d',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'carbon-capture-applications',
+    range: { min: 0, max: 100, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'co2_conversion_product',
+    name: 'Co2 Conversion Product',
+    description: 'Main product',
+    unit: '-',
+    type: 'select',
+    category: 'application-specific',
+    subcategory: 'carbon-capture-applications',
+    default: 'HCOOH'
+  },
+  {
+    id: 'faradaic_efficiency_co2',
+    name: 'Faradaic Efficiency Co2',
+    description: 'CO₂ reduction efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'carbon-capture-applications',
+    range: { min: 0, max: 100, typical: 70 },
+    default: 70
+  },
+  {
+    id: 'product_selectivity',
+    name: 'Product Selectivity',
+    description: 'Target product selectivity',
+    unit: '%',
+    type: 'number',
+    category: 'application-specific',
+    subcategory: 'carbon-capture-applications',
+    range: { min: 0, max: 100, typical: 80 },
+    default: 80
+  }
+]
+
+// Emerging-technology Parameters
+const emergingTechnologyParameters: Parameter[] = [
+  // Nanomaterial Integration
+  {
+    id: 'nanoparticle_size',
+    name: 'Nanoparticle Size',
+    description: 'Average particle size',
+    unit: 'nm',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: 1, max: 1000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'size_distribution',
+    name: 'Size Distribution',
+    description: 'Size polydispersity',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: 5, max: 50, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'nanoparticle_shape',
+    name: 'Nanoparticle Shape',
+    description: 'Particle morphology',
+    unit: '-',
+    type: 'select',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    default: 'sphere'
+  },
+  {
+    id: 'surface_charge',
+    name: 'Surface Charge',
+    description: 'Zeta potential',
+    unit: 'mV',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: -100, max: 100, typical: -30 },
+    default: -30
+  },
+  {
+    id: 'surface_functionalization',
+    name: 'Surface Functionalization',
+    description: 'Surface groups',
+    unit: '-',
+    type: 'select',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    default: 'none'
+  },
+  {
+    id: 'loading_percentage',
+    name: 'Loading Percentage',
+    description: 'Nanomaterial loading',
+    unit: 'wt%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: 0.1, max: 50, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'dispersion_quality',
+    name: 'Dispersion Quality',
+    description: 'Dispersion uniformity',
+    unit: '-',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: 1, max: 10, typical: 8 },
+    default: 8
+  },
+  {
+    id: 'interface_strength',
+    name: 'Interface Strength',
+    description: 'Matrix-filler adhesion',
+    unit: 'MPa',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: 1, max: 100, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'percolation_threshold',
+    name: 'Percolation Threshold',
+    description: 'Electrical percolation',
+    unit: 'wt%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'nanomaterial-integration',
+    range: { min: 0.01, max: 10, typical: 1 },
+    default: 1
+  },
+
+  // 3d Printing Additive Manufacturing
+  {
+    id: 'printing_technology',
+    name: 'Printing Technology',
+    description: '3D printing method',
+    unit: '-',
+    type: 'select',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    default: 'FDM'
+  },
+  {
+    id: 'layer_resolution',
+    name: 'Layer Resolution',
+    description: 'Layer thickness',
+    unit: 'μm',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 10, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'printing_speed',
+    name: 'Printing Speed',
+    description: 'Print head speed',
+    unit: 'mm/s',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 1, max: 500, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'nozzle_temperature',
+    name: 'Nozzle Temperature',
+    description: 'Extruder temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 20, max: 400, typical: 200 },
+    default: 200
+  },
+  {
+    id: 'bed_temperature',
+    name: 'Bed Temperature',
+    description: 'Build plate temperature',
+    unit: '°C',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 20, max: 150, typical: 60 },
+    default: 60
+  },
+  {
+    id: 'material_viscosity',
+    name: 'Material Viscosity',
+    description: 'Printing ink viscosity',
+    unit: 'Pa·s',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 0.001, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'curing_method',
+    name: 'Curing Method',
+    description: 'Solidification method',
+    unit: '-',
+    type: 'select',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    default: 'thermal'
+  },
+  {
+    id: 'shrinkage_rate',
+    name: 'Shrinkage Rate',
+    description: 'Post-printing shrinkage',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 0, max: 20, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'conductivity_printed',
+    name: 'Conductivity Printed',
+    description: 'Printed conductivity',
+    unit: 'S/m',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: '3d-printing-additive-manufacturing',
+    range: { min: 0, max: 10000, typical: 100 },
+    default: 100
+  },
+
+  // Synthetic Biology Integration
+  {
+    id: 'vector_type',
+    name: 'Vector Type',
+    description: 'Gene delivery method',
+    unit: '-',
+    type: 'select',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    default: 'plasmid'
+  },
+  {
+    id: 'promoter_strength',
+    name: 'Promoter Strength',
+    description: 'Expression level',
+    unit: '-',
+    type: 'select',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    default: 'medium'
+  },
+  {
+    id: 'copy_number',
+    name: 'Copy Number',
+    description: 'Gene copies per cell',
+    unit: '-',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    range: { min: 1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'expression_stability',
+    name: 'Expression Stability',
+    description: 'Stable expression rate',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    range: { min: 0, max: 100, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'metabolic_burden',
+    name: 'Metabolic Burden',
+    description: 'Growth rate reduction',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    range: { min: 0, max: 50, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'pathway_length',
+    name: 'Pathway Length',
+    description: 'Number of enzymes',
+    unit: 'enzymes',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    range: { min: 1, max: 20, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'flux_balance',
+    name: 'Flux Balance',
+    description: 'Pathway balance',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    range: { min: 50, max: 100, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'cofactor_regeneration',
+    name: 'Cofactor Regeneration',
+    description: 'Cofactor recycling',
+    unit: '-',
+    type: 'boolean',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    default: true
+  },
+  {
+    id: 'product_toxicity_threshold',
+    name: 'Product Toxicity Threshold',
+    description: 'Toxic concentration',
+    unit: 'g/L',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'synthetic-biology-integration',
+    range: { min: 0.1, max: 100, typical: 10 },
+    default: 10
+  },
+
+  // Quantum Effects
+  {
+    id: 'tunneling_distance',
+    name: 'Tunneling Distance',
+    description: 'Electron tunneling range',
+    unit: 'nm',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'quantum-effects',
+    range: { min: 0.1, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'coherence_time',
+    name: 'Coherence Time',
+    description: 'Quantum coherence duration',
+    unit: 'ps',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'quantum-effects',
+    range: { min: 0.1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'entanglement_efficiency',
+    name: 'Entanglement Efficiency',
+    description: 'Quantum entanglement',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'quantum-effects',
+    range: { min: 0, max: 100, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'quantum_yield',
+    name: 'Quantum Yield',
+    description: 'Quantum efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'quantum-effects',
+    range: { min: 0, max: 100, typical: 50 },
+    default: 50
+  },
+
+  // Digital Twin Technology
+  {
+    id: 'model_accuracy',
+    name: 'Model Accuracy',
+    description: 'Twin prediction accuracy',
+    unit: '%',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 50, max: 99.9, typical: 90 },
+    default: 90
+  },
+  {
+    id: 'update_latency',
+    name: 'Update Latency',
+    description: 'Data synchronization delay',
+    unit: 'ms',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 1, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'parameter_count',
+    name: 'Parameter Count',
+    description: 'Model parameters',
+    unit: '-',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 10, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'computation_time',
+    name: 'Computation Time',
+    description: 'Simulation cycle time',
+    unit: 's',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 0.001, max: 3600, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'predictive_horizon',
+    name: 'Predictive Horizon',
+    description: 'Prediction time range',
+    unit: 'h',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 0.1, max: 720, typical: 24 },
+    default: 24
+  },
+  {
+    id: 'scenario_count',
+    name: 'Scenario Count',
+    description: 'Parallel scenarios',
+    unit: '-',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'optimization_frequency',
+    name: 'Optimization Frequency',
+    description: 'Optimization rate',
+    unit: '/h',
+    type: 'number',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    range: { min: 0.1, max: 60, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'anomaly_detection',
+    name: 'Anomaly Detection',
+    description: 'Fault detection enabled',
+    unit: '-',
+    type: 'boolean',
+    category: 'emerging-technology',
+    subcategory: 'digital-twin-technology',
+    default: true
+  }
+]
+
+// Integration-scaling Parameters
+const integrationScalingParameters: Parameter[] = [
+  // Multi Scale Integration
+  {
+    id: 'lab_to_pilot_factor',
+    name: 'Lab To Pilot Factor',
+    description: 'Lab to pilot scale-up',
+    unit: '-',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 10, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'pilot_to_industrial_factor',
+    name: 'Pilot To Industrial Factor',
+    description: 'Pilot to industrial',
+    unit: '-',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 10, max: 1000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'scale_efficiency_loss',
+    name: 'Scale Efficiency Loss',
+    description: 'Performance loss on scale-up',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 0, max: 50, typical: 20 },
+    default: 20
+  },
+  {
+    id: 'scale_cost_factor',
+    name: 'Scale Cost Factor',
+    description: 'Economy of scale factor',
+    unit: '-',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 0.5, max: 1, typical: 0.7 },
+    default: 0.7
+  },
+  {
+    id: 'module_size',
+    name: 'Module Size',
+    description: 'Standard module capacity',
+    unit: 'kW',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 0.1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'modules_per_system',
+    name: 'Modules Per System',
+    description: 'Number of modules',
+    unit: '-',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'interconnection_loss',
+    name: 'Interconnection Loss',
+    description: 'Module connection losses',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 0, max: 20, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'redundancy_level',
+    name: 'Redundancy Level',
+    description: 'Backup capacity',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'multi-scale-integration',
+    range: { min: 0, max: 100, typical: 20 },
+    default: 20
+  },
+
+  // Network Effects
+  {
+    id: 'network_topology',
+    name: 'Network Topology',
+    description: 'Network structure',
+    unit: '-',
+    type: 'select',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    default: 'parallel'
+  },
+  {
+    id: 'reactor_count',
+    name: 'Reactor Count',
+    description: 'Reactors in network',
+    unit: '-',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    range: { min: 2, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'load_balancing',
+    name: 'Load Balancing',
+    description: 'Load distribution',
+    unit: '-',
+    type: 'select',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    default: 'dynamic'
+  },
+  {
+    id: 'network_efficiency',
+    name: 'Network Efficiency',
+    description: 'Overall network efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    range: { min: 50, max: 100, typical: 85 },
+    default: 85
+  },
+  {
+    id: 'communication_latency',
+    name: 'Communication Latency',
+    description: 'Network latency',
+    unit: 'ms',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    range: { min: 1, max: 1000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'data_throughput',
+    name: 'Data Throughput',
+    description: 'Data transfer rate',
+    unit: 'Mbps',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    range: { min: 0.1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'network_reliability',
+    name: 'Network Reliability',
+    description: 'Uptime percentage',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'network-effects',
+    range: { min: 90, max: 99.999, typical: 99.9 },
+    default: 99.9
+  },
+
+  // Grid Integration
+  {
+    id: 'grid_voltage',
+    name: 'Grid Voltage',
+    description: 'Grid connection voltage',
+    unit: 'V',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 100, max: 100000, typical: 400 },
+    default: 400
+  },
+  {
+    id: 'power_factor',
+    name: 'Power Factor',
+    description: 'Power factor',
+    unit: '-',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 0.5, max: 1, typical: 0.95 },
+    default: 0.95
+  },
+  {
+    id: 'harmonic_distortion',
+    name: 'Harmonic Distortion',
+    description: 'THD percentage',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 0, max: 10, typical: 3 },
+    default: 3
+  },
+  {
+    id: 'grid_synchronization',
+    name: 'Grid Synchronization',
+    description: 'Grid sync required',
+    unit: '-',
+    type: 'boolean',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    default: true
+  },
+  {
+    id: 'islanding_protection',
+    name: 'Islanding Protection',
+    description: 'Anti-islanding protection',
+    unit: '-',
+    type: 'boolean',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    default: true
+  },
+  {
+    id: 'storage_capacity',
+    name: 'Storage Capacity',
+    description: 'Battery capacity',
+    unit: 'kWh',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 0, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'storage_efficiency',
+    name: 'Storage Efficiency',
+    description: 'Round-trip efficiency',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 50, max: 99, typical: 85 },
+    default: 85
+  },
+  {
+    id: 'charge_rate',
+    name: 'Charge Rate',
+    description: 'Charge rate',
+    unit: 'C',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 0.1, max: 10, typical: 1 },
+    default: 1
+  },
+  {
+    id: 'discharge_rate',
+    name: 'Discharge Rate',
+    description: 'Discharge rate',
+    unit: 'C',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'grid-integration',
+    range: { min: 0.1, max: 10, typical: 1 },
+    default: 1
+  },
+
+  // Hybrid System Integration
+  {
+    id: 'solar_capacity',
+    name: 'Solar Capacity',
+    description: 'Solar PV capacity',
+    unit: 'kW',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'wind_capacity',
+    name: 'Wind Capacity',
+    description: 'Wind turbine capacity',
+    unit: 'kW',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 10000, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'renewable_fraction',
+    name: 'Renewable Fraction',
+    description: 'Renewable energy share',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 100, typical: 30 },
+    default: 30
+  },
+  {
+    id: 'hybrid_control_mode',
+    name: 'Hybrid Control Mode',
+    description: 'Control strategy',
+    unit: '-',
+    type: 'select',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    default: 'maximize_renewable'
+  },
+  {
+    id: 'heat_recovery',
+    name: 'Heat Recovery',
+    description: 'Waste heat utilization',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 90, typical: 50 },
+    default: 50
+  },
+  {
+    id: 'water_recovery',
+    name: 'Water Recovery',
+    description: 'Water reuse rate',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 99, typical: 80 },
+    default: 80
+  },
+  {
+    id: 'nutrient_recovery',
+    name: 'Nutrient Recovery',
+    description: 'Nutrient recycling',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 99, typical: 70 },
+    default: 70
+  },
+  {
+    id: 'carbon_recovery',
+    name: 'Carbon Recovery',
+    description: 'Carbon capture rate',
+    unit: '%',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'hybrid-system-integration',
+    range: { min: 0, max: 99, typical: 60 },
+    default: 60
+  },
+
+  // Infrastructure Requirements
+  {
+    id: 'land_area',
+    name: 'Land Area',
+    description: 'Total site area',
+    unit: 'm²',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 10, max: 100000, typical: 1000 },
+    default: 1000
+  },
+  {
+    id: 'building_footprint',
+    name: 'Building Footprint',
+    description: 'Building area',
+    unit: 'm²',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 10, max: 10000, typical: 200 },
+    default: 200
+  },
+  {
+    id: 'utility_connections',
+    name: 'Utility Connections',
+    description: 'Required utilities',
+    unit: '-',
+    type: 'array',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    default: '[power, water, sewer]'
+  },
+  {
+    id: 'access_road_width',
+    name: 'Access Road Width',
+    description: 'Access road requirements',
+    unit: 'm',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 3, max: 10, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'power_connection',
+    name: 'Power Connection',
+    description: 'Electrical service size',
+    unit: 'kVA',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 10, max: 10000, typical: 100 },
+    default: 100
+  },
+  {
+    id: 'water_supply',
+    name: 'Water Supply',
+    description: 'Water requirement',
+    unit: 'm³/d',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 1, max: 1000, typical: 10 },
+    default: 10
+  },
+  {
+    id: 'wastewater_discharge',
+    name: 'Wastewater Discharge',
+    description: 'Wastewater generation',
+    unit: 'm³/d',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 0, max: 1000, typical: 5 },
+    default: 5
+  },
+  {
+    id: 'natural_gas',
+    name: 'Natural Gas',
+    description: 'Gas requirement',
+    unit: 'm³/h',
+    type: 'number',
+    category: 'integration-scaling',
+    subcategory: 'infrastructure-requirements',
+    range: { min: 0, max: 1000, typical: 0 },
+    default: 0
   }
 ]
 
 // Parameter Categories
 export const parameterCategories: ParameterCategory[] = [
   {
-    id: 'environmental',
-    name: 'Environmental',
-    description: 'Environmental conditions and atmospheric parameters',
-    icon: '<svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 12h8M12 8v8"/></svg>',
-    color: 'emerald',
-    subcategories: ['atmospheric-conditions', 'light-conditions', 'mechanical-conditions', 'air-quality']
+    "id": "environmental",
+    "name": "Environmental",
+    "description": "Environmental conditions and atmospheric parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><circle cx=\"12\" cy=\"12\" r=\"10\" stroke=\"currentColor\" stroke-width=\"2\" fill=\"none\"/><path d=\"M8 12h8M12 8v8\"/></svg>",
+    "color": "emerald",
+    "subcategories": [
+      "atmospheric-ambient-conditions",
+      "light-radiation-parameters",
+      "physical-environmental-factors"
+    ]
   },
   {
-    id: 'biological',
-    name: 'Biological',
-    description: 'Microbial activity, biofilm formation, and biological processes',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 8h8v8H8z"/><path d="M10 10h4v4h-4z"/></svg>',
-    color: 'teal',
-    subcategories: ['biofilm-properties', 'microbial-selection', 'substrate-parameters', 'kinetics', 'metabolic-parameters']
+    "id": "biological",
+    "name": "Biological",
+    "description": "Microbial activity, biofilm formation, and biological processes",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z\"/><path d=\"M8 8h8v8H8z\"/><path d=\"M10 10h4v4h-4z\"/></svg>",
+    "color": "teal",
+    "subcategories": [
+      "microorganism-database",
+      "biofilm-parameters",
+      "microbial-kinetics"
+    ]
   },
   {
-    id: 'electrical',
-    name: 'Electrical',
-    description: 'Electrical performance, output, and impedance characteristics',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
-    color: 'amber',
-    subcategories: ['output-performance', 'impedance', 'efficiency', 'electrochemical-properties']
+    "id": "electrical",
+    "name": "Electrical",
+    "description": "Electrical performance, output, and impedance characteristics",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M13 2L3 14h9l-1 8 10-12h-9l1-8z\"/></svg>",
+    "color": "amber",
+    "subcategories": []
   },
   {
-    id: 'materials',
-    name: 'Materials',
-    description: 'Electrode materials, membranes, and physical components',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/><path d="M12 3v18"/><path d="M3 12h18"/></svg>',
-    color: 'violet',
-    subcategories: ['electrode-materials', 'electrode-geometry', 'membrane-separator', 'structural-materials', 'surface-properties']
+    "id": "materials",
+    "name": "Materials",
+    "description": "Electrode materials, membranes, and physical components",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M9 9h6v6H9z\"/><path d=\"M12 3v18\"/><path d=\"M3 12h18\"/></svg>",
+    "color": "violet",
+    "subcategories": []
   },
   {
-    id: 'chemical',
-    name: 'Chemical',
-    description: 'Electrolyte composition, pH, and chemical properties',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v2.5A2.5 2.5 0 0 0 11.5 7h1A2.5 2.5 0 0 0 15 4.5V2"/><path d="M9 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-2"/><path d="m12 12 2 2-2 2-2-2 2-2z"/></svg>',
-    color: 'rose',
-    subcategories: ['electrolyte-composition', 'ion-concentrations', 'chemical-properties']
+    "id": "chemical",
+    "name": "Chemical",
+    "description": "Electrolyte composition, pH, and chemical properties",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M9 2v2.5A2.5 2.5 0 0 0 11.5 7h1A2.5 2.5 0 0 0 15 4.5V2\"/><path d=\"M9 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-2\"/><path d=\"m12 12 2 2-2 2-2-2 2-2z\"/></svg>",
+    "color": "rose",
+    "subcategories": []
   },
   {
-    id: 'operational',
-    name: 'Operational',
-    description: 'Operating conditions, flow parameters, and control settings',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
-    color: 'slate',
-    subcategories: ['flow-conditions', 'circuit-conditions', 'control-parameters', 'maintenance-parameters']
+    "id": "operational",
+    "name": "Operational",
+    "description": "System operation, control, and performance parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z\"/></svg>",
+    "color": "blue",
+    "subcategories": [
+      "process-control-parameters",
+      "operating-modes",
+      "startup-shutdown"
+    ]
   },
   {
-    id: 'physical',
-    name: 'Physical',
-    description: 'Reactor geometry, dimensions, and structural parameters',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27,6.96 12,12.01 20.73,6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>',
-    color: 'indigo',
-    subcategories: ['reactor-geometry', 'thermal-properties', 'mechanical-properties']
+    "id": "physical",
+    "name": "Physical",
+    "description": "Geometry, dimensions, and physical characteristics",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"/><polyline points=\"3.27,6.96 12,12.01 20.73,6.96\"/><line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"/></svg>",
+    "color": "indigo",
+    "subcategories": []
   },
   {
-    id: 'monitoring',
-    name: 'Monitoring',
-    description: 'Data acquisition, logging, and real-time monitoring parameters',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 0-8-3-8-8s3-8 8-8 8 3 8 8-3 8-8 8z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/><path d="M17 7l2 2-2 2"/></svg>',
-    color: 'cyan',
-    subcategories: ['real-time-monitoring', 'data-logging', 'alarm-settings']
+    "id": "monitoring",
+    "name": "Monitoring",
+    "description": "Sensors, measurement, and data collection parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M9 12l2 2 4-4\"/><path d=\"M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3\"/><path d=\"M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3\"/><path d=\"M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3\"/><path d=\"M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3\"/></svg>",
+    "color": "green",
+    "subcategories": []
   },
   {
-    id: 'safety',
-    name: 'Safety',
-    description: 'Safety limits, emergency procedures, and protection systems',
-    icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>',
-    color: 'red',
-    subcategories: ['safety-limits', 'emergency-procedures', 'safety-systems']
+    "id": "safety",
+    "name": "Safety",
+    "description": "Safety protocols, limits, and emergency procedures",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/></svg>",
+    "color": "red",
+    "subcategories": []
+  },
+  {
+    "id": "cell-level",
+    "name": "Cell-level",
+    "description": "Cell-level parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "cell-geometry-dimensions",
+      "cell-electrode-configuration",
+      "cell-performance-metrics",
+      "cell-specific-operational-parameters"
+    ]
+  },
+  {
+    "id": "reactor-level",
+    "name": "Reactor-level",
+    "description": "Reactor-level parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "multi-cell-stack-configuration",
+      "reactor-system-components",
+      "reactor-control-systems",
+      "industrial-scale-parameters"
+    ]
+  },
+  {
+    "id": "material",
+    "name": "Material",
+    "description": "Material parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "anode-materials",
+      "cathode-materials",
+      "membraneseparator-materials"
+    ]
+  },
+  {
+    "id": "performance-metrics",
+    "name": "Performance-metrics",
+    "description": "Performance-metrics parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "electrical-performance",
+      "chemical-production-metrics",
+      "treatment-performance"
+    ]
+  },
+  {
+    "id": "economic-sustainability",
+    "name": "Economic-sustainability",
+    "description": "Economic-sustainability parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "capital-cost-parameters",
+      "operating-cost-parameters",
+      "economic-performance-indicators",
+      "life-cycle-assessment-parameters",
+      "social-impact-parameters"
+    ]
+  },
+  {
+    "id": "safety-regulatory",
+    "name": "Safety-regulatory",
+    "description": "Safety-regulatory parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "safety-parameters",
+      "regulatory-compliance",
+      "risk-assessment-parameters"
+    ]
+  },
+  {
+    "id": "monitoring-control",
+    "name": "Monitoring-control",
+    "description": "Monitoring-control parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "sensor-specifications",
+      "data-acquisition",
+      "control-algorithms",
+      "automation-scada",
+      "aiml-integration"
+    ]
+  },
+  {
+    "id": "application-specific",
+    "name": "Application-specific",
+    "description": "Application-specific parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "wastewater-treatment-applications",
+      "biosensor-applications",
+      "space-applications",
+      "agricultural-integration",
+      "medical-device-applications",
+      "desalination-applications",
+      "carbon-capture-applications"
+    ]
+  },
+  {
+    "id": "emerging-technology",
+    "name": "Emerging-technology",
+    "description": "Emerging-technology parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "nanomaterial-integration",
+      "3d-printing-additive-manufacturing",
+      "synthetic-biology-integration",
+      "quantum-effects",
+      "digital-twin-technology"
+    ]
+  },
+  {
+    "id": "integration-scaling",
+    "name": "Integration-scaling",
+    "description": "Integration-scaling parameters",
+    "icon": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><circle cx=\"12\" cy=\"12\" r=\"10\"/></svg>",
+    "color": "gray",
+    "subcategories": [
+      "multi-scale-integration",
+      "network-effects",
+      "grid-integration",
+      "hybrid-system-integration",
+      "infrastructure-requirements"
+    ]
   }
 ]
 
 // All parameters combined
 const allParameters: Parameter[] = [
   ...environmentalParameters,
+  ...cellLevelParameters,
+  ...reactorLevelParameters,
   ...biologicalParameters,
-  ...electricalParameters,
   ...materialParameters,
-  ...chemicalParameters,
   ...operationalParameters,
-  ...physicalParameters,
-  ...monitoringParameters,
-  ...safetyParameters
+  ...performanceMetricsParameters,
+  ...economicSustainabilityParameters,
+  ...safetyRegulatoryParameters,
+  ...monitoringControlParameters,
+  ...applicationSpecificParameters,
+  ...emergingTechnologyParameters,
+  ...integrationScalingParameters
 ]
 
 // Utility functions

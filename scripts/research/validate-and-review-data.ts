@@ -329,7 +329,7 @@ async function generateValidationReport() {
       ...report
     }
     
-    fs.writeFileSync('/Users/samfrons/Desktop/Messai/messai-mvp/data-validation-report.json', JSON.stringify(detailedReport, null, 2))
+    fs.writeFileSync('/Users/samfrons/Desktop/clean-messai/messai-mvp/data-validation-report.json', JSON.stringify(detailedReport, null, 2))
     console.log(`\n💾 Detailed report saved to: data-validation-report.json`)
     
     return report
