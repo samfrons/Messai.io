@@ -12,6 +12,11 @@ export interface FuelCellParameters {
   voltage?: number // V
 }
 
+// Extended interface for API compatibility
+export interface FuelCellPredictionInput extends FuelCellParameters {
+  fuelCellType?: 'PEM' | 'SOFC' | 'PAFC' | 'MCFC' | 'AFC'
+}
+
 export interface PredictionResult {
   powerOutput: number // W
   efficiency: number // %

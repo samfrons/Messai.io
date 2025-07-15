@@ -23,6 +23,7 @@
     "db:push": "nx run-many -t db:push",
     "db:studio": "nx run-many -t db:studio",
     "type-check": "nx run-many -t type-check",
+    "pre-deploy-check": "node scripts/pre-deployment-check.js",
     "graph": "NX_GRAPH_PORT=4213 nx graph",
     "affected:build": "nx affected -t build",
     "affected:test": "nx affected -t test",

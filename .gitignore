@@ -74,6 +74,12 @@ coverage/
 # Prisma
 prisma/dev.db*
 
+# Specific files to ignore
+reference/mess-papers/energies-14-03381.pdf
+
+# ESLint symlink workaround
+apps/web/app/api/auth/[...nextauth]/auth
+
 .nx/cache
 .nx/workspace-data
 .cursor/rules/nx-rules.mdc

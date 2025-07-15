@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-deployment checks before push..."
+npm run pre-deploy-check
+
+if [ $? -eq 0 ]; then
+  echo "✅ Pre-deployment checks passed. Safe to push."
+else
+  echo "❌ Pre-deployment checks failed. Push aborted."
+  exit 1
+fi
