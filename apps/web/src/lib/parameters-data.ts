@@ -1811,7 +1811,7 @@ const biologicalParameters: Parameter[] = [
     name: '├─ Fermentation Products',
     description: 'Fermentation end products',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'biological',
     subcategory: 'microorganism-database',
     default: '[butyrate, H2]'
@@ -1830,7 +1830,7 @@ const biologicalParameters: Parameter[] = [
     name: '├─ Metal Tolerance',
     description: 'Tolerant to metals',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'biological',
     subcategory: 'microorganism-database',
     default: '[Cr, Cu, Cd]'
@@ -1919,7 +1919,7 @@ const biologicalParameters: Parameter[] = [
     name: '├─ Substrate Range',
     description: 'Substrate utilization',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'biological',
     subcategory: 'microorganism-database',
     default: '[acetate, methanol, CO]'
@@ -2207,7 +2207,7 @@ const biologicalParameters: Parameter[] = [
     name: '├─ Member Species',
     description: 'Consortium members',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'biological',
     subcategory: 'microorganism-database',
     default: '[]'
@@ -2702,7 +2702,7 @@ const materialParameters: Parameter[] = [
     name: '├─ Termination Groups',
     description: 'Surface terminations',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'material',
     subcategory: 'anode-materials',
     default: '[O, OH, F]'
@@ -2734,7 +2734,7 @@ const materialParameters: Parameter[] = [
     name: '├─ Stability Ph Range',
     description: 'Stable pH range',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'material',
     subcategory: 'anode-materials',
     default: '[3, 9]'
@@ -4926,7 +4926,7 @@ const safetyRegulatoryParameters: Parameter[] = [
     name: 'Certification Required',
     description: 'Required certifications',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'safety-regulatory',
     subcategory: 'regulatory-compliance',
     default: '[ISO14001, ISO45001]'
@@ -4982,7 +4982,7 @@ const safetyRegulatoryParameters: Parameter[] = [
     name: 'Alarm Types',
     description: 'Alarm systems',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'safety-regulatory',
     subcategory: 'risk-assessment-parameters',
     default: '[gas, fire, pressure]'
@@ -5135,7 +5135,7 @@ const monitoringControlParameters: Parameter[] = [
     name: 'Orp Range',
     description: 'ORP measurement range',
     unit: 'mV',
-    type: 'array',
+    type: 'string',
     category: 'monitoring-control',
     subcategory: 'sensor-specifications',
     default: '[-500, 500]'
@@ -5145,7 +5145,7 @@ const monitoringControlParameters: Parameter[] = [
     name: 'Conductivity Range',
     description: 'Conductivity range',
     unit: 'mS/cm',
-    type: 'array',
+    type: 'string',
     category: 'monitoring-control',
     subcategory: 'sensor-specifications',
     default: '[0, 100]'
@@ -5787,7 +5787,7 @@ const applicationSpecificParameters: Parameter[] = [
     name: 'Detection Range',
     description: 'Measurement range',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'application-specific',
     subcategory: 'biosensor-applications',
     default: '[1, 1000]'
@@ -7073,7 +7073,7 @@ const integrationScalingParameters: Parameter[] = [
     name: 'Utility Connections',
     description: 'Required utilities',
     unit: '-',
-    type: 'array',
+    type: 'string',
     category: 'integration-scaling',
     subcategory: 'infrastructure-requirements',
     default: '[power, water, sewer]'

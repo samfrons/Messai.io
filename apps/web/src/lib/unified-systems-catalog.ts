@@ -234,7 +234,7 @@ export const getFuelCellSystems = (): SystemType[] => {
 }
 
 export const getSystemCategories = (): string[] => {
-  return [...new Set(unifiedSystemsCatalog.map(system => system.category))]
+  return Array.from(new Set(unifiedSystemsCatalog.map(system => system.category)))
 }
 
 export const searchSystems = (query: string): SystemType[] => {

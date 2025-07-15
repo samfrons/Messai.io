@@ -207,7 +207,7 @@ function validateSystemType(config: MESSConfiguration): ValidationResult {
  */
 function findParameterRules(parameterName: string): any {
   for (const category of Object.values(validationRules.categories)) {
-    if (category[parameterName]) {
+    if (category && typeof category === 'object' && category[parameterName]) {
       return category[parameterName]
     }
   }
@@ -251,8 +251,8 @@ export function predictPerformance(config: MESSConfiguration): {
   }
 
   // Apply material factors
-  basePower *= materialFactors[config.anodeMaterial] || 1.0
-  basePower *= cathodeFactor[config.cathodeMaterial] || 1.0
+  basePower *= materialFactors[config.anodeMaterial as keyof typeof materialFactors] || 1.0
+  basePower *= cathodeFactor[config.cathodeMaterial as keyof typeof cathodeFactor] || 1.0
 
   // Temperature factor (optimum around 30°C)
   if (config.temperature) {
@@ -269,7 +269,7 @@ export function predictPerformance(config: MESSConfiguration): {
   }
 
   // Reduce confidence for unknown materials
-  if (!materialFactors[config.anodeMaterial]) {
+  if (!materialFactors[config.anodeMaterial as keyof typeof materialFactors]) {
     confidence *= 0.5
   }
 
