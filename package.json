@@ -27,7 +27,7 @@
     "affected:build": "nx affected -t build",
     "affected:test": "nx affected -t test",
     "affected:lint": "nx affected -t lint",
-    "prepare": "husky install"
+    "prepare": "test -d .git && husky install || echo 'Git hooks skipped'"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",
