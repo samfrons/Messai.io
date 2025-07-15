@@ -443,6 +443,108 @@ export const backupUtils = {
   }
 }
 
+// String filter utility function
+export const createStringFilter = (
+  value: string | undefined,
+  mode: 'contains' | 'startsWith' | 'endsWith' | 'equals' = 'contains',
+  caseSensitive: boolean = false
+): any => {
+  if (!value || value.trim() === '') {
+    return undefined
+  }
+
+  const trimmedValue = value.trim()
+  
+  switch (mode) {
+    case 'contains':
+      return {
+        contains: trimmedValue,
+        mode: caseSensitive ? 'default' : 'insensitive'
+      }
+    case 'startsWith':
+      return {
+        startsWith: trimmedValue,
+        mode: caseSensitive ? 'default' : 'insensitive'
+      }
+    case 'endsWith':
+      return {
+        endsWith: trimmedValue,
+        mode: caseSensitive ? 'default' : 'insensitive'
+      }
+    case 'equals':
+      return {
+        equals: trimmedValue,
+        mode: caseSensitive ? 'default' : 'insensitive'
+      }
+    default:
+      return {
+        contains: trimmedValue,
+        mode: caseSensitive ? 'default' : 'insensitive'
+      }
+  }
+}
+
+// Advanced filter builders
+export const createDateRangeFilter = (
+  startDate?: Date | string,
+  endDate?: Date | string
+): any => {
+  const filter: any = {}
+  
+  if (startDate) {
+    filter.gte = typeof startDate === 'string' ? new Date(startDate) : startDate
+  }
+  
+  if (endDate) {
+    filter.lte = typeof endDate === 'string' ? new Date(endDate) : endDate
+  }
+  
+  return Object.keys(filter).length > 0 ? filter : undefined
+}
+
+export const createNumericRangeFilter = (
+  min?: number,
+  max?: number
+): any => {
+  const filter: any = {}
+  
+  if (typeof min === 'number' && !isNaN(min)) {
+    filter.gte = min
+  }
+  
+  if (typeof max === 'number' && !isNaN(max)) {
+    filter.lte = max
+  }
+  
+  return Object.keys(filter).length > 0 ? filter : undefined
+}
+
+export const createArrayFilter = (
+  values: string[] | undefined,
+  mode: 'hasEvery' | 'hasSome' | 'isEmpty' = 'hasSome'
+): any => {
+  if (!values || values.length === 0) {
+    return undefined
+  }
+  
+  const validValues = values.filter(v => v && v.trim() !== '')
+  
+  if (validValues.length === 0) {
+    return undefined
+  }
+  
+  switch (mode) {
+    case 'hasEvery':
+      return { hasEvery: validValues }
+    case 'hasSome':
+      return { hasSome: validValues }
+    case 'isEmpty':
+      return { isEmpty: true }
+    default:
+      return { hasSome: validValues }
+  }
+}
+
 // Export all utilities
 export default {
   db: dbUtils,

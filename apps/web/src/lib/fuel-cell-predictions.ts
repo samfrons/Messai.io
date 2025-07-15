@@ -277,3 +277,28 @@ const generateTradeoffAnalysis = (configs: FuelCellParameters[], results: Predic
   
   return tradeoffs
 }
+
+// Main modeling engine class
+export class FuelCellModelingEngine {
+  private modelFidelity: 'low' | 'medium' | 'high' | 'ultra'
+  
+  constructor(fidelity: 'low' | 'medium' | 'high' | 'ultra' = 'medium') {
+    this.modelFidelity = fidelity
+  }
+  
+  predict(params: FuelCellParameters): PredictionResult {
+    return predictFuelCellPerformance(params)
+  }
+  
+  compare(configurations: FuelCellParameters[]): ComparisonResult {
+    return compareFuelCellConfigurations(configurations)
+  }
+  
+  setFidelity(fidelity: 'low' | 'medium' | 'high' | 'ultra'): void {
+    this.modelFidelity = fidelity
+  }
+  
+  getFidelity(): string {
+    return this.modelFidelity
+  }
+}

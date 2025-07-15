@@ -388,3 +388,70 @@ export class RateLimiter {
     return Math.max(0, this.timeWindow - (Date.now() - oldestRequest))
   }
 }
+
+// Global browser instance
+export const zenBrowser = new ZenBrowser()
+
+// Paper discovery function
+export const discoverPapers = async (
+  query: string,
+  options: {
+    sources?: ('pubmed' | 'arxiv' | 'google_scholar')[]
+    maxResults?: number
+    dateRange?: { start?: number; end?: number }
+  } = {}
+): Promise<PaperExtractionResult[]> => {
+  const { 
+    sources = ['pubmed', 'arxiv'], 
+    maxResults = 10,
+    dateRange 
+  } = options
+
+  const browser = new ZenBrowser()
+  await browser.initialize()
+
+  try {
+    const allResults: PaperExtractionResult[] = []
+
+    for (const source of sources) {
+      try {
+        const results = await browser.searchPapers(query, source)
+        
+        // Filter by date range if specified
+        let filteredResults = results
+        if (dateRange) {
+          filteredResults = results.filter(paper => {
+            if (!paper.year) return true
+            if (dateRange.start && paper.year < dateRange.start) return false
+            if (dateRange.end && paper.year > dateRange.end) return false
+            return true
+          })
+        }
+
+        allResults.push(...filteredResults)
+      } catch (error) {
+        console.warn(`Failed to search ${source}:`, error)
+      }
+    }
+
+    // Remove duplicates based on DOI or title
+    const uniqueResults = allResults.filter((paper, index, array) => {
+      if (paper.doi) {
+        return array.findIndex(p => p.doi === paper.doi) === index
+      }
+      if (paper.title) {
+        return array.findIndex(p => p.title === paper.title) === index
+      }
+      return true
+    })
+
+    // Sort by year (newest first) and limit results
+    const sortedResults = uniqueResults
+      .sort((a, b) => (b.year || 0) - (a.year || 0))
+      .slice(0, maxResults)
+
+    return sortedResults
+  } finally {
+    await browser.close()
+  }
+}

@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { FuelCellModelingEngine, type FuelCellPredictionInput } from '@/lib/fuel-cell-predictions'
-import { FuelCellType, ModelFidelity } from '@/lib/types/fuel-cell-types'
+import { FuelCellTypeEnum, ModelFidelityEnum } from '@/lib/types/fuel-cell-types'
 
 // ============================================================================
 // VALIDATION SCHEMAS
 // ============================================================================
 
-const FuelCellTypeSchema = z.enum([FuelCellType.PEM, FuelCellType.SOFC, FuelCellType.PAFC, FuelCellType.MCFC, FuelCellType.AFC])
-const ModelFidelitySchema = z.enum([ModelFidelity.BASIC, ModelFidelity.INTERMEDIATE, ModelFidelity.ADVANCED])
+const FuelCellTypeSchema = z.enum([FuelCellTypeEnum.PEM, FuelCellTypeEnum.SOFC, FuelCellTypeEnum.PAFC, FuelCellTypeEnum.MCFC, FuelCellTypeEnum.AFC])
+const ModelFidelitySchema = z.enum([ModelFidelityEnum.BASIC, ModelFidelityEnum.INTERMEDIATE, ModelFidelityEnum.ADVANCED, ModelFidelityEnum.ULTRA])
 
 const FuelCellPredictionSchema = z.object({
   // System configuration

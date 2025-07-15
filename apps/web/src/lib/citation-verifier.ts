@@ -421,3 +421,6 @@ export const validateCitationFormat = (citation: Partial<CitationData>): { isVal
     errors
   }
 }
+
+// Alias for plural form
+export const verifyCitations = verifyCitationsBatch

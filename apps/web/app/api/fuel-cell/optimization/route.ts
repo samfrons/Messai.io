@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { FuelCellOptimizationEngine } from '@/lib/fuel-cell-optimization'
-import { FuelCellType } from '@/lib/types/fuel-cell-types'
+import { FuelCellTypeEnum } from '@/lib/types/fuel-cell-types'
 
 // ============================================================================
 // VALIDATION SCHEMAS
 // ============================================================================
 
-const FuelCellTypeSchema = z.enum([FuelCellType.PEM, FuelCellType.SOFC, FuelCellType.PAFC, FuelCellType.MCFC, FuelCellType.AFC])
+const FuelCellTypeSchema = z.enum([FuelCellTypeEnum.PEM, FuelCellTypeEnum.SOFC, FuelCellTypeEnum.PAFC, FuelCellTypeEnum.MCFC, FuelCellTypeEnum.AFC])
 
 const OptimizationObjectiveSchema = z.object({
   type: z.enum(['MAXIMIZE_POWER', 'MAXIMIZE_EFFICIENCY', 'MINIMIZE_COST', 'MAXIMIZE_DURABILITY', 'MULTI_OBJECTIVE']),

@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
 import { FuelCellModelingEngine, FuelCellPredictionInput } from '@/lib/fuel-cell-predictions'
-import { FuelCellType } from '@/lib/types/fuel-cell-types'
+import { FuelCellTypeEnum } from '@/lib/types/fuel-cell-types'
 
 // ============================================================================
 // VALIDATION SCHEMAS
 // ============================================================================
 
-const FuelCellTypeSchema = z.enum([FuelCellType.PEM, FuelCellType.SOFC, FuelCellType.PAFC, FuelCellType.MCFC, FuelCellType.AFC])
+const FuelCellTypeSchema = z.enum([FuelCellTypeEnum.PEM, FuelCellTypeEnum.SOFC, FuelCellTypeEnum.PAFC, FuelCellTypeEnum.MCFC, FuelCellTypeEnum.AFC])
 
 const SystemConfigurationSchema = z.object({
   id: z.string(),

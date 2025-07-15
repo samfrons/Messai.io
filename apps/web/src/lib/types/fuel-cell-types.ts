@@ -1,6 +1,24 @@
 // Fuel Cell Type Definitions
 export type FuelCellType = 'PEM' | 'SOFC' | 'PAFC' | 'MCFC' | 'AFC'
 
+export type ModelFidelity = 'low' | 'medium' | 'high' | 'ultra'
+
+// Enum-like objects for API route validation
+export const FuelCellTypeEnum = {
+  PEM: 'PEM' as const,
+  SOFC: 'SOFC' as const,
+  PAFC: 'PAFC' as const,
+  MCFC: 'MCFC' as const,
+  AFC: 'AFC' as const
+} as const
+
+export const ModelFidelityEnum = {
+  BASIC: 'low' as const,
+  INTERMEDIATE: 'medium' as const,
+  ADVANCED: 'high' as const,
+  ULTRA: 'ultra' as const
+} as const
+
 export interface FuelCellConfiguration {
   id?: string
   name?: string

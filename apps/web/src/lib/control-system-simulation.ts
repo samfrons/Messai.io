@@ -354,3 +354,115 @@ export const designAdaptiveController = (
     initialGains: { kp: 1.0, ki: 0.1, kd: 0.01 }
   }
 }
+
+// Simulation presets for common scenarios
+export const SIMULATION_PRESETS = {
+  STARTUP_SEQUENCE: {
+    duration: 300,
+    timeStep: 1,
+    initialConditions: {
+      temperature: 25,
+      pressure: 1.0,
+      voltage: 0.3,
+      current: 0.1
+    },
+    disturbances: {
+      loadChanges: [
+        { time: 60, value: 0.5 },
+        { time: 180, value: 1.0 }
+      ]
+    }
+  },
+  LOAD_FOLLOWING: {
+    duration: 600,
+    timeStep: 1,
+    initialConditions: {
+      temperature: 70,
+      pressure: 1.5,
+      voltage: 0.7,
+      current: 10
+    },
+    disturbances: {
+      loadChanges: [
+        { time: 100, value: 0.3 },
+        { time: 200, value: -0.2 },
+        { time: 300, value: 0.4 },
+        { time: 400, value: -0.3 },
+        { time: 500, value: 0.2 }
+      ]
+    }
+  },
+  THERMAL_CYCLING: {
+    duration: 1200,
+    timeStep: 2,
+    initialConditions: {
+      temperature: 70,
+      pressure: 1.5,
+      voltage: 0.7,
+      current: 15
+    },
+    disturbances: {
+      temperatureVariations: [
+        { time: 200, value: 10 },
+        { time: 400, value: -15 },
+        { time: 600, value: 20 },
+        { time: 800, value: -10 },
+        { time: 1000, value: 5 }
+      ]
+    }
+  },
+  PRESSURE_VARIATIONS: {
+    duration: 400,
+    timeStep: 1,
+    initialConditions: {
+      temperature: 70,
+      pressure: 1.5,
+      voltage: 0.7,
+      current: 12
+    },
+    disturbances: {
+      pressureVariations: [
+        { time: 50, value: 0.5 },
+        { time: 150, value: -0.3 },
+        { time: 250, value: 0.8 },
+        { time: 350, value: -0.4 }
+      ]
+    }
+  }
+}
+
+// Main simulation engine class
+export class ControlSystemSimulationEngine {
+  private fuelCellConfig: FuelCellConfiguration
+  private controlParams: ControlSystemParameters
+  
+  constructor(config: FuelCellConfiguration, controlParams: ControlSystemParameters) {
+    this.fuelCellConfig = config
+    this.controlParams = controlParams
+  }
+  
+  simulate(simParams: SimulationParameters): SimulationResult {
+    return simulateControlSystem(this.fuelCellConfig, this.controlParams, simParams)
+  }
+  
+  runPreset(presetName: keyof typeof SIMULATION_PRESETS): SimulationResult {
+    const preset = SIMULATION_PRESETS[presetName]
+    return this.simulate(preset)
+  }
+  
+  updateConfiguration(config: Partial<FuelCellConfiguration>): void {
+    this.fuelCellConfig = { ...this.fuelCellConfig, ...config }
+  }
+  
+  updateControlParameters(params: Partial<ControlSystemParameters>): void {
+    this.controlParams = { ...this.controlParams, ...params }
+  }
+  
+  getConfiguration(): FuelCellConfiguration {
+    return { ...this.fuelCellConfig }
+  }
+  
+  getControlParameters(): ControlSystemParameters {
+    return { ...this.controlParams }
+  }
+}

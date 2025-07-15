@@ -658,3 +658,68 @@ export const getDefaultConstraints = (type: FuelCellType): OptimizationConstrain
     airFlowRate: { min: 0.2, max: 40 }
   }
 }
+
+// Main optimization engine class
+export class FuelCellOptimizationEngine {
+  private defaultAlgorithmConfig: OptimizationAlgorithmConfig
+  
+  constructor() {
+    this.defaultAlgorithmConfig = {
+      algorithm: 'genetic',
+      parameters: {
+        populationSize: 50,
+        generations: 100,
+        mutationRate: 0.1,
+        crossoverRate: 0.8
+      },
+      constraints: {
+        cellCount: { min: 1, max: 50 },
+        activeArea: { min: 10, max: 1000 },
+        operatingTemperature: { min: 60, max: 100 },
+        operatingPressure: { min: 1, max: 5 },
+        humidity: { min: 50, max: 100 },
+        fuelFlowRate: { min: 0.1, max: 20 },
+        airFlowRate: { min: 0.2, max: 40 }
+      }
+    }
+  }
+  
+  optimize(
+    baseConfiguration: FuelCellConfiguration,
+    objective: OptimizationObjective,
+    algorithmConfig?: Partial<OptimizationAlgorithmConfig>
+  ): OptimizationResult {
+    const config = algorithmConfig ? 
+      { ...this.defaultAlgorithmConfig, ...algorithmConfig } : 
+      this.defaultAlgorithmConfig
+    
+    return optimizeFuelCellConfiguration(baseConfiguration, objective, config)
+  }
+  
+  optimizeWithConstraints(
+    baseConfiguration: FuelCellConfiguration,
+    objective: OptimizationObjective,
+    constraints: OptimizationConstraints,
+    algorithm: 'genetic' | 'particle_swarm' | 'gradient_descent' | 'simulated_annealing' = 'genetic'
+  ): OptimizationResult {
+    const config: OptimizationAlgorithmConfig = {
+      ...this.defaultAlgorithmConfig,
+      algorithm,
+      constraints
+    }
+    
+    return optimizeFuelCellConfiguration(baseConfiguration, objective, config)
+  }
+  
+  getDefaultConstraints(type: FuelCellType): OptimizationConstraints {
+    return getDefaultConstraints(type)
+  }
+  
+  setDefaultAlgorithm(algorithm: 'genetic' | 'particle_swarm' | 'gradient_descent' | 'simulated_annealing'): void {
+    this.defaultAlgorithmConfig.algorithm = algorithm
+  }
+  
+  setDefaultParameters(parameters: Partial<OptimizationAlgorithmConfig['parameters']>): void {
+    this.defaultAlgorithmConfig.parameters = { ...this.defaultAlgorithmConfig.parameters, ...parameters }
+  }
+}
