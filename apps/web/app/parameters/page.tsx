@@ -18,6 +18,8 @@ export default function ParametersPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [expandedParams, setExpandedParams] = useState<Set<string>>(new Set())
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set())
+  const [expandedSubcategories, setExpandedSubcategories] = useState<Set<string>>(new Set())
   const [showExportMenu, setShowExportMenu] = useState(false)
   
   // Get statistics
@@ -49,8 +51,28 @@ export default function ParametersPage() {
     return groups
   }, [filteredParameters])
   
-  // Toggle parameter expansion
-  const toggleExpanded = (paramId: string) => {
+  // Toggle functions
+  const toggleCategory = (categoryId: string) => {
+    const newExpanded = new Set(expandedCategories)
+    if (newExpanded.has(categoryId)) {
+      newExpanded.delete(categoryId)
+    } else {
+      newExpanded.add(categoryId)
+    }
+    setExpandedCategories(newExpanded)
+  }
+
+  const toggleSubcategory = (subcategoryKey: string) => {
+    const newExpanded = new Set(expandedSubcategories)
+    if (newExpanded.has(subcategoryKey)) {
+      newExpanded.delete(subcategoryKey)
+    } else {
+      newExpanded.add(subcategoryKey)
+    }
+    setExpandedSubcategories(newExpanded)
+  }
+
+  const toggleParameter = (paramId: string) => {
     const newExpanded = new Set(expandedParams)
     if (newExpanded.has(paramId)) {
       newExpanded.delete(paramId)
@@ -59,6 +81,9 @@ export default function ParametersPage() {
     }
     setExpandedParams(newExpanded)
   }
+
+  // Legacy function name for backward compatibility
+  const toggleExpanded = toggleParameter
   
   // Export functions
   const handleExport = (format: 'json' | 'csv') => {
