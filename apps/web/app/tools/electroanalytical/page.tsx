@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic'
 
 // Dynamic import to avoid SSR issues with Three.js
 const ElectroanalyticalVisualization = dynamic(
-  () => import('@/components/3d/electroanalytical/ElectroanalyticalVisualization'),
+  () => import('../../../components/3d/electroanalytical/ElectroanalyticalVisualization'),
   { 
     ssr: false,
     loading: () => (

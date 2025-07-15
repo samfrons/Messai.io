@@ -12,6 +12,7 @@
   "dependencies": {
     "@messai/core": "workspace:*",
     "@messai/ui": "workspace:*",
+    "@messai/database": "workspace:*",
     "@prisma/client": "^6.11.1",
     "@react-spring/three": "^10.0.1",
     "@react-three/drei": "^10.5.0",

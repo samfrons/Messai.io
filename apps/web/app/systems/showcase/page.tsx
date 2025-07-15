@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { unifiedSystemsCatalog, getDesignTypeFor3D } from '@/lib/unified-systems-catalog'
-import Enhanced3DSystemModal from '@/components/Enhanced3DSystemModal'
+import { unifiedSystemsCatalog, getDesignTypeFor3D } from '../../../src/lib/unified-systems-catalog'
+import Enhanced3DSystemModal from '../../../components/Enhanced3DSystemModal'
 
 export default function SystemsShowcasePage() {
   const [selectedSystem, setSelectedSystem] = useState(unifiedSystemsCatalog[0])

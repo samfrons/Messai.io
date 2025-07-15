@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { 
   parameterCategories, 
   getAllParameters, 
@@ -13,6 +14,23 @@ import {
   type Parameter,
   type ParameterCategory
 } from '@/lib/parameters-data'
+import { ParameterCard, ParameterGrid } from '@/components/ui/ParameterCard'
+import * as CaladanIcons from '@/components/ui/CaladanIcons'
+import { Search, Filter, BarChart3, Download, ArrowLeft } from 'lucide-react'
+
+// Map parameter categories to our custom icons
+const categoryIconMap: Record<string, keyof typeof CaladanIcons> = {
+  'electrode': 'ElectrodeIcon',
+  'microbial': 'MicrobeIcon',
+  'physical': 'TemperatureIcon',
+  'chemical': 'PhIcon',
+  'electrical': 'PowerIcon',
+  'operational': 'FlowIcon',
+  'environmental': 'TemperatureIcon',
+  'monitoring': 'SensorIcon',
+  'economic': 'PowerIcon',
+  'design': 'TankIcon'
+}
 
 interface CompatibilityScore {
   score: number // 0-100
@@ -167,101 +185,108 @@ export default function EnhancedParametersPage() {
   }
   
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen caladan-bg-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Enhanced MESS Parameter Database
-            </h1>
-            <div className="flex gap-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-8"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <div>
+              <div className="flex items-center gap-4 mb-2">
+                <Link href="/features/parameters" className="text-gray-400 hover:text-white transition-colors">
+                  <ArrowLeft className="w-5 h-5" />
+                </Link>
+                <h1 className="text-3xl md:text-4xl font-light text-white">
+                  Enhanced MESS Parameter Database
+                </h1>
+              </div>
+              <p className="text-gray-300 text-lg">
+                Advanced parameter management with material compatibility analysis and comparison tools
+              </p>
+            </div>
+            <div className="flex gap-3">
               <button
                 onClick={() => setCompareMode(!compareMode)}
-                className={`px-4 py-2 rounded-lg transition-colors ${
-                  compareMode 
-                    ? 'bg-green-600 text-white hover:bg-green-700' 
-                    : 'bg-gray-600 text-white hover:bg-gray-700'
-                }`}
+                className={`caladan-button ${compareMode ? 'glow-caladan' : ''}`}
               >
+                <BarChart3 className="w-4 h-4 mr-2" />
                 {compareMode ? 'Exit Compare' : 'Compare Mode'}
               </button>
-              <Link
-                href="/parameters"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                Classic View
+              <Link href="/parameters">
+                <button className="px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 border border-white/20 text-white hover:bg-white/10">
+                  Classic View
+                </button>
               </Link>
             </div>
           </div>
           
-          <p className="text-gray-600 mb-4">
-            Advanced parameter management with material compatibility analysis and comparison tools
-          </p>
-          
-          {/* Stats with Progress Bars */}
+          {/* Stats with Caladan Bio styling */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-white rounded-lg p-4 border border-gray-200">
-              <div className="text-sm text-gray-600">Database Coverage</div>
-              <div className="text-2xl font-bold text-blue-600">1,500+</div>
-              <div className="mt-2 bg-gray-200 rounded-full h-2">
-                <div className="bg-blue-600 h-2 rounded-full" style={{ width: '85%' }}></div>
+            <div className="caladan-card">
+              <div className="text-sm text-gray-400 uppercase tracking-wide">Database Coverage</div>
+              <div className="text-2xl font-bold caladan-text-accent">1,500+</div>
+              <div className="mt-3 bg-gray-700 rounded-full h-2">
+                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '85%' }}></div>
               </div>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-gray-200">
-              <div className="text-sm text-gray-600">Validated Parameters</div>
-              <div className="text-2xl font-bold text-green-600">{stats.withRanges}</div>
-              <div className="mt-2 bg-gray-200 rounded-full h-2">
-                <div className="bg-green-600 h-2 rounded-full" style={{ width: '72%' }}></div>
+            <div className="caladan-card">
+              <div className="text-sm text-gray-400 uppercase tracking-wide">Validated Parameters</div>
+              <div className="text-2xl font-bold caladan-text-accent">{stats.withRanges}</div>
+              <div className="mt-3 bg-gray-700 rounded-full h-2">
+                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '72%' }}></div>
               </div>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-gray-200">
-              <div className="text-sm text-gray-600">Material Combinations</div>
-              <div className="text-2xl font-bold text-purple-600">450+</div>
-              <div className="mt-2 bg-gray-200 rounded-full h-2">
-                <div className="bg-purple-600 h-2 rounded-full" style={{ width: '60%' }}></div>
+            <div className="caladan-card">
+              <div className="text-sm text-gray-400 uppercase tracking-wide">Material Combinations</div>
+              <div className="text-2xl font-bold caladan-text-accent">450+</div>
+              <div className="mt-3 bg-gray-700 rounded-full h-2">
+                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '60%' }}></div>
               </div>
             </div>
-            <div className="bg-white rounded-lg p-4 border border-gray-200">
-              <div className="text-sm text-gray-600">AI Predictions</div>
-              <div className="text-2xl font-bold text-orange-600">280</div>
-              <div className="mt-2 bg-gray-200 rounded-full h-2">
-                <div className="bg-orange-600 h-2 rounded-full" style={{ width: '45%' }}></div>
+            <div className="caladan-card">
+              <div className="text-sm text-gray-400 uppercase tracking-wide">AI Predictions</div>
+              <div className="text-2xl font-bold caladan-text-accent">280</div>
+              <div className="mt-3 bg-gray-700 rounded-full h-2">
+                <div className="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style={{ width: '45%' }}></div>
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
         
-        {/* View Mode Tabs */}
-        <div className="mb-6">
-          <div className="border-b border-gray-200">
+        {/* View Mode Tabs with Caladan Bio styling */}
+        <div className="mb-8">
+          <div className="border-b border-gray-600">
             <nav className="-mb-px flex space-x-8">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   viewMode === 'grid'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-green-400 caladan-text-accent'
+                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-500'
                 }`}
               >
                 Parameter Grid
               </button>
               <button
                 onClick={() => setViewMode('table')}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   viewMode === 'table'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-green-400 caladan-text-accent'
+                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-500'
                 }`}
               >
                 Table View
               </button>
               <button
                 onClick={() => setViewMode('compatibility')}
-                className={`py-2 px-1 border-b-2 font-medium text-sm ${
+                className={`py-3 px-1 border-b-2 font-medium text-sm transition-colors ${
                   viewMode === 'compatibility'
-                    ? 'border-blue-500 text-blue-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                    ? 'border-green-400 caladan-text-accent'
+                    : 'border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-500'
                 }`}
               >
                 Compatibility Matrix
@@ -270,130 +295,131 @@ export default function EnhancedParametersPage() {
           </div>
         </div>
         
-        {/* Search and Filters */}
+        {/* Search and Filters with Caladan Bio styling */}
         {viewMode !== 'compatibility' && (
-          <div className="mb-6 space-y-4">
+          <div className="mb-8 space-y-6">
             <div className="relative">
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search parameters..."
-                className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full px-4 py-3 pl-12 bg-gray-800 border border-gray-600 rounded-lg focus:ring-2 focus:ring-green-400 focus:border-green-400 text-white placeholder-gray-400"
               />
-              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
             </div>
             
-            {/* Category Filter Chips */}
-            <div className="flex flex-wrap gap-2">
+            {/* Category Filter Chips with custom icons */}
+            <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => setSelectedCategory('all')}
-                className={`px-3 py-1 rounded-full text-sm ${
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                   selectedCategory === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    ? 'caladan-button'
+                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                 }`}
               >
-                All
+                All Categories
               </button>
-              {parameterCategories.slice(0, 8).map(category => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`px-3 py-1 rounded-full text-sm flex items-center gap-1 ${
-                    selectedCategory === category.id
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                  }`}
-                >
-                  <span>{category.icon}</span>
-                  {category.name}
-                </button>
-              ))}
+              {parameterCategories.slice(0, 8).map(category => {
+                const IconComponent = CaladanIcons[categoryIconMap[category.id] || 'SensorIcon']
+                return (
+                  <button
+                    key={category.id}
+                    onClick={() => setSelectedCategory(category.id)}
+                    className={`px-4 py-2 rounded-lg text-sm flex items-center gap-2 font-medium transition-all ${
+                      selectedCategory === category.id
+                        ? 'caladan-button glow-sm'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    <IconComponent size={16} />
+                    {category.name}
+                  </button>
+                )
+              })}
             </div>
           </div>
         )}
         
         {/* Content based on view mode */}
         {viewMode === 'grid' && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             {compareMode && compareParams.size > 0 && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="caladan-card border-green-400/30 bg-green-900/20 p-6"
+              >
                 <div className="flex items-center justify-between">
-                  <p className="text-blue-800">
+                  <p className="text-green-200">
                     {compareParams.size} parameters selected for comparison
                   </p>
                   <button
                     onClick={() => {/* Implement comparison view */}}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                    className="caladan-button"
                   >
+                    <BarChart3 className="w-4 h-4 mr-2" />
                     View Comparison
                   </button>
                 </div>
-              </div>
+              </motion.div>
             )}
             
-            {Object.entries(groupedParameters).map(([groupKey, params]) => {
+            {Object.entries(groupedParameters).map(([groupKey, params], index) => {
               const [categoryId, subcategory] = groupKey.split('-')
               const category = parameterCategories.find(c => c.id === categoryId)
+              const IconComponent = CaladanIcons[categoryIconMap[categoryId] || 'SensorIcon']
               
               return (
-                <div key={groupKey} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                    <span className="text-xl">{category?.icon}</span>
+                <motion.div 
+                  key={groupKey}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="caladan-card p-6"
+                >
+                  <h3 className="text-xl font-light text-white mb-6 flex items-center gap-3">
+                    <div className="caladan-icon-bg">
+                      <IconComponent size={24} className="caladan-text-accent" />
+                    </div>
                     {category?.name} / {subcategory.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                   </h3>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {params.map(param => (
-                      <div
-                        key={param.id}
-                        className={`border rounded-lg p-4 transition-all ${
-                          compareParams.has(param.id)
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-blue-300'
-                        }`}
-                      >
-                        <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h4 className="font-medium text-gray-900">{param.name}</h4>
-                            {param.unit && (
-                              <span className="text-sm text-gray-500">[{param.unit}]</span>
-                            )}
-                          </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                    {params.map(param => {
+                      const iconKey = categoryIconMap[param.category] || 'SensorIcon'
+                      const typicalValue = param.range?.typical || param.range?.min || 'N/A'
+                      
+                      return (
+                        <div key={param.id} className="relative">
+                          <ParameterCard
+                            title={param.name}
+                            value={typicalValue}
+                            unit={param.unit}
+                            description={param.description}
+                            icon={iconKey}
+                            className={`${
+                              compareParams.has(param.id)
+                                ? 'border-green-400 bg-green-900/20 glow-sm'
+                                : ''
+                            }`}
+                          />
                           {compareMode && (
-                            <input
-                              type="checkbox"
-                              checked={compareParams.has(param.id)}
-                              onChange={() => toggleCompareParam(param.id)}
-                              className="mt-1"
-                            />
+                            <div className="absolute top-3 right-3">
+                              <input
+                                type="checkbox"
+                                checked={compareParams.has(param.id)}
+                                onChange={() => toggleCompareParam(param.id)}
+                                className="w-4 h-4 text-green-600 bg-gray-800 border-gray-600 rounded focus:ring-green-500"
+                              />
+                            </div>
                           )}
                         </div>
-                        
-                        <p className="text-sm text-gray-600 mb-2">{param.description}</p>
-                        
-                        {param.range && (
-                          <div className="text-xs text-gray-500">
-                            Range: {param.range.min} - {param.range.max}
-                            {param.range.typical && ` (typical: ${param.range.typical})`}
-                            {param.unit && ` ${param.unit}`}
-                          </div>
-                        )}
-                        
-                        {param.category && (
-                          <div className="mt-2 flex flex-wrap gap-1">
-                            <span className="px-2 py-1 text-xs bg-blue-100 text-blue-600 rounded">
-                              {param.category}
-                            </span>
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
-                </div>
+                </motion.div>
               )
             })}
           </div>

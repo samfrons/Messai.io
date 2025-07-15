@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import UnifiedDashboard from '@/components/unified/UnifiedDashboard'
-import { getDemoConfig } from '@/lib/demo-mode'
+import UnifiedDashboard from '../../components/unified/UnifiedDashboard'
+import { getDemoConfig } from '../../src/lib/demo-mode'
 import { ExternalLink } from 'lucide-react'
 
 export default function PlatformPage() {

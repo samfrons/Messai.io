@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import ExperimentChart from '@/components/ExperimentChart'
+import ExperimentChart from '../../../components/ExperimentChart'
 
 interface ExperimentDetails {
   id: string

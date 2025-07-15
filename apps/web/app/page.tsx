@@ -1,9 +1,25 @@
+'use client'
+
 import { Button, Card, CardContent, CardHeader, CardTitle } from '@messai/ui'
 import { SCIENTIFIC_CONSTANTS, SystemType } from '@messai/core'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { FeatureCard, ParameterGrid } from '@/components/ui/ParameterCard'
+import { FeatureCard, ParameterGrid } from '../components/ui/ParameterCard'
 import { ArrowRight, Zap, FlaskConical } from 'lucide-react'
+import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
+
+// Dynamic import to avoid SSR issues with Three.js
+const InteractiveMFCModel = dynamic(
+  () => import('../components/3d/homepage/InteractiveMFCModel'),
+  { 
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-[500px] bg-gray-900 rounded-lg flex items-center justify-center">
+        <div className="text-white">Loading 3D Model...</div>
+      </div>
+    )
+  }
+)
 
 export default function HomePage() {
   const features = [
@@ -46,7 +62,7 @@ export default function HomePage() {
       title: 'Microfluidic Systems',
       description: 'Specialized microfluidic algae bioreactor models with Caladan Bio aesthetic',
       icon: 'MicrobeIcon' as const,
-      href: '/lab/3d-modeling',
+      href: '/features/microfluidic',
       highlights: ['Microfluidic channel design', 'Algae culture simulation', 'Co-laminar flow patterns']
     }
   ]
@@ -201,6 +217,64 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Interactive 3D Model Section */}
+      <section className="section relative caladan-bg-dark">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-light mb-4 text-white">Interactive Microbial Fuel Cell</h2>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              Explore our detailed 3D model with real-time biofilm simulation, electron flow visualization, 
+              and substrate dynamics
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="max-w-6xl mx-auto"
+          >
+            <InteractiveMFCModel
+              height="600px"
+              autoRotate={true}
+              showControls={true}
+              className="rounded-xl overflow-hidden shadow-2xl"
+            />
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto"
+          >
+            <div className="text-center bg-black/30 p-6 rounded-lg backdrop-blur-sm">
+              <div className="text-2xl font-light text-white mb-2">Real-time Biofilm</div>
+              <div className="text-sm text-gray-300">
+                Watch microbial colonies grow and form conductive networks
+              </div>
+            </div>
+            <div className="text-center bg-black/30 p-6 rounded-lg backdrop-blur-sm">
+              <div className="text-2xl font-light text-white mb-2">Electron Flow</div>
+              <div className="text-sm text-gray-300">
+                Visualize electron transfer from anode to cathode
+              </div>
+            </div>
+            <div className="text-center bg-black/30 p-6 rounded-lg backdrop-blur-sm">
+              <div className="text-2xl font-light text-white mb-2">Substrate Dynamics</div>
+              <div className="text-sm text-gray-300">
+                Monitor organic matter flow and consumption
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

@@ -14,9 +14,9 @@ import {
   sortByPopularity,
   sortByCost,
   type UnifiedMESSSystem 
-} from '@/lib/unified-systems-catalog'
-import UnifiedSystemCard from '@/components/UnifiedSystemCard'
-import Enhanced3DSystemPanel from '@/components/Enhanced3DSystemPanel'
+} from '../../src/lib/unified-systems-catalog'
+import UnifiedSystemCard from '../../components/UnifiedSystemCard'
+import Enhanced3DSystemPanel from '../../components/Enhanced3DSystemPanel'
 
 export default function SystemsPage() {
   const searchParams = useSearchParams()

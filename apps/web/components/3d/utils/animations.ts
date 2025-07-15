@@ -82,7 +82,13 @@ export function updateParticleSystem(
   bounds: { min: THREE.Vector3; max: THREE.Vector3 },
   forces?: THREE.Vector3
 ): void {
-  system.particles.forEach((particle, i) => {
+  // Optimize by avoiding clone() calls in loop
+  const deltaForces = forces ? forces.clone().multiplyScalar(delta) : null
+  
+  for (let i = 0; i < system.particles.length; i++) {
+    const particle = system.particles[i]
+    const velocity = system.velocities[i]
+    
     // Update lifetime
     system.lifetimes[i] += delta
     
@@ -94,20 +100,22 @@ export function updateParticleSystem(
       system.lifetimes[i] = 0
     }
     
-    // Apply forces
-    if (forces) {
-      system.velocities[i].add(forces.clone().multiplyScalar(delta))
+    // Apply forces (optimized)
+    if (deltaForces) {
+      velocity.add(deltaForces)
     }
     
-    // Update position
-    particle.add(system.velocities[i].clone().multiplyScalar(delta))
+    // Update position (optimized)
+    particle.x += velocity.x * delta
+    particle.y += velocity.y * delta
+    particle.z += velocity.z * delta
     
     // Boundary checks
     if (particle.y > bounds.max.y) {
       particle.y = bounds.min.y
       system.lifetimes[i] = 0
     }
-  })
+  }
 }
 
 // Biofilm growth animation
@@ -189,13 +197,18 @@ export function updateBubbles(
   origin: THREE.Vector3,
   spread: number = 0.1
 ): void {
-  bubbles.forEach((bubble) => {
-    // Update position
-    bubble.position.add(bubble.velocity.clone().multiplyScalar(delta))
+  for (let i = 0; i < bubbles.length; i++) {
+    const bubble = bubbles[i]
+    
+    // Update position (optimized)
+    bubble.position.x += bubble.velocity.x * delta
+    bubble.position.y += bubble.velocity.y * delta  
+    bubble.position.z += bubble.velocity.z * delta
     
     // Add wobble
-    bubble.position.x += Math.sin(bubble.age * 3) * 0.001
-    bubble.position.z += Math.cos(bubble.age * 3) * 0.001
+    const wobbleAmount = 0.001
+    bubble.position.x += Math.sin(bubble.age * 3) * wobbleAmount
+    bubble.position.z += Math.cos(bubble.age * 3) * wobbleAmount
     
     // Update age
     bubble.age += delta
@@ -210,5 +223,5 @@ export function updateBubbles(
       bubble.age = 0
       bubble.size = 0.01 + Math.random() * 0.01
     }
-  })
+  }
 }
