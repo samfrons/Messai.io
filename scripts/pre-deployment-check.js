@@ -53,7 +53,7 @@ function checkExports() {
         if (!content.includes('export class FuelCellModelingEngine')) {
           exportIssues.push(`${file}: Missing export for FuelCellModelingEngine`);
         }
-        if (!content.includes('export type FuelCellPredictionInput')) {
+        if (!content.includes('export interface FuelCellPredictionInput') && !content.includes('export type FuelCellPredictionInput')) {
           exportIssues.push(`${file}: Missing export for FuelCellPredictionInput`);
         }
       }
