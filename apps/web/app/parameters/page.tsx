@@ -205,156 +205,372 @@ export default function ParametersPage() {
           {selectedCategory !== 'all' && ` in ${parameterCategories.find(c => c.id === selectedCategory)?.name}`}
         </div>
         
-        {/* Parameters Grid */}
-        <div className="space-y-6">
-          {Object.entries(groupedParameters).map(([groupKey, params]) => {
-            const [categoryId, subcategory] = groupKey.split('-')
-            const category = parameterCategories.find(c => c.id === categoryId)
-            
-            return (
-              <div key={groupKey} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6">
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
-                  <span className="text-xl">{category?.icon}</span>
-                  {category?.name} / {subcategory.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                </h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {params.map(param => (
-                    <div
-                      key={param.id}
-                      className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-blue-300 dark:hover:border-blue-700 transition-colors cursor-pointer"
-                      onClick={() => toggleExpanded(param.id)}
+        {/* Accordion Interface */}
+        <div className="space-y-4">
+          {selectedCategory === 'all' ? (
+            // Show all categories as accordions
+            parameterCategories.map(category => {
+              const categoryParams = getParametersByCategory(category.id).filter(param => 
+                searchQuery ? searchParameters(searchQuery).includes(param) : true
+              )
+              
+              if (categoryParams.length === 0) return null
+              
+              const subcategoryGroups = categoryParams.reduce((groups, param) => {
+                const key = param.subcategory
+                if (!groups[key]) groups[key] = []
+                groups[key].push(param)
+                return groups
+              }, {} as Record<string, Parameter[]>)
+              
+              return (
+                <div key={category.id} className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg">
+                  {/* Category Header */}
+                  <button
+                    onClick={() => toggleCategory(category.id)}
+                    className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors"
+                  >
+                    <div className="flex items-center gap-4">
+                      <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white" dangerouslySetInnerHTML={{ __html: category.icon }} />
+                      <div>
+                        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">{category.name}</h2>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">{categoryParams.length} parameters</p>
+                      </div>
+                    </div>
+                    <svg 
+                      className={`w-6 h-6 text-slate-400 transition-transform duration-200 ${
+                        expandedCategories.has(category.id) ? 'rotate-180' : ''
+                      }`} 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100">
-                            {param.name}
-                          </h4>
-                          <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
-                            {param.unit && (
-                              <span>[{param.unit}]</span>
-                            )}
-                            {param.range && (param.range.min !== undefined || param.range.max !== undefined) && (
-                              <span className="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
-                                {param.range.min !== undefined && param.range.max !== undefined 
-                                  ? `${param.range.min}-${param.range.max}`
-                                  : param.range.min !== undefined 
-                                  ? `≥${param.range.min}`
-                                  : `≤${param.range.max}`
-                                }
-                              </span>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  
+                  {/* Category Content */}
+                  {expandedCategories.has(category.id) && (
+                    <div className="border-t border-slate-200 dark:border-slate-700">
+                      {Object.entries(subcategoryGroups).map(([subcategoryKey, params]) => {
+                        const subcategoryFullKey = `${category.id}-${subcategoryKey}`
+                        
+                        return (
+                          <div key={subcategoryKey} className="border-b border-slate-100 dark:border-slate-700/50 last:border-b-0">
+                            {/* Subcategory Header */}
+                            <button
+                              onClick={() => toggleSubcategory(subcategoryFullKey)}
+                              className="w-full px-8 py-4 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors"
+                            >
+                              <div>
+                                <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200">
+                                  {subcategoryKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                                </h3>
+                                <p className="text-sm text-slate-500 dark:text-slate-400">{params.length} parameters</p>
+                              </div>
+                              <svg 
+                                className={`w-5 h-5 text-slate-400 transition-transform duration-200 ${
+                                  expandedSubcategories.has(subcategoryFullKey) ? 'rotate-180' : ''
+                                }`} 
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24"
+                              >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                              </svg>
+                            </button>
+                            
+                            {/* Parameters List */}
+                            {expandedSubcategories.has(subcategoryFullKey) && (
+                              <div className="px-8 pb-4">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                                  {params.map(param => (
+                                    <div
+                                      key={param.id}
+                                      className="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-4 border border-slate-200 dark:border-slate-600 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-200 cursor-pointer group"
+                                      onClick={() => toggleParameter(param.id)}
+                                    >
+                                      <div className="flex items-start justify-between mb-2">
+                                        <div className="flex-1">
+                                          <h4 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                                            {param.name}
+                                          </h4>
+                                          <div className="flex items-center gap-2 mt-1">
+                                            {param.unit && (
+                                              <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-600 px-2 py-0.5 rounded">
+                                                {param.unit}
+                                              </span>
+                                            )}
+                                            {param.range && (param.range.min !== undefined || param.range.max !== undefined) && (
+                                              <span className="text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded font-medium">
+                                                {param.range.min !== undefined && param.range.max !== undefined 
+                                                  ? `${param.range.min}-${param.range.max}`
+                                                  : param.range.min !== undefined 
+                                                  ? `≥${param.range.min}`
+                                                  : `≤${param.range.max}`
+                                                }
+                                              </span>
+                                            )}
+                                          </div>
+                                        </div>
+                                        <svg 
+                                          className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                                            expandedParams.has(param.id) ? 'rotate-180' : ''
+                                          }`} 
+                                          fill="none" 
+                                          stroke="currentColor" 
+                                          viewBox="0 0 24 24"
+                                        >
+                                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                      </div>
+                                      
+                                      <p className={`text-sm text-slate-600 dark:text-slate-300 ${
+                                        expandedParams.has(param.id) ? '' : 'line-clamp-2'
+                                      }`}>
+                                        {param.description}
+                                      </p>
+                                      
+                                      {expandedParams.has(param.id) && (
+                                        <div className="mt-4 space-y-3 pt-3 border-t border-slate-200 dark:border-slate-600">
+                                          {param.range && (
+                                            <div className="space-y-2">
+                                              <div className="flex items-center gap-2">
+                                                <span className="font-medium text-slate-700 dark:text-slate-300 text-sm">Range:</span>
+                                                <span className="text-sm text-slate-600 dark:text-slate-400">
+                                                  {param.range.min !== undefined && param.range.max !== undefined 
+                                                    ? `${param.range.min} - ${param.range.max}`
+                                                    : param.range.min !== undefined 
+                                                    ? `≥ ${param.range.min}`
+                                                    : param.range.max !== undefined 
+                                                    ? `≤ ${param.range.max}`
+                                                    : 'No range specified'
+                                                  }
+                                                  {param.unit && ` ${param.unit}`}
+                                                </span>
+                                              </div>
+                                              {param.range.typical !== undefined && (
+                                                <div className="flex items-center gap-2">
+                                                  <span className="font-medium text-slate-700 dark:text-slate-300 text-sm">Typical:</span>
+                                                  <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                                                    {param.range.typical} {param.unit}
+                                                  </span>
+                                                </div>
+                                              )}
+                                            </div>
+                                          )}
+                                          
+                                          <div className="flex flex-wrap gap-1">
+                                            <span className="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded font-medium">
+                                              {param.category}
+                                            </span>
+                                            {param.subcategory && (
+                                              <span className="px-2 py-1 text-xs bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-400 rounded">
+                                                {param.subcategory.replace(/-/g, ' ')}
+                                              </span>
+                                            )}
+                                          </div>
+                                        </div>
+                                      )}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
                             )}
                           </div>
-                        </div>
-                        <svg 
-                          className={`w-5 h-5 text-gray-400 transition-transform ${
-                            expandedParams.has(param.id) ? 'rotate-180' : ''
-                          }`} 
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
+                        )
+                      })}
+                    </div>
+                  )}
+                </div>
+              )
+            })
+          ) : (
+            // Show single category
+            (() => {
+              const category = parameterCategories.find(c => c.id === selectedCategory)!
+              const categoryParams = filteredParameters
+              const subcategoryGroups = categoryParams.reduce((groups, param) => {
+                const key = param.subcategory
+                if (!groups[key]) groups[key] = []
+                groups[key].push(param)
+                return groups
+              }, {} as Record<string, Parameter[]>)
+              
+              return (
+                <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-lg">
+                  <div className="px-6 py-5 border-b border-slate-200 dark:border-slate-700">
+                    <div className="flex items-center gap-4">
+                      <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg text-white" dangerouslySetInnerHTML={{ __html: category.icon }} />
+                      <div>
+                        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">{category.name}</h2>
+                        <p className="text-sm text-slate-600 dark:text-slate-400">{categoryParams.length} parameters</p>
                       </div>
-                      
-                      <p className={`text-sm text-gray-600 dark:text-gray-400 mt-2 ${
-                        expandedParams.has(param.id) ? '' : 'line-clamp-2'
-                      }`}>
-                        {param.description}
-                      </p>
-                      
-                      {expandedParams.has(param.id) && (
-                        <div className="mt-4 space-y-2">
-                          {param.range && (
-                            <div className="text-sm space-y-1">
-                              <div>
-                                <span className="font-medium text-gray-700 dark:text-gray-300">Range: </span>
-                                <span className="text-gray-600 dark:text-gray-400">
-                                  {param.range.min !== undefined && param.range.max !== undefined 
-                                    ? `${param.range.min} - ${param.range.max}`
-                                    : param.range.min !== undefined 
-                                    ? `≥ ${param.range.min}`
-                                    : param.range.max !== undefined 
-                                    ? `≤ ${param.range.max}`
-                                    : 'No range specified'
-                                  }
-                                  {param.unit && ` ${param.unit}`}
-                                </span>
+                    </div>
+                  </div>
+                  
+                  {Object.entries(subcategoryGroups).map(([subcategoryKey, params]) => (
+                    <div key={subcategoryKey} className="border-b border-slate-100 dark:border-slate-700/50 last:border-b-0">
+                      <div className="px-8 py-4">
+                        <h3 className="text-lg font-semibold text-slate-800 dark:text-slate-200 mb-4">
+                          {subcategoryKey.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                        </h3>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+                          {params.map(param => (
+                            <div
+                              key={param.id}
+                              className="bg-slate-50 dark:bg-slate-700/50 rounded-xl p-4 border border-slate-200 dark:border-slate-600 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-200 cursor-pointer group"
+                              onClick={() => toggleParameter(param.id)}
+                            >
+                              {/* Same parameter content as above */}
+                              <div className="flex items-start justify-between mb-2">
+                                <div className="flex-1">
+                                  <h4 className="font-semibold text-slate-900 dark:text-slate-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">
+                                    {param.name}
+                                  </h4>
+                                  <div className="flex items-center gap-2 mt-1">
+                                    {param.unit && (
+                                      <span className="text-xs text-slate-500 dark:text-slate-400 bg-slate-200 dark:bg-slate-600 px-2 py-0.5 rounded">
+                                        {param.unit}
+                                      </span>
+                                    )}
+                                    {param.range && (param.range.min !== undefined || param.range.max !== undefined) && (
+                                      <span className="text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded font-medium">
+                                        {param.range.min !== undefined && param.range.max !== undefined 
+                                          ? `${param.range.min}-${param.range.max}`
+                                          : param.range.min !== undefined 
+                                          ? `≥${param.range.min}`
+                                          : `≤${param.range.max}`
+                                        }
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                                <svg 
+                                  className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                                    expandedParams.has(param.id) ? 'rotate-180' : ''
+                                  }`} 
+                                  fill="none" 
+                                  stroke="currentColor" 
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
                               </div>
-                              {param.range.typical !== undefined && (
-                                <div>
-                                  <span className="font-medium text-gray-700 dark:text-gray-300">Typical: </span>
-                                  <span className="text-blue-600 dark:text-blue-400 font-medium">
-                                    {param.range.typical} {param.unit}
-                                  </span>
+                              
+                              <p className={`text-sm text-slate-600 dark:text-slate-300 ${
+                                expandedParams.has(param.id) ? '' : 'line-clamp-2'
+                              }`}>
+                                {param.description}
+                              </p>
+                              
+                              {expandedParams.has(param.id) && (
+                                <div className="mt-4 space-y-3 pt-3 border-t border-slate-200 dark:border-slate-600">
+                                  {param.range && (
+                                    <div className="space-y-2">
+                                      <div className="flex items-center gap-2">
+                                        <span className="font-medium text-slate-700 dark:text-slate-300 text-sm">Range:</span>
+                                        <span className="text-sm text-slate-600 dark:text-slate-400">
+                                          {param.range.min !== undefined && param.range.max !== undefined 
+                                            ? `${param.range.min} - ${param.range.max}`
+                                            : param.range.min !== undefined 
+                                            ? `≥ ${param.range.min}`
+                                            : param.range.max !== undefined 
+                                            ? `≤ ${param.range.max}`
+                                            : 'No range specified'
+                                          }
+                                          {param.unit && ` ${param.unit}`}
+                                        </span>
+                                      </div>
+                                      {param.range.typical !== undefined && (
+                                        <div className="flex items-center gap-2">
+                                          <span className="font-medium text-slate-700 dark:text-slate-300 text-sm">Typical:</span>
+                                          <span className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                                            {param.range.typical} {param.unit}
+                                          </span>
+                                        </div>
+                                      )}
+                                    </div>
+                                  )}
+                                  
+                                  <div className="flex flex-wrap gap-1">
+                                    <span className="px-2 py-1 text-xs bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded font-medium">
+                                      {param.category}
+                                    </span>
+                                    {param.subcategory && (
+                                      <span className="px-2 py-1 text-xs bg-slate-200 dark:bg-slate-600 text-slate-600 dark:text-slate-400 rounded">
+                                        {param.subcategory.replace(/-/g, ' ')}
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
                               )}
                             </div>
-                          )}
-                          
-                          <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded">
-                              {param.category}
-                            </span>
-                            {param.subcategory && (
-                              <span className="px-2 py-1 text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded">
-                                {param.subcategory.replace(/-/g, ' ')}
-                              </span>
-                            )}
-                          </div>
+                          ))}
                         </div>
-                      )}
+                      </div>
                     </div>
                   ))}
                 </div>
-              </div>
-            )
-          })}
+              )
+            })()
+          )}
         </div>
         
         {/* Empty State */}
         {filteredParameters.length === 0 && (
-          <div className="text-center py-12">
-            <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No parameters found</h3>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              Try adjusting your search query or category filter
-            </p>
-            <button
-              onClick={() => {
-                setSearchQuery('')
-                setSelectedCategory('all')
-              }}
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Clear filters
-            </button>
+          <div className="text-center py-16">
+            <div className="max-w-md mx-auto">
+              <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-r from-emerald-100 to-teal-100 dark:from-emerald-900/30 dark:to-teal-900/30 rounded-full flex items-center justify-center">
+                <svg className="w-10 h-10 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2">No parameters found</h3>
+              <p className="text-slate-600 dark:text-slate-400 mb-6">
+                Try adjusting your search query or category filter to find the parameters you're looking for.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategory('all')
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-200 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                Clear all filters
+              </button>
+            </div>
           </div>
         )}
         
         {/* Bottom CTA */}
-        <div className="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white text-center">
-          <h2 className="text-2xl font-bold mb-4">Use Parameters in Your Research</h2>
-          <p className="mb-6 max-w-2xl mx-auto">
-            This comprehensive parameter library helps standardize MESS research and development. 
-            Use these parameters to design experiments, configure simulations, and optimize systems.
-          </p>
-          <div className="flex gap-4 justify-center">
-            <Link
-              href="/"
-              className="px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-medium"
-            >
-              Design a System
-            </Link>
-            <Link
-              href="/research"
-              className="px-6 py-3 bg-transparent border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors font-medium"
-            >
-              Browse Research
-            </Link>
+        <div className="mt-16 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 rounded-3xl p-12 text-white text-center relative overflow-hidden">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-20 -translate-y-20"></div>
+            <div className="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-30 translate-y-30"></div>
+          </div>
+          
+          <div className="relative">
+            <h2 className="text-3xl font-bold mb-4">Ready to use these parameters?</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90 leading-relaxed">
+              This comprehensive parameter library helps standardize MESS research and development. 
+              Use these validated parameters to design experiments, configure simulations, and optimize bioelectrochemical systems.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                href="/"
+                className="px-8 py-4 bg-white text-emerald-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 min-w-[200px]"
+              >
+                Design a System
+              </Link>
+              <Link
+                href="/research"
+                className="px-8 py-4 bg-transparent border-2 border-white text-white rounded-xl hover:bg-white/10 transition-all duration-200 font-bold min-w-[200px]"
+              >
+                Browse Research
+              </Link>
+            </div>
           </div>
         </div>
       </div>

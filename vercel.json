@@ -1,9 +1,8 @@
 {
-  "buildCommand": "cd apps/web && pnpm build",
+  "buildCommand": "pnpm nx build web",
   "outputDirectory": "apps/web/.next",
   "installCommand": "pnpm install",
   "framework": "nextjs",
-  "rootDirectory": "apps/web",
   "functions": {
     "app/api/**/*.ts": {
       "maxDuration": 30
