@@ -10,52 +10,26 @@
       "outputs": ["{projectRoot}/dist/**", "{projectRoot}/.next/**"],
       "cache": true
     },
-    "dev": {
-      "cache": false
-    },
-    "lint": {
-      "cache": true
-    },
-    "test": {
-      "cache": true
-    },
-    "type-check": {
-      "cache": true
-    },
-    "@nx/js:tsc": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["default", "^default"]
-    }
+    "dev": { "cache": false },
+    "lint": { "cache": true },
+    "test": { "cache": true },
+    "type-check": { "cache": true },
+    "@nx/js:tsc": { "cache": true, "dependsOn": ["^build"], "inputs": ["default", "^default"] }
   },
   "defaultBase": "main",
   "parallel": 3,
   "cacheDirectory": ".nx/cache",
-  "pluginsConfig": {
-    "@nx/js": {
-      "analyzeSourceFiles": true
-    }
-  },
+  "pluginsConfig": { "@nx/js": { "analyzeSourceFiles": true } },
   "defaultProject": "web",
-  "workspaceLayout": {
-    "appsDir": "apps",
-    "libsDir": "packages"
-  },
+  "workspaceLayout": { "appsDir": "apps", "libsDir": "packages" },
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "type-check"]
-      }
+      "options": { "cacheableOperations": ["build", "lint", "test", "type-check"] }
     }
   },
   "plugins": [
-    {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
     {
       "plugin": "@nx/vite/plugin",
       "options": {
@@ -82,11 +56,6 @@
       }
     }
   ],
-  "generators": {
-    "@nx/react": {
-      "library": {
-        "unitTestRunner": "vitest"
-      }
-    }
-  }
+  "generators": { "@nx/react": { "library": { "unitTestRunner": "vitest" } } },
+  "nxCloudId": "687636956230aa88d17a122f"
 }
